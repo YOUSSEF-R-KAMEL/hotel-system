@@ -1,0 +1,44 @@
+.form__wrapper {
+  @include flexCenter;
+  height: 80%;
+  width: 60%;
+  margin: 0 auto;
+  &-header {
+    text-align: start;
+    width: 100%;
+  }
+  &-paragraph {
+    width: 70%;
+    .blue-link {
+      color: mat.get-color-from-palette($Hotel-system-primary);
+    }
+    .red-link {
+      color: mat.get-color-from-palette($Hotel-system-accent);
+    }
+  }
+  .auth-form {
+    @include flexCenter;
+    width: 100%;
+
+    mat-form-field {
+      width: 100%;
+
+      mat-label {
+      }
+      input {
+      }
+      mat-icon {
+      }
+    }
+    &.__links {
+      .link {
+      }
+    }
+  }
+  .image__container {
+    &.-header {
+    }
+    &.-paragraph {
+    }
+  }
+}
