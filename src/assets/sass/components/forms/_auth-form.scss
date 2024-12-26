@@ -3,14 +3,15 @@
   height: 80%;
   width: 60%;
   margin: 0 auto;
+  gap: 1rem;
+  text-align: start;
   &-header {
-    text-align: start;
     width: 100%;
   }
   &-paragraph {
     width: 70%;
     .blue-link {
-      color: mat.get-color-from-palette($Hotel-system-primary);
+      color: mat.get-color-from-palette($Hotel-system-primary, 900);
     }
     .red-link {
       color: mat.get-color-from-palette($Hotel-system-accent);
@@ -30,9 +31,17 @@
       mat-icon {
       }
     }
-    &.__links {
+    &__links {
+      width: 100%;
+      text-align: end;
       .link {
+        color: #4D4D4D;
+        font-weight: lighter;
       }
+    }
+    &__actions {
+      width: 100%;
+      margin-top: 3rem;
     }
   }
   .image__container {
