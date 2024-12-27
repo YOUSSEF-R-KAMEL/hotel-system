@@ -1,26 +1,68 @@
-import { Component } from '@angular/core';
-import { ChartConfiguration, ChartType } from 'chart.js/dist/types/index';
+import { Component, OnInit } from '@angular/core';
+import {
+  ChartConfiguration,
+  ChartOptions,
+  ChartType,
+} from 'chart.js/dist/types/index';
+import { HomeService } from './services/home.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss',
+  styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent {
-  public chartData: ChartConfiguration['data'] = {
-    labels: ['Red', 'Blue', 'Yellow'],
+export class HomeComponent implements OnInit {
+  cards: any[] = [
+    {
+      name: 'Rooms',
+      number: 0,
+    },
+    { name: 'Facilities', number: 0 },
+    {
+      name: 'Ads',
+      number: 0,
+    },
+  ];
+  public bookingChartData: ChartConfiguration['data'] = {
+    labels: [],
     datasets: [
       {
-        label: 'My First Dataset',
-        data: [300, 50, 100],
-        backgroundColor: [
-          'rgb(255, 99, 132)',
-          'rgb(54, 162, 235)',
-          'rgb(255, 205, 86)',
-        ],
+        label: 'Bookings',
+        data: [],
+        backgroundColor: ['rgb(54, 162, 235)', 'rgb(255, 99, 132)'],
         hoverOffset: 4,
       },
     ],
   };
   public chartType: ChartType = 'doughnut';
+  public userChartData: ChartConfiguration['data'] = {
+    labels: [],
+    datasets: [
+      {
+        label: 'Users',
+        data: [],
+        backgroundColor: ['rgb(75, 192, 192)', 'rgb(153, 102, 255)'],
+      },
+    ],
+  };
+  public userChartOptions: ChartOptions = { responsive: true };
+  public userChartType: ChartType = 'polarArea';
+  constructor(private _HomeService: HomeService) {}
+  ngOnInit(): void {
+    this._HomeService.getChartData().subscribe({
+      next: (res) => {
+        console.log(res);
+        this.bookingChartData.labels = ['Pending', 'Completed'];
+        this.bookingChartData.datasets[0].data = [
+          res.data.bookings.pending,
+          res.data.bookings.completed,
+        ];
+        this.userChartData.labels = ['User', 'Admin'];
+        this.userChartData.datasets[0].data = [
+          res.data.users.admin,
+          res.data.users.user,
+        ];
+      },
+    });
+  }
 }
