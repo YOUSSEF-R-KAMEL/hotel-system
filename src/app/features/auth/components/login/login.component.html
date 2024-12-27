@@ -11,15 +11,28 @@
             If you don't have an account register You can
             <a class="blue-link" routerLink="">Register here !</a>
           </p>
-          <form class="auth-form">
+          <form
+            class="auth-form"
+            [formGroup]="loginForm"
+            (ngSubmit)="onSubmit(loginForm)"
+          >
             <mat-form-field appearance="fill">
               <mat-label>Email address</mat-label>
-              <input matInput placeholder="Please enter your email" />
+              <input
+                matInput
+                formControlName="email"
+                placeholder="Please enter your email"
+              />
               <mat-icon matPrefix>email</mat-icon>
             </mat-form-field>
             <mat-form-field appearance="fill">
               <mat-label>Password</mat-label>
-              <input matInput placeholder="Please enter your password" />
+              <input
+                matInput
+                type="text"
+                formControlName="password"
+                placeholder="Please enter your password"
+              />
               <mat-icon matPrefix>lock</mat-icon>
               <mat-icon matSuffix>visibility</mat-icon>
             </mat-form-field>
@@ -29,7 +42,9 @@
             <div class="auth-form__actions">
               <button class="button" mat-raised-button color="primary">Login</button>
             <div class="auth-form__action">
-              <button mat-raised-button color="primary">Login</button>
+              <button mat-raised-button color="primary" type="submit">
+                Login
+              </button>
             </div>
           </form>
         </div>
