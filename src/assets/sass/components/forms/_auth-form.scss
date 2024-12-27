@@ -20,10 +20,8 @@
   .auth-form {
     @include flexCenter;
     width: 100%;
-
     mat-form-field {
       width: 100%;
-
       mat-label {
       }
       input {
@@ -44,10 +42,27 @@
       margin-top: 3rem;
     }
   }
-  .image__container {
-    &.-header {
-    }
-    &.-paragraph {
-    }
+}
+.image__container {
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  display: flex;
+  justify-content: end;
+  flex-direction: column;
+  color: white;
+  padding: 0 0 4rem 4rem;
+  &.login {
+    @include login-image;
+  }
+  &.register {
+    @include register-image;
+  }
+  &-reset {
+    @include reset-image;
+  }
+  &.-header {
+  }
+  &.-paragraph {
   }
 }
