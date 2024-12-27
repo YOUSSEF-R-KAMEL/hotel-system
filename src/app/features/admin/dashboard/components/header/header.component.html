@@ -1,5 +1,5 @@
-<nav class="radius-16 px-4">
-  <div class="row h-100 align-items-end">
+<header class="px-4">
+  <div class="row radius-16 my-3 p-2 h-100 justify-content-end">
     <div class="col-md-5">
       <div
         class="info-wrapper pe-3 d-flex justify-content-end align-items-center column-gap-3"
@@ -11,23 +11,23 @@
           [matMenuTriggerFor]="menu"
           aria-label="Example icon-button with a menu"
         >
-          <mat-icon>more_vert</mat-icon>
+          <mat-icon>arrow_drop_down</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
           <button mat-menu-item>
-            <mat-icon>dialpad</mat-icon>
-            <span>Redial</span>
-          </button>
-          <button mat-menu-item disabled>
-            <mat-icon>voicemail</mat-icon>
-            <span>Check voice mail</span>
+            <mat-icon>person</mat-icon>
+            <span>Profile</span>
           </button>
           <button mat-menu-item>
-            <mat-icon>notifications_off</mat-icon>
-            <span>Disable alerts</span>
+            <mat-icon>lock_open</mat-icon>
+            <span>Change password</span>
+          </button>
+          <button mat-menu-item>
+            <mat-icon>logout</mat-icon>
+            <span>Logout</span>
           </button>
         </mat-menu>
       </div>
     </div>
   </div>
-</nav>
+</header>
