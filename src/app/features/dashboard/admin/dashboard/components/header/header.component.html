@@ -1,0 +1,33 @@
+<nav class="radius-16 px-4">
+  <div class="row h-100 align-items-end">
+    <div class="col-md-5">
+      <div
+        class="info-wrapper pe-3 d-flex justify-content-end align-items-center column-gap-3"
+      >
+        <span><img src="" alt="avatar" /></span>
+        <span> userName </span>
+        <button
+          mat-icon-button
+          [matMenuTriggerFor]="menu"
+          aria-label="Example icon-button with a menu"
+        >
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>
+            <mat-icon>dialpad</mat-icon>
+            <span>Redial</span>
+          </button>
+          <button mat-menu-item disabled>
+            <mat-icon>voicemail</mat-icon>
+            <span>Check voice mail</span>
+          </button>
+          <button mat-menu-item>
+            <mat-icon>notifications_off</mat-icon>
+            <span>Disable alerts</span>
+          </button>
+        </mat-menu>
+      </div>
+    </div>
+  </div>
+</nav>
