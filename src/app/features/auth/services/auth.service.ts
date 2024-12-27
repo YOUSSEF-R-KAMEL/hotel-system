@@ -8,7 +8,7 @@ import { ILogin, LoginResponse } from '../interfaces/ILogin';
 })
 export class AuthService {
   role: string | null = '';
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
   getRole(): string | null {
     if (
       localStorage.getItem('role') !== null &&

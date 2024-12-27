@@ -21,7 +21,7 @@ import { RouterModule } from '@angular/router';
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule, 
+    CommonModule,
     RouterModule,
     MatPaginatorModule,
     MatButtonModule,
@@ -40,7 +40,7 @@ import { RouterModule } from '@angular/router';
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-  ],exports:[   
+  ],exports:[
     RouterModule,
     MatPaginatorModule,
     MatButtonModule,
@@ -58,6 +58,7 @@ import { RouterModule } from '@angular/router';
     MatListModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule,]
+    MatSortModule,
+  ]
 })
 export class SharedModule { }
