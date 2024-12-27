@@ -58,7 +58,7 @@
   &.register {
     @include register-image;
   }
-  &-reset {
+  &.reset {
     @include reset-image;
   }
   &.-header {
