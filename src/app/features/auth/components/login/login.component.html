@@ -6,27 +6,45 @@
           <img src="../../../../../assets/images/svg/logo.svg" alt="logo" />
         </div>
         <div class="form__wrapper">
-          <h2 class="form__wrapper-header">Login</h2>
+          <h2 class="form__wrapper-header">Sign in</h2>
           <p class="form__wrapper-paragraph">
             If you don't have an account register You can
             <a class="blue-link" routerLink="">Register here !</a>
           </p>
-          <form class="auth-form">
+          <form
+            class="auth-form"
+            [formGroup]="loginForm"
+            (ngSubmit)="onSubmit(loginForm)"
+          >
             <mat-form-field appearance="fill">
-              <mat-label>Email</mat-label>
-              <input matInput placeholder="Placeholder" />
-              <mat-icon matSuffix>email</mat-icon>
+              <mat-label>Email address</mat-label>
+              <input
+                matInput
+                formControlName="email"
+                placeholder="Please enter your email"
+              />
+              <mat-icon matPrefix>email</mat-icon>
             </mat-form-field>
             <mat-form-field appearance="fill">
               <mat-label>Password</mat-label>
-              <input matInput placeholder="Placeholder" />
-              <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+              <input
+                matInput
+                type="text"
+                formControlName="password"
+                placeholder="Please enter your password"
+              />
+              <mat-icon matPrefix>lock</mat-icon>
+              <mat-icon matSuffix>visibility</mat-icon>
             </mat-form-field>
             <div class="auth-form__links">
               <a href="" class="link">Forget password</a>
             </div>
             <div class="auth-form__actions">
               <button class="button" mat-raised-button color="primary">Login</button>
+            <div class="auth-form__action">
+              <button mat-raised-button color="primary" type="submit">
+                Login
+              </button>
             </div>
           </form>
         </div>
