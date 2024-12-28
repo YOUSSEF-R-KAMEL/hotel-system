@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgFor } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -16,10 +16,14 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
+import { TableComponent } from './components/table/table.component';
+import { MatChipsModule } from '@angular/material/chips';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    TableComponent
+  ],
   imports: [
     CommonModule,
     RouterModule,
@@ -40,6 +44,8 @@ import { RouterModule } from '@angular/router';
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
+    MatChipsModule,
+    NgFor
   ],exports:[
     RouterModule,
     MatPaginatorModule,
@@ -59,6 +65,7 @@ import { RouterModule } from '@angular/router';
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
+    TableComponent
   ]
 })
 export class SharedModule { }
