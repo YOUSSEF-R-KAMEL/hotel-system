@@ -1,0 +1,29 @@
+<section>
+  <div class="row mt-5 justify-content-around">
+    @for( card of cards; track card){
+    <div
+      class="col-md-3 radius-16 card-container d-flex justify-content-around align-items-center"
+    >
+      <div>
+        <p class="numbers-wrapper">
+          {{ card.number }}
+        </p>
+        <span>{{ card.name }}</span>
+      </div>
+      <div class="img-wrapper">
+        <img src="assets/images/svg/card-img.svg" alt="icon" />
+      </div>
+    </div>
+    }
+  </div>
+  <div class="row chart-container d-flex justify-content-lg-around">
+    <canvas baseChart [data]="bookingChartData" [type]="chartType"> </canvas>
+    <canvas
+      baseChart
+      [data]="userChartData"
+      [options]="userChartOptions"
+      [type]="userChartType"
+    >
+    </canvas>
+  </div>
+</section>

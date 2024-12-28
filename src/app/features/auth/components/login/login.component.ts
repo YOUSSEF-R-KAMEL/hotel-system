@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 
+import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -17,7 +18,8 @@ export class LoginComponent {
   });
   constructor(
     private _AuthService: AuthService,
-    private _ToastrService: ToastrService
+    private _ToastrService: ToastrService,
+    private _Router: Router
   ) {}
   onSubmit(data: FormGroup) {
     const formValue = data.value;
@@ -28,6 +30,8 @@ export class LoginComponent {
           this.resMsg = res.message;
           localStorage.setItem('token', res.data.token);
           localStorage.setItem('role', res.data.user.role);
+          localStorage.setItem('userId', res.data.user._id);
+          localStorage.setItem('userName', res.data.user.userName);
         },
         error: (err) => {
           console.log(err);
@@ -35,6 +39,11 @@ export class LoginComponent {
         },
         complete: () => {
           this._ToastrService.success(this.resMsg, 'Success');
+          if (localStorage.getItem('role') == 'admin') {
+            this._Router.navigate(['/admin/dashboard/home']);
+          } else if (localStorage.getItem('role') == 'user') {
+            this._Router.navigate(['/user/home']);
+          }
         },
       });
     }

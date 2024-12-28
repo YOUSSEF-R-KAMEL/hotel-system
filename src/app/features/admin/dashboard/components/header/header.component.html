@@ -1,0 +1,33 @@
+<header class="px-4">
+  <div class="row radius-16 my-3 p-2 h-100 justify-content-end">
+    <div class="col-md-5">
+      <div
+        class="info-wrapper pe-3 d-flex justify-content-end align-items-center column-gap-3"
+      >
+        <span><img [src]="profileImage" alt="avatar" /></span>
+        <span> {{ userName }} </span>
+        <button
+          mat-icon-button
+          [matMenuTriggerFor]="menu"
+          aria-label="Example icon-button with a menu"
+        >
+          <mat-icon>arrow_drop_down</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>
+            <mat-icon>person</mat-icon>
+            <span>Profile</span>
+          </button>
+          <button mat-menu-item>
+            <mat-icon>lock_open</mat-icon>
+            <span>Change password</span>
+          </button>
+          <button mat-menu-item (click)="onLogout()">
+            <mat-icon>logout</mat-icon>
+            <span>Logout</span>
+          </button>
+        </mat-menu>
+      </div>
+    </div>
+  </div>
+</header>
