@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ITableAction, ITableInput } from '../../../../../shared/interface/table/table-input.interface';
-import { UsersService } from './services/users.service';
-import { IUser } from './interfaces/user.interface';
+import { ITableAction, ITableInput } from '../../../../shared/interface/table/table-input.interface';
 import { IUserWithCount } from './interfaces/get-users-interface';
+import { UsersService } from './services/users.service';
 
 @Component({
   selector: 'app-users',
