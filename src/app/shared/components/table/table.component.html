@@ -1,0 +1,58 @@
+<table mat-table [dataSource]="dataSource" matSort class="mat-table" (matSortChange)="announceSortChange($event)">
+  <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column.field">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ column.header }}</th>
+    <td mat-cell *matCellDef="let element">
+      <ng-container *ngIf="isArray(element[column.field])">
+        <mat-chip-listbox>
+          <mat-chip *ngFor="let item of element[column.field]">{{ item.title }}</mat-chip>
+        </mat-chip-listbox>
+      </ng-container>
+      <ng-container *ngIf="column.field === 'createdAt' || column.field === 'updatedAt'">
+        {{ element[column.field] | date: 'dd/MM/yyyy' }}
+      </ng-container>
+      <ng-container *ngIf="column.field === 'profileImage'">
+        <img width="40px" height="40px" [src]="element[column.field] === null ? defaultImage : element[column.field]"
+          alt="Profile Picture" class="rounded-circle" />
+      </ng-container>
+      <!-- <ng-container *ngIf="column.field === 'actions'">
+        <button class="icon-button" mat-icon-button [matMenuTriggerFor]="menu"
+          aria-label="Example icon-button with a menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <ng-container *ngFor="let action of data.actions">
+            <button mat-menu-item class="icon-button" mat-button (click)="action.callback(element)">
+              <mat-icon [color]="action.color">{{action.icon}}</mat-icon>
+              <span [ngClass]="action.color === 'warn' ? 'text-danger' : ''">{{action.label}}</span>
+            </button>
+          </ng-container>
+        </mat-menu>
+      </ng-container> -->
+      <ng-container
+        *ngIf="!isArray(element[column.field]) && !(column.field === 'profileImage') && !(column.field === 'createdAt') && !(column.field === 'updatedAt')">
+        {{ element[column.field] }}
+      </ng-container>
+    </td>
+  </ng-container>
+  <!-- <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef>Actions</th>
+    <td mat-cell *matCellDef="let element">
+      <button class="icon-button" mat-icon-button [matMenuTriggerFor]="menu"
+        aria-label="Example icon-button with a menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        @for(action of data.actions;track action.label) {
+        <button mat-menu-item class="icon-button" mat-button (click)="action.callback(element)">
+          <mat-icon [color]="action.color">{{action.icon}}</mat-icon>
+          <span [ngClass]="action.color === 'warn' ? 'text-danger' : ''">{{action.label}}</span>
+        </button>
+        }
+      </mat-menu>
+    </td>
+  </ng-container> -->
+  <tr mat-header-row *matHeaderRowDef="displayedColumnFields"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumnFields"></tr>
+</table>
+<mat-paginator [pageSize]="pageSize" [length]="totalRecords" showFirstLastButtons [pageSizeOptions]="[5, 10, 20]"
+  (page)="onPageChange($event)"></mat-paginator>
