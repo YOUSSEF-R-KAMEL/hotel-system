@@ -7,8 +7,7 @@
       <li class="px-5 py-3">
         <a
           class="px-3 logout"
-          (click)="item.name === 'Logout' ? logout() : null"
-          [routerLink]="item.name === 'Logout' ? null : item.route"
+          [routerLink]="item.route"
           routerLinkActive="active"
           #rla="routerLinkActive"
         >

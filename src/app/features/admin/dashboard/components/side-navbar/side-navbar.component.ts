@@ -39,15 +39,9 @@ export class SideNavbarComponent {
       name: 'Booking facilities',
       icon: 'lock_open',
     },
-    {
-      name: 'Logout',
-      icon: 'logout',
-      route: '/auth',
-    },
   ];
   toggleSidebar(): void {
     this.isExpanded = !this.isExpanded;
     this.toggle.emit();
   }
-  logout(): void {}
 }

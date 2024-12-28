@@ -8,7 +8,7 @@ export const userGuard: CanActivateFn = (route, state) => {
   if (token !== null && role == 'user') {
     return true;
   } else {
-    _Router.navigate(['/home']);
+    _Router.navigate(['/user/home']);
     return false;
   }
 };

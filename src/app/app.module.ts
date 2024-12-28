@@ -25,7 +25,7 @@ import { globalInterceptor } from './core/interceptors/global/global.interceptor
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({ positionClass: 'toast-bottom-right' }),
   ],
   providers: [
     provideClientHydration(),
