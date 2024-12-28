@@ -1,88 +1,86 @@
-<section class="auth-sec">
-  <div class="container">
-    <div class="row">
-      <div class="auth col-xs-12 col-lg-10 m-auto p-4 px-5">
-        <img src="../../../assets/images/auth/logo-auth.svg" alt="" class="d-block m-auto">
-        <h2>Register</h2>
-        <p class="grey-color">Welcome Back! Please enter your details</p>
-        <form [formGroup]="registerForm" (ngSubmit)="register()">
-          <div class="row">
-            <div class="col-md-6 m-auto mb-2">
-              <div class="upload d-flex justify-content-center">
-                <input type="file" (change)="fileChangeEvent($event)" />
-                <image-cropper
-                    [imageChangedEvent]="imageChangedEvent"
-                    [maintainAspectRatio]="true"
-                    [aspectRatio]="4 / 3"
-                    format="png"
-                    (imageCropped)="imageCropped($event)"
-                    (imageLoaded)="imageLoaded($event)"
-                    (cropperReady)="cropperReady()"
-                    (loadImageFailed)="loadImageFailed()"
-                ></image-cropper>
-                <!-- <img [src]="croppedImage" /> -->
-              </div>
+<section class="">
+  <div class="containter">
+    <div class="row w-100">
+      <div class="col-md-6 ">
+        <div class="logo__container">
+          <img src="../../../../../assets/images/svg/logo.svg" alt="logo" />
+        </div>
+        <div class="form__wrapper mt-5">
+          <h2 class="form__wrapper-header">Sign Up</h2>
+          <p class="form__wrapper-paragraph">
+            If you already have an account register You can
+            <a class="red-link" routerLink="/auth/login">Login here!</a>
+          </p>
+          <form class="auth-form" [formGroup]="registerForm" (ngSubmit)="register()">
+            <div class="upload d-flex justify-content-center mb-3">
+              <ngx-dropzone class="rounded-circle text-center overflow-hidden" (change)="onSelect($event)">
+                <ngx-dropzone-label>upload Photo <i class="fa-solid fa-cloud-arrow-up"></i></ngx-dropzone-label>
+                <ngx-dropzone-image-preview class="rounded-circle" ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f" [removable]="true" (removed)="onRemove(f)">
+                  <ngx-dropzone-label class="rounded-circle"></ngx-dropzone-label>
+                </ngx-dropzone-image-preview>
+              </ngx-dropzone>
             </div>
-          </div>
-          <div class="row">
             <!-- userName -->
-            <div class="col-md-12">
-              <div class="input-group mb-3">
-                <label for="UserName" class="w-100 mb-2">User Name</label>
-                <input type="text" class="form-control" id="UserName" placeholder="please type here ..." formControlName="userName" aria-label="userName">
+            <mat-form-field appearance="fill">
+              <mat-label>User Name</mat-label>
+              <input matInput formControlName="userName"
+              placeholder="Please type here" />
+            </mat-form-field>
+            <ng-container *ngIf="registerForm.get('userName')?.dirty || registerForm.get('userName')?.touched">
+              <p class="text-danger" *ngIf="registerForm.get('userName')?.errors?.['required']">The UserName is required</p>
+              <p class="text-danger" *ngIf="registerForm.get('userName')?.errors?.['pattern']">The UserName must contain characters and end with numbers without spaces.</p>
+            </ng-container>
+            <div class="row">
+              <div class="col-md-6">
+                <!-- phoneNumber -->
+                <mat-form-field appearance="fill">
+                  <mat-label>Phone Number</mat-label>
+                  <input matInput formControlName="phoneNumber"
+                  placeholder="Please type here" />
+                </mat-form-field>
+                <ng-container *ngIf="registerForm.get('phoneNumber')?.dirty || registerForm.get('phoneNumber')?.touched">
+                  <p class="text-danger" *ngIf="registerForm.get('phoneNumber')?.errors?.['required']">Phone Number is required</p>
+                </ng-container>
               </div>
-              <ng-container *ngIf="registerForm.get('userName')?.dirty || registerForm.get('userName')?.touched">
-                <p class="text-danger" *ngIf="registerForm.get('userName')?.errors?.['required']">The UserName is required</p>
-                <p class="text-danger" *ngIf="registerForm.get('userName')?.errors?.['pattern']">The UserName must contain characters and end with numbers without spaces.</p>
-              </ng-container>
-            </div>
-            <!-- phoneNumber -->
-            <div class="col-md-5">
-              <div class="input-group mb-3">
-                <label for="phoneNumber" class="w-100 mb-2">Phone Number</label>
-                <input type="text" class="form-control" id="phoneNumber" placeholder="please type here ..." formControlName="phoneNumber" aria-label="phoneNumber">
+              <div class="col-md-6">
+                <!-- country -->
+                <mat-form-field appearance="fill">
+                  <mat-label>country</mat-label>
+                  <input matInput type="text" formControlName="country"
+                  placeholder="Please type here" />
+                </mat-form-field>
+                <ng-container *ngIf="registerForm.get('country')?.dirty || registerForm.get('country')?.touched">
+                  <p class="text-danger" *ngIf="registerForm.get('country')?.errors?.['required']">country is required</p>
+                </ng-container>
               </div>
-              <ng-container *ngIf="registerForm.get('phoneNumber')?.dirty || registerForm.get('phoneNumber')?.touched">
-                <p class="text-danger" *ngIf="registerForm.get('phoneNumber')?.errors?.['required']">phoneNumber is required</p>
-              </ng-container>
-            </div>
-            <!-- country -->
-            <div class="col-md-5 offset-md-2">
-              <div class="input-group mb-3">
-                <label for="country" class="w-100 mb-2">Country</label>
-                <input type="text" class="form-control" id="country" placeholder="please type here ..." formControlName="country" aria-label="country">
-              </div>
-              <ng-container *ngIf="registerForm.get('country')?.dirty || registerForm.get('country')?.touched">
-                <p class="text-danger" *ngIf="registerForm.get('country')?.errors?.['required']">country is required</p>
-              </ng-container>
             </div>
             <!-- email -->
-            <div class="col-md-12">
-              <div class="input-group mb-3">
-                <label for="email" class="w-100 mb-2">Email</label>
-                <input type="email" class="form-control" id="email" placeholder="please type here ..." formControlName="email" aria-label="email">
-              </div>
-              <ng-container *ngIf="registerForm.get('email')?.dirty || registerForm.get('email')?.touched">
-                <p class="text-danger" *ngIf="registerForm.get('email')?.errors?.['required']">email is required</p>
-                <p class="text-danger" *ngIf="registerForm.get('email')?.errors?.['email']">
-                  Email is not valid
-                </p>
-              </ng-container>
-            </div>
+            <mat-form-field appearance="fill">
+              <mat-label>Email</mat-label>
+              <input matInput formControlName="email"
+              placeholder="Please type here" />
+            </mat-form-field>
+            <ng-container *ngIf="registerForm.get('email')?.dirty || registerForm.get('email')?.touched">
+              <p class="text-danger" *ngIf="registerForm.get('email')?.errors?.['required']">email is required</p>
+              <p class="text-danger" *ngIf="registerForm.get('email')?.errors?.['email']">
+                Email is not valid
+              </p>
+            </ng-container>
             <!-- password -->
-            <div class="col-md-12">
-              <div class="input-group mb-3 flex-nowrap position-relative flex-column">
-                <label for="password" class="w-100 mb-2">Password</label>
-                <input autocomplete="--" [type]="showPassword? 'text' : 'password'" class="form-control w-100"
-                        id="password" placeholder="please type here ..." formControlName="password">
-                <span class="eye-pass" (click)="toggleShowPass()">
-                  <i
-                  class="fa-solid position-absolute grey-color"
-                  [class]="!showPassword ? 'fa-eye' : 'fa-eye-slash'"
-                  >
-                  </i>
-                </span>
-              </div>
+            <mat-form-field appearance="fill">
+              <mat-label>Password</mat-label>
+              <input matInput
+              autocomplete="--" [type]="showPassword? 'text' : 'password'"
+              formControlName="password"
+              placeholder="Please type here" />
+              <span class="eye-pass" (click)="toggleShowPass()">
+                <i
+                class="fa-solid position-absolute grey-color"
+                [class]="!showPassword ? 'fa-eye' : 'fa-eye-slash'"
+                >
+                </i>
+              </span>
+            </mat-form-field>
               <ng-container *ngIf="registerForm.get('password')?.dirty || registerForm.get('password')?.touched">
                 <p class="text-danger" *ngIf="registerForm.get('password')?.errors?.['required']">password is required</p>
                 <p class="text-danger" *ngIf="registerForm.get('password')?.errors?.['pattern']">
@@ -90,36 +88,39 @@
                   special character, one lowercase letter, one uppercase letter and one digit.
                 </p>
               </ng-container>
-            </div>
             <!-- confirmPassword -->
-            <div class="col-md-12">
-              <div class="input-group mb-3 flex-nowrap position-relative flex-column">
-                <label for="confirmPassword" class="w-100 mb-2">Confirm Password</label>
-                <input autocomplete="--" [type]="showConfirmPassword? 'text' : 'password'" class="form-control w-100"
-                id="confirmPassword" placeholder="please type here ..." formControlName="confirmPassword">
-                <span class="eye-pass" (click)="toggleShowConfirmPass()">
-                  <i
-                  class="fa-solid position-absolute grey-color"
-                  [class]="!showConfirmPassword ? 'fa-eye' : 'fa-eye-slash'"
-                  >
-                  </i>
-                </span>
-              </div>
-              <ng-container *ngIf="registerForm.get('confirmPassword')?.dirty || registerForm.get('confirmPassword')?.touched">
-                <p class="text-danger" *ngIf="registerForm.get('confirmPassword')?.errors?.['required']">confirmPassword is required</p>
-                <p class="text-danger" *ngIf="registerForm.getError('mismatch')">
-                  not match with password
-                </p>
-              </ng-container>
+            <mat-form-field appearance="fill">
+              <mat-label>Confirm Password</mat-label>
+              <input matInput
+              autocomplete="--" [type]="showConfirmPassword? 'text' : 'password'"
+              formControlName="confirmPassword"
+              placeholder="Please type here" />
+              <span class="eye-pass" (click)="toggleShowConfirmPass()">
+                <i
+                class="fa-solid position-absolute grey-color"
+                [class]="!showConfirmPassword ? 'fa-eye' : 'fa-eye-slash'"
+                >
+                </i>
+              </span>
+            </mat-form-field>
+            <ng-container *ngIf="registerForm.get('confirmPassword')?.dirty || registerForm.get('confirmPassword')?.touched">
+              <p class="text-danger" *ngIf="registerForm.get('confirmPassword')?.errors?.['required']">confirmPassword is required</p>
+              <p class="text-danger" *ngIf="registerForm.getError('mismatch')">
+                not match with password
+              </p>
+            </ng-container>
+            <div class="auth-form__actions">
+              <button class="button" mat-raised-button color="primary">Sign Up</button>
             </div>
-          </div>
-          <div class="d-flex justify-content-end w-100 my-3">
-            <a class="main-color text-decoration-none" routerLink="/auth/login">Login Now?</a>
-          </div>
-          <button class="bg-main-color w-100" type="submit">Register</button>
-        </form>
+          </form>
+        </div>
+      </div>
+      <div class="col-md-6 py-3 d-flex">
+        <div class="image__container register">
+          <h1 class="image__container-header">Sign in to Roamhome</h1>
+          <p class="image__container-paragraph">Homes as unique as you.</p>
+        </div>
       </div>
     </div>
   </div>
 </section>
-
