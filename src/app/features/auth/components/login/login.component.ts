@@ -28,6 +28,8 @@ export class LoginComponent {
           this.resMsg = res.message;
           localStorage.setItem('token', res.data.token);
           localStorage.setItem('role', res.data.user.role);
+          localStorage.setItem('userId', res.data.user._id);
+          localStorage.setItem('userName', res.data.user.userName);
         },
         error: (err) => {
           console.log(err);

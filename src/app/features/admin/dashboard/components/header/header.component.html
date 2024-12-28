@@ -4,8 +4,8 @@
       <div
         class="info-wrapper pe-3 d-flex justify-content-end align-items-center column-gap-3"
       >
-        <span><img src="" alt="avatar" /></span>
-        <span> userName </span>
+        <span><img [src]="profileImage" alt="avatar" /></span>
+        <span> {{ userName }} </span>
         <button
           mat-icon-button
           [matMenuTriggerFor]="menu"

@@ -8,7 +8,7 @@ import { IUserResponse } from '../../interfaces/IUserResponse';
 })
 export class HelperService {
   constructor(private _HttpClient: HttpClient) {}
-  onGetUser(id: number): Observable<IUserResponse> {
+  onGetUser(id: string): Observable<IUserResponse> {
     return this._HttpClient.get<IUserResponse>(`admin/users/${id}`);
   }
 }
