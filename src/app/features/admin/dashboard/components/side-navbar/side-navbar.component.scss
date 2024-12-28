@@ -1,0 +1,64 @@
+@import "../../../../../../assets/sass/abstracts/variables";
+.sidebar {
+  background-color: $dark-blue;
+  .toggle-btn {
+    background-color: $red-color;
+    color: $white-color;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    position: absolute;
+    width: fit-content;
+    right: 0;
+    height: 1.5rem;
+    top: 2%;
+    border-radius: 0.5rem 0 0 0.5rem;
+    transform: translateX(0);
+  }
+  ul {
+    list-style: none;
+    padding: 0;
+    padding-top: 3rem;
+    li {
+      text-align: center;
+      position: relative;
+      cursor: pointer;
+      &.active,
+      &:hover {
+        color: $white-color;
+        background-color: $dark-grey;
+
+        &::before {
+          content: "";
+          position: absolute;
+          height: 100%;
+          width: 4px;
+          background-color: $dark-blue2;
+          top: 0;
+          left: 0;
+        }
+      }
+
+      a {
+        color: $white-color;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+      }
+    }
+  }
+  &.collapsed {
+    .toggle-btn {
+      width: 1.3rem;
+      right: -0.66rem;
+      transform: translateX(50%);
+      border-radius: 0 0.5rem 0.5rem 0;
+      mat-icon {
+        margin-left: -5px;
+      }
+    }
+    li {
+      padding: 1rem !important;
+    }
+  }
+}

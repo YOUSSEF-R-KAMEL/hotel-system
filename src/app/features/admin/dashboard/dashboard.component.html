@@ -1,0 +1,14 @@
+<div class="container-fluid h-100">
+  <div class="row h-100">
+    <div
+      [ngClass]="isExpand ? 'sidebar-container' : 'sidebar-container-collapsed'"
+      class="p-0 h-100 position-fixed"
+    >
+      <app-side-navbar (toggle)="toggleSidebar()"></app-side-navbar>
+    </div>
+    <div [class]="isExpand ? 'col-md-10' : 'col-md-11'" class="ms-auto">
+      <app-header [profileImage]="profileImage"></app-header>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

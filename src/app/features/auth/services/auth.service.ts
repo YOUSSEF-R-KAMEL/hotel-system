@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ILogin, LoginResponse } from '../interfaces/ILogin';
 
@@ -8,7 +9,7 @@ import { ILogin, LoginResponse } from '../interfaces/ILogin';
 })
 export class AuthService {
   role: string | null = '';
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private _Router: Router) {}
   getRole(): string | null {
     if (
       localStorage.getItem('role') !== null &&
@@ -23,5 +24,9 @@ export class AuthService {
   }
   register(data: FormData) {
     return this.http.post('Users/Register', data);
+  }
+  onLogout(): void {
+    localStorage.clear();
+    this._Router.navigate(['/auth']);
   }
 }
