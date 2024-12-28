@@ -13,7 +13,7 @@ export class AdsService {
     return this._HttpClient.get<IAdsResponse>('admin/ads');
   }
 
-  onUpdateAds(data: any): Observable<IUpdateResponse> {
-    return this._HttpClient.put<IUpdateResponse>('admin/ads', { data });
+  onUpdateAds(id: number, data: any): Observable<IUpdateResponse> {
+    return this._HttpClient.put<IUpdateResponse>(`admin/ads/${id}`, { data });
   }
 }
