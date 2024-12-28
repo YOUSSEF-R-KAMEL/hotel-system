@@ -5,7 +5,6 @@ import {
 } from '@angular/platform-browser';
 
 import {
-  HTTP_INTERCEPTORS,
   HttpClientModule,
   provideHttpClient,
   withFetch,
@@ -13,10 +12,13 @@ import {
 } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 import { ToastrModule } from 'ngx-toastr';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { globalInterceptor } from './core/interceptors/global/global.interceptor';
+import { NgxSpinner, NgxSpinnerModule } from 'ngx-spinner';
+import { loadingInterceptor } from './core/interceptors/loading/loading.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,13 +27,15 @@ import { globalInterceptor } from './core/interceptors/global/global.interceptor
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot(),
+    NgxSpinnerModule,
+    ToastrModule.forRoot({ positionClass: 'toast-bottom-right' }),
   ],
   providers: [
     provideClientHydration(),
     provideAnimationsAsync(),
-    provideHttpClient(withFetch(), withInterceptors([globalInterceptor])),
+    provideHttpClient(withFetch(), withInterceptors([globalInterceptor, loadingInterceptor])),
+    [provideCharts(withDefaultRegisterables())],
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
