@@ -12,7 +12,9 @@ export class AdsService {
   onGetAllAds(): Observable<IAdsResponse> {
     return this._HttpClient.get<IAdsResponse>('admin/ads');
   }
-
+  onAdsDetails(id: number): Observable<IAdsResponse> {
+    return this._HttpClient.get<IAdsResponse>(`admin/ads/${id}`);
+  }
   onUpdateAds(id: number, data: any): Observable<IUpdateResponse> {
     return this._HttpClient.put<IUpdateResponse>(`admin/ads/${id}`, { data });
   }
