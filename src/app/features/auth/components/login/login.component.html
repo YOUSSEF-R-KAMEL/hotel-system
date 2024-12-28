@@ -5,26 +5,48 @@
         <div class="logo__container">
           <img src="../../../../../assets/images/svg/logo.svg" alt="logo" />
         </div>
-        <div class="form__wrapper">
+        <div class="form__wrapper mt-5">
           <h2 class="form__wrapper-header">Sign in</h2>
           <p class="form__wrapper-paragraph">
             If you don't have an account register You can
-            <a class="blue-link" routerLink="">Register here !</a>
+            <a class="blue-link" routerLink="/auth/register">Register here !</a>
           </p>
-          <form class="auth-form" [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm)">
+          <form class="auth-form" [formGroup]="loginForm" (ngSubmit)="login()">
+            <!-- email -->
             <mat-form-field appearance="fill">
               <mat-label>Email address</mat-label>
-              <input matInput formControlName="email" placeholder="Please enter your email" />
-              <mat-icon matPrefix>email</mat-icon>
+              <input matInput formControlName="email" placeholder="Please type here" />
             </mat-form-field>
-            <mat-form-field appearance="fill">
-              <mat-label>Password</mat-label>
-              <input matInput type="text" formControlName="password" placeholder="Please enter your password" />
-              <mat-icon matPrefix>lock</mat-icon>
-              <mat-icon matSuffix>visibility</mat-icon>
-            </mat-form-field>
+            <ng-container *ngIf="loginForm.get('email')?.dirty || loginForm.get('email')?.touched">
+              <p class="text-danger" *ngIf="loginForm.get('email')?.errors?.['required']">email is required</p>
+              <p class="text-danger" *ngIf="loginForm.get('email')?.errors?.['email']">
+                Email is not valid
+              </p>
+            </ng-container>
+          <!-- password -->
+          <mat-form-field appearance="fill">
+            <mat-label>Password</mat-label>
+            <input matInput
+            autocomplete="--" [type]="showPassword? 'text' : 'password'"
+            formControlName="password"
+            placeholder="Please type here" />
+            <span class="eye-pass" (click)="toggleShowPass()">
+              <i
+              class="fa-solid position-absolute grey-color"
+              [class]="!showPassword ? 'fa-eye' : 'fa-eye-slash'"
+              >
+              </i>
+            </span>
+          </mat-form-field>
+            <ng-container *ngIf="loginForm.get('password')?.dirty || loginForm.get('password')?.touched">
+              <p class="text-danger" *ngIf="loginForm.get('password')?.errors?.['required']">password is required</p>
+              <p class="text-danger" *ngIf="loginForm.get('password')?.errors?.['pattern']">
+                least 8 characters, one
+                special character, one lowercase letter, one uppercase letter and one digit.
+              </p>
+            </ng-container>
             <div class="auth-form__links">
-              <a href="" class="link">Forget password</a>
+              <a routerLink="/auth/request-reset-password" class="link">Forget password</a>
             </div>
             <div class="auth-form__actions">
               <button class="button" mat-raised-button color="primary">Login</button>

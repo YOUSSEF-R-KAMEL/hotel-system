@@ -21,7 +21,16 @@ export class AuthService {
   onLogin(data: ILogin): Observable<LoginResponse> {
     return this.http.post<LoginResponse>('admin/users/login', data);
   }
-  register(data: FormData) {
-    return this.http.post('Users/Register', data);
+  onRegister(data: FormData) {
+    return this.http.post('portal/users', data);
   }
+
+  onReqResPassword(data: FormData) {
+    return this.http.post('portal/users/forgot-password', data);
+  }
+
+  onResPassword(data: FormData) {
+    return this.http.post('portal/users/reset-password', data);
+  }
+
 }

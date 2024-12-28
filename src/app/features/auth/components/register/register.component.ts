@@ -23,11 +23,12 @@ export class RegisterComponent {
   private readonly _authService = inject(AuthService)
   private readonly toastr = inject(ToastrService)
   registerForm:FormGroup = new FormGroup({
+    role : new FormControl('user'),
     profileImage : new FormControl(null),
     userName: new FormControl(null, [Validators.required, Validators.pattern(/^(?=.*\d)[a-zA-Z\d]{1,8}$/)]),
     email: new FormControl(null, [Validators.required, Validators.email]),
     country : new FormControl(null, [Validators.required]),
-    phoneNumber  : new FormControl(null, [Validators.required, Validators.minLength(11), Validators.maxLength(11)]),
+    phoneNumber  : new FormControl(null, [Validators.required, Validators.minLength(11), Validators.maxLength(17)]),
     password: new FormControl(null, [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,}$/)]),
     confirmPassword : new FormControl(null, [Validators.required])
   }, { validators: this.checkPasswords })
@@ -45,7 +46,7 @@ export class RegisterComponent {
     });
     myData.append('profileImage', this.imgSrc)
 
-    this._authService.register(myData).subscribe({
+    this._authService.onRegister(myData).subscribe({
       next: (res:any) => {
         this.isLoading = false
         this.resMsg = res.message
@@ -68,6 +69,15 @@ export class RegisterComponent {
         this.toastr.success(this.resMsg,'Successfully')
       }
     })
+  }  onSelect(event:any) {
+    this.files.push(...event.addedFiles);
+    this.imgSrc = this.files[0]
+    // console.log(this.imgSrc)
+  }
+
+  onRemove(event:any) {
+    // console.log(event);
+    this.files.splice(this.files.indexOf(event), 1);
   }
 
     fileChangeEvent(event: Event): void {
