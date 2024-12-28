@@ -12,17 +12,7 @@ import { HomeService } from './services/home.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  cards: any[] = [
-    {
-      name: 'Rooms',
-      number: 0,
-    },
-    { name: 'Facilities', number: 0 },
-    {
-      name: 'Ads',
-      number: 0,
-    },
-  ];
+  cards: any[] = [];
   public bookingChartData: ChartConfiguration['data'] = {
     labels: [],
     datasets: [
@@ -52,6 +42,17 @@ export class HomeComponent implements OnInit {
     this._HomeService.getChartData().subscribe({
       next: (res) => {
         console.log(res);
+        this.cards = [
+          {
+            name: 'Rooms',
+            number: res.data.rooms,
+          },
+          { name: 'Facilities', number: res.data.facilities },
+          {
+            name: 'Ads',
+            number: res.data.ads,
+          },
+        ];
         this.bookingChartData.labels = ['Pending', 'Completed'];
         this.bookingChartData.datasets[0].data = [
           res.data.bookings.pending,
