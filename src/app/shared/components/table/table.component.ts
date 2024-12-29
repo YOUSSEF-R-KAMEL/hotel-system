@@ -3,7 +3,6 @@ import {
   Component,
   EventEmitter,
   Input,
-  OnInit,
   Output,
   TemplateRef,
   ViewChild,
@@ -13,6 +12,7 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { TableTypeEnum } from '../../enums/table-type-enum';
 import { ITableColumn } from '../../interface/table/table-columns.interface';
+import { Ads } from '../../../features/admin/dashboard/ads/interfaces/IAdsResponse';
 import { ITableInput } from '../../interface/table/table-input.interface';
 
 @Component({
@@ -20,16 +20,16 @@ import { ITableInput } from '../../interface/table/table-input.interface';
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
 })
-export class TableComponent implements OnInit {
+export class TableComponent {
   data: ITableInput;
   pageNumber = 1;
   pageSize = 5;
   totalRecords = 0;
   dataSource: MatTableDataSource<any> = new MatTableDataSource();
   displayedColumns: ITableColumn[] = [];
-  projectNames: string[] = [];
   defaultImage =
     '../../../../assets/images/svg/profile-picture-placeholder.svg';
+
   @Input() type: TableTypeEnum = TableTypeEnum.Users;
   @Input() set tableInput(data: ITableInput) {
     this.data = data;
@@ -42,20 +42,14 @@ export class TableComponent implements OnInit {
   }>();
 
   @ViewChild(MatSort) sort!: MatSort;
-  @ViewChild('imageTemplate', { static: true })
-  imageTemplate!: TemplateRef<any>;
+  @ViewChild('imageTemplate', { static: true }) imageTemplate!: TemplateRef<any>;
   @ViewChild('dateTemplate', { static: true }) dateTemplate!: TemplateRef<any>;
   @ViewChild('actionsTemplate', { static: true }) actionsTemplate!: TemplateRef<any>;
   @ViewChild('booleanTemplate', { static: true }) booleanTemplate!: TemplateRef<any>;
   @ViewChild('userTemplate', { static: true }) userTemplate!: TemplateRef<any>;
   @ViewChild('roomTemplate', { static: true }) roomTemplate!: TemplateRef<any>;
+  @ViewChild('discountTemplate', { static: true }) discountTemplate!: TemplateRef<any>;
   @ViewChild('defaultTemplate', { static: true }) defaultTemplate!: TemplateRef<any>;
-
-=======
-  @ViewChild('actionsTemplate', { static: true })
-  actionsTemplate!: TemplateRef<any>;
-  @ViewChild('defaultTemplate', { static: true })
-  defaultTemplate!: TemplateRef<any>;
 
   constructor(private _liveAnnouncer: LiveAnnouncer) {
     this.data = {
@@ -67,16 +61,22 @@ export class TableComponent implements OnInit {
     };
   }
 
-  ngOnInit(): void {}
-
   initializeTable(tableData: ITableInput): void {
     if (!tableData || tableData.data.data.length === 0) {
       return;
     }
+    let tableDataArray = tableData.data.data;
+    if (this.type === TableTypeEnum.Ads) {
+      tableDataArray = tableDataArray.map((ad: Ads) => {
+        return {
+          ...ad,
+          discount: ad.room?.discount ?? 'N/A',
+        };
+      });
+    }
     const excludedFields = ['_id', 'createdAt', 'updatedAt', 'verified'];
-    let columns = Object.keys(tableData.data.data[0]).filter(
-      (field) => !excludedFields.includes(field)
-    );
+    const columns = Object.keys(tableDataArray[0]).filter((field) => !excludedFields.includes(field));
+    console.log(columns);
     this.displayedColumns = [
       ...columns.map((column) => {
         return {
@@ -88,11 +88,13 @@ export class TableComponent implements OnInit {
     if (tableData.actions?.length > 0) {
       this.displayedColumns.push({ field: 'actions', header: 'Actions' });
     }
-    this.dataSource.data = tableData.data.data;
+    this.dataSource.data = tableDataArray;
+
     if (this.sort) {
       this.dataSource.sort = this.sort;
     }
   }
+
 
   announceSortChange(sortState: Sort): void {
     if (sortState.direction) {
@@ -112,10 +114,6 @@ export class TableComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  isArray(element: any) {
-    return Array.isArray(element);
-  }
-
   getTemplate(field: string): TemplateRef<any> {
     switch (field) {
       case 'profileImage':
@@ -132,6 +130,8 @@ export class TableComponent implements OnInit {
         return this.userTemplate;
       case 'actions':
         return this.actionsTemplate;
+      case 'discount':
+        return this.discountTemplate;
       default:
         return this.defaultTemplate;
     }
@@ -143,8 +143,7 @@ export class TableComponent implements OnInit {
       .replace(/^./, (str) => str.toUpperCase())
       .replace(/\s([a-z])/g, (match, group) => group.toLowerCase());
   }
-
-  get displayedColumnFields(): string[] {
-    return this.displayedColumns.map((col) => col.field);
+  get displayedColumnFields() {
+    return this.displayedColumns.map((column) => column.field);
   }
 }
