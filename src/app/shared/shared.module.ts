@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatChipsModule } from '@angular/material/chips';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -17,13 +18,10 @@ import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 import { TableComponent } from './components/table/table.component';
-import { MatChipsModule } from '@angular/material/chips';
-
+import { DeleteItemComponent } from './components/delete-item/delete-item.component';
 
 @NgModule({
-  declarations: [
-    TableComponent
-  ],
+  declarations: [TableComponent, DeleteItemComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -45,8 +43,9 @@ import { MatChipsModule } from '@angular/material/chips';
     MatPaginatorModule,
     MatSortModule,
     MatChipsModule,
-    NgFor
-  ],exports:[
+    NgFor,
+  ],
+  exports: [
     RouterModule,
     MatPaginatorModule,
     MatButtonModule,
@@ -65,7 +64,7 @@ import { MatChipsModule } from '@angular/material/chips';
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    TableComponent
-  ]
+    TableComponent,
+  ],
 })
-export class SharedModule { }
+export class SharedModule {}

@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {
   ITableAction,
   ITableInput,
-} from '../../../../../shared/interface/table/table-input.interface';
-import { IAdsData } from './interfaces/IAdsResponse';
+} from '../../../../shared/interface/table/table-input.interface';
+import { Ads, IAdsData } from './interfaces/IAdsResponse';
 import { AdsService } from './services/ads.service';
 
 @Component({
@@ -23,7 +23,7 @@ export class AdsComponent implements OnInit {
         color: 'primary',
         label: 'View',
         icon: 'visibility',
-        callback: (row) => {
+        callback: (row: Ads) => {
           console.log('View', row);
         },
       },
@@ -32,7 +32,7 @@ export class AdsComponent implements OnInit {
         color: 'primary',
         label: 'Edit',
         icon: 'edit_square',
-        callback: (row) => {
+        callback: (row: Ads) => {
           console.log('Edit', row);
         },
       },
@@ -41,7 +41,7 @@ export class AdsComponent implements OnInit {
         color: 'accent',
         label: 'Delete',
         icon: 'delete',
-        callback: (row) => {
+        callback: (row: Ads) => {
           console.log('Delete', row);
         },
       },
