@@ -1,5 +1,5 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { TableTypeEnum } from '../../enums/table-type-enum';
@@ -30,6 +30,11 @@ export class TableComponent implements OnInit {
   @Output() pageChange = new EventEmitter<{ pageNumber: number; pageSize: number }>();
 
   @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild('imageTemplate', { static: true }) imageTemplate!: TemplateRef<any>;
+  @ViewChild('dateTemplate', { static: true }) dateTemplate!: TemplateRef<any>;
+  @ViewChild('actionsTemplate', { static: true }) actionsTemplate!: TemplateRef<any>;
+  @ViewChild('defaultTemplate', { static: true }) defaultTemplate!: TemplateRef<any>;
+
 
   constructor(private _liveAnnouncer: LiveAnnouncer) {
     this.data = {
@@ -47,7 +52,7 @@ export class TableComponent implements OnInit {
     if (!tableData || tableData.data.data.length === 0) {
       return;
     }
-    const excludedFields = ['_id', 'createdAt', 'updatedAt'];
+    const excludedFields = ['_id', 'createdAt', 'updatedAt', 'verified'];
     let columns = Object.keys(tableData.data.data[0]).filter((field) => !excludedFields.includes(field));
     this.displayedColumns = [
       ...columns.map((column) => {
@@ -57,9 +62,9 @@ export class TableComponent implements OnInit {
         };
       })
     ];
-    // if (tableData.actions?.length > 0) {
-    //   this.displayedColumns.push({ field: 'actions', header: 'Actions' });
-    // }
+    if (tableData.actions?.length > 0) {
+      this.displayedColumns.push({ field: 'actions', header: 'Actions' });
+    }
     this.dataSource.data = tableData.data.data;
     if (this.sort) {
       this.dataSource.sort = this.sort;
@@ -85,16 +90,18 @@ export class TableComponent implements OnInit {
     return Array.isArray(element);
   }
 
-  getTemplate(field: string): any {
+  getTemplate(field: string): TemplateRef<any> {
     switch (field) {
-      case 'task': return 'arrayTemplate';
-      case 'creationDate': return 'dateTemplate';
-      case 'modificationDate': return 'dateTemplate';
-      case 'imagePath': return 'imageTemplate';
-      case 'isActive': return 'booleanTemplate';
-      case 'project': return 'projectTemplate';
-      case 'employee': return 'employeeTemplate';
-      default: return 'defaultTemplate';
+      case 'profileImage':
+      case 'imagePath':
+        return this.imageTemplate;
+      case 'createdAt':
+      case 'updatedAt':
+        return this.dateTemplate;
+      case 'actions':
+        return this.actionsTemplate;
+      default:
+        return this.defaultTemplate;
     }
   }
 
