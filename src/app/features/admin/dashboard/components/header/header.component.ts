@@ -8,9 +8,12 @@ import { AuthService } from '../../../../auth/services/auth.service';
 })
 export class HeaderComponent {
   @Input() profileImage: string = '';
+  userName: string | null = '';
 
-  userName: string | null = localStorage.getItem('userName');
-  constructor(private _AuthService: AuthService) {}
+  constructor(private _AuthService: AuthService) {
+    console.log(localStorage.getItem('userName'));
+    this.userName = localStorage.getItem('userName');
+  }
   onLogout(): void {
     this._AuthService.onLogout();
   }

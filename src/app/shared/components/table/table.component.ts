@@ -1,11 +1,19 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  TemplateRef,
+  ViewChild,
+} from '@angular/core';
+import { PageEvent } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { TableTypeEnum } from '../../enums/table-type-enum';
-import { ITableInput } from '../../interface/table/table-input.interface';
-import { PageEvent } from '@angular/material/paginator';
 import { ITableColumn } from '../../interface/table/table-columns.interface';
+import { ITableInput } from '../../interface/table/table-input.interface';
 
 @Component({
   selector: 'app-table',
@@ -20,17 +28,22 @@ export class TableComponent implements OnInit {
   dataSource: MatTableDataSource<any> = new MatTableDataSource();
   displayedColumns: ITableColumn[] = [];
   projectNames: string[] = [];
-  defaultImage = '../../../../assets/images/svg/profile-picture-placeholder.svg';
+  defaultImage =
+    '../../../../assets/images/svg/profile-picture-placeholder.svg';
   @Input() type: TableTypeEnum = TableTypeEnum.Users;
   @Input() set tableInput(data: ITableInput) {
     this.data = data;
     this.totalRecords = data.data.totalCount;
     this.initializeTable(data);
   }
-  @Output() pageChange = new EventEmitter<{ pageNumber: number; pageSize: number }>();
+  @Output() pageChange = new EventEmitter<{
+    pageNumber: number;
+    pageSize: number;
+  }>();
 
   @ViewChild(MatSort) sort!: MatSort;
-  @ViewChild('imageTemplate', { static: true }) imageTemplate!: TemplateRef<any>;
+  @ViewChild('imageTemplate', { static: true })
+  imageTemplate!: TemplateRef<any>;
   @ViewChild('dateTemplate', { static: true }) dateTemplate!: TemplateRef<any>;
   @ViewChild('actionsTemplate', { static: true }) actionsTemplate!: TemplateRef<any>;
   @ViewChild('booleanTemplate', { static: true }) booleanTemplate!: TemplateRef<any>;
@@ -38,6 +51,11 @@ export class TableComponent implements OnInit {
   @ViewChild('roomTemplate', { static: true }) roomTemplate!: TemplateRef<any>;
   @ViewChild('defaultTemplate', { static: true }) defaultTemplate!: TemplateRef<any>;
 
+=======
+  @ViewChild('actionsTemplate', { static: true })
+  actionsTemplate!: TemplateRef<any>;
+  @ViewChild('defaultTemplate', { static: true })
+  defaultTemplate!: TemplateRef<any>;
 
   constructor(private _liveAnnouncer: LiveAnnouncer) {
     this.data = {
@@ -46,24 +64,26 @@ export class TableComponent implements OnInit {
         totalCount: 0,
       },
       actions: [],
-    }
+    };
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   initializeTable(tableData: ITableInput): void {
     if (!tableData || tableData.data.data.length === 0) {
       return;
     }
     const excludedFields = ['_id', 'createdAt', 'updatedAt', 'verified'];
-    let columns = Object.keys(tableData.data.data[0]).filter((field) => !excludedFields.includes(field));
+    let columns = Object.keys(tableData.data.data[0]).filter(
+      (field) => !excludedFields.includes(field)
+    );
     this.displayedColumns = [
       ...columns.map((column) => {
         return {
           field: column,
           header: this.formatHeader(column),
         };
-      })
+      }),
     ];
     if (tableData.actions?.length > 0) {
       this.displayedColumns.push({ field: 'actions', header: 'Actions' });
@@ -82,7 +102,10 @@ export class TableComponent implements OnInit {
     }
   }
   onPageChange(event: PageEvent): void {
-    this.pageChange.emit({ pageNumber: event.pageIndex + 1, pageSize: event.pageSize });
+    this.pageChange.emit({
+      pageNumber: event.pageIndex + 1,
+      pageSize: event.pageSize,
+    });
   }
   applyFilter(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -125,4 +148,3 @@ export class TableComponent implements OnInit {
     return this.displayedColumns.map((col) => col.field);
   }
 }
-
