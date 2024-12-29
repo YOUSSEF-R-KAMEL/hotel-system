@@ -8,13 +8,13 @@ const routes: Routes = [
   { path: '', redirectTo: 'auth', pathMatch: 'full' },
   {
     path: 'auth',
-    canActivate: [loggedInAdminGuard],
+    // canActivate: [loggedInAdminGuard],
     loadChildren: () =>
       import('./features/auth/auth.module').then((m) => m.AuthModule),
   },
   {
     path: 'admin',
-    canActivate: [adminGuard],
+    // canActivate: [adminGuard],
     loadChildren: () =>
       import('./features/admin/admin.module').then((m) => m.AdminModule),
   },

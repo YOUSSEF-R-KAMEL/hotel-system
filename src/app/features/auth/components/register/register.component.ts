@@ -69,7 +69,9 @@ export class RegisterComponent {
         this.toastr.success(this.resMsg,'Successfully')
       }
     })
-  }  onSelect(event:any) {
+  }
+
+  onSelect(event:any) {
     this.files.push(...event.addedFiles);
     this.imgSrc = this.files[0]
     // console.log(this.imgSrc)
@@ -79,23 +81,6 @@ export class RegisterComponent {
     // console.log(event);
     this.files.splice(this.files.indexOf(event), 1);
   }
-
-    fileChangeEvent(event: Event): void {
-        this.imageChangedEvent = event;
-    }
-    imageCropped(event: any) {
-      this.croppedImage = this.sanitizer.bypassSecurityTrustUrl(event.objectUrl);
-      // event.blob can be used to upload the cropped image
-    }
-    imageLoaded(image: LoadedImage) {
-        // show cropper
-    }
-    cropperReady() {
-        // cropper ready
-    }
-    loadImageFailed() {
-
-    }
 
   toggleShowPass(): void{
     this.showPassword = !this.showPassword
