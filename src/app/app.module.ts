@@ -24,7 +24,6 @@ import { loadingInterceptor } from './core/interceptors/loading/loading.intercep
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    BaseChartDirective,
     BrowserAnimationsModule,
     NgxSpinnerModule,
     ToastrModule.forRoot({ positionClass: 'toast-bottom-right' }),

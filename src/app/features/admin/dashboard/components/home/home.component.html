@@ -17,11 +17,17 @@
     }
   </div>
   <div class="row chart-container d-flex justify-content-lg-around">
-    <canvas baseChart [data]="bookingChartData" [type]="chartType"> </canvas>
+    <canvas
+      baseChart
+      [data]="bookingChartData"
+      [options]="chartOptions"
+      [type]="chartType"
+    >
+    </canvas>
     <canvas
       baseChart
       [data]="userChartData"
-      [options]="userChartOptions"
+      [options]="chartOptions"
       [type]="userChartType"
     >
     </canvas>
