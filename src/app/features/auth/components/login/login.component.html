@@ -26,14 +26,6 @@
             <ng-container *ngIf="loginForm.get('email')?.dirty || loginForm.get('email')?.touched">
               <mat-error class="mb-3" *ngIf="loginForm.get('email')?.errors?.['required']">Email is required</mat-error>
               <mat-error class="mb-3" *ngIf="loginForm.get('email')?.errors?.['email']">
-            <mat-form-field appearance="fill">
-              <mat-label>Email address</mat-label>
-              <input
-                matInput
-                formControlName="email"
-                placeholder="Please type here"
-              />
-            </mat-form-field>
             <ng-container
               *ngIf="
                 loginForm.get('email')?.dirty || loginForm.get('email')?.touched
@@ -74,24 +66,6 @@
                 least 8 characters, one
                 special character, one lowercase letter, one uppercase letter and one digit.
               </mat-error>
-            <!-- password -->
-            <mat-form-field appearance="fill">
-              <mat-label>Password</mat-label>
-              <input
-                matInput
-                autocomplete="--"
-                [type]="showPassword ? 'text' : 'password'"
-                formControlName="password"
-                placeholder="Please type here"
-              />
-              <span class="eye-pass" (click)="toggleShowPass()">
-                <i
-                  class="fa-solid position-absolute grey-color"
-                  [class]="!showPassword ? 'fa-eye' : 'fa-eye-slash'"
-                >
-                </i>
-              </span>
-            </mat-form-field>
             <ng-container
               *ngIf="
                 loginForm.get('password')?.dirty ||
