@@ -1,0 +1,67 @@
+.user-form {
+  display: flex;
+  flex-direction: row; /* Align children horizontally */
+  background-color: white;
+  padding: 2rem 4rem;
+  border-radius: 16px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  min-height: fit-content;
+}
+
+.profile-image {
+  position: relative;
+  border: 5px solid white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  object-fit: cover; /* Ensures the image covers the container */
+}
+
+.col-md-8 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.col-md-4 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.text-color {
+  font-size: 1.5rem;
+  color: #203FC7; /* Change this to the color you want */
+}
+
+.gray-color {
+  color: #777;
+}
+
+svg.background {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  z-index: 0;
+}
+.close-button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border: 1px solid red;
+  border-radius: 50%;
+  transition: all .3s;
+  &:hover {
+    background-color: rgba($color: red, $alpha: .1);
+  }
+  mat-icon {
+    font-size: 24px;
+    color: red;
+  }
+
+}
+
+
