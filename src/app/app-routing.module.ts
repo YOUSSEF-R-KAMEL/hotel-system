@@ -1,8 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { adminGuard } from './core/guards/admin/admin.guard';
-import { loggedInAdminGuard } from './core/guards/logged-in-admin/logged-in-admin.guard';
-import { userGuard } from './core/guards/user/user.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'auth', pathMatch: 'full' },
@@ -27,7 +24,6 @@ const routes: Routes = [
   },
   {
     path: 'logged-user',
-    canActivate: [userGuard],
     loadChildren: () =>
       import('./features/logged-user/logged-user.module').then(
         (m) => m.LoggedUserModule

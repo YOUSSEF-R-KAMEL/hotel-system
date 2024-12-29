@@ -12,7 +12,18 @@ const routes: Routes = [
         path: 'home',
         component: HomeComponent,
       },
-      {path: 'users', loadChildren: () => import('./users/users.module').then(m => m.UsersModule)},
+      {
+        path: 'users',
+        loadChildren: () =>
+          import('./users/users.module').then((m) => m.UsersModule),
+      },
+
+      {
+        path: 'ads',
+        loadChildren: () =>
+          import('./ads/ads.module').then((m) => m.AdsModule),
+      },
+
       { path: '', redirectTo: 'home', pathMatch: 'full' },
     ],
   },

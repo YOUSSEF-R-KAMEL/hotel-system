@@ -9,7 +9,12 @@ import { ILogin, LoginResponse } from '../interfaces/ILogin';
 })
 export class AuthService {
   role: string | null = '';
-  constructor(private http: HttpClient, private _Router: Router) {}
+  constructor(private http: HttpClient, private _Router: Router) {
+    this.getProfile();
+  }
+  getProfile() {
+    this.getRole();
+  }
   getRole(): string | null {
     if (
       localStorage.getItem('role') !== null &&
