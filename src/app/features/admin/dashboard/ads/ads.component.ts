@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteItemComponent } from '../../../../shared/components/delete-item/delete-item.component';
 import {
   ITableAction,
   ITableInput,
@@ -16,6 +18,7 @@ export class AdsComponent implements OnInit {
   page = 1;
   size = 5;
   actions: ITableAction[] = [];
+  readonly dialog = inject(MatDialog);
   constructor(private _AdsService: AdsService) {
     this.actions = [
       {
@@ -42,7 +45,7 @@ export class AdsComponent implements OnInit {
         label: 'Delete',
         icon: 'delete',
         callback: (row: Ads) => {
-          console.log('Delete', row);
+          this.onDeleteAds(row);
         },
       },
     ];
@@ -65,7 +68,6 @@ export class AdsComponent implements OnInit {
     };
     this._AdsService.onGetAllAds(adsParams).subscribe({
       next: (res) => {
-        console.log(res);
         this.passDataToTable(res.data);
       },
       error: (err) => {
@@ -77,8 +79,6 @@ export class AdsComponent implements OnInit {
     if (!data || !data.ads) {
       return;
     }
-    console.log(data);
-
     this.adsData = {
       data: {
         data: data.ads,
@@ -92,5 +92,22 @@ export class AdsComponent implements OnInit {
     this.page = event.pageNumber;
     this.size = event.pageSize;
     this.getAllAds();
+  }
+  onDeleteAds(data: Ads) {
+    const dialogRef = this.dialog.open(DeleteItemComponent, {
+      data: { text: 'Ads' },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this._AdsService.onDeleteAds(data).subscribe({
+          next: (res) => {
+            this.getAllAds();
+          },
+          error: (err) => {
+            console.log(err);
+          },
+        });
+      }
+    });
   }
 }

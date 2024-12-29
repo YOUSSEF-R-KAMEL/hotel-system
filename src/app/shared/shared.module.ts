@@ -4,7 +4,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
-import { MatDialogModule } from '@angular/material/dialog';
+import {
+  MatDialogActions,
+  MatDialogClose,
+  MatDialogContent,
+  MatDialogModule,
+  MatDialogTitle,
+} from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -17,8 +23,8 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
-import { TableComponent } from './components/table/table.component';
 import { DeleteItemComponent } from './components/delete-item/delete-item.component';
+import { TableComponent } from './components/table/table.component';
 
 @NgModule({
   declarations: [TableComponent, DeleteItemComponent],
@@ -44,6 +50,10 @@ import { DeleteItemComponent } from './components/delete-item/delete-item.compon
     MatSortModule,
     MatChipsModule,
     NgFor,
+    MatDialogActions,
+    MatDialogClose,
+    MatDialogContent,
+    MatDialogTitle,
   ],
   exports: [
     RouterModule,
@@ -65,6 +75,10 @@ import { DeleteItemComponent } from './components/delete-item/delete-item.compon
     MatPaginatorModule,
     MatSortModule,
     TableComponent,
+    MatDialogActions,
+    MatDialogClose,
+    MatDialogContent,
+    MatDialogTitle,
   ],
 })
 export class SharedModule {}
