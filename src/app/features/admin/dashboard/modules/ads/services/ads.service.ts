@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { IParams } from '../../../users/interfaces/user-params.interface';
 import { IAdsResponse } from '../interfaces/IAdsResponse';
 import { IUpdateResponse } from '../interfaces/IUpdateResponse.ts';
 
@@ -9,8 +10,10 @@ import { IUpdateResponse } from '../interfaces/IUpdateResponse.ts';
 })
 export class AdsService {
   constructor(private _HttpClient: HttpClient) {}
-  onGetAllAds(): Observable<IAdsResponse> {
-    return this._HttpClient.get<IAdsResponse>('admin/ads');
+  onGetAllAds(params: IParams): Observable<IAdsResponse> {
+    return this._HttpClient.get<IAdsResponse>('admin/ads', {
+      params: { ...params },
+    });
   }
   onAdsDetails(id: number): Observable<IAdsResponse> {
     return this._HttpClient.get<IAdsResponse>(`admin/ads/${id}`);
