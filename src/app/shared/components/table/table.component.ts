@@ -3,7 +3,6 @@ import {
   Component,
   EventEmitter,
   Input,
-  OnInit,
   Output,
   TemplateRef,
   ViewChild,
@@ -14,22 +13,23 @@ import { MatTableDataSource } from '@angular/material/table';
 import { TableTypeEnum } from '../../enums/table-type-enum';
 import { ITableColumn } from '../../interface/table/table-columns.interface';
 import { Ads } from '../../../features/admin/dashboard/ads/interfaces/IAdsResponse';
+import { ITableInput } from '../../interface/table/table-input.interface';
 
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
 })
-export class TableComponent implements OnInit {
+export class TableComponent {
   data: ITableInput;
   pageNumber = 1;
   pageSize = 5;
   totalRecords = 0;
   dataSource: MatTableDataSource<any> = new MatTableDataSource();
   displayedColumns: ITableColumn[] = [];
-  projectNames: string[] = [];
   defaultImage =
     '../../../../assets/images/svg/profile-picture-placeholder.svg';
+
   @Input() type: TableTypeEnum = TableTypeEnum.Users;
   @Input() set tableInput(data: ITableInput) {
     this.data = data;
@@ -42,8 +42,7 @@ export class TableComponent implements OnInit {
   }>();
 
   @ViewChild(MatSort) sort!: MatSort;
-  @ViewChild('imageTemplate', { static: true })
-  imageTemplate!: TemplateRef<any>;
+  @ViewChild('imageTemplate', { static: true }) imageTemplate!: TemplateRef<any>;
   @ViewChild('dateTemplate', { static: true }) dateTemplate!: TemplateRef<any>;
   @ViewChild('actionsTemplate', { static: true }) actionsTemplate!: TemplateRef<any>;
   @ViewChild('booleanTemplate', { static: true }) booleanTemplate!: TemplateRef<any>;
@@ -51,12 +50,6 @@ export class TableComponent implements OnInit {
   @ViewChild('roomTemplate', { static: true }) roomTemplate!: TemplateRef<any>;
   @ViewChild('discountTemplate', { static: true }) discountTemplate!: TemplateRef<any>;
   @ViewChild('defaultTemplate', { static: true }) defaultTemplate!: TemplateRef<any>;
-
-=======
-  @ViewChild('actionsTemplate', { static: true })
-  actionsTemplate!: TemplateRef<any>;
-  @ViewChild('defaultTemplate', { static: true })
-  defaultTemplate!: TemplateRef<any>;
 
   constructor(private _liveAnnouncer: LiveAnnouncer) {
     this.data = {
@@ -67,8 +60,6 @@ export class TableComponent implements OnInit {
       actions: [],
     };
   }
-
-  ngOnInit(): void {}
 
   initializeTable(tableData: ITableInput): void {
     if (!tableData || tableData.data.data.length === 0) {
@@ -84,14 +75,14 @@ export class TableComponent implements OnInit {
       });
     }
     const excludedFields = ['_id', 'createdAt', 'updatedAt', 'verified'];
-    let columns = Object.keys(tableDataArray[0]).filter((field) => !excludedFields.includes(field));
+    const columns = Object.keys(tableDataArray[0]).filter((field) => !excludedFields.includes(field));
+    console.log(columns);
     this.displayedColumns = [
       ...columns.map((column) => {
         return {
           field: column,
           header: this.formatHeader(column),
         };
-      }),
       }),
     ];
     if (tableData.actions?.length > 0) {
@@ -152,8 +143,7 @@ export class TableComponent implements OnInit {
       .replace(/^./, (str) => str.toUpperCase())
       .replace(/\s([a-z])/g, (match, group) => group.toLowerCase());
   }
-
-  get displayedColumnFields(): string[] {
-    return this.displayedColumns.map((col) => col.field);
+  get displayedColumnFields() {
+    return this.displayedColumns.map((column) => column.field);
   }
 }
