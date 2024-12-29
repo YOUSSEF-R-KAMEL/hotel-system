@@ -18,13 +18,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { globalInterceptor } from './core/interceptors/global/global.interceptor';
 import { loadingInterceptor } from './core/interceptors/loading/loading.interceptor';
-
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    BaseChartDirective,
     BrowserAnimationsModule,
     NgxSpinnerModule,
     ToastrModule.forRoot({ positionClass: 'toast-bottom-right' }),

@@ -1,11 +1,12 @@
 export interface IAdsResponse {
   success: boolean;
   message: string;
-  data: Data;
+  data: IAdsData;
 }
 
-export interface Data {
-  ads: Ads;
+export interface IAdsData {
+  ads: Ads[];
+  totalCount: number;
 }
 
 export interface Ads {
