@@ -21,3 +21,8 @@ export interface Users {
   user: number;
   admin: number;
 }
+
+export interface ICard {
+  name: string;
+  number: number;
+}
