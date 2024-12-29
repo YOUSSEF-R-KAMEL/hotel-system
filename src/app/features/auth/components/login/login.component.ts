@@ -12,6 +12,7 @@ import { AuthService } from '../../services/auth.service';
 })
 export class LoginComponent {
   resMsg: string = '';
+  showPassword:boolean = false
   loginForm: FormGroup = new FormGroup({
     email: new FormControl(null, [Validators.required, Validators.email]),
     password: new FormControl(null, [Validators.required]),
@@ -21,10 +22,9 @@ export class LoginComponent {
     private _ToastrService: ToastrService,
     private _Router: Router
   ) {}
-  onSubmit(data: FormGroup) {
-    const formValue = data.value;
-    if (data.valid) {
-      this._AuthService.onLogin(formValue).subscribe({
+  login() {
+    if (this.loginForm.valid) {
+      this._AuthService.onLogin(this.loginForm.value).subscribe({
         next: (res) => {
           console.log(res);
           this.resMsg = res.message;
@@ -47,5 +47,8 @@ export class LoginComponent {
         },
       });
     }
+  }
+  toggleShowPass(): void{
+    this.showPassword = !this.showPassword
   }
 }

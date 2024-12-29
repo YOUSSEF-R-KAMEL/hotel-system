@@ -14,7 +14,7 @@ import { HomeService } from './services/home.service';
 export class HomeComponent implements OnInit {
   cards: any[] = [];
   public bookingChartData: ChartConfiguration['data'] = {
-    labels: [],
+    labels: ['Pending', 'Completed'],
     datasets: [
       {
         label: 'Bookings',
@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
   };
   public chartType: ChartType = 'doughnut';
   public userChartData: ChartConfiguration['data'] = {
-    labels: [],
+    labels: ['Admin', 'User'],
     datasets: [
       {
         label: 'Users',
@@ -42,27 +42,28 @@ export class HomeComponent implements OnInit {
     this._HomeService.getChartData().subscribe({
       next: (res) => {
         console.log(res);
-        this.cards = [
-          {
-            name: 'Rooms',
-            number: res.data.rooms,
-          },
-          { name: 'Facilities', number: res.data.facilities },
-          {
-            name: 'Ads',
-            number: res.data.ads,
-          },
-        ];
-        this.bookingChartData.labels = ['Pending', 'Completed'];
-        this.bookingChartData.datasets[0].data = [
-          res.data.bookings.pending,
-          res.data.bookings.completed,
-        ];
-        this.userChartData.labels = ['User', 'Admin'];
-        this.userChartData.datasets[0].data = [
-          res.data.users.admin,
-          res.data.users.user,
-        ];
+        if (res.success) {
+          // Map cards data
+          this.cards = [
+            { name: 'Rooms', number: res.data.rooms },
+            { name: 'Facilities', number: res.data.facilities },
+            { name: 'Ads', number: res.data.ads },
+          ];
+
+          // Map booking chart data
+          this.bookingChartData.labels = ['Pending', 'Completed'];
+          this.bookingChartData.datasets[0].data = [
+            res.data.bookings.pending,
+            res.data.bookings.completed,
+          ];
+
+          // Map user chart data
+          this.userChartData.labels = ['Admin', 'User'];
+          this.userChartData.datasets[0].data = [
+            res.data.users.admin,
+            res.data.users.user,
+          ];
+        }
       },
     });
   }

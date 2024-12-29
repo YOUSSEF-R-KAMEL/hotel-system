@@ -32,7 +32,7 @@ export class SideNavbarComponent {
     {
       name: 'Ads',
       icon: 'work',
-      route: '/dashboard/employee/ads',
+      route: '/admin/dashboard/ads',
     },
     {
       route: '/booking',
