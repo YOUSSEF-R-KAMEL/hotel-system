@@ -2,57 +2,51 @@
   <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column.field">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ column.header }}</th>
     <td mat-cell *matCellDef="let element">
-      <ng-container *ngIf="isArray(element[column.field])">
-        <mat-chip-listbox>
-          <mat-chip *ngFor="let item of element[column.field]">{{ item.title }}</mat-chip>
-        </mat-chip-listbox>
-      </ng-container>
-      <ng-container *ngIf="column.field === 'createdAt' || column.field === 'updatedAt'">
-        {{ element[column.field] | date: 'dd/MM/yyyy' }}
-      </ng-container>
-      <ng-container *ngIf="column.field === 'profileImage'">
-        <img width="40px" height="40px" [src]="element[column.field] === null ? defaultImage : element[column.field]"
-          alt="Profile Picture" class="rounded-circle" />
-      </ng-container>
-      <!-- <ng-container *ngIf="column.field === 'actions'">
-        <button class="icon-button" mat-icon-button [matMenuTriggerFor]="menu"
-          aria-label="Example icon-button with a menu">
-          <mat-icon>more_vert</mat-icon>
-        </button>
-        <mat-menu #menu="matMenu">
-          <ng-container *ngFor="let action of data.actions">
-            <button mat-menu-item class="icon-button" mat-button (click)="action.callback(element)">
-              <mat-icon [color]="action.color">{{action.icon}}</mat-icon>
-              <span [ngClass]="action.color === 'warn' ? 'text-danger' : ''">{{action.label}}</span>
-            </button>
-          </ng-container>
-        </mat-menu>
-      </ng-container> -->
       <ng-container
-        *ngIf="!isArray(element[column.field]) && !(column.field === 'profileImage') && !(column.field === 'createdAt') && !(column.field === 'updatedAt')">
-        {{ element[column.field] }}
-      </ng-container>
+        *ngTemplateOutlet="getTemplate(column.field); context: { $implicit: element[column.field], element: element }"></ng-container>
     </td>
   </ng-container>
-  <!-- <ng-container matColumnDef="actions">
-    <th mat-header-cell *matHeaderCellDef>Actions</th>
-    <td mat-cell *matCellDef="let element">
-      <button class="icon-button" mat-icon-button [matMenuTriggerFor]="menu"
-        aria-label="Example icon-button with a menu">
-        <mat-icon>more_vert</mat-icon>
-      </button>
-      <mat-menu #menu="matMenu">
-        @for(action of data.actions;track action.label) {
-        <button mat-menu-item class="icon-button" mat-button (click)="action.callback(element)">
-          <mat-icon [color]="action.color">{{action.icon}}</mat-icon>
-          <span [ngClass]="action.color === 'warn' ? 'text-danger' : ''">{{action.label}}</span>
-        </button>
-        }
-      </mat-menu>
-    </td>
-  </ng-container> -->
   <tr mat-header-row *matHeaderRowDef="displayedColumnFields"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumnFields"></tr>
 </table>
 <mat-paginator [pageSize]="pageSize" [length]="totalRecords" showFirstLastButtons [pageSizeOptions]="[5, 10, 20]"
-  (page)="onPageChange($event)"></mat-paginator>
+  (page)="onPageChange($event)">
+</mat-paginator>
+<!-- Templates -->
+<ng-template #arrayTemplate let-value>
+  <mat-chip-listbox>
+    <mat-chip *ngFor="let item of value">{{ item.title }}</mat-chip>
+  </mat-chip-listbox>
+</ng-template>
+<ng-template #dateTemplate let-value>
+  {{ value | date: 'dd/MM/yyyy' }}
+</ng-template>
+<ng-template #imageTemplate let-value>
+  <img width="40px" height="40px" [src]="value === null ? defaultImage : value" alt="Profile Picture"
+    class="rounded-circle" />
+</ng-template>
+<ng-template #booleanTemplate let-value>
+  <mat-icon [color]="value ? 'primary' : 'warn'">{{ value ? 'check_circle' : 'cancel' }}</mat-icon>
+</ng-template>
+<ng-template #actionsTemplate let-element="element">
+  <button *ngIf="data.actions.length > 1" class="icon-button" mat-icon-button [matMenuTriggerFor]="menu"
+    aria-label="Example icon-button with a menu">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <ng-container *ngFor="let action of data.actions">
+      <button mat-menu-item class="icon-button" (click)="action.callback(element)">
+        <mat-icon [color]="action.color">{{ action.icon }}</mat-icon>
+        <span [ngClass]="action.color === 'warn' ? 'text-danger' : ''">{{ action.label }}</span>
+      </button>
+    </ng-container>
+  </mat-menu>
+  <button *ngIf="data.actions.length === 1" mat-icon-button aria-label="Example icon-button with a menu"
+    (click)="data.actions[0].callback(element)">
+    <mat-icon [color]="data.actions[0].color">{{ data.actions[0].icon }}</mat-icon>
+  </button>
+</ng-template>
+
+<ng-template #defaultTemplate let-value>
+  {{ value }}
+</ng-template>
