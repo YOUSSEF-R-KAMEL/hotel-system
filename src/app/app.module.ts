@@ -12,11 +12,6 @@ import {
 } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import {
-  BaseChartDirective,
-  provideCharts,
-  withDefaultRegisterables,
-} from 'ng2-charts';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastrModule } from 'ngx-toastr';
 import { AppRoutingModule } from './app-routing.module';
@@ -29,7 +24,6 @@ import { loadingInterceptor } from './core/interceptors/loading/loading.intercep
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    BaseChartDirective,
     BrowserAnimationsModule,
     NgxSpinnerModule,
     ToastrModule.forRoot({ positionClass: 'toast-bottom-right' }),
@@ -41,7 +35,6 @@ import { loadingInterceptor } from './core/interceptors/loading/loading.intercep
       withFetch(),
       withInterceptors([globalInterceptor, loadingInterceptor])
     ),
-    [provideCharts(withDefaultRegisterables())],
   ],
   bootstrap: [AppComponent],
 })

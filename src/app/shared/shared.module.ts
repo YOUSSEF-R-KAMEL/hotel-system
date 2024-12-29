@@ -3,7 +3,14 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatChipsModule } from '@angular/material/chips';
+import {
+  MatDialogActions,
+  MatDialogClose,
+  MatDialogContent,
+  MatDialogModule,
+  MatDialogTitle,
+} from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -16,14 +23,11 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
+import { DeleteItemComponent } from './components/delete-item/delete-item.component';
 import { TableComponent } from './components/table/table.component';
-import { MatChipsModule } from '@angular/material/chips';
-
 
 @NgModule({
-  declarations: [
-    TableComponent
-  ],
+  declarations: [TableComponent, DeleteItemComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -45,8 +49,13 @@ import { MatChipsModule } from '@angular/material/chips';
     MatPaginatorModule,
     MatSortModule,
     MatChipsModule,
-    NgFor
-  ],exports:[
+    NgFor,
+    MatDialogActions,
+    MatDialogClose,
+    MatDialogContent,
+    MatDialogTitle,
+  ],
+  exports: [
     RouterModule,
     MatPaginatorModule,
     MatButtonModule,
@@ -65,7 +74,11 @@ import { MatChipsModule } from '@angular/material/chips';
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    TableComponent
-  ]
+    TableComponent,
+    MatDialogActions,
+    MatDialogClose,
+    MatDialogContent,
+    MatDialogTitle,
+  ],
 })
-export class SharedModule { }
+export class SharedModule {}
