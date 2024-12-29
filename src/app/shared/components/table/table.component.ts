@@ -33,6 +33,9 @@ export class TableComponent implements OnInit {
   @ViewChild('imageTemplate', { static: true }) imageTemplate!: TemplateRef<any>;
   @ViewChild('dateTemplate', { static: true }) dateTemplate!: TemplateRef<any>;
   @ViewChild('actionsTemplate', { static: true }) actionsTemplate!: TemplateRef<any>;
+  @ViewChild('booleanTemplate', { static: true }) booleanTemplate!: TemplateRef<any>;
+  @ViewChild('userTemplate', { static: true }) userTemplate!: TemplateRef<any>;
+  @ViewChild('roomTemplate', { static: true }) roomTemplate!: TemplateRef<any>;
   @ViewChild('defaultTemplate', { static: true }) defaultTemplate!: TemplateRef<any>;
 
 
@@ -98,6 +101,12 @@ export class TableComponent implements OnInit {
       case 'createdAt':
       case 'updatedAt':
         return this.dateTemplate;
+      case 'isActive':
+        return this.booleanTemplate;
+      case 'room':
+        return this.roomTemplate;
+      case 'createdBy':
+        return this.userTemplate;
       case 'actions':
         return this.actionsTemplate;
       default:
