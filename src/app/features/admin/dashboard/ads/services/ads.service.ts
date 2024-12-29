@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IParams } from '../../../users/interfaces/user-params.interface';
+import { IParams } from '../../users/interfaces/user-params.interface';
 import { IAdsResponse } from '../interfaces/IAdsResponse';
 import { IUpdateResponse } from '../interfaces/IUpdateResponse.ts';
 

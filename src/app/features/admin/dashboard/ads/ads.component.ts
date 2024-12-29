@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {
-  ITableAction,
-  ITableInput,
-} from '../../../../../shared/interface/table/table-input.interface';
+    ITableAction,
+    ITableInput,
+} from '../../../../shared/interface/table/table-input.interface';
 import { IAdsData } from './interfaces/IAdsResponse';
 import { AdsService } from './services/ads.service';
+import { TableTypeEnum } from '../../../../shared/enums/table-type-enum';
 
 @Component({
   selector: 'app-ads',
@@ -12,6 +13,7 @@ import { AdsService } from './services/ads.service';
   styleUrl: './ads.component.scss',
 })
 export class AdsComponent implements OnInit {
+  type = TableTypeEnum.Ads;
   adsData: ITableInput;
   page = 1;
   size = 5;

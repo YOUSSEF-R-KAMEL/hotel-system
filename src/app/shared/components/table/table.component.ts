@@ -6,6 +6,7 @@ import { TableTypeEnum } from '../../enums/table-type-enum';
 import { ITableInput } from '../../interface/table/table-input.interface';
 import { PageEvent } from '@angular/material/paginator';
 import { ITableColumn } from '../../interface/table/table-columns.interface';
+import { Ads } from '../../../features/admin/dashboard/ads/interfaces/IAdsResponse';
 
 @Component({
   selector: 'app-table',
@@ -36,6 +37,7 @@ export class TableComponent implements OnInit {
   @ViewChild('booleanTemplate', { static: true }) booleanTemplate!: TemplateRef<any>;
   @ViewChild('userTemplate', { static: true }) userTemplate!: TemplateRef<any>;
   @ViewChild('roomTemplate', { static: true }) roomTemplate!: TemplateRef<any>;
+  @ViewChild('discountTemplate', { static: true }) discountTemplate!: TemplateRef<any>;
   @ViewChild('defaultTemplate', { static: true }) defaultTemplate!: TemplateRef<any>;
 
 
@@ -55,24 +57,35 @@ export class TableComponent implements OnInit {
     if (!tableData || tableData.data.data.length === 0) {
       return;
     }
+    let tableDataArray = tableData.data.data;
+    if (this.type === TableTypeEnum.Ads) {
+      tableDataArray = tableDataArray.map((ad: Ads) => {
+        return {
+          ...ad,
+          discount: ad.room?.discount ?? 'N/A',
+        };
+      });
+    }
     const excludedFields = ['_id', 'createdAt', 'updatedAt', 'verified'];
-    let columns = Object.keys(tableData.data.data[0]).filter((field) => !excludedFields.includes(field));
+    let columns = Object.keys(tableDataArray[0]).filter((field) => !excludedFields.includes(field));
     this.displayedColumns = [
       ...columns.map((column) => {
         return {
           field: column,
           header: this.formatHeader(column),
         };
-      })
+      }),
     ];
     if (tableData.actions?.length > 0) {
       this.displayedColumns.push({ field: 'actions', header: 'Actions' });
     }
-    this.dataSource.data = tableData.data.data;
+    this.dataSource.data = tableDataArray;
+
     if (this.sort) {
       this.dataSource.sort = this.sort;
     }
   }
+
 
   announceSortChange(sortState: Sort): void {
     if (sortState.direction) {
@@ -87,10 +100,6 @@ export class TableComponent implements OnInit {
   applyFilter(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-
-  isArray(element: any) {
-    return Array.isArray(element);
   }
 
   getTemplate(field: string): TemplateRef<any> {
@@ -109,6 +118,8 @@ export class TableComponent implements OnInit {
         return this.userTemplate;
       case 'actions':
         return this.actionsTemplate;
+      case 'discount':
+        return this.discountTemplate;
       default:
         return this.defaultTemplate;
     }
