@@ -129,11 +129,14 @@ export class AdsComponent implements OnInit {
       if (result) {
         this._AdsService.onDeleteAds(data).subscribe({
           next: (res) => {
-            this.getAllAds();
           },
           error: (err) => {
-            console.log(err);
+            this.toast.error(err.error.message);
           },
+          complete: () => {
+            this.toast.success('Ad Deleted Successfully');
+            this.getAllAds();
+          }
         });
       }
     });
