@@ -48,7 +48,9 @@ export class TableComponent {
   @ViewChild('booleanTemplate', { static: true }) booleanTemplate!: TemplateRef<any>;
   @ViewChild('userTemplate', { static: true }) userTemplate!: TemplateRef<any>;
   @ViewChild('roomTemplate', { static: true }) roomTemplate!: TemplateRef<any>;
+  @ViewChild('facilitiesArrayTemplate', { static: true }) facilitiesArrayTemplate!: TemplateRef<any>;
   @ViewChild('discountTemplate', { static: true }) discountTemplate!: TemplateRef<any>;
+  @ViewChild('imagesArrayTemplate', { static: true }) imagesArrayTemplate!: TemplateRef<any>;
   @ViewChild('defaultTemplate', { static: true }) defaultTemplate!: TemplateRef<any>;
 
   constructor(private _liveAnnouncer: LiveAnnouncer) {
@@ -132,6 +134,10 @@ export class TableComponent {
         return this.actionsTemplate;
       case 'discount':
         return this.discountTemplate;
+      case 'facilities':
+        return this.facilitiesArrayTemplate;
+      case 'images':
+        return this.imagesArrayTemplate;
       default:
         return this.defaultTemplate;
     }

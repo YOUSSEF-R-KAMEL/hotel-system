@@ -47,7 +47,6 @@ export class LoginComponent {
     }
     this._AuthService.onLogin(this.loginForm.value).subscribe({
       next: (res) => {
-        console.log(res);
         this.resMsg = res.message;
         localStorage.setItem('token', res.data.token);
         localStorage.setItem('role', res.data.user.role);

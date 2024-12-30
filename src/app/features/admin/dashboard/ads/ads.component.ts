@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteItemComponent } from '../../../../shared/components/delete-item/delete-item.component';
@@ -20,11 +21,12 @@ import { AdsService } from './services/ads.service';
 })
 export class AdsComponent implements OnInit {
   type = TableTypeEnum.Ads;
+  apiResponse = '';
   adsData: ITableInput;
   page = 1;
   size = 5;
   actions: ITableAction[] = [];
-  constructor(private _AdsService: AdsService, private dialog: MatDialog) {
+  constructor(private toast: ToastrService, private _AdsService: AdsService, private dialog: MatDialog) {
     this.actions = [
       {
         type: 'icon',
@@ -42,7 +44,6 @@ export class AdsComponent implements OnInit {
         icon: 'edit_square',
         callback: (row: Ads) => {
           this.onUpdateAds(row);
-          console.log('Edit', row);
         },
       },
       {
@@ -87,7 +88,6 @@ export class AdsComponent implements OnInit {
       return;
     }
     console.log(data);
-
     this.adsData = {
       data: {
         data: data.ads,
@@ -110,11 +110,13 @@ export class AdsComponent implements OnInit {
       if (result) {
         this._AdsService.onAdsDetails(data).subscribe({
           next: (res) => {
-            this.getAllAds();
           },
           error: (err) => {
-            console.log(err);
+            this.toast.error(err.error.message)
           },
+          complete: () => {
+            this.getAllAds();
+          }
         });
       }
     });
@@ -146,26 +148,27 @@ export class AdsComponent implements OnInit {
         console.log(result);
         this._AdsService.onUpdateAds(data._id, result).subscribe({
           next: (res) => {
-            // this.getAllAds();
+            this.apiResponse = res.message;
           },
           error: (err) => {
-            console.log(err);
+            this.toast.error(err.error.message);
           },
           complete: () => {
+            this.toast.success(this.apiResponse);
             this.getAllAds();
           },
         });
       }
     });
   }
-  onAddAds(data: Ads) {
+  onAddAds() {
     const dialogRef = this.dialog.open(AddAdComponent, {
       data: { text: 'Add Ads' },
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         console.log(result);
-        this._AdsService.onCreateAds(data).subscribe({
+        this._AdsService.onCreateAds(result).subscribe({
           next: (res) => {
             this.getAllAds();
           },
