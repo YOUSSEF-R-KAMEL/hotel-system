@@ -3,14 +3,14 @@
     <h5>{{ data.text }}</h5>
     <mat-icon class="text-danger text-end" mat-dialog-close>close</mat-icon>
   </div>
-  <form class="text-center d-flex flex-column">
+  <form class="text-center d-flex flex-column" [formGroup]="updateAdForm">
     <mat-form-field appearance="fill">
       <mat-label>Discount</mat-label>
-      <input matInput [(ngModel)]="discount" placeholder="Placeholder" />
+      <input formControlName="discount" matInput  placeholder="Placeholder" />
     </mat-form-field>
     <mat-form-field>
       <mat-label>Active</mat-label>
-      <mat-select [(ngModel)]="isActive">
+      <mat-select formControlName="isActive">
         <mat-option [value]="true">Active</mat-option>
         <mat-option [value]="false">Inactive</mat-option>
       </mat-select>
@@ -18,7 +18,7 @@
   </form>
 </div>
 <div mat-dialog-actions [align]="'end'">
-  <button mat-button [mat-dialog-close]="data" class="btn btn-primary">
+  <button mat-button [mat-dialog-close]="updateAdForm.value" class="btn btn-primary">
     Update
   </button>
 </div>

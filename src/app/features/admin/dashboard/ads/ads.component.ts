@@ -167,13 +167,16 @@ export class AdsComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        console.log(result);
         this._AdsService.onCreateAds(result).subscribe({
-          next: (res) => {
-            this.getAllAds();
+          next: (res: any) => {
+            this.apiResponse = res.message;
           },
           error: (err) => {
-            console.log(err);
+            this.toast.error(err.error.message);
+          },
+          complete: () => {
+            this.toast.success(this.apiResponse);
+            this.getAllAds();
           },
         });
       }
