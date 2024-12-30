@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { BaseChartDirective } from 'ng2-charts';
+import { NgChartsModule } from 'ng2-charts';
 import { SharedModule } from '../../../shared/shared.module';
 import { HeaderComponent } from './components/header/header.component';
 import { HomeComponent } from './components/home/home.component';
@@ -15,11 +15,6 @@ import { DashboardComponent } from './dashboard.component';
     SideNavbarComponent,
     HomeComponent,
   ],
-  imports: [
-    CommonModule,
-    DashboardRoutingModule,
-    SharedModule,
-    BaseChartDirective,
-  ],
+  imports: [CommonModule, DashboardRoutingModule, SharedModule, NgChartsModule],
 })
 export class DashboardModule {}
