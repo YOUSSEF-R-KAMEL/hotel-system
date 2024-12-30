@@ -11,7 +11,7 @@ interface IMenu {
   styleUrl: './side-navbar.component.scss',
 })
 export class SideNavbarComponent {
-  isExpanded: boolean = true;
+  isExpanded: boolean = false;
   @Output() toggle: EventEmitter<boolean> = new EventEmitter<boolean>();
   navItems: IMenu[] = [
     {
@@ -26,18 +26,18 @@ export class SideNavbarComponent {
     },
     {
       name: 'Rooms',
-      icon: 'task',
+      icon: 'bed',
       route: '/admin/dashboard/rooms',
     },
     {
       name: 'Ads',
-      icon: 'work',
+      icon: 'sell',
       route: '/admin/dashboard/ads',
     },
     {
       route: '/booking',
       name: 'Booking facilities',
-      icon: 'lock_open',
+      icon: 'book_online',
     },
   ];
   toggleSidebar(): void {
