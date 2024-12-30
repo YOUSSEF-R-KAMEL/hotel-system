@@ -1,11 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import {
-    ITableAction,
-    ITableInput,
-} from '../../../../shared/interface/table/table-input.interface';
-import { IAdsData } from './interfaces/IAdsResponse';
-import { AdsService } from './services/ads.service';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteItemComponent } from '../../../../shared/components/delete-item/delete-item.component';
 import { TableTypeEnum } from '../../../../shared/enums/table-type-enum';
+import {
+  ITableAction,
+  ITableInput,
+} from '../../../../shared/interface/table/table-input.interface';
+import { AddAdComponent } from './components/add-ad/add-ad.component';
+import { UpdateAdComponent } from './components/update-ad/update-ad.component';
+import { ViewAdComponent } from './components/view-ad/view-ad.component';
+import { Ads, IAdsData } from './interfaces/IAdsResponse';
+import { IUpdateAd } from './interfaces/IUpdateAd';
+import { AdsService } from './services/ads.service';
 
 @Component({
   selector: 'app-ads',
@@ -18,15 +24,15 @@ export class AdsComponent implements OnInit {
   page = 1;
   size = 5;
   actions: ITableAction[] = [];
-  constructor(private _AdsService: AdsService) {
+  constructor(private _AdsService: AdsService, private dialog: MatDialog) {
     this.actions = [
       {
         type: 'icon',
         color: 'primary',
         label: 'View',
         icon: 'visibility',
-        callback: (row) => {
-          console.log('View', row);
+        callback: (row: Ads) => {
+          this.onViewAd(row);
         },
       },
       {
@@ -34,7 +40,8 @@ export class AdsComponent implements OnInit {
         color: 'primary',
         label: 'Edit',
         icon: 'edit_square',
-        callback: (row) => {
+        callback: (row: Ads) => {
+          this.onUpdateAds(row);
           console.log('Edit', row);
         },
       },
@@ -44,7 +51,7 @@ export class AdsComponent implements OnInit {
         label: 'Delete',
         icon: 'delete',
         callback: (row) => {
-          console.log('Delete', row);
+          this.onDeleteAds(row);
         },
       },
     ];
@@ -94,5 +101,79 @@ export class AdsComponent implements OnInit {
     this.page = event.pageNumber;
     this.size = event.pageSize;
     this.getAllAds();
+  }
+  onViewAd(data: Ads) {
+    const dialogRef = this.dialog.open(ViewAdComponent, {
+      data: data,
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this._AdsService.onAdsDetails(data).subscribe({
+          next: (res) => {
+            this.getAllAds();
+          },
+          error: (err) => {
+            console.log(err);
+          },
+        });
+      }
+    });
+  }
+  onDeleteAds(data: Ads) {
+    const dialogRef = this.dialog.open(DeleteItemComponent, {
+      data: { text: 'Ad' },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this._AdsService.onDeleteAds(data).subscribe({
+          next: (res) => {
+            this.getAllAds();
+          },
+          error: (err) => {
+            console.log(err);
+          },
+        });
+      }
+    });
+  }
+
+  onUpdateAds(data: Ads) {
+    const dialogRef = this.dialog.open(UpdateAdComponent, {
+      data: { text: 'Update Ad', data },
+    });
+    dialogRef.afterClosed().subscribe((result: IUpdateAd) => {
+      if (result) {
+        console.log(result);
+        this._AdsService.onUpdateAds(data._id, result).subscribe({
+          next: (res) => {
+            // this.getAllAds();
+          },
+          error: (err) => {
+            console.log(err);
+          },
+          complete: () => {
+            this.getAllAds();
+          },
+        });
+      }
+    });
+  }
+  onAddAds(data: Ads) {
+    const dialogRef = this.dialog.open(AddAdComponent, {
+      data: { text: 'Add Ads' },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        console.log(result);
+        this._AdsService.onCreateAds(data).subscribe({
+          next: (res) => {
+            this.getAllAds();
+          },
+          error: (err) => {
+            console.log(err);
+          },
+        });
+      }
+    });
   }
 }
