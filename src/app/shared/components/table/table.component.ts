@@ -78,7 +78,6 @@ export class TableComponent {
     }
     const excludedFields = ['_id', 'createdAt', 'updatedAt', 'verified'];
     const columns = Object.keys(tableDataArray[0]).filter((field) => !excludedFields.includes(field));
-    console.log(columns);
     this.displayedColumns = [
       ...columns.map((column) => {
         return {

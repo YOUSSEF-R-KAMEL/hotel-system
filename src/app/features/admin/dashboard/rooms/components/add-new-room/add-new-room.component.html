@@ -1,1 +1,108 @@
-<p>add-new-room works!</p>
+<section>
+  <div class="container">
+    <div class="row">
+      <form class="auth-form" [formGroup]="newRoomForm" (ngSubmit)="addRoom()">
+        <!-- roomNumber -->
+        <div class="input-group mb-3">
+          <input type="text"
+                class="form-control"
+                placeholder="Room Number"
+                formControlName="roomNumber"
+                aria-label="roomNumber"
+          >
+        </div>
+        <ng-container *ngIf="newRoomForm.get('roomNumber')?.dirty || newRoomForm.get('roomNumber')?.touched">
+          <mat-error class="mb-3 d-inline-block" *ngIf="newRoomForm.get('roomNumber')?.errors?.['required']">Room Number is required</mat-error>
+          <mat-error class="mb-3 d-inline-block" *ngIf="newRoomForm.get('roomNumber')?.errors?.['pattern']">Room Number must be number and one '-'</mat-error>
+        </ng-container>
+        <div class="row">
+        <!-- price -->
+        <div class="col-md-6">
+          <div class="input-group mb-3">
+            <input type="text"
+                  class="form-control"
+                  placeholder="price"
+                  formControlName="price"
+                  aria-label="price"
+            >
+          </div>
+          <ng-container *ngIf="newRoomForm.get('price')?.dirty || newRoomForm.get('price')?.touched">
+            <mat-error class="mb-3 d-inline-block" *ngIf="newRoomForm.get('price')?.errors?.['required']">price is required</mat-error>
+            <mat-error class="mb-3 d-inline-block" *ngIf="newRoomForm.get('price')?.errors?.['pattern']">price must be number</mat-error>
+          </ng-container>
+          </div>
+          <!-- capacity -->
+          <div class="col-md-6">
+            <div class="input-group mb-3">
+              <input type="text"
+                    class="form-control"
+                    placeholder="capacity"
+                    formControlName="capacity"
+                    aria-label="capacity"
+              >
+            </div>
+            <ng-container *ngIf="newRoomForm.get('capacity')?.dirty || newRoomForm.get('capacity')?.touched">
+              <mat-error class="mb-3 d-inline-block" *ngIf="newRoomForm.get('capacity')?.errors?.['required']">capacity is required</mat-error>
+              <mat-error class="mb-3 d-inline-block" *ngIf="newRoomForm.get('capacity')?.errors?.['pattern']">price must be number</mat-error>
+            </ng-container>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <!-- discount -->
+            <div class="input-group mb-3">
+              <input type="text"
+                    class="form-control"
+                    placeholder="discount"
+                    formControlName="discount"
+                    aria-label="discount"
+              >
+            </div>
+            <ng-container *ngIf="newRoomForm.get('discount')?.dirty || newRoomForm.get('discount')?.touched">
+              <mat-error class="mb-3 d-inline-block" *ngIf="newRoomForm.get('discount')?.errors?.['required']">discount is required</mat-error>
+              <mat-error class="mb-3 d-inline-block" *ngIf="newRoomForm.get('discount')?.errors?.['pattern']">discount must be number</mat-error>
+            </ng-container>
+          </div>
+          <div class="col-md-6">
+            <!-- facilities -->
+            <div class="input-group mb-3">
+              <select class="form-control"
+              formControlName="facilities"
+              aria-label="facilities"
+              >
+                @for (item of facilitiesArr; track $index) {
+                  <option [value]="$index">{{item}}</option>
+                }
+            </select>
+            </div>
+            <ng-container *ngIf="newRoomForm.get('facilities')?.dirty || newRoomForm.get('facilities')?.touched">
+              <mat-error class="mb-3 d-inline-block" *ngIf="newRoomForm.get('facilities')?.errors?.['required']">facilities is required</mat-error>
+            </ng-container>
+          </div>
+        </div>
+        <div class="auth-form__actions ">
+          <div class="row d-flex justify-content-end">
+            <div class="col-md-2">
+              <button
+              class="button"
+              mat-stroked-button
+              >
+              Cancel
+            </button>
+          </div>
+          <div class="col-md-2">
+            <button
+            class="button"
+            mat-raised-button
+            color="primary"
+            [disabled]="newRoomForm.invalid"
+            >
+            Save
+          </button>
+        </div>
+        </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
