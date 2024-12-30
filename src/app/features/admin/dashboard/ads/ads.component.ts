@@ -51,7 +51,7 @@ export class AdsComponent implements OnInit {
         label: 'Delete',
         icon: 'delete',
         callback: (row) => {
-          console.log('Delete', row);
+          this.onDeleteAds(row);
         },
       },
     ];
@@ -104,7 +104,7 @@ export class AdsComponent implements OnInit {
   }
   onViewAd(data: Ads) {
     const dialogRef = this.dialog.open(ViewAdComponent, {
-      data: this.adsData,
+      data: data,
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
@@ -139,17 +139,20 @@ export class AdsComponent implements OnInit {
 
   onUpdateAds(data: Ads) {
     const dialogRef = this.dialog.open(UpdateAdComponent, {
-      data: { text: 'Update Ads' },
+      data: { text: 'Update Ad', data },
     });
     dialogRef.afterClosed().subscribe((result: IUpdateAd) => {
       if (result) {
         console.log(result);
         this._AdsService.onUpdateAds(data._id, result).subscribe({
           next: (res) => {
-            this.getAllAds();
+            // this.getAllAds();
           },
           error: (err) => {
             console.log(err);
+          },
+          complete: () => {
+            this.getAllAds();
           },
         });
       }
