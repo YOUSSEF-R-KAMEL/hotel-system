@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ITableAction, ITableInput } from '../../../../shared/interface/table/table-input.interface';
 import { IUserWithCount } from './interfaces/get-users-interface';
 import { UsersService } from './services/users.service';
+import { IUser } from './interfaces/user.interface';
+import { MatDialog } from '@angular/material/dialog';
+import { ViewUserDialogComponent } from './components/view-user-dialog/view-user-dialog.component';
 
 @Component({
   selector: 'app-users',
@@ -13,16 +16,14 @@ export class UsersComponent implements OnInit {
   page = 1;
   size = 5;
   actions: ITableAction[] = [];
-  constructor(private usersService: UsersService) {
+  constructor(private dialog: MatDialog, private usersService: UsersService) {
     this.actions = [
       {
         type: 'icon',
         color: 'primary',
         label: 'View',
-        icon: 'view',
-        callback: (row) => {
-          console.log('View', row);
-        }
+        icon: 'visibility',
+        callback: (row: IUser) => this.openViewDialog(row)
       }
     ]
     this.usersData = {
@@ -50,8 +51,8 @@ export class UsersComponent implements OnInit {
         console.log(err);
       }
     });
-
   }
+
   passDataToTable(data: IUserWithCount) {
     this.usersData = {
       data: {
@@ -61,9 +62,16 @@ export class UsersComponent implements OnInit {
       actions: this.actions
     }
   }
+
   handlePageChange(event : {pageNumber: number; pageSize: number}) {
     this.page = event.pageNumber;
     this.size = event.pageSize;
     this.getUsers();
+  }
+
+  openViewDialog(row: IUser) {
+    this.dialog.open(ViewUserDialogComponent, {
+      data: row,
+    });
   }
 }

@@ -8,4 +8,20 @@
 image-container {
   width: 100%;
   height: 100%;
+.mat-raised-button {
+  &.primary {
+    background-color: mat.get-color-from-palette($Hotel-system-primary, 900);
+    color: white;
+  }
+
+  &.secondary {
+    background-color: transparent;
+    color: mat.get-color-from-palette($Hotel-system-primary, 900);
+    border: 1px solid mat.get-color-from-palette($Hotel-system-primary, 900);
+  }
+
+  &.danger {
+    background-color: mat.get-color-from-palette($Hotel-system-warn, 500);
+    color: white;
+  }
 }

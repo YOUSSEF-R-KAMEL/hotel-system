@@ -1,22 +1,21 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IUserParams } from '../interfaces/user-params.interface';
 import { Observable } from 'rxjs';
 import { IGetUsers } from '../interfaces/get-users-interface';
+import { IParams } from '../interfaces/user-params.interface';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UsersService {
+  constructor(private _http: HttpClient) {}
 
-  constructor(private _http: HttpClient) { }
-
-  getUsers(params: IUserParams): Observable<IGetUsers> {
+  getUsers(params: IParams): Observable<IGetUsers> {
     return this._http.get<IGetUsers>('admin/users', {
       params: {
         page: params.page,
-        size: params.size
-      }
+        size: params.size,
+      },
     });
   }
 }

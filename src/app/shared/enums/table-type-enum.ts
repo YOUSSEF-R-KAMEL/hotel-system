@@ -1,6 +1,7 @@
 export enum TableTypeEnum {
   Users = 'Users',
-  Projects = 'Projects',
-  Tasks = 'Tasks'
+  Ads = 'Ads',
+  Rooms = 'Rooms',
+  Facitlies = 'Facilities',
 }
 
