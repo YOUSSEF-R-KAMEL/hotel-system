@@ -25,6 +25,11 @@ export class SideNavbarComponent {
       route: '/admin/dashboard/users',
     },
     {
+      name: 'Facilities',
+      icon: 'people',
+      route: '/admin/dashboard/facilities',
+    },
+    {
       name: 'Rooms',
       icon: 'task',
       route: '/admin/dashboard/rooms',

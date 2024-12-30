@@ -8,14 +8,16 @@ import { ToastrModule } from 'ngx-toastr';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { globalInterceptor } from './core/interceptors/global/global.interceptor';
-import { NgxSpinnerModule } from 'ngx-spinner';
 import { loadingInterceptor } from './core/interceptors/loading/loading.interceptor';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    RouterModule,
     HttpClientModule,
     BrowserAnimationsModule,
     NgxSpinnerModule,

@@ -9,60 +9,52 @@
           <h2 class="form__wrapper-header">Sign in</h2>
           <p class="form__wrapper-paragraph">
             If you don't have an account register You can
-            <a class="blue-link fw-medium " routerLink="/auth/register">Register here !</a>
+            <a class="blue-link fw-medium" routerLink="/auth/register">Register here !</a>
           </p>
           <form class="auth-form" [formGroup]="loginForm" (ngSubmit)="login()">
             <!-- email -->
             <div class="input-group mb-3">
               <label for="email" class="w-100 mb-2">Email Address</label>
-              <input type="email"
-                    id="email"
-                    class="form-control"
-                    placeholder="Please type here ..."
-                    formControlName="email"
-                    aria-label="email"
-              >
+              <input type="email" id="email" class="form-control" placeholder="Please type here ..."
+                formControlName="email" aria-label="email" />
             </div>
             <ng-container *ngIf="loginForm.get('email')?.dirty || loginForm.get('email')?.touched">
-              <mat-error class="mb-3" *ngIf="loginForm.get('email')?.errors?.['required']">Email is required</mat-error>
+              <mat-error class="mb-3" *ngIf="loginForm.get('email')?.errors?.['required']">Email is
+                required</mat-error>
               <mat-error class="mb-3" *ngIf="loginForm.get('email')?.errors?.['email']">
                 Email is not valid
               </mat-error>
             </ng-container>
-          <!-- password -->
-          <div class="input-group mb-3 position-relative">
-            <label for="password" class="w-100 mb-2">Password</label>
-            <input [type]="showPassword? 'text' : 'password'"
-                  id="password"
-                  class="form-control"
-                  placeholder="Please type here ..."
-                  formControlName="password"
-                  aria-label="password"
-            >
-            <span class="eye-pass" (click)="toggleShowPass()">
-              <i class="fa-solid grey-color"
-              [class]="!showPassword ? 'fa-eye' : 'fa-eye-slash'">
-              </i>
-            </span>
-          </div>
-            <ng-container *ngIf="loginForm.get('password')?.dirty || loginForm.get('password')?.touched">
-              <mat-error class="mb-3" *ngIf="loginForm.get('password')?.errors?.['required']">password is required</mat-error>
-              <mat-error class="mb-3" *ngIf="loginForm.get('password')?.errors?.['pattern']">
-                least 8 characters, one
-                special character, one lowercase letter, one uppercase letter and one digit.
+            <!-- password -->
+            <div class="input-group mb-3 position-relative">
+              <label for="password" class="w-100 mb-2">Password</label>
+              <input [type]="showPassword ? 'text' : 'password'" id="password" class="form-control"
+                placeholder="Please type here ..." formControlName="password" aria-label="password" />
+              <span class="eye-pass" (click)="toggleShowPass()">
+                <i class="fa-solid grey-color" [class]="!showPassword ? 'fa-eye' : 'fa-eye-slash'">
+                </i>
+              </span>
+            </div>
+            <ng-container *ngIf="
+                loginForm.get('password')?.dirty ||
+                loginForm.get('password')?.touched">
+              <mat-error class="mb-3" *ngIf="loginForm.get('password')?.errors?.['required']">password is
+                required
               </mat-error>
+<<<<<<< HEAD
+=======
+              <mat-error class="mb-3" *ngIf="loginForm.get('password')?.errors?.['pattern']">
+                least 8 characters, one special character, one lowercase letter,
+                one uppercase letter and one digit.
+              </mat-error>
+>>>>>>> 54f18faa3d320d2029635f924239e9bd7ff63e1c
             </ng-container>
             <!-- forget password link -->
             <div class="auth-form__links">
               <a routerLink="/auth/request-reset-password" class="link">Forget password ?</a>
             </div>
             <div class="auth-form__actions">
-              <button
-                class="button"
-                mat-raised-button
-                color="primary"
-                [disabled]="loginForm.invalid"
-              >
+              <button class="button" mat-raised-button color="primary" [disabled]="loginForm.invalid">
                 Login
               </button>
             </div>

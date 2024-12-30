@@ -45,6 +45,30 @@ export class LoginComponent {
         },
       });
     }
+<<<<<<< HEAD
+=======
+    this._AuthService.onLogin(this.loginForm.value).subscribe({
+      next: (res) => {
+        this.resMsg = res.message;
+        localStorage.setItem('token', res.data.token);
+        localStorage.setItem('role', res.data.user.role);
+        localStorage.setItem('userId', res.data.user._id);
+        localStorage.setItem('userName', res.data.user.userName);
+      },
+      error: (err) => {
+        console.log(err);
+        this._ToastrService.error(err.message, 'Error');
+      },
+      complete: () => {
+        this._ToastrService.success(this.resMsg, 'Success');
+        if (localStorage.getItem('role') == 'admin') {
+          this._Router.navigate(['/admin/dashboard/home']);
+        } else if (localStorage.getItem('role') == 'user') {
+          this._Router.navigate(['/user/home']);
+        }
+      },
+    });
+>>>>>>> 54f18faa3d320d2029635f924239e9bd7ff63e1c
   }
   toggleShowPass(): void {
     this.showPassword = !this.showPassword;

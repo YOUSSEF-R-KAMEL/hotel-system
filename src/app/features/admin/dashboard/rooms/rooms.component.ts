@@ -20,11 +20,29 @@ export class RoomsComponent implements OnInit {
         type: 'icon',
         color: 'primary',
         label: 'View',
-        icon: 'view',
+        icon: 'visibility',
         callback: (row) => {
           console.log('View', row);
         }
-      }
+      },
+      {
+        type: 'icon',
+        color: 'primary',
+        label: 'Edit',
+        icon: 'edit_square',
+        callback: (row) => {
+          console.log('Edit', row);
+        }
+      },
+      {
+        type: 'icon',
+        color: 'warn',
+        label: 'Delete',
+        icon: 'delete',
+        callback: (row) => {
+          console.log('Delete', row);
+        }
+      },
     ]
     this.roomsData = {
       data: {
