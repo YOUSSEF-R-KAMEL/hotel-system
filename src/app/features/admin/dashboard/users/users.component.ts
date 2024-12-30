@@ -44,6 +44,7 @@ export class UsersComponent implements OnInit {
     }
     this.usersService.getUsers(userParams).subscribe({
       next: (res) => {
+        console.log(res.data.users)
         this.passDataToTable(res.data);
       },
       error: (err) => {
