@@ -1,6 +1,5 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { DeleteItemComponent } from '../../../../shared/components/delete-item/delete-item.component';
+import { Component, OnInit } from '@angular/core';
+import { TableTypeEnum } from '../../../../shared/enums/table-type-enum';
 import {
   ITableAction,
   ITableInput,
@@ -17,11 +16,11 @@ import { AdsService } from './services/ads.service';
   styleUrl: './ads.component.scss',
 })
 export class AdsComponent implements OnInit {
+  type = TableTypeEnum.Ads;
   adsData: ITableInput;
   page = 1;
   size = 5;
   actions: ITableAction[] = [];
-  readonly dialog = inject(MatDialog);
   constructor(private _AdsService: AdsService) {
     this.actions = [
       {
@@ -48,8 +47,8 @@ export class AdsComponent implements OnInit {
         color: 'accent',
         label: 'Delete',
         icon: 'delete',
-        callback: (row: Ads) => {
-          this.onDeleteAds(row);
+        callback: (row) => {
+          console.log('Delete', row);
         },
       },
     ];
@@ -72,6 +71,7 @@ export class AdsComponent implements OnInit {
     };
     this._AdsService.onGetAllAds(adsParams).subscribe({
       next: (res) => {
+        console.log(res);
         this.passDataToTable(res.data);
       },
       error: (err) => {
@@ -83,6 +83,8 @@ export class AdsComponent implements OnInit {
     if (!data || !data.ads) {
       return;
     }
+    console.log(data);
+
     this.adsData = {
       data: {
         data: data.ads,

@@ -6,108 +6,130 @@
           <img src="../../../../../assets/images/svg/logo.svg" alt="logo" />
         </div>
         <div class="form__wrapper mt-5">
-          <h2 class="form__wrapper-header">Sign Up</h2>
+          <h2 class="form__wrapper-header mt-5">Sign Up</h2>
           <p class="form__wrapper-paragraph">
             If you already have an account register You can
-            <a class="red-link" routerLink="/auth/login">Login here!</a>
+            <a class="red-link fw-medium" routerLink="/auth/login">Login here!</a>
           </p>
           <form class="auth-form" [formGroup]="registerForm" (ngSubmit)="register()">
             <div class="upload d-flex justify-content-center mb-3">
               <ngx-dropzone class="rounded-circle text-center overflow-hidden" (change)="onSelect($event)">
-                <ngx-dropzone-label>upload Photo <i class="fa-solid fa-cloud-arrow-up"></i></ngx-dropzone-label>
+                <ngx-dropzone-label>Upload Photo <i class="fa-solid fa-cloud-arrow-up"></i></ngx-dropzone-label>
                 <ngx-dropzone-image-preview class="rounded-circle" ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f" [removable]="true" (removed)="onRemove(f)">
                   <ngx-dropzone-label class="rounded-circle"></ngx-dropzone-label>
                 </ngx-dropzone-image-preview>
               </ngx-dropzone>
             </div>
             <!-- userName -->
-            <mat-form-field appearance="fill">
-              <mat-label>User Name</mat-label>
-              <input matInput formControlName="userName"
-              placeholder="Please type here" />
-            </mat-form-field>
+            <div class="input-group mb-3">
+              <label for="userName" class="w-100 mb-2">User Name</label>
+              <input type="text"
+                    id="userName"
+                    class="form-control"
+                    placeholder="Please type here ..."
+                    formControlName="userName"
+                    aria-label="userName"
+              >
+            </div>
             <ng-container *ngIf="registerForm.get('userName')?.dirty || registerForm.get('userName')?.touched">
-              <p class="text-danger" *ngIf="registerForm.get('userName')?.errors?.['required']">The UserName is required</p>
-              <p class="text-danger" *ngIf="registerForm.get('userName')?.errors?.['pattern']">The UserName must contain characters and end with numbers without spaces.</p>
+              <mat-error class="mb-3" *ngIf="registerForm.get('userName')?.errors?.['required']">The User Name is required</mat-error>
+              <mat-error class="mb-3" *ngIf="registerForm.get('userName')?.errors?.['pattern']">The User Name must contain characters and end with numbers without spaces.</mat-error>
             </ng-container>
             <div class="row">
               <div class="col-md-6">
                 <!-- phoneNumber -->
-                <mat-form-field appearance="fill">
-                  <mat-label>Phone Number</mat-label>
-                  <input matInput formControlName="phoneNumber"
-                  placeholder="Please type here" />
-                </mat-form-field>
+                <div class="input-group mb-3">
+                  <label for="phoneNumber" class="w-100 mb-2">Phone Number</label>
+                  <input type="text"
+                        id="phoneNumber"
+                        class="form-control"
+                        placeholder="Please type here ..."
+                        formControlName="phoneNumber"
+                        aria-label="phoneNumber"
+                  >
+                </div>
                 <ng-container *ngIf="registerForm.get('phoneNumber')?.dirty || registerForm.get('phoneNumber')?.touched">
-                  <p class="text-danger" *ngIf="registerForm.get('phoneNumber')?.errors?.['required']">Phone Number is required</p>
+                  <mat-error class="mb-3" *ngIf="registerForm.get('phoneNumber')?.errors?.['required']">Phone Number is required</mat-error>
                 </ng-container>
               </div>
               <div class="col-md-6">
                 <!-- country -->
-                <mat-form-field appearance="fill">
-                  <mat-label>country</mat-label>
-                  <input matInput type="text" formControlName="country"
-                  placeholder="Please type here" />
-                </mat-form-field>
+                <div class="input-group mb-3">
+                  <label for="country" class="w-100 mb-2">Country</label>
+                  <input type="text"
+                        id="country"
+                        class="form-control"
+                        placeholder="Please type here ..."
+                        formControlName="country"
+                        aria-label="country"
+                  >
+                </div>
                 <ng-container *ngIf="registerForm.get('country')?.dirty || registerForm.get('country')?.touched">
-                  <p class="text-danger" *ngIf="registerForm.get('country')?.errors?.['required']">country is required</p>
+                  <mat-error class="mb-3" *ngIf="registerForm.get('country')?.errors?.['required']">country is required</mat-error>
                 </ng-container>
               </div>
             </div>
             <!-- email -->
-            <mat-form-field appearance="fill">
-              <mat-label>Email</mat-label>
-              <input matInput formControlName="email"
-              placeholder="Please type here" />
-            </mat-form-field>
+            <div class="input-group mb-3">
+              <label for="email" class="w-100 mb-2">Email</label>
+              <input type="email"
+                    id="email"
+                    class="form-control"
+                    placeholder="Please type here ..."
+                    formControlName="email"
+                    aria-label="email"
+              >
+            </div>
             <ng-container *ngIf="registerForm.get('email')?.dirty || registerForm.get('email')?.touched">
-              <p class="text-danger" *ngIf="registerForm.get('email')?.errors?.['required']">email is required</p>
-              <p class="text-danger" *ngIf="registerForm.get('email')?.errors?.['email']">
+              <mat-error class="mb-3" *ngIf="registerForm.get('email')?.errors?.['required']">email is required</mat-error>
+              <mat-error class="mb-3" *ngIf="registerForm.get('email')?.errors?.['email']">
                 Email is not valid
-              </p>
+              </mat-error>
             </ng-container>
             <!-- password -->
-            <mat-form-field appearance="fill">
-              <mat-label>Password</mat-label>
-              <input matInput
-              autocomplete="--" [type]="showPassword? 'text' : 'password'"
-              formControlName="password"
-              placeholder="Please type here" />
+            <div class="input-group mb-3 position-relative">
+              <label for="password" class="password-label w-100 mb-2">Password</label>
+              <input [type]="showPassword? 'text' : 'password'"
+                    id="password"
+                    class="form-control"
+                    placeholder="Please type here ..."
+                    formControlName="password"
+                    aria-label="password"
+              >
               <span class="eye-pass" (click)="toggleShowPass()">
-                <i
-                class="fa-solid position-absolute grey-color"
-                [class]="!showPassword ? 'fa-eye' : 'fa-eye-slash'"
-                >
+                <i class="fa-solid grey-color"
+                [class]="!showPassword ? 'fa-eye' : 'fa-eye-slash'">
                 </i>
               </span>
-            </mat-form-field>
+            </div>
               <ng-container *ngIf="registerForm.get('password')?.dirty || registerForm.get('password')?.touched">
-                <p class="text-danger" *ngIf="registerForm.get('password')?.errors?.['required']">password is required</p>
-                <p class="text-danger" *ngIf="registerForm.get('password')?.errors?.['pattern']">
+                <mat-error class="mb-3" *ngIf="registerForm.get('password')?.errors?.['required']">password is required</mat-error>
+                <mat-error class="mb-3" *ngIf="registerForm.get('password')?.errors?.['pattern']">
                   least 8 characters, one
                   special character, one lowercase letter, one uppercase letter and one digit.
-                </p>
+                </mat-error>
               </ng-container>
             <!-- confirmPassword -->
-            <mat-form-field appearance="fill">
-              <mat-label>Confirm Password</mat-label>
-              <input matInput
-              autocomplete="--" [type]="showConfirmPassword? 'text' : 'password'"
-              formControlName="confirmPassword"
-              placeholder="Please type here" />
+            <div class="input-group mb-3 position-relative">
+              <label for="confirmPassword" class="w-100 mb-2">Confirm Password</label>
+              <input [type]="showConfirmPassword? 'text' : 'password'"
+                    id="confirmPassword"
+                    class="form-control"
+                    placeholder="Please type here ..."
+                    formControlName="confirmPassword"
+                    aria-label="confirmPassword"
+              >
               <span class="eye-pass" (click)="toggleShowConfirmPass()">
-                <i
-                class="fa-solid position-absolute grey-color"
-                [class]="!showConfirmPassword ? 'fa-eye' : 'fa-eye-slash'"
-                >
+                <i class="fa-solid grey-color"
+                [class]="!showConfirmPassword ? 'fa-eye' : 'fa-eye-slash'">
                 </i>
               </span>
-            </mat-form-field>
+            </div>
             <ng-container *ngIf="registerForm.get('confirmPassword')?.dirty || registerForm.get('confirmPassword')?.touched">
-              <p class="text-danger" *ngIf="registerForm.get('confirmPassword')?.errors?.['required']">confirmPassword is required</p>
-              <p class="text-danger" *ngIf="registerForm.getError('mismatch')">
+              <mat-error class="mb-3" *ngIf="registerForm.get('confirmPassword')?.errors?.['required']">confirmPassword is required</mat-error>
+              <mat-error class="mb-3" *ngIf="registerForm.getError('mismatch')">
                 not match with password
-              </p>
+              </mat-error>
             </ng-container>
             <div class="auth-form__actions">
               <button class="button" mat-raised-button color="primary">Sign Up</button>

@@ -46,6 +46,21 @@
     <mat-icon [color]="data.actions[0].color">{{ data.actions[0].icon }}</mat-icon>
   </button>
 </ng-template>
+<ng-template #booleanTemplate let-value>
+  <mat-icon [color]="value ? 'primary' : 'warn'">{{ value ? 'check_circle' : 'cancel' }}</mat-icon>
+</ng-template>
+
+<ng-template #userTemplate let-value>
+  {{ value.userName }}
+</ng-template>
+
+<ng-template #roomTemplate let-value>
+  {{ value.roomNumber }}
+</ng-template>
+
+<ng-template #discountTemplate let-value>
+  {{ value }}%
+</ng-template>
 
 <ng-template #defaultTemplate let-value>
   {{ value }}

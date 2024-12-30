@@ -9,18 +9,23 @@
           <h2 class="form__wrapper-header">Sign in</h2>
           <p class="form__wrapper-paragraph">
             If you don't have an account register You can
-            <a class="blue-link" routerLink="/auth/register">Register here !</a>
+            <a class="blue-link fw-medium " routerLink="/auth/register">Register here !</a>
           </p>
           <form class="auth-form" [formGroup]="loginForm" (ngSubmit)="login()">
             <!-- email -->
-            <mat-form-field appearance="fill">
-              <mat-label>Email address</mat-label>
-              <input
-                matInput
-                formControlName="email"
-                placeholder="Please type here"
-              />
-            </mat-form-field>
+            <div class="input-group mb-3">
+              <label for="email" class="w-100 mb-2">Email Address</label>
+              <input type="email"
+                    id="email"
+                    class="form-control"
+                    placeholder="Please type here ..."
+                    formControlName="email"
+                    aria-label="email"
+              >
+            </div>
+            <ng-container *ngIf="loginForm.get('email')?.dirty || loginForm.get('email')?.touched">
+              <mat-error class="mb-3" *ngIf="loginForm.get('email')?.errors?.['required']">Email is required</mat-error>
+              <mat-error class="mb-3" *ngIf="loginForm.get('email')?.errors?.['email']">
             <ng-container
               *ngIf="
                 loginForm.get('email')?.dirty || loginForm.get('email')?.touched
@@ -37,26 +42,30 @@
                 *ngIf="loginForm.get('email')?.errors?.['email']"
               >
                 Email is not valid
-              </p>
+              </mat-error>
             </ng-container>
-            <!-- password -->
-            <mat-form-field appearance="fill">
-              <mat-label>Password</mat-label>
-              <input
-                matInput
-                autocomplete="--"
-                [type]="showPassword ? 'text' : 'password'"
-                formControlName="password"
-                placeholder="Please type here"
-              />
-              <span class="eye-pass" (click)="toggleShowPass()">
-                <i
-                  class="fa-solid position-absolute grey-color"
-                  [class]="!showPassword ? 'fa-eye' : 'fa-eye-slash'"
-                >
-                </i>
-              </span>
-            </mat-form-field>
+          <!-- password -->
+          <div class="input-group mb-3 position-relative">
+            <label for="password" class="w-100 mb-2">Password</label>
+            <input [type]="showPassword? 'text' : 'password'"
+                  id="password"
+                  class="form-control"
+                  placeholder="Please type here ..."
+                  formControlName="password"
+                  aria-label="password"
+            >
+            <span class="eye-pass" (click)="toggleShowPass()">
+              <i class="fa-solid grey-color"
+              [class]="!showPassword ? 'fa-eye' : 'fa-eye-slash'">
+              </i>
+            </span>
+          </div>
+            <ng-container *ngIf="loginForm.get('password')?.dirty || loginForm.get('password')?.touched">
+              <mat-error class="mb-3" *ngIf="loginForm.get('password')?.errors?.['required']">password is required</mat-error>
+              <mat-error class="mb-3" *ngIf="loginForm.get('password')?.errors?.['pattern']">
+                least 8 characters, one
+                special character, one lowercase letter, one uppercase letter and one digit.
+              </mat-error>
             <ng-container
               *ngIf="
                 loginForm.get('password')?.dirty ||
@@ -77,7 +86,9 @@
                 one uppercase letter and one digit.
               </p>
             </ng-container>
+            <!-- forget password link -->
             <div class="auth-form__links">
+              <a routerLink="/auth/request-reset-password" class="link">Forget password ?</a>
               <a routerLink="/auth/request-reset-password" class="link"
                 >Forget password</a
               >

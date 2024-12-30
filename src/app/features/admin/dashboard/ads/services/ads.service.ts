@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IParams } from '../../users/interfaces/user-params.interface';
-import { Ads, IAdsResponse } from '../interfaces/IAdsResponse';
+import { IAdsResponse } from '../interfaces/IAdsResponse';
 import { IUpdateResponse } from '../interfaces/IUpdateResponse.ts';
 
 @Injectable({
@@ -15,17 +15,15 @@ export class AdsService {
       params: { ...params },
     });
   }
-  onAdsDetails(data: Ads): Observable<IAdsResponse> {
-    return this._HttpClient.get<IAdsResponse>(`admin/ads/${data._id}`);
+  onAdsDetails(id: number): Observable<IAdsResponse> {
+    return this._HttpClient.get<IAdsResponse>(`admin/ads/${id}`);
   }
-  onUpdateAds(data: Ads): Observable<IUpdateResponse> {
-    return this._HttpClient.put<IUpdateResponse>(`admin/ads/${data._id}`, {
-      data,
-    });
+  onUpdateAds(id: number, data: any): Observable<IUpdateResponse> {
+    return this._HttpClient.put<IUpdateResponse>(`admin/ads/${id}`, { data });
   }
 
-  onDeleteAds(data: Ads): Observable<any> {
-    return this._HttpClient.delete<IUpdateResponse>(`admin/ads/${data._id}`);
+  onDeleteAds(id: number): Observable<any> {
+    return this._HttpClient.delete<IUpdateResponse>(`admin/ads/${id}`);
   }
   onCreateAds(data: any): Observable<Ads> {
     return this._HttpClient.post<Ads>('admin/ads', {

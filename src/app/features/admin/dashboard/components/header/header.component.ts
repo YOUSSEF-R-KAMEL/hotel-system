@@ -7,12 +7,13 @@ import { AuthService } from '../../../../auth/services/auth.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
+  userName: string | null = null;
   @Input() profileImage: string = '';
-  userName: string | null = '';
 
   constructor(private _AuthService: AuthService) {
-    console.log(localStorage.getItem('userName'));
-    this.userName = localStorage.getItem('userName');
+    if (localStorage.getItem('userName')) {
+      this.userName = localStorage.getItem('userName');
+    }
   }
   onLogout(): void {
     this._AuthService.onLogout();
