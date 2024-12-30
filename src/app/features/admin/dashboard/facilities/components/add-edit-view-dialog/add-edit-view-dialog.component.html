@@ -1,0 +1,20 @@
+<section>
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center">
+      <h3 mat-dialog-title>{{data.type}} facility</h3>
+      <button mat-icon-button color="warn" mat-dialog-close>
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    <div mat-dialog-content>
+      <mat-form-field class="normal-input w-100">
+        <input matInput placeholder="Name" [(ngModel)]="name" />
+        <mat-error></mat-error>
+      </mat-form-field>
+    </div>
+    <div mat-dialog-actions class="d-flex justify-content-end p-3 pt-0">
+      <button [mat-dialog-close]="name" mat-raised-button color="primary">Save</button>
+    </div>
+  </div>
+</section>
+
