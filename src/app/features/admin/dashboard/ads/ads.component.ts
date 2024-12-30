@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteItemComponent } from '../../../../shared/components/delete-item/delete-item.component';
 import { TableTypeEnum } from '../../../../shared/enums/table-type-enum';
 import {
   ITableAction,
@@ -8,6 +10,7 @@ import { AddAdComponent } from './components/add-ad/add-ad.component';
 import { UpdateAdComponent } from './components/update-ad/update-ad.component';
 import { ViewAdComponent } from './components/view-ad/view-ad.component';
 import { Ads, IAdsData } from './interfaces/IAdsResponse';
+import { IUpdateAd } from './interfaces/IUpdateAd';
 import { AdsService } from './services/ads.service';
 
 @Component({
@@ -21,7 +24,7 @@ export class AdsComponent implements OnInit {
   page = 1;
   size = 5;
   actions: ITableAction[] = [];
-  constructor(private _AdsService: AdsService) {
+  constructor(private _AdsService: AdsService, private dialog: MatDialog) {
     this.actions = [
       {
         type: 'icon',
@@ -118,7 +121,7 @@ export class AdsComponent implements OnInit {
   }
   onDeleteAds(data: Ads) {
     const dialogRef = this.dialog.open(DeleteItemComponent, {
-      data: { text: 'Ads' },
+      data: { text: 'Ad' },
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
@@ -138,10 +141,10 @@ export class AdsComponent implements OnInit {
     const dialogRef = this.dialog.open(UpdateAdComponent, {
       data: { text: 'Update Ads' },
     });
-    dialogRef.afterClosed().subscribe((result) => {
+    dialogRef.afterClosed().subscribe((result: IUpdateAd) => {
       if (result) {
         console.log(result);
-        this._AdsService.onUpdateAds(data).subscribe({
+        this._AdsService.onUpdateAds(data._id, result).subscribe({
           next: (res) => {
             this.getAllAds();
           },
