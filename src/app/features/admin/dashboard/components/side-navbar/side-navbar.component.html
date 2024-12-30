@@ -1,7 +1,9 @@
-<aside class="sidebar h-100" [class.collapsed]="!isExpanded">
-  <button class="toggle-btn" (click)="toggleSidebar()">
-    <mat-icon>{{ isExpanded ? "chevron_left" : "chevron_right" }}</mat-icon>
-  </button>
+<aside
+  class="sidebar h-100 collapsed"
+  (mouseleave)="isExpanded = false"
+  (mouseenter)="isExpanded = true"
+  [ngClass]="{ expanded: isExpanded }"
+>
   <ul>
     <ng-container *ngFor="let item of navItems">
       <li class="px-5 py-3">
