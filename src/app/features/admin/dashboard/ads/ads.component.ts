@@ -5,6 +5,9 @@ import {
   ITableAction,
   ITableInput,
 } from '../../../../shared/interface/table/table-input.interface';
+import { AddAdComponent } from './components/add-ad/add-ad.component';
+import { UpdateAdComponent } from './components/update-ad/update-ad.component';
+import { ViewAdComponent } from './components/view-ad/view-ad.component';
 import { Ads, IAdsData } from './interfaces/IAdsResponse';
 import { AdsService } from './services/ads.service';
 
@@ -27,7 +30,7 @@ export class AdsComponent implements OnInit {
         label: 'View',
         icon: 'visibility',
         callback: (row: Ads) => {
-          console.log('View', row);
+          this.onViewAd(row);
         },
       },
       {
@@ -36,6 +39,7 @@ export class AdsComponent implements OnInit {
         label: 'Edit',
         icon: 'edit_square',
         callback: (row: Ads) => {
+          this.onUpdateAds(row);
           console.log('Edit', row);
         },
       },
@@ -93,6 +97,23 @@ export class AdsComponent implements OnInit {
     this.size = event.pageSize;
     this.getAllAds();
   }
+  onViewAd(data: Ads) {
+    const dialogRef = this.dialog.open(ViewAdComponent, {
+      data: this.adsData,
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this._AdsService.onAdsDetails(data).subscribe({
+          next: (res) => {
+            this.getAllAds();
+          },
+          error: (err) => {
+            console.log(err);
+          },
+        });
+      }
+    });
+  }
   onDeleteAds(data: Ads) {
     const dialogRef = this.dialog.open(DeleteItemComponent, {
       data: { text: 'Ads' },
@@ -100,6 +121,43 @@ export class AdsComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this._AdsService.onDeleteAds(data).subscribe({
+          next: (res) => {
+            this.getAllAds();
+          },
+          error: (err) => {
+            console.log(err);
+          },
+        });
+      }
+    });
+  }
+
+  onUpdateAds(data: Ads) {
+    const dialogRef = this.dialog.open(UpdateAdComponent, {
+      data: { text: 'Update Ads' },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        console.log(result);
+        this._AdsService.onUpdateAds(data).subscribe({
+          next: (res) => {
+            this.getAllAds();
+          },
+          error: (err) => {
+            console.log(err);
+          },
+        });
+      }
+    });
+  }
+  onAddAds(data: Ads) {
+    const dialogRef = this.dialog.open(AddAdComponent, {
+      data: { text: 'Add Ads' },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        console.log(result);
+        this._AdsService.onCreateAds(data).subscribe({
           next: (res) => {
             this.getAllAds();
           },

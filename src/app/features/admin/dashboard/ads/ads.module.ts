@@ -4,10 +4,12 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from '../../../../shared/shared.module';
 import { AdsRoutingModule } from './ads-routing.module';
 import { AdsComponent } from './ads.component';
-import { AddUpdateAdComponent } from './components/add-update-ad/add-update-ad.component';
+import { AddAdComponent } from './components/add-ad/add-ad.component';
+import { UpdateAdComponent } from './components/update-ad/update-ad.component';
+import { ViewAdComponent } from './components/view-ad/view-ad.component';
 
 @NgModule({
-  declarations: [AdsComponent, AddUpdateAdComponent],
+  declarations: [AdsComponent, AddAdComponent, UpdateAdComponent, ViewAdComponent],
   imports: [CommonModule, AdsRoutingModule, SharedModule],
 })
 export class AdsModule {}
