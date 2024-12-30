@@ -25,7 +25,11 @@ const routes: Routes = [
         loadChildren: () =>
           import('./ads/ads.module').then((m) => m.AdsModule),
       },
-
+      {
+        path: 'facilities',
+        loadChildren: () =>
+          import('./facilities/facilities.module').then(m => m.FacilitiesModule)
+      },
       { path: '', redirectTo: 'home', pathMatch: 'full' },
     ],
   },
@@ -36,4 +40,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class DashboardRoutingModule {}
+export class DashboardRoutingModule { }
