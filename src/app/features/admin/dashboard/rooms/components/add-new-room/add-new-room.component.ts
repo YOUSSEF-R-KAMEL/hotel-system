@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { RoomsService } from '../../services/rooms.service';
 import { ToastrService } from 'ngx-toastr';
-import { Router } from 'express';
 
 @Component({
   selector: 'app-add-new-room',
@@ -11,6 +10,7 @@ import { Router } from 'express';
 })
 export class AddNewRoomComponent implements OnInit {
   resMsg:any = ''
+  facilitiesArr:string[] = []
   newRoomForm: FormGroup = new FormGroup({
     roomNumber: new FormControl(null, [Validators.required, Validators.pattern(/^[0-9]+[-][0-9]+$/)]),
     price: new FormControl(null, [Validators.required, Validators.pattern(/^[0-9]{0,9}$/)]),
@@ -42,16 +42,18 @@ export class AddNewRoomComponent implements OnInit {
       });
     }
   }
-
   getFacilities(){
     this._roomsService.getFacilities().subscribe({
       next: (res) => {
-        console.log(res)
+        res.data.facilities.forEach(fa =>{
+          this.facilitiesArr.push(fa.name)
+        })
       },
       error: (err) => {
         this._ToastrService.error(err.message, 'Error');
       },
       complete: () => {
+        console.log(this.facilitiesArr)
       },
     })
   }

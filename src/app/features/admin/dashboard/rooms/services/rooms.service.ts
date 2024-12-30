@@ -4,6 +4,7 @@ import { IRoomParams } from '../interfaces/room-params.interface';
 import { Observable } from 'rxjs';
 import { IGetRooms } from '../interfaces/get-rooms-interface';
 import { IRoom } from '../interfaces/room.interface';
+import { IGetFacilities } from '../interfaces/get-facilities-interface';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,6 @@ export class RoomsService {
     return this._http.post('admin/rooms', data)
   }
   getFacilities(){
-    return this._http.get('admin/room-facilities')
+    return this._http.get<IGetFacilities>('admin/room-facilities')
   }
 }

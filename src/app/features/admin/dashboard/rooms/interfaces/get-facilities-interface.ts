@@ -1,4 +1,4 @@
-import { IRoom } from "./room.interface";
+import { IFacility } from "./facilities.interface";
 
 export interface IGetFacilities {
   success: boolean;
@@ -7,6 +7,6 @@ export interface IGetFacilities {
 }
 
 export interface IFacilitiesWithCount {
-  facilities: IRoom[];
+  facilities: IFacility[];
   totalCount: number;
 }

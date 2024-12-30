@@ -66,27 +66,41 @@
           <div class="col-md-6">
             <!-- facilities -->
             <div class="input-group mb-3">
-              <input type="text"
-                    class="form-control"
-                    placeholder="facilities"
-                    formControlName="facilities"
-                    aria-label="facilities"
+              <select class="form-control"
+              formControlName="facilities"
+              aria-label="facilities"
               >
+                @for (item of facilitiesArr; track $index) {
+                  <option [value]="$index">{{item}}</option>
+                }
+            </select>
             </div>
             <ng-container *ngIf="newRoomForm.get('facilities')?.dirty || newRoomForm.get('facilities')?.touched">
               <mat-error class="mb-3 d-inline-block" *ngIf="newRoomForm.get('facilities')?.errors?.['required']">facilities is required</mat-error>
             </ng-container>
           </div>
         </div>
-        <div class="auth-form__actions">
-          <button
+        <div class="auth-form__actions ">
+          <div class="row d-flex justify-content-end">
+            <div class="col-md-2">
+              <button
+              class="button"
+              mat-stroked-button
+              >
+              Cancel
+            </button>
+          </div>
+          <div class="col-md-2">
+            <button
             class="button"
             mat-raised-button
             color="primary"
             [disabled]="newRoomForm.invalid"
-          >
-            save
+            >
+            Save
           </button>
+        </div>
+        </div>
         </div>
       </form>
     </div>
