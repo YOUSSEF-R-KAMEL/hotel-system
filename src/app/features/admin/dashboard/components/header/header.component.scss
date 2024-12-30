@@ -1,7 +1,7 @@
 @import "../../../../../../assets/sass/abstracts/variables";
 header {
   .row {
-    background-color: $light-grey;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
   }
   span {
     img {

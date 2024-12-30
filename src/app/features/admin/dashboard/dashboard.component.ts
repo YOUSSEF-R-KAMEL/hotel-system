@@ -8,7 +8,7 @@ import { HelperService } from '../../../shared/services/helper/helper.service';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-  isExpand: boolean = true;
+  isExpand: boolean = false;
   profileImage: string = '';
   imageUrl: string = 'https://upskilling-egypt.com:3000/';
   constructor(private _HelperService: HelperService) {}
