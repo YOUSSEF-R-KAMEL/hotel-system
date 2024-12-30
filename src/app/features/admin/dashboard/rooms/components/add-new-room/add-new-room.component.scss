@@ -1,0 +1,12 @@
+input {
+  background-color: #F7F7F7;
+  &::placeholder {
+    text-transform: capitalize;
+  }
+}
+
+mat-error {
+  color: #dc3545;
+  text-transform: capitalize;
+  margin-bottom: 15px !important;
+}
