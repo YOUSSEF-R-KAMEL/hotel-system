@@ -32,9 +32,7 @@ export class RegisterComponent {
     password: new FormControl(null, [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,}$/)]),
     confirmPassword : new FormControl(null, [Validators.required])
   }, { validators: this.checkPasswords })
-
-  constructor(private sanitizer: DomSanitizer){}
-
+  constructor(){}
   register(){
     this.isLoading = true
     const myData = new FormData()
@@ -45,7 +43,6 @@ export class RegisterComponent {
       }
     });
     myData.append('profileImage', this.imgSrc)
-
     this._authService.onRegister(myData).subscribe({
       next: (res:any) => {
         this.isLoading = false
@@ -70,26 +67,21 @@ export class RegisterComponent {
       }
     })
   }
-
   onSelect(event:any) {
     this.files.push(...event.addedFiles);
     this.imgSrc = this.files[0]
     // console.log(this.imgSrc)
   }
-
   onRemove(event:any) {
     // console.log(event);
     this.files.splice(this.files.indexOf(event), 1);
   }
-
   toggleShowPass(): void{
     this.showPassword = !this.showPassword
   }
-
   toggleShowConfirmPass(): void{
     this.showConfirmPassword = !this.showConfirmPassword
   }
-
   checkPasswords(g:AbstractControl) {
     const password = g.get('password')?.value;
     const confirmPassword = g.get('confirmPassword')?.value;

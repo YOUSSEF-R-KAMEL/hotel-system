@@ -13,9 +13,8 @@
   <div class="container p-5 z-3">
     <div class="row user-form">
       <div class="col-md-8">
-        <h5 class="text-color">#{{ data._id }}</h5>
-        <p class="gray-color">Status: {{ data.isActive }}</p>
-        <p class="gray-color">Date: {{ data.createdAt }}</p>
+        <p class="gray-color">Status: {{ data.isActive ? 'Active' : 'Inactive' }}</p>
+        <p class="gray-color">Date: {{ data.createdAt | date:"dd/MM/yyyy" }}</p>
         <p class="gray-color">User: {{ data.createdBy.userName }}</p>
         <p class="gray-color">Room no.: {{ data.room.roomNumber }}</p>
       </div>

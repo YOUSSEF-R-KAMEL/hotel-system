@@ -33,8 +33,22 @@ const routes: Routes = [
         path: 'ads',
         loadChildren: () => import('./ads/ads.module').then((m) => m.AdsModule),
       },
+      {
+        path: 'facilities',
+        loadChildren: () =>
+          import('./facilities/facilities.module').then(
+            (m) => m.FacilitiesModule
+          ),
+      },
       { path: 'profile/:id', component: ProfileComponent },
       { path: '', redirectTo: 'home', pathMatch: 'full' },
+      {
+        path: 'booking-facilities',
+        loadChildren: () =>
+          import('./booking-facilities/booking-facilities.module').then(
+            (m) => m.BookingFacilitiesModule
+          ),
+      },
     ],
   },
   { path: '**', redirectTo: '/dashboard/home' },
