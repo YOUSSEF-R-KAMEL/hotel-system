@@ -57,3 +57,12 @@ mat-error {
   color: #dc3545;
   text-transform: capitalize;
 }
+.auth-form__actions {
+  margin-top: .5rem;
+}
+.form__wrapper {
+  gap: 0;
+  &-header {
+    margin-top: 1rem;
+  }
+}

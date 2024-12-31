@@ -1,3 +1,4 @@
+import { IData } from "../api-data-response/api-response.interface";
 
 export interface ITableAction {
   type: 'icon' | 'button';
@@ -12,7 +13,4 @@ export interface ITableInput {
   actions: ITableAction[];
 }
 
-interface IData {
-  data: any[];
-  totalCount: number;
-}
+
