@@ -5,7 +5,9 @@
       <div class="col-md-3">
         <div class="img-container">
           <img
-            [src]="user?.profileImage || 'assets/default-profile.png'"
+            [src]="
+              user?.profileImage || 'assets/images/svg/default-avatar.avif'
+            "
             alt="User Profile Image"
             class="img-fluid rounded-circle"
           />
