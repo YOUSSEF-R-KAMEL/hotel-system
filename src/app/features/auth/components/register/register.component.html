@@ -6,13 +6,13 @@
           <img src="../../../../../assets/images/svg/logo.svg" alt="logo" />
         </div>
         <div class="form__wrapper mt-5">
-          <h2 class="form__wrapper-header mt-5">Sign Up</h2>
+          <h2 class="form__wrapper-header">Sign Up</h2>
           <p class="form__wrapper-paragraph">
             If you already have an account register You can
             <a class="red-link fw-medium" routerLink="/auth/login">Login here!</a>
           </p>
           <form class="auth-form" [formGroup]="registerForm" (ngSubmit)="register()">
-            <div class="upload d-flex justify-content-center mb-3">
+            <div class="upload d-flex justify-content-center ">
               <ngx-dropzone class="rounded-circle text-center overflow-hidden" (change)="onSelect($event)">
                 <ngx-dropzone-label>Upload Photo <i class="fa-solid fa-cloud-arrow-up"></i></ngx-dropzone-label>
                 <ngx-dropzone-image-preview class="rounded-circle" ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f" [removable]="true" (removed)="onRemove(f)">
@@ -21,7 +21,7 @@
               </ngx-dropzone>
             </div>
             <!-- userName -->
-            <div class="input-group mb-3">
+            <div class="input-group ">
               <label for="userName" class="w-100 mb-2">User Name</label>
               <input type="text"
                     id="userName"
@@ -32,13 +32,13 @@
               >
             </div>
             <ng-container *ngIf="registerForm.get('userName')?.dirty || registerForm.get('userName')?.touched">
-              <mat-error class="mb-3" *ngIf="registerForm.get('userName')?.errors?.['required']">The User Name is required</mat-error>
-              <mat-error class="mb-3" *ngIf="registerForm.get('userName')?.errors?.['pattern']">The User Name must contain characters and end with numbers without spaces.</mat-error>
+              <mat-error  *ngIf="registerForm.get('userName')?.errors?.['required']">The User Name is required</mat-error>
+              <mat-error  *ngIf="registerForm.get('userName')?.errors?.['pattern']">The User Name must contain characters and end with numbers without spaces.</mat-error>
             </ng-container>
             <div class="row">
               <div class="col-md-6">
                 <!-- phoneNumber -->
-                <div class="input-group mb-3">
+                <div class="input-group ">
                   <label for="phoneNumber" class="w-100 mb-2">Phone Number</label>
                   <input type="text"
                         id="phoneNumber"
@@ -49,12 +49,12 @@
                   >
                 </div>
                 <ng-container *ngIf="registerForm.get('phoneNumber')?.dirty || registerForm.get('phoneNumber')?.touched">
-                  <mat-error class="mb-3" *ngIf="registerForm.get('phoneNumber')?.errors?.['required']">Phone Number is required</mat-error>
+                  <mat-error  *ngIf="registerForm.get('phoneNumber')?.errors?.['required']">Phone Number is required</mat-error>
                 </ng-container>
               </div>
               <div class="col-md-6">
                 <!-- country -->
-                <div class="input-group mb-3">
+                <div class="input-group ">
                   <label for="country" class="w-100 mb-2">Country</label>
                   <input type="text"
                         id="country"
@@ -65,12 +65,12 @@
                   >
                 </div>
                 <ng-container *ngIf="registerForm.get('country')?.dirty || registerForm.get('country')?.touched">
-                  <mat-error class="mb-3" *ngIf="registerForm.get('country')?.errors?.['required']">country is required</mat-error>
+                  <mat-error  *ngIf="registerForm.get('country')?.errors?.['required']">country is required</mat-error>
                 </ng-container>
               </div>
             </div>
             <!-- email -->
-            <div class="input-group mb-3">
+            <div class="input-group ">
               <label for="email" class="w-100 mb-2">Email</label>
               <input type="email"
                     id="email"
@@ -81,13 +81,13 @@
               >
             </div>
             <ng-container *ngIf="registerForm.get('email')?.dirty || registerForm.get('email')?.touched">
-              <mat-error class="mb-3" *ngIf="registerForm.get('email')?.errors?.['required']">email is required</mat-error>
-              <mat-error class="mb-3" *ngIf="registerForm.get('email')?.errors?.['email']">
+              <mat-error  *ngIf="registerForm.get('email')?.errors?.['required']">email is required</mat-error>
+              <mat-error  *ngIf="registerForm.get('email')?.errors?.['email']">
                 Email is not valid
               </mat-error>
             </ng-container>
             <!-- password -->
-            <div class="input-group mb-3 position-relative">
+            <div class="input-group  position-relative">
               <label for="password" class="password-label w-100 mb-2">Password</label>
               <input [type]="showPassword? 'text' : 'password'"
                     id="password"
@@ -103,14 +103,14 @@
               </span>
             </div>
               <ng-container *ngIf="registerForm.get('password')?.dirty || registerForm.get('password')?.touched">
-                <mat-error class="mb-3" *ngIf="registerForm.get('password')?.errors?.['required']">password is required</mat-error>
-                <mat-error class="mb-3" *ngIf="registerForm.get('password')?.errors?.['pattern']">
+                <mat-error  *ngIf="registerForm.get('password')?.errors?.['required']">password is required</mat-error>
+                <mat-error  *ngIf="registerForm.get('password')?.errors?.['pattern']">
                   least 8 characters, one
                   special character, one lowercase letter, one uppercase letter and one digit.
                 </mat-error>
               </ng-container>
             <!-- confirmPassword -->
-            <div class="input-group mb-3 position-relative">
+            <div class="input-group  position-relative">
               <label for="confirmPassword" class="w-100 mb-2">Confirm Password</label>
               <input [type]="showConfirmPassword? 'text' : 'password'"
                     id="confirmPassword"
@@ -126,8 +126,8 @@
               </span>
             </div>
             <ng-container *ngIf="registerForm.get('confirmPassword')?.dirty || registerForm.get('confirmPassword')?.touched">
-              <mat-error class="mb-3" *ngIf="registerForm.get('confirmPassword')?.errors?.['required']">confirmPassword is required</mat-error>
-              <mat-error class="mb-3" *ngIf="registerForm.getError('mismatch')">
+              <mat-error  *ngIf="registerForm.get('confirmPassword')?.errors?.['required']">confirmPassword is required</mat-error>
+              <mat-error  *ngIf="registerForm.getError('mismatch')">
                 not match with password
               </mat-error>
             </ng-container>
