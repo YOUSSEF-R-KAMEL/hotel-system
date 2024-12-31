@@ -8,12 +8,14 @@ import { HomeComponent } from './components/home/home.component';
 import { SideNavbarComponent } from './components/side-navbar/side-navbar.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
+import { ProfileComponent } from './components/profile/profile.component';
 @NgModule({
   declarations: [
     DashboardComponent,
     HeaderComponent,
     SideNavbarComponent,
     HomeComponent,
+    ProfileComponent,
   ],
   imports: [CommonModule, DashboardRoutingModule, SharedModule, NgChartsModule],
 })
