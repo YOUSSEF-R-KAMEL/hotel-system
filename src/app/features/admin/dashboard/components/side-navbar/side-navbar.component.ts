@@ -40,7 +40,7 @@ export class SideNavbarComponent {
       route: '/admin/dashboard/ads',
     },
     {
-      route: '/booking',
+      route: 'booking-facilities',
       name: 'Booking facilities',
       icon: 'book_online',
     },
