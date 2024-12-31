@@ -28,7 +28,6 @@ const routes: Routes = [
         loadChildren: () =>
           import('./users/users.module').then((m) => m.UsersModule),
       },
-
       {
         path: 'ads',
         loadChildren: () => import('./ads/ads.module').then((m) => m.AdsModule),
