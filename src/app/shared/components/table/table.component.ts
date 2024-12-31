@@ -23,7 +23,7 @@ import { ITableInput } from '../../interface/table/table-input.interface';
 export class TableComponent {
   data: ITableInput;
   pageNumber = 1;
-  pageSize = 5;
+  pageSize = 10;
   totalRecords = 0;
   dataSource: MatTableDataSource<any> = new MatTableDataSource();
   displayedColumns: ITableColumn[] = [];
