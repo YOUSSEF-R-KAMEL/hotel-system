@@ -27,8 +27,6 @@ export class AdsService {
     return this._HttpClient.delete<IUpdateResponse>(`admin/ads/${data._id}`);
   }
   onCreateAds(data: Ads): Observable<Ads> {
-    return this._HttpClient.post<Ads>('admin/ads', {
-      data,
-    });
+    return this._HttpClient.post<Ads>('admin/ads',data);
   }
 }

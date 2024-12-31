@@ -23,7 +23,7 @@ import { ITableInput } from '../../interface/table/table-input.interface';
 export class TableComponent {
   data: ITableInput;
   pageNumber = 1;
-  pageSize = 5;
+  pageSize = 10;
   totalRecords = 0;
   dataSource: MatTableDataSource<any> = new MatTableDataSource();
   displayedColumns: ITableColumn[] = [];
@@ -48,13 +48,14 @@ export class TableComponent {
   @ViewChild('booleanTemplate', { static: true }) booleanTemplate!: TemplateRef<any>;
   @ViewChild('userTemplate', { static: true }) userTemplate!: TemplateRef<any>;
   @ViewChild('roomTemplate', { static: true }) roomTemplate!: TemplateRef<any>;
+  @ViewChild('facilitiesArrayTemplate', { static: true }) facilitiesArrayTemplate!: TemplateRef<any>;
   @ViewChild('discountTemplate', { static: true }) discountTemplate!: TemplateRef<any>;
+  @ViewChild('imagesArrayTemplate', { static: true }) imagesArrayTemplate!: TemplateRef<any>;
   @ViewChild('defaultTemplate', { static: true }) defaultTemplate!: TemplateRef<any>;
 
   constructor(private _liveAnnouncer: LiveAnnouncer) {
     this.data = {
       data: {
-        data: [],
         totalCount: 0,
       },
       actions: [],
@@ -62,12 +63,12 @@ export class TableComponent {
   }
 
   initializeTable(tableData: ITableInput): void {
-    if (!tableData || tableData.data.data.length === 0) {
+    if (!tableData || tableData.data.totalCount === 0) {
       return;
     }
-    let tableDataArray = tableData.data.data;
+    let tableDataArray = tableData.data.booking ?? tableData.data.users ?? tableData.data.facilities ?? tableData.data.rooms ?? tableData.data.ads ?? [];
     if (this.type === TableTypeEnum.Ads) {
-      tableDataArray = tableDataArray.map((ad: Ads) => {
+      tableDataArray = (tableDataArray as Ads[]).map((ad: Ads) => {
         return {
           ...ad,
           discount: ad.room?.discount ?? 'N/A',
@@ -76,7 +77,6 @@ export class TableComponent {
     }
     const excludedFields = ['_id', 'createdAt', 'updatedAt', 'verified'];
     const columns = Object.keys(tableDataArray[0]).filter((field) => !excludedFields.includes(field));
-    console.log(columns);
     this.displayedColumns = [
       ...columns.map((column) => {
         return {
@@ -121,6 +121,8 @@ export class TableComponent {
         return this.imageTemplate;
       case 'createdAt':
       case 'updatedAt':
+      case 'startDate':
+      case 'endDate':
         return this.dateTemplate;
       case 'isActive':
         return this.booleanTemplate;
@@ -132,6 +134,12 @@ export class TableComponent {
         return this.actionsTemplate;
       case 'discount':
         return this.discountTemplate;
+      case 'facilities':
+        return this.facilitiesArrayTemplate;
+      case 'images':
+        return this.imagesArrayTemplate;
+      case 'user':
+        return this.userTemplate;
       default:
         return this.defaultTemplate;
     }

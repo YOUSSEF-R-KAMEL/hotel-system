@@ -28,13 +28,18 @@ const routes: Routes = [
         loadChildren: () =>
           import('./users/users.module').then((m) => m.UsersModule),
       },
-
       {
         path: 'ads',
         loadChildren: () => import('./ads/ads.module').then((m) => m.AdsModule),
       },
       { path: 'profile/:id', component: ProfileComponent },
+      {
+        path: 'facilities',
+        loadChildren: () =>
+          import('./facilities/facilities.module').then(m => m.FacilitiesModule)
+      },
       { path: '', redirectTo: 'home', pathMatch: 'full' },
+      { path: 'booking-facilities', loadChildren: () => import('./booking-facilities/booking-facilities.module').then(m => m.BookingFacilitiesModule) },
     ],
   },
   { path: '**', redirectTo: '/dashboard/home' },
@@ -44,4 +49,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class DashboardRoutingModule {}
+export class DashboardRoutingModule { }

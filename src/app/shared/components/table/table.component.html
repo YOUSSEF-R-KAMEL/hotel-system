@@ -58,8 +58,22 @@
   {{ value.roomNumber }}
 </ng-template>
 
+<ng-template #facilitiesArrayTemplate let-value>
+  <mat-chip-listbox *ngFor="let facility of value">
+    <mat-chip>
+      {{ facility.name }}
+    </mat-chip>
+  </mat-chip-listbox>
+</ng-template>
+
+<ng-template #imagesArrayTemplate let-value>
+  <ng-container *ngFor="let image of value">
+    <img width="40px" height="40px" class="rounded-circle" [src]="image" alt="image">
+  </ng-container>
+</ng-template>
+
 <ng-template #discountTemplate let-value>
-  {{ value }}%
+  ${{ value }}
 </ng-template>
 
 <ng-template #defaultTemplate let-value>

@@ -25,6 +25,11 @@ export class SideNavbarComponent {
       route: '/admin/dashboard/users',
     },
     {
+      name: 'Facilities',
+      icon: 'people',
+      route: '/admin/dashboard/facilities',
+    },
+    {
       name: 'Rooms',
       icon: 'bed',
       route: '/admin/dashboard/rooms',
@@ -35,7 +40,7 @@ export class SideNavbarComponent {
       route: '/admin/dashboard/ads',
     },
     {
-      route: '/booking',
+      route: 'booking-facilities',
       name: 'Booking facilities',
       icon: 'book_online',
     },
