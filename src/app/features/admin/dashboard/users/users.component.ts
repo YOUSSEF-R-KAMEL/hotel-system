@@ -5,6 +5,7 @@ import { UsersService } from './services/users.service';
 import { IUser } from './interfaces/user.interface';
 import { MatDialog } from '@angular/material/dialog';
 import { ViewUserDialogComponent } from './components/view-user-dialog/view-user-dialog.component';
+import { ITableColumn } from '../../../../shared/interface/table/table-columns.interface';
 
 @Component({
   selector: 'app-users',
@@ -13,6 +14,7 @@ import { ViewUserDialogComponent } from './components/view-user-dialog/view-user
 })
 export class UsersComponent implements OnInit {
   usersData: ITableInput;
+  userColumns: ITableColumn[] = [];
   page = 1;
   size = 10;
   actions: ITableAction[] = [];
@@ -60,6 +62,7 @@ export class UsersComponent implements OnInit {
       },
       actions: this.actions
     }
+    // this.userColumns = Object.keys(data.users[0]).map()
   }
 
   handlePageChange(event : {pageNumber: number; pageSize: number}) {

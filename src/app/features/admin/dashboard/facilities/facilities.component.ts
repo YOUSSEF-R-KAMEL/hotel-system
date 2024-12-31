@@ -89,7 +89,6 @@ export class FacilitiesComponent {
         type: type,
         data: data
       },
-      width: '30%'
     })
     dialogRef.afterClosed().subscribe((result: string) => {
       if (result) {
