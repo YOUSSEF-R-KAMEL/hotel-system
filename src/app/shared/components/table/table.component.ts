@@ -31,6 +31,7 @@ export class TableComponent {
     '../../../../assets/images/svg/profile-picture-placeholder.svg';
 
   @Input() type: TableTypeEnum = TableTypeEnum.Users;
+  @Input() columns: ITableColumn[] = [];
   @Input() set tableInput(data: ITableInput) {
     this.data = data;
     this.totalRecords = data.data.totalCount;
