@@ -53,9 +53,10 @@ svg.background {
   justify-content: center;
   align-items: center;
   background-color: transparent;
-  border: 1px solid red;
+  border: none;
   border-radius: 50%;
   transition: all .3s;
+  padding: .2rem;
   &:hover {
     background-color: rgba($color: red, $alpha: .1);
   }
