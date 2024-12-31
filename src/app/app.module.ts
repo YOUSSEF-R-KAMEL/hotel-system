@@ -21,7 +21,7 @@ import { RouterModule } from '@angular/router';
     HttpClientModule,
     BrowserAnimationsModule,
     NgxSpinnerModule,
-    ToastrModule.forRoot({ positionClass: 'toast-bottom-right' }),
+    ToastrModule.forRoot({ positionClass: 'toast-top-right' }),
   ],
   providers: [
     provideClientHydration(),

@@ -18,8 +18,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     const id = localStorage.getItem('userId');
-    console.log(localStorage.getItem('userId'));
-
+    
     if (id !== null) {
       this._HelperService.onGetUser(id).subscribe({
         next: (res: IUserResponse) => {
