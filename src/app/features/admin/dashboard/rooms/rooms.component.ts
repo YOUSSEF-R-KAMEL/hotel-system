@@ -12,7 +12,7 @@ import { RoomsService } from './services/rooms.service';
 export class RoomsComponent implements OnInit {
   roomsData: ITableInput;
   page = 1;
-  size = 5;
+  size = 10;
   actions: ITableAction[] = [];
   constructor(private _roomsService: RoomsService) {
     this.actions = [
@@ -46,7 +46,7 @@ export class RoomsComponent implements OnInit {
     ]
     this.roomsData = {
       data: {
-        data: [],
+        rooms: [],
         totalCount: 0
       },
       actions: this.actions
@@ -75,7 +75,7 @@ export class RoomsComponent implements OnInit {
   passDataToTable(data: IRoomWithCount) {
     this.roomsData = {
       data: {
-        data: data.rooms,
+        rooms: data.rooms,
         totalCount: data.totalCount
       },
       actions: this.actions

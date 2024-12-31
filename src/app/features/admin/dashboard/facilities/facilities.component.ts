@@ -16,7 +16,7 @@ export class FacilitiesComponent {
   facilitiesData: ITableInput;
   apiResponse = '';
   page = 1;
-  size = 5;
+  size = 10;
   actions: ITableAction[] = [];
   constructor(private toast: ToastrService, private dialog: MatDialog, private facilitiesService: FacilitiesService) {
     this.actions = [
@@ -44,7 +44,7 @@ export class FacilitiesComponent {
     ]
     this.facilitiesData = {
       data: {
-        data: [],
+        facilities: [],
         totalCount: 0
       },
       actions: this.actions
@@ -71,7 +71,7 @@ export class FacilitiesComponent {
   passDataToTable(data: IFacilityDataWithCount) {
     this.facilitiesData = {
       data: {
-        data: data.facilities,
+        facilities: data.facilities,
         totalCount: data.totalCount
       },
       actions: this.actions

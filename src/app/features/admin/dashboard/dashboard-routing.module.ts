@@ -31,6 +31,7 @@ const routes: Routes = [
           import('./facilities/facilities.module').then(m => m.FacilitiesModule)
       },
       { path: '', redirectTo: 'home', pathMatch: 'full' },
+      { path: 'booking-facilities', loadChildren: () => import('./booking-facilities/booking-facilities.module').then(m => m.BookingFacilitiesModule) },
     ],
   },
   { path: '**', redirectTo: '/dashboard/home' },

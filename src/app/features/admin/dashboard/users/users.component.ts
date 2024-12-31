@@ -14,7 +14,7 @@ import { ViewUserDialogComponent } from './components/view-user-dialog/view-user
 export class UsersComponent implements OnInit {
   usersData: ITableInput;
   page = 1;
-  size = 5;
+  size = 10;
   actions: ITableAction[] = [];
   constructor(private dialog: MatDialog, private usersService: UsersService) {
     this.actions = [
@@ -28,7 +28,7 @@ export class UsersComponent implements OnInit {
     ]
     this.usersData = {
       data: {
-        data: [],
+        users: [],
         totalCount: 0
       },
       actions: this.actions
@@ -44,7 +44,6 @@ export class UsersComponent implements OnInit {
     }
     this.usersService.getUsers(userParams).subscribe({
       next: (res) => {
-        console.log(res.data.users)
         this.passDataToTable(res.data);
       },
       error: (err) => {
@@ -56,7 +55,7 @@ export class UsersComponent implements OnInit {
   passDataToTable(data: IUserWithCount) {
     this.usersData = {
       data: {
-        data: data.users,
+        users: data.users,
         totalCount: data.totalCount
       },
       actions: this.actions
