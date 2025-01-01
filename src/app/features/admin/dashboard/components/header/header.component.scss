@@ -11,3 +11,11 @@ header {
     }
   }
 }
+::ng-deep mat-menu {
+  button {
+    mat-icon:hover,
+    span:hover {
+      color: white !important;
+    }
+  }
+}
