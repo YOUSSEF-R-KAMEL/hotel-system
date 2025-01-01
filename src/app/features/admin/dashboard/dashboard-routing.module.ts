@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { DashboardComponent } from './dashboard.component';
+import { ChangePasswordComponent } from './components/change-password/change-password.component';
 
 const routes: Routes = [
   {
@@ -46,6 +47,10 @@ const routes: Routes = [
           import('./booking-facilities/booking-facilities.module').then(
             (m) => m.BookingFacilitiesModule
           ),
+      },
+      {
+        path: 'change-password',
+        component: ChangePasswordComponent
       },
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: '**', redirectTo: '/dashboard/home' },
