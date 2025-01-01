@@ -4,7 +4,7 @@
       *ngFor="let card of cards()"
       class="col-md-3 radius-16 card-container d-flex justify-content-around align-items-center"
     >
-      <div>
+      <div [routerLink]="'/admin/dashboard/' + card.name.toLowerCase()">
         <p class="numbers-wrapper">{{ card.number }}</p>
         <span>{{ card.name }}</span>
       </div>
@@ -13,19 +13,27 @@
       </div>
     </div>
   </div>
-  <div class="row chart-container d-flex justify-content-lg-around">
-    <canvas
-      baseChart
-      [data]="bookingChartData()"
-      [options]="chartOptions"
-      [type]="chartType"
-    ></canvas>
-    <canvas
-      baseChart
-      [data]="userChartData()"
-      [options]="chartOptions"
-      [type]="userChartType"
-    ></canvas>
+  <div
+    class="row chart-container d-flex align-items-center justify-content-around"
+  >
+    <div class="col-md-5 text-center booking-container">
+      <span> Bookings </span>
+      <canvas
+        baseChart
+        [data]="bookingChartData()"
+        [options]="chartOptions"
+        [type]="chartType"
+      ></canvas>
+    </div>
+    <div class="users-container text-center col-md-5">
+      <span> Users </span>
+
+      <canvas
+        baseChart
+        [data]="userChartData()"
+        [options]="chartOptions"
+        [type]="userChartType"
+      ></canvas>
+    </div>
   </div>
 </section>
-

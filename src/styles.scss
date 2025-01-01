@@ -12,38 +12,37 @@
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
 $custom-primary: (
-  50 : #203FC7,
-  100 : #203FC7,
-  200 : #203FC7,
-  300 : #203FC7,
-  400 : #203FC7,
-  500 : #203FC7,
-  600 : #203FC7,
-  700 : #203FC7,
-  800 : #203FC7,
-  900 : #203FC7,
-  A100 : #203FC7,
-  A200 : #203FC7,
-  A400 : #203FC7,
-  A700 : #203FC7,
+  50: #203fc7,
+  100: #203fc7,
+  200: #203fc7,
+  300: #203fc7,
+  400: #203fc7,
+  500: #203fc7,
+  600: #203fc7,
+  700: #203fc7,
+  800: #203fc7,
+  900: #203fc7,
+  A100: #203fc7,
+  A200: #203fc7,
+  A400: #203fc7,
+  A700: #203fc7,
   contrast: (
-    50 : #000,
-    100 : #000,
-    200 : #000,
-    300 : #fff,
-    400 : #fff,
-    500 : #fff,
-    600 : #fff,
-    700 : #fff,
-    800 : #fff,
-    900 : #fff,
-    A100 : #000,
-    A200 : #000,
-    A400 : #fff,
-    A700 : #fff,
-  )
+    50: #000,
+    100: #000,
+    200: #000,
+    300: #fff,
+    400: #fff,
+    500: #fff,
+    600: #fff,
+    700: #fff,
+    800: #fff,
+    900: #fff,
+    A100: #000,
+    A200: #000,
+    A400: #fff,
+    A700: #fff,
+  ),
 );
-
 
 $Hotel-system-primary: mat.define-palette($custom-primary);
 $Hotel-system-accent: mat.define-palette(mat.$red-palette, A200, A100, A400);
@@ -80,5 +79,9 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
-
+$hover-color: mat.get-color-from-palette($Hotel-system-primary, 50);
 @import "assets/sass/main.scss";
+:root {
+  --mat-menu-container-shape: 1rem;
+  --mat-menu-item-hover-state-layer-color: #{$hover-color};
+}

@@ -1,14 +1,13 @@
 <aside
-  class="sidebar h-100 collapsed"
+  class="sidebar h-100"
   (mouseleave)="isExpanded = false"
   (mouseenter)="isExpanded = true"
-  [ngClass]="{ expanded: isExpanded }"
 >
   <ul>
     <ng-container *ngFor="let item of navItems">
-      <li class="px-5 py-3">
+      <li class="py-3">
         <a
-          class="px-3 logout"
+          class="logout"
           [routerLink]="item.route"
           routerLinkActive="active"
           #rla="routerLinkActive"
