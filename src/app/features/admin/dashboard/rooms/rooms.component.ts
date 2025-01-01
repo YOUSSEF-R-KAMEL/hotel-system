@@ -18,7 +18,7 @@ import { DeleteItemComponent } from '../../../../shared/components/delete-item/d
 export class RoomsComponent implements OnInit {
   roomsData: ITableInput;
   page = 1;
-  size = 5;
+  size = 10;
   actions: ITableAction[] = [];
   dataForCurrentRoom!:IRoom
   constructor(private _roomsService: RoomsService,
@@ -57,7 +57,7 @@ export class RoomsComponent implements OnInit {
     ]
     this.roomsData = {
       data: {
-        data: [],
+        rooms: [],
         totalCount: 0
       },
       actions: this.actions
@@ -83,7 +83,7 @@ export class RoomsComponent implements OnInit {
   passDataToTable(data: IRoomWithCount) {
     this.roomsData = {
       data: {
-        data: data.rooms,
+        rooms: data.rooms,
         totalCount: data.totalCount
       },
       actions: this.actions

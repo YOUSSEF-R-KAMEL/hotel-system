@@ -24,7 +24,7 @@ export class AdsComponent implements OnInit {
   apiResponse = '';
   adsData: ITableInput;
   page = 1;
-  size = 5;
+  size = 10;
   actions: ITableAction[] = [];
   constructor(private toast: ToastrService, private _AdsService: AdsService, private dialog: MatDialog) {
     this.actions = [
@@ -58,7 +58,7 @@ export class AdsComponent implements OnInit {
     ];
     this.adsData = {
       data: {
-        data: [],
+        ads: [],
         totalCount: 0,
       },
 
@@ -90,7 +90,7 @@ export class AdsComponent implements OnInit {
     console.log(data);
     this.adsData = {
       data: {
-        data: data.ads,
+        ads: data.ads,
         totalCount: data.totalCount,
       },
       actions: this.actions,
