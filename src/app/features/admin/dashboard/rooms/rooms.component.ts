@@ -1,7 +1,11 @@
+import { RoomRoutes } from './routes/room-routes';
 import { Component, OnInit } from '@angular/core';
 import { ITableAction, ITableInput } from '../../../../shared/interface/table/table-input.interface';
 import { IRoomWithCount } from './interfaces/get-rooms-interface';
 import { RoomsService } from './services/rooms.service';
+import { FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { IRoom } from './interfaces/room.interface';
 
 @Component({
   selector: 'app-rooms',
@@ -15,15 +19,15 @@ export class RoomsComponent implements OnInit {
   size = 10;
   roomsColumns: string[] = [];
   actions: ITableAction[] = [];
-  constructor(private _roomsService: RoomsService) {
+  constructor(private _roomsService: RoomsService, private router: Router, private route: ActivatedRoute) {
     this.actions = [
       {
         type: 'icon',
         color: 'primary',
         label: 'View',
         icon: 'visibility',
-        callback: (row) => {
-          console.log('View', row);
+        callback: (row: IRoom) => {
+          this.router.navigate([RoomRoutes.VIEW_ROOM, row._id], { relativeTo: this.route });
         }
       },
       {
@@ -93,9 +97,13 @@ export class RoomsComponent implements OnInit {
     ]
   }
 
-  handlePageChange(event : {pageNumber: number; pageSize: number}) {
+  handlePageChange(event: { pageNumber: number; pageSize: number }) {
     this.page = event.pageNumber;
     this.size = event.pageSize;
     this.getRooms();
+  }
+
+  get RoomRoutes() {
+    return RoomRoutes
   }
 }

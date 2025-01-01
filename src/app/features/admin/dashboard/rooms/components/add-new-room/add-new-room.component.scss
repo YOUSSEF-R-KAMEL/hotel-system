@@ -4,9 +4,36 @@ input, select {
     text-transform: capitalize;
   }
 }
+section {
+  height: 70vh;
+  .container {
+    height: 100%;
+  }
+}
 
 mat-error {
   color: #dc3545;
   text-transform: capitalize;
   margin-bottom: 15px !important;
 }
+.mat-mdc-select {
+  padding-top: .5rem !important;
+}
+
+ngx-dropzone {
+  background-color: #F1FFF0;
+  border: 1px dashed #009247;
+  ngx-dropzone-label {
+    p span {
+      color: #009247;
+    }
+  }
+}
+
+.room-form {
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+

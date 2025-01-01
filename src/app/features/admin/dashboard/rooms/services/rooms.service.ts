@@ -1,16 +1,17 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { IRoomParams } from '../interfaces/room-params.interface';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IGetRooms } from '../interfaces/get-rooms-interface';
-import { IRoom } from '../interfaces/room.interface';
 import { IGetFacilities } from '../interfaces/get-facilities-interface';
+import { IGetRooms } from '../interfaces/get-rooms-interface';
+import { IRoomParams } from '../interfaces/room-params.interface';
+import { IRoom } from '../interfaces/room.interface';
+import { IData } from '../../../../../shared/interface/api-data-response/api-response.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RoomsService {
-  constructor(private _http:HttpClient) {}
+  constructor(private _http: HttpClient) { }
   getRooms(params: IRoomParams): Observable<IGetRooms> {
     return this._http.get<IGetRooms>('admin/rooms', {
       params: {
@@ -19,10 +20,19 @@ export class RoomsService {
       }
     });
   }
-  addNewRoom(data:IRoom){
-    return this._http.post('admin/rooms', data)
+  addRoom(room: FormData) {
+    return this._http.post('admin/rooms', room)
   }
-  getFacilities(){
+  updateRoom(id: string, room: FormData) {
+    return this._http.put('admin/rooms' + id, room)
+  }
+  deleteRoom(id: string) {
+    return this._http.delete('admin/rooms' + id);
+  }
+  getFacilities() {
     return this._http.get<IGetFacilities>('admin/room-facilities')
+  }
+  getRoom(id: string) {
+    return this._http.get<any>('admin/rooms/' + id)
   }
 }
