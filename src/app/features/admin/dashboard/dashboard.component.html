@@ -2,18 +2,22 @@
   <div class="row h-100">
     <div
       [ngClass]="{
-        'sidebar-container': !isExpand,
-        'sidebar-container-collapsed': isExpand
+        'col-md-1': !isExpand,
+        'col-md-2': isExpand,
+        'col-transition': true
       }"
+      (mouseenter)="isExpand = true"
+      (mouseleave)="isExpand = false"
       class="sidebar p-0 h-100 position-fixed"
     >
-      <app-side-navbar (toggle)="toggleSidebar()"></app-side-navbar>
+      <app-side-navbar></app-side-navbar>
     </div>
     <div
       class="ms-auto"
       [ngClass]="{
-        'col-md-10 ': !isExpand,
-        'col-md-11 ': isExpand
+        'col-md-10 ': isExpand,
+        'col-md-11 ': !isExpand,
+        'col-transition': true
       }"
     >
       <app-header [profileImage]="profileImage"></app-header>

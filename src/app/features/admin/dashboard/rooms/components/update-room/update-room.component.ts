@@ -1,48 +1,50 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { RoomsService } from '../../services/rooms.service';
 import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { IRoom } from '../../interfaces/room.interface';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-add-new-room',
-  templateUrl: './add-new-room.component.html',
-  styleUrl: './add-new-room.component.scss'
+  selector: 'app-update-room',
+  templateUrl: './update-room.component.html',
+  styleUrl: './update-room.component.scss'
 })
-export class AddNewRoomComponent implements OnInit {
+export class UpdateRoomComponent implements AfterViewInit {
   resMsg:any = ''
+  currentRoomId:string = ''
+  currentRoom!:IRoom
   files: File[] = [];
   imgSrc:any;
   facilitiesArr:string[] = []
-  newRoomForm: FormGroup = new FormGroup({
-    roomNumber: new FormControl(null, [Validators.required, Validators.pattern(/^[0-9]+[-][0-9]+$/)]),
-    price: new FormControl(null, [Validators.required, Validators.pattern(/^[0-9]{0,9}$/)]),
-    capacity: new FormControl(null, [Validators.required, Validators.pattern(/^[0-9]{0,9}$/)]),
-    discount: new FormControl(null, [Validators.required, Validators.pattern(/^[0-9]{0,9}$/)]),
-  });
   selectedAmenities: string[] = [];
   dropdownOpen: boolean = false;
+  updateRoomForm!: FormGroup;
   constructor(
       private _roomsService: RoomsService,
       private _ToastrService: ToastrService,
       private _router:Router,
+      private _route: ActivatedRoute
   ){
+    this.getCurrentRoomData()
   }
-  ngOnInit(): void {
-      this.getFacilities()
+  ngAfterViewInit(): void {
+    this.getFacilities()
+    this.getCurrentRoomData()
   }
-  addRoom() {
-    if (this.newRoomForm.valid) {
+  updateRoom() {
+    if (this.updateRoomForm.valid) {
       const myData = new FormData()
-      Object.keys(this.newRoomForm.controls).forEach((key) => {
-        const value = this.newRoomForm.get(key)?.value
+      Object.keys(this.updateRoomForm.controls).forEach((key) => {
+        const value = this.updateRoomForm.get(key)?.value
         if(value){
           myData.append(key, value)
         }
       });
       myData.append('imgs', this.imgSrc)
       myData.append('facilities', JSON.stringify(this.selectedAmenities))
-      this._roomsService.addNewRoom(myData).subscribe({
+      this._roomsService.updateByID( this.currentRoomId!, myData).subscribe({
         next: (res) => {
           this.resMsg = res
         },
@@ -73,10 +75,8 @@ export class AddNewRoomComponent implements OnInit {
   onSelect(event:any) {
     this.files.push(...event.addedFiles);
     this.imgSrc = this.files[0]
-    // console.log(this.imgSrc)
   }
   onRemove(event:any) {
-    // console.log(event);
     this.files.splice(this.files.indexOf(event), 1);
   }
   cancelAction(){
@@ -97,4 +97,17 @@ export class AddNewRoomComponent implements OnInit {
     }
     console.log(this.selectedAmenities)
   }
+  getCurrentRoomData(){
+    this.currentRoomId = this._route.snapshot.paramMap.get('id')!;  // Get route param
+    this._roomsService.getRoomByID(this.currentRoomId).subscribe((res:any) =>{
+      this.updateRoomForm = new FormGroup({
+        roomNumber: new FormControl(res.data.room.roomNumber, [Validators.required, Validators.pattern(/^[0-9]+[-][0-9]+$/)]),
+        price: new FormControl(res.price, [Validators.required, Validators.pattern(/^[0-9]{0,9}$/)]),
+        capacity: new FormControl(res.capacity, [Validators.required, Validators.pattern(/^[0-9]{0,9}$/)]),
+        discount: new FormControl(res.discount, [Validators.required, Validators.pattern(/^[0-9]{0,9}$/)]),
+      })
+    })
+  }
+
 }
+

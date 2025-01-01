@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { IGetRooms } from '../interfaces/get-rooms-interface';
 import { IRoom } from '../interfaces/room.interface';
 import { IGetFacilities } from '../interfaces/get-facilities-interface';
+import { INewRoom } from '../interfaces/new-room-interface';
 
 @Injectable({
   providedIn: 'root'
@@ -19,10 +20,19 @@ export class RoomsService {
       }
     });
   }
-  addNewRoom(data:IRoom){
+  addNewRoom(data:any){
     return this._http.post('admin/rooms', data)
   }
   getFacilities(){
     return this._http.get<IGetFacilities>('admin/room-facilities')
+  }
+  getRoomByID(id:string){
+    return this._http.get('admin/rooms/' + id)
+  }
+  updateByID(id:string, data:any){
+    return this._http.post<IRoom>('admin/rooms/' + id, data)
+  }
+  deleteRoom(id:string){
+    return this._http.delete<IRoom>('admin/rooms/' + id)
   }
 }

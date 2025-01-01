@@ -1,7 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ITableAction, ITableInput } from '../../../../shared/interface/table/table-input.interface';
-import { IRoomWithCount } from './interfaces/get-rooms-interface';
+import { IGetRooms, IRoomWithCount } from './interfaces/get-rooms-interface';
 import { RoomsService } from './services/rooms.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
+import { ViewRoomComponent } from './components/view-room/view-room.component';
+import { IRoom } from './interfaces/room.interface';
+import { Router } from '@angular/router';
+import { DeleteItemComponent } from '../../../../shared/components/delete-item/delete-item.component';
 
 @Component({
   selector: 'app-rooms',
@@ -15,7 +21,12 @@ export class RoomsComponent implements OnInit {
   size = 10;
   roomsColumns: string[] = [];
   actions: ITableAction[] = [];
-  constructor(private _roomsService: RoomsService) {
+  dataForCurrentRoom!:IRoom
+  constructor(private _roomsService: RoomsService,
+              private _toast: ToastrService,
+              private _dialog: MatDialog,
+              private _router:Router
+            ) {
     this.actions = [
       {
         type: 'icon',
@@ -23,7 +34,7 @@ export class RoomsComponent implements OnInit {
         label: 'View',
         icon: 'visibility',
         callback: (row) => {
-          console.log('View', row);
+          this.onViewRoom(row);
         }
       },
       {
@@ -32,7 +43,7 @@ export class RoomsComponent implements OnInit {
         label: 'Edit',
         icon: 'edit_square',
         callback: (row) => {
-          console.log('Edit', row);
+          this.onUpdateRoom(row)
         }
       },
       {
@@ -41,7 +52,7 @@ export class RoomsComponent implements OnInit {
         label: 'Delete',
         icon: 'delete',
         callback: (row) => {
-          console.log('Delete', row);
+          this.onDeleteRoom(row)
         }
       },
     ]
@@ -56,7 +67,6 @@ export class RoomsComponent implements OnInit {
   ngOnInit(): void {
     this.getRooms();
   }
-
   getRooms() {
     let roomParams = {
       page: this.page,
@@ -64,7 +74,6 @@ export class RoomsComponent implements OnInit {
     }
     this._roomsService.getRooms(roomParams).subscribe({
       next: (res) => {
-        console.log(res.data.rooms)
         this.passDataToTable(res.data);
       },
       error: (err) => {
@@ -72,7 +81,6 @@ export class RoomsComponent implements OnInit {
       }
     });
   }
-
   passDataToTable(data: IRoomWithCount) {
     console.log(data);
     this.roomsData = {
@@ -92,10 +100,39 @@ export class RoomsComponent implements OnInit {
       'Room images'
     ]
   }
-
   handlePageChange(event : {pageNumber: number; pageSize: number}) {
     this.page = event.pageNumber;
     this.size = event.pageSize;
     this.getRooms();
+  }
+  onViewRoom(data:IRoom){
+    this.dataForCurrentRoom = data;
+    this._dialog.open(ViewRoomComponent, {
+      data: data,
+    });
+  }
+  onUpdateRoom(data:IRoom){
+    this.dataForCurrentRoom = data
+    this._router.navigate(['/admin/dashboard/rooms/update-room', data._id])
+  }
+  onDeleteRoom(data: IRoom) {
+    const dialogRef = this._dialog.open(DeleteItemComponent, {
+      data: { text: 'Room' },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this._roomsService.deleteRoom(data._id).subscribe({
+          next: (res) => {
+          },
+          error: (err) => {
+            this._toast.error(err.error.message);
+          },
+          complete: () => {
+            this._toast.success('Room Deleted Successfully');
+            this.getRooms();
+          }
+        });
+      }
+    });
   }
 }

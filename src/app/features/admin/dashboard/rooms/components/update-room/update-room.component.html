@@ -1,7 +1,7 @@
 <section>
   <div class="container">
     <div class="row">
-      <form class="auth-form" [formGroup]="newRoomForm" (ngSubmit)="addRoom()">
+      <form class="auth-form" [formGroup]="updateRoomForm" (ngSubmit)="updateRoom()">
         <!-- roomNumber -->
         <div class="input-group mb-3">
           <input type="text"
@@ -11,9 +11,9 @@
                 aria-label="roomNumber"
           >
         </div>
-        <ng-container *ngIf="newRoomForm.get('roomNumber')?.dirty || newRoomForm.get('roomNumber')?.touched">
-          <mat-error class="mb-3 d-inline-block" *ngIf="newRoomForm.get('roomNumber')?.errors?.['required']">Room Number is required</mat-error>
-          <mat-error class="mb-3 d-inline-block" *ngIf="newRoomForm.get('roomNumber')?.errors?.['pattern']">Room Number must be number and one '-'</mat-error>
+        <ng-container *ngIf="updateRoomForm.get('roomNumber')?.dirty || updateRoomForm.get('roomNumber')?.touched">
+          <mat-error class="mb-3 d-inline-block" *ngIf="updateRoomForm.get('roomNumber')?.errors?.['required']">Room Number is required</mat-error>
+          <mat-error class="mb-3 d-inline-block" *ngIf="updateRoomForm.get('roomNumber')?.errors?.['pattern']">Room Number must be number and one '-'</mat-error>
         </ng-container>
         <div class="row">
         <!-- price -->
@@ -26,9 +26,9 @@
                   aria-label="price"
             >
           </div>
-          <ng-container *ngIf="newRoomForm.get('price')?.dirty || newRoomForm.get('price')?.touched">
-            <mat-error class="mb-3 d-inline-block" *ngIf="newRoomForm.get('price')?.errors?.['required']">price is required</mat-error>
-            <mat-error class="mb-3 d-inline-block" *ngIf="newRoomForm.get('price')?.errors?.['pattern']">price must be number</mat-error>
+          <ng-container *ngIf="updateRoomForm.get('price')?.dirty || updateRoomForm.get('price')?.touched">
+            <mat-error class="mb-3 d-inline-block" *ngIf="updateRoomForm.get('price')?.errors?.['required']">price is required</mat-error>
+            <mat-error class="mb-3 d-inline-block" *ngIf="updateRoomForm.get('price')?.errors?.['pattern']">price must be number</mat-error>
           </ng-container>
           </div>
           <!-- capacity -->
@@ -41,9 +41,9 @@
                     aria-label="capacity"
               >
             </div>
-            <ng-container *ngIf="newRoomForm.get('capacity')?.dirty || newRoomForm.get('capacity')?.touched">
-              <mat-error class="mb-3 d-inline-block" *ngIf="newRoomForm.get('capacity')?.errors?.['required']">capacity is required</mat-error>
-              <mat-error class="mb-3 d-inline-block" *ngIf="newRoomForm.get('capacity')?.errors?.['pattern']">price must be number</mat-error>
+            <ng-container *ngIf="updateRoomForm.get('capacity')?.dirty || updateRoomForm.get('capacity')?.touched">
+              <mat-error class="mb-3 d-inline-block" *ngIf="updateRoomForm.get('capacity')?.errors?.['required']">capacity is required</mat-error>
+              <mat-error class="mb-3 d-inline-block" *ngIf="updateRoomForm.get('capacity')?.errors?.['pattern']">price must be number</mat-error>
             </ng-container>
           </div>
         </div>
@@ -58,9 +58,9 @@
                     aria-label="discount"
               >
             </div>
-            <ng-container *ngIf="newRoomForm.get('discount')?.dirty || newRoomForm.get('discount')?.touched">
-              <mat-error class="mb-3 d-inline-block" *ngIf="newRoomForm.get('discount')?.errors?.['required']">discount is required</mat-error>
-              <mat-error class="mb-3 d-inline-block" *ngIf="newRoomForm.get('discount')?.errors?.['pattern']">discount must be number</mat-error>
+            <ng-container *ngIf="updateRoomForm.get('discount')?.dirty || updateRoomForm.get('discount')?.touched">
+              <mat-error class="mb-3 d-inline-block" *ngIf="updateRoomForm.get('discount')?.errors?.['required']">discount is required</mat-error>
+              <mat-error class="mb-3 d-inline-block" *ngIf="updateRoomForm.get('discount')?.errors?.['pattern']">discount must be number</mat-error>
             </ng-container>
           </div>
           <div class="col-md-6">
@@ -112,7 +112,7 @@
             class="button"
             mat-raised-button
             color="primary"
-            [disabled]="newRoomForm.invalid"
+            [disabled]="updateRoomForm.invalid"
             >
             Save
           </button>
