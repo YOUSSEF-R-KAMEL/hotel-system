@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { DashboardComponent } from './dashboard.component';
+import { ChangePasswordComponent } from './components/change-password/change-password.component';
 
 const routes: Routes = [
   {
@@ -29,6 +30,10 @@ const routes: Routes = [
         path: 'facilities',
         loadChildren: () =>
           import('./facilities/facilities.module').then(m => m.FacilitiesModule)
+      },
+      {
+        path: 'change-password',
+        component: ChangePasswordComponent
       },
       { path: '', redirectTo: 'home', pathMatch: 'full' },
     ],

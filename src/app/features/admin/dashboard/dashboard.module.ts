@@ -8,12 +8,14 @@ import { HomeComponent } from './components/home/home.component';
 import { SideNavbarComponent } from './components/side-navbar/side-navbar.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
+import { ChangePasswordComponent } from './components/change-password/change-password.component';
 @NgModule({
   declarations: [
     DashboardComponent,
     HeaderComponent,
     SideNavbarComponent,
     HomeComponent,
+    ChangePasswordComponent,
   ],
   imports: [CommonModule, DashboardRoutingModule, SharedModule, NgChartsModule],
 })
