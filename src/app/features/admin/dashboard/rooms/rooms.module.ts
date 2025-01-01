@@ -16,8 +16,6 @@ import { RoomsComponent } from './rooms.component';
     CommonModule,
     RoomsRoutingModule,
     SharedModule,
-    NgxDropzoneModule,
-    ReactiveFormsModule
   ]
 })
 export class RoomsModule { }

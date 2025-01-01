@@ -35,7 +35,7 @@ export class RoomsComponent implements OnInit {
         label: 'Edit',
         icon: 'edit_square',
         callback: (row) => {
-          this.onUpdateRoom(row)
+          // this.router.navigate(row)
         }
       },
       {
@@ -44,7 +44,7 @@ export class RoomsComponent implements OnInit {
         label: 'Delete',
         icon: 'delete',
         callback: (row) => {
-          this.onDeleteRoom(row)
+          // this.onDeleteRoom(row)
         }
       },
     ]
