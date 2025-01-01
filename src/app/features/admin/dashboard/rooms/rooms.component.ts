@@ -13,6 +13,7 @@ export class RoomsComponent implements OnInit {
   roomsData: ITableInput;
   page = 1;
   size = 10;
+  roomsColumns: string[] = [];
   actions: ITableAction[] = [];
   constructor(private _roomsService: RoomsService) {
     this.actions = [
@@ -73,6 +74,7 @@ export class RoomsComponent implements OnInit {
   }
 
   passDataToTable(data: IRoomWithCount) {
+    console.log(data);
     this.roomsData = {
       data: {
         rooms: data.rooms,
@@ -80,6 +82,15 @@ export class RoomsComponent implements OnInit {
       },
       actions: this.actions
     }
+    this.roomsColumns = [
+      'Room',
+      'Price',
+      'Capacity',
+      'Discount',
+      'Facilities',
+      'Created by',
+      'Room images'
+    ]
   }
 
   handlePageChange(event : {pageNumber: number; pageSize: number}) {

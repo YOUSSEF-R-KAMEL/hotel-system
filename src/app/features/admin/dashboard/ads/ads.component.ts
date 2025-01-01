@@ -25,6 +25,7 @@ export class AdsComponent implements OnInit {
   adsData: ITableInput;
   page = 1;
   size = 10;
+  adsColumns: string[] = [];
   actions: ITableAction[] = [];
   constructor(private toast: ToastrService, private _AdsService: AdsService, private dialog: MatDialog) {
     this.actions = [
@@ -87,7 +88,6 @@ export class AdsComponent implements OnInit {
     if (!data || !data.ads) {
       return;
     }
-    console.log(data);
     this.adsData = {
       data: {
         ads: data.ads,
@@ -95,6 +95,12 @@ export class AdsComponent implements OnInit {
       },
       actions: this.actions,
     };
+    this.adsColumns = [
+      'Active',
+      'Room',
+      'Created by',
+      'Discount'
+    ]
   }
 
   handlePageChange(event: { pageNumber: number; pageSize: number }) {
