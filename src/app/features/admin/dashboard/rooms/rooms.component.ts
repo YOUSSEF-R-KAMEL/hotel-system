@@ -5,6 +5,9 @@ import { IRoomWithCount } from './interfaces/get-rooms-interface';
 import { IRoom } from './interfaces/room.interface';
 import { RoomRoutes } from './routes/room-routes';
 import { RoomsService } from './services/rooms.service';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteItemComponent } from '../../../../shared/components/delete-item/delete-item.component';
+import { IApiResponse } from '../../../../shared/interface/api-data-response/api-response.interface';
 
 @Component({
   selector: 'app-rooms',
@@ -14,11 +17,12 @@ import { RoomsService } from './services/rooms.service';
 
 export class RoomsComponent implements OnInit {
   roomsData: ITableInput;
+  apiResponse = '';
   page = 1;
   size = 10;
   roomsColumns: string[] = [];
   actions: ITableAction[] = [];
-  constructor(private _roomsService: RoomsService, private router: Router, private route: ActivatedRoute) {
+  constructor(private dialog: MatDialog,private _roomsService: RoomsService, private router: Router, private route: ActivatedRoute) {
     this.actions = [
       {
         type: 'icon',
@@ -35,7 +39,7 @@ export class RoomsComponent implements OnInit {
         label: 'Edit',
         icon: 'edit_square',
         callback: (row) => {
-          // this.router.navigate(row)
+          this.router.navigate([RoomRoutes.EDIT_ROOM, row._id], { relativeTo: this.route });
         }
       },
       {
@@ -43,8 +47,8 @@ export class RoomsComponent implements OnInit {
         color: 'warn',
         label: 'Delete',
         icon: 'delete',
-        callback: (row) => {
-          // this.onDeleteRoom(row)
+        callback: (room: IRoom) => {
+          this.openDeleteDialog(room)
         }
       },
     ]
@@ -97,6 +101,25 @@ export class RoomsComponent implements OnInit {
     this.page = event.pageNumber;
     this.size = event.pageSize;
     this.getRooms();
+  }
+  openDeleteDialog(room: IRoom) {
+    const dialogRef = this.dialog.open(DeleteItemComponent, {
+      data: {text: 'room'},
+    });
+    dialogRef.afterClosed().subscribe({
+      next: (result) => {
+        if (result) {
+          this._roomsService.deleteRoom(room._id).subscribe({
+            next: (res: IApiResponse) => {
+              this.apiResponse = res.message;
+            },
+            error: (err) => {
+              console.log(err);
+            }
+          });
+        }
+      }
+    });
   }
 
   get RoomRoutes() {

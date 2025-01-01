@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { IGetFacilities } from '../interfaces/get-facilities-interface';
 import { IGetRooms } from '../interfaces/get-rooms-interface';
 import { IRoomParams } from '../interfaces/room-params.interface';
+import { IApiResponse } from '../../../../../shared/interface/api-data-response/api-response.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -18,19 +19,19 @@ export class RoomsService {
       }
     });
   }
-  addRoom(room: FormData) {
-    return this._http.post('admin/rooms', room)
+  addRoom(room: FormData): Observable<IApiResponse> {
+    return this._http.post<IApiResponse>('admin/rooms', room)
   }
-  updateRoom(id: string, room: FormData) {
-    return this._http.put('admin/rooms' + id, room)
+  updateRoom(id: string, room: FormData): Observable<IApiResponse> {
+    return this._http.put<IApiResponse>('admin/rooms' + id, room)
   }
-  deleteRoom(id: string) {
-    return this._http.delete('admin/rooms' + id);
+  deleteRoom(id: string): Observable<IApiResponse> {
+    return this._http.delete<IApiResponse>('admin/rooms' + id);
   }
-  getFacilities() {
-    return this._http.get<IGetFacilities>('admin/room-facilities')
+  getFacilities(): Observable<IApiResponse> {
+    return this._http.get<IApiResponse>('admin/room-facilities')
   }
-  getRoom(id: string) {
-    return this._http.get<any>('admin/rooms/' + id)
+  getRoom(id: string): Observable<IApiResponse> {
+    return this._http.get<IApiResponse>('admin/rooms/' + id)
   }
 }

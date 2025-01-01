@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { IApiResponse } from '../../../../../../shared/interface/api-data-response/api-response.interface';
 import { IFacility } from '../../interfaces/facilities.interface';
 import { RoomsService } from '../../services/rooms.service';
-import { IRoom } from '../../interfaces/room.interface';
 
 @Component({
   selector: 'app-add-new-room',
@@ -14,15 +14,14 @@ import { IRoom } from '../../interfaces/room.interface';
 export class AddViewEditRoomComponent implements OnInit {
   resMsg: any = ''
   files: File[] = [];
-  facilities: IFacility[] = []
-  room!: IRoom;
+  facilities: IFacility[] = [];
   newRoomForm: FormGroup = new FormGroup({
     roomNumber: new FormControl(null, [Validators.required]),
     price: new FormControl(null, [Validators.required, Validators.pattern(/^[0-9]{0,9}$/)]),
     capacity: new FormControl(null, [Validators.required, Validators.pattern(/^[0-9]{0,9}$/)]),
     discount: new FormControl(null, [Validators.required, Validators.pattern(/^[0-9]{0,9}$/)]),
+    facilities: new FormControl(null, [Validators.required]),
   });
-  selectedAmenities: string[] = [];
   dropdownOpen: boolean = false;
   constructor(
     private _roomsService: RoomsService,
@@ -31,23 +30,25 @@ export class AddViewEditRoomComponent implements OnInit {
     private route: ActivatedRoute
   ) {
 
+    this.route.data.subscribe((data: any) => {
+      const roomData = data.room.data.room;
+      this.newRoomForm.patchValue({
+        roomNumber: roomData.roomNumber,
+        price: roomData.price,
+        capacity: roomData.capacity,
+        discount: roomData.discount,
+        facilities: roomData.facilities.map((facility: IFacility) => facility._id)
+      })
+    })
   }
 
   ngOnInit(): void {
-    const resolvedData = this.route.snapshot.data['room'];
-    console.log('Resolved data:', resolvedData);
-    if (resolvedData) {
-      this.room = resolvedData;
-      console.log('Room data:', this.room);
-    } else {
-      this._ToastrService.error('Room not found!', 'Error');
-    }
+    this.getFacilities();
   }
+
   addRoom() {
     const formData = this.buildFormData(this.newRoomForm, { images: this.files });
     this._roomsService.addRoom(formData).subscribe({
-      next: (response) => {
-      },
       error: (error) => {
         this._ToastrService.error('Failed to add room.', 'Error');
       },
@@ -60,8 +61,8 @@ export class AddViewEditRoomComponent implements OnInit {
 
   getFacilities() {
     this._roomsService.getFacilities().subscribe({
-      next: (res) => {
-        this.facilities = res.data.facilities;
+      next: (res: IApiResponse) => {
+        this.facilities = res.data.facilities as IFacility[];
       },
       error: (err) => {
         this._ToastrService.error(err.message, 'Error');

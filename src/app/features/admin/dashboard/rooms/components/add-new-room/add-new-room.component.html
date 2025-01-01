@@ -49,8 +49,8 @@
             </div>
             <div class="col-md-6">
               <mat-form-field class="normal-input w-100">
-                <mat-label>Facilities</mat-label>
-                <mat-select formControlName="facilities" multiple>
+                <!-- <mat-label>Facilities</mat-label> -->
+                <mat-select formControlName="facilities" multiple placeholder="Facilities">
                   @for (facility of facilities; track facility._id) {
                   <mat-option [value]="facility._id">{{ facility.name }}</mat-option>
                   }
