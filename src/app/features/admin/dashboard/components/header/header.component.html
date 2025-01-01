@@ -1,4 +1,4 @@
-<header class="mb-3">
+<header>
   <div class="row p-2 h-100 justify-content-between align-items-center">
     <div class="col-md-3">
       <img src="assets/images/svg/logo.svg" alt="logo" />
@@ -21,10 +21,10 @@
             <mat-icon>person</mat-icon>
             <span>Profile</span>
           </button>
-          <button mat-menu-item>
+          <a routerLink="/admin/dashboard/change-password" mat-menu-item>
             <mat-icon>lock_open</mat-icon>
             <span>Change password</span>
-          </button>
+          </a>
           <button mat-menu-item (click)="onLogout()">
             <mat-icon>logout</mat-icon>
             <span>Logout</span>

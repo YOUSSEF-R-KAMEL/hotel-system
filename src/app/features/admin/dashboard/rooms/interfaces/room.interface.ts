@@ -4,12 +4,7 @@ export interface IRoom {
   createdAt: string;
   createdBy: string
   discount: string;
-  facilities: [
-    {
-      _id:string,
-      name:string
-    }
-  ];
+  facilities: object[];
   images: string[];
   price: string;
   roomNumber: string;

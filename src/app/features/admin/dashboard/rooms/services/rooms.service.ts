@@ -4,8 +4,6 @@ import { Observable } from 'rxjs';
 import { IGetFacilities } from '../interfaces/get-facilities-interface';
 import { IGetRooms } from '../interfaces/get-rooms-interface';
 import { IRoomParams } from '../interfaces/room-params.interface';
-import { IRoom } from '../interfaces/room.interface';
-import { IData } from '../../../../../shared/interface/api-data-response/api-response.interface';
 
 @Injectable({
   providedIn: 'root'

@@ -21,8 +21,9 @@ export class AddViewEditRoomComponent implements OnInit {
     price: new FormControl(null, [Validators.required, Validators.pattern(/^[0-9]{0,9}$/)]),
     capacity: new FormControl(null, [Validators.required, Validators.pattern(/^[0-9]{0,9}$/)]),
     discount: new FormControl(null, [Validators.required, Validators.pattern(/^[0-9]{0,9}$/)]),
-    facilities: new FormControl(null, [Validators.required]),
   });
+  selectedAmenities: string[] = [];
+  dropdownOpen: boolean = false;
   constructor(
     private _roomsService: RoomsService,
     private _ToastrService: ToastrService,
@@ -42,7 +43,6 @@ export class AddViewEditRoomComponent implements OnInit {
       this._ToastrService.error('Room not found!', 'Error');
     }
   }
-
   addRoom() {
     const formData = this.buildFormData(this.newRoomForm, { images: this.files });
     this._roomsService.addRoom(formData).subscribe({

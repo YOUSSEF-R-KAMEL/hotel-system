@@ -4,9 +4,9 @@ import {
   ChartOptions,
   ChartType,
 } from 'chart.js/dist/types/index';
-import { HomeService } from './services/home.service';
-import { Charts, Data, ICard } from './interfaces/charts';
 import { ToastrService } from 'ngx-toastr';
+import { Charts, Data, ICard } from './interfaces/charts';
+import { HomeService } from './services/home.service';
 
 @Component({
   selector: 'app-home',
@@ -41,7 +41,10 @@ export class HomeComponent implements OnInit {
   chartOptions: ChartOptions = { responsive: true };
   cards = signal<ICard[]>([]);
 
-  constructor(private _HomeService: HomeService, private toast: ToastrService) {}
+  constructor(
+    private _HomeService: HomeService,
+    private toast: ToastrService
+  ) {}
 
   ngOnInit(): void {
     this._HomeService.getChartData().subscribe({
@@ -51,14 +54,17 @@ export class HomeComponent implements OnInit {
       error: (err) => {
         // console.log(err);
         this.toast.error(err.error.message);
-      }
+      },
     });
   }
 
   updateDataInCharts(res: Data) {
     this.cards.set([
       { name: 'Rooms', number: res.rooms },
-      { name: 'Facilities', number: res.facilities },
+      {
+        name: 'Facilities',
+        number: res.facilities,
+      },
       { name: 'Ads', number: res.ads },
     ]);
 
@@ -87,4 +93,3 @@ export class HomeComponent implements OnInit {
     });
   }
 }
-

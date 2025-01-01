@@ -17,7 +17,7 @@ import { AdsService } from './services/ads.service';
 @Component({
   selector: 'app-ads',
   templateUrl: './ads.component.html',
-  styleUrl: './ads.component.scss',
+  styleUrl: './ads.component.scss', 
 })
 export class AdsComponent implements OnInit {
   type = TableTypeEnum.Ads;

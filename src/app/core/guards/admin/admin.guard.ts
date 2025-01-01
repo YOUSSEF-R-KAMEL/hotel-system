@@ -8,7 +8,7 @@ export const adminGuard: CanActivateFn = (route, state) => {
   if (token !== null && role == 'admin') {
     return true;
   } else {
-    _Router.navigate(['/admin/dashboard']);
+    _Router.navigate(['/auth']);
     return false;
   }
 };

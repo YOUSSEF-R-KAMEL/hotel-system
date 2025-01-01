@@ -1,11 +1,10 @@
-import { RoomRoutes } from './routes/room-routes';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ITableAction, ITableInput } from '../../../../shared/interface/table/table-input.interface';
 import { IRoomWithCount } from './interfaces/get-rooms-interface';
-import { RoomsService } from './services/rooms.service';
-import { FormGroup } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
 import { IRoom } from './interfaces/room.interface';
+import { RoomRoutes } from './routes/room-routes';
+import { RoomsService } from './services/rooms.service';
 
 @Component({
   selector: 'app-rooms',
@@ -36,7 +35,7 @@ export class RoomsComponent implements OnInit {
         label: 'Edit',
         icon: 'edit_square',
         callback: (row) => {
-          console.log('Edit', row);
+          this.onUpdateRoom(row)
         }
       },
       {
@@ -45,7 +44,7 @@ export class RoomsComponent implements OnInit {
         label: 'Delete',
         icon: 'delete',
         callback: (row) => {
-          console.log('Delete', row);
+          this.onDeleteRoom(row)
         }
       },
     ]
@@ -60,7 +59,6 @@ export class RoomsComponent implements OnInit {
   ngOnInit(): void {
     this.getRooms();
   }
-
   getRooms() {
     let roomParams = {
       page: this.page,
@@ -68,7 +66,6 @@ export class RoomsComponent implements OnInit {
     }
     this._roomsService.getRooms(roomParams).subscribe({
       next: (res) => {
-        console.log(res.data.rooms)
         this.passDataToTable(res.data);
       },
       error: (err) => {
@@ -76,7 +73,6 @@ export class RoomsComponent implements OnInit {
       }
     });
   }
-
   passDataToTable(data: IRoomWithCount) {
     console.log(data);
     this.roomsData = {
