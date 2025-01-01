@@ -26,7 +26,7 @@ export class SideNavbarComponent {
     },
     {
       name: 'Facilities',
-      icon: 'people',
+      icon: 'room_preferences',
       route: '/admin/dashboard/facilities',
     },
     {

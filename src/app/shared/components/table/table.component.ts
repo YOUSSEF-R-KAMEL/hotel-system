@@ -31,6 +31,7 @@ export class TableComponent {
     '../../../../assets/images/svg/profile-picture-placeholder.svg';
 
   @Input() type: TableTypeEnum = TableTypeEnum.Users;
+  @Input() columns: string[] = [];
   @Input() set tableInput(data: ITableInput) {
     this.data = data;
     this.totalRecords = data.data.totalCount;
@@ -75,13 +76,13 @@ export class TableComponent {
         };
       });
     }
-    const excludedFields = ['_id', 'createdAt', 'updatedAt', 'verified'];
+    const excludedFields = ['_id', 'createdAt', 'updatedAt', 'verified', 'stripeChargeId'];
     const columns = Object.keys(tableDataArray[0]).filter((field) => !excludedFields.includes(field));
     this.displayedColumns = [
-      ...columns.map((column) => {
+      ...columns.map((column, index) => {
         return {
           field: column,
-          header: this.formatHeader(column),
+          header: this.columns[index],
         };
       }),
     ];

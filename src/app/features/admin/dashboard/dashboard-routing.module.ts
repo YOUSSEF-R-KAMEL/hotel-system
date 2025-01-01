@@ -33,25 +33,33 @@ const routes: Routes = [
         path: 'ads',
         loadChildren: () => import('./ads/ads.module').then((m) => m.AdsModule),
       },
-      { path: 'profile/:id', component: ProfileComponent },
       {
         path: 'facilities',
         loadChildren: () =>
-          import('./facilities/facilities.module').then(m => m.FacilitiesModule)
+          import('./facilities/facilities.module').then(
+            (m) => m.FacilitiesModule
+          ),
+      },
+      { path: 'profile/:id', component: ProfileComponent },
+      {
+        path: 'booking-facilities',
+        loadChildren: () =>
+          import('./booking-facilities/booking-facilities.module').then(
+            (m) => m.BookingFacilitiesModule
+          ),
       },
       {
         path: 'change-password',
         component: ChangePasswordComponent
       },
       { path: '', redirectTo: 'home', pathMatch: 'full' },
-      { path: 'booking-facilities', loadChildren: () => import('./booking-facilities/booking-facilities.module').then(m => m.BookingFacilitiesModule) },
+      { path: '**', redirectTo: '/dashboard/home' },
     ],
   },
-  { path: '**', redirectTo: '/dashboard/home' },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class DashboardRoutingModule { }
+export class DashboardRoutingModule {}
