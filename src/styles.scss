@@ -12,20 +12,20 @@
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
 $custom-primary: (
-  50: #203fc7,
-  100: #203fc7,
-  200: #203fc7,
-  300: #203fc7,
-  400: #203fc7,
+  50: #e3f2fd,
+  100: #bbdefb,
+  200: #90caf9,
+  300: #64b5f6,
+  400: #42a5f5,
   500: #203fc7,
-  600: #203fc7,
-  700: #203fc7,
-  800: #203fc7,
-  900: #203fc7,
-  A100: #203fc7,
-  A200: #203fc7,
-  A400: #203fc7,
-  A700: #203fc7,
+  600: #1e88e5,
+  700: #1976d2,
+  800: #1565c0,
+  900: #0d47a1,
+  A100: #82b1ff,
+  A200: #448aff,
+  A400: #2979ff,
+  A700: #2962ff,
   contrast: (
     50: #000,
     100: #000,
@@ -79,7 +79,7 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
-$hover-color: mat.get-color-from-palette($Hotel-system-primary, 50);
+$hover-color: mat.get-color-from-palette($Hotel-system-primary, 200);
 @import "assets/sass/main.scss";
 :root {
   --mat-menu-container-shape: 1rem;
