@@ -3,7 +3,7 @@
     <div class="row">
       <h3>Bookings table details</h3>
       <p>You can check all details</p>
-      <app-table (pageChange)="handlePageChange($event)" [tableInput]="bookingFacilitiesData"></app-table>
+      <app-table [columns]="bookingsColumns" (pageChange)="handlePageChange($event)" [tableInput]="bookingFacilitiesData"></app-table>
     </div>
   </div>
 </section>

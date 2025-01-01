@@ -2,11 +2,9 @@ import { IBooking } from './interfaces/booking-facility.interface';
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ITableInput, ITableAction } from '../../../../shared/interface/table/table-input.interface';
-import { ViewUserDialogComponent } from '../users/components/view-user-dialog/view-user-dialog.component';
-import { IUserWithCount } from '../users/interfaces/get-users-interface';
-import { IUser } from '../users/interfaces/user.interface';
 import { BookingFacilitiesService } from './services/booking-facilities.service';
 import { IApiResponse, IData } from '../../../../shared/interface/api-data-response/api-response.interface';
+import { ViewBookingDialogComponent } from './components/view-booking-dialog/view-booking-dialog.component';
 
 @Component({
   selector: 'app-booking-facilities',
@@ -17,6 +15,7 @@ export class BookingFacilitiesComponent {
   bookingFacilitiesData: ITableInput;
   page = 1;
   size = 10;
+  bookingsColumns: string[] = [];
   actions: ITableAction[] = [];
   constructor(private dialog: MatDialog, private bookingService: BookingFacilitiesService) {
     this.actions = [
@@ -25,7 +24,7 @@ export class BookingFacilitiesComponent {
         color: 'primary',
         label: 'View',
         icon: 'visibility',
-        callback: (row: IUser) => this.openViewDialog(row)
+        callback: (booking: IBooking) => this.openViewDialog(booking)
       }
     ]
     this.bookingFacilitiesData = {
@@ -56,6 +55,7 @@ export class BookingFacilitiesComponent {
   }
 
   passDataToTable(data: IData) {
+    console.log(data);
     this.bookingFacilitiesData = {
       data: {
         booking: data.booking,
@@ -63,6 +63,14 @@ export class BookingFacilitiesComponent {
       },
       actions: this.actions
     }
+    this.bookingsColumns = [
+      'Start date',
+      'End date',
+      'Total price',
+      'User',
+      'Room',
+      'Status',
+    ]
   }
 
   handlePageChange(event: { pageNumber: number; pageSize: number }) {
@@ -71,9 +79,9 @@ export class BookingFacilitiesComponent {
     this.getBookings();
   }
 
-  openViewDialog(row: IUser) {
-    this.dialog.open(ViewUserDialogComponent, {
-      data: row,
+  openViewDialog(booking: IBooking) {
+    this.dialog.open(ViewBookingDialogComponent, {
+      data: booking,
     });
   }
 }
