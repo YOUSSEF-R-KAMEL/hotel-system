@@ -16,6 +16,7 @@
         >
       </div>
     </div>
+    <app-table [columns]="roomsColumns" (pageChange)="handlePageChange($event)" [tableInput]="roomsData"></app-table>
     <app-table
       (pageChange)="handlePageChange($event)"
       [tableInput]="roomsData"

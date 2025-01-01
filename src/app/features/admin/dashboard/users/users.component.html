@@ -3,6 +3,7 @@
     <div class="row">
       <h3>Users table details</h3>
       <p>You can check all details</p>
+      <app-table [columns]="userColumns" (pageChange)="handlePageChange($event)" [tableInput]="usersData"></app-table>
       <app-table
         (pageChange)="handlePageChange($event)"
         [tableInput]="usersData"

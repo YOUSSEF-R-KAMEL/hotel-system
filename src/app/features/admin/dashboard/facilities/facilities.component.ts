@@ -17,6 +17,7 @@ export class FacilitiesComponent {
   apiResponse = '';
   page = 1;
   size = 10;
+  facilitiesColumns: string[] = [];
   actions: ITableAction[] = [];
   constructor(private toast: ToastrService, private dialog: MatDialog, private facilitiesService: FacilitiesService) {
     this.actions = [
@@ -76,6 +77,10 @@ export class FacilitiesComponent {
       },
       actions: this.actions
     }
+    this.facilitiesColumns = [
+      'Name',
+      'Created by'
+    ]
   }
 
   handlePageChange(event: { pageNumber: number; pageSize: number }) {

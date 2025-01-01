@@ -14,7 +14,7 @@ import { ITableColumn } from '../../../../shared/interface/table/table-columns.i
 })
 export class UsersComponent implements OnInit {
   usersData: ITableInput;
-  userColumns: ITableColumn[] = [];
+  userColumns: string[] = [];
   page = 1;
   size = 10;
   actions: ITableAction[] = [];
@@ -62,10 +62,17 @@ export class UsersComponent implements OnInit {
       },
       actions: this.actions
     }
-    // this.userColumns = Object.keys(data.users[0]).map()
+    this.userColumns = [
+      'Username',
+      'Email',
+      'Phone number',
+      'Country',
+      'Role',
+      'Profile image'
+    ]
   }
 
-  handlePageChange(event : {pageNumber: number; pageSize: number}) {
+  handlePageChange(event: { pageNumber: number; pageSize: number }) {
     this.page = event.pageNumber;
     this.size = event.pageSize;
     this.getUsers();

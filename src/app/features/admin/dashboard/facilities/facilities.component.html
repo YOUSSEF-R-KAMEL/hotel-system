@@ -15,6 +15,7 @@
         </button>
       </div>
     </div>
+      <app-table [columns]="facilitiesColumns" (pageChange)="handlePageChange($event)" [tableInput]="facilitiesData"></app-table>
     <app-table
       (pageChange)="handlePageChange($event)"
       [tableInput]="facilitiesData"
