@@ -40,7 +40,6 @@ const routes: Routes = [
           ),
       },
       { path: 'profile/:id', component: ProfileComponent },
-      { path: '', redirectTo: 'home', pathMatch: 'full' },
       {
         path: 'booking-facilities',
         loadChildren: () =>
@@ -48,9 +47,10 @@ const routes: Routes = [
             (m) => m.BookingFacilitiesModule
           ),
       },
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      { path: '**', redirectTo: '/dashboard/home' },
     ],
   },
-  { path: '**', redirectTo: '/dashboard/home' },
 ];
 
 @NgModule({
