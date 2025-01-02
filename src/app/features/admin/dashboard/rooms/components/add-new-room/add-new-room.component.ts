@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { IApiResponse } from '../../../../../../shared/interface/api-data-response/api-response.interface';
 import { IFacility } from '../../interfaces/facilities.interface';
 import { RoomsService } from '../../services/rooms.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-add-new-room',
@@ -27,17 +28,17 @@ export class AddViewEditRoomComponent implements OnInit {
     private _roomsService: RoomsService,
     private _ToastrService: ToastrService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) {
-
     this.route.data.subscribe((data: any) => {
       const roomData = data.room.data.room;
+      console.log(roomData.facilities);
       this.newRoomForm.patchValue({
         roomNumber: roomData.roomNumber,
         price: roomData.price,
         capacity: roomData.capacity,
         discount: roomData.discount,
-        facilities: roomData.facilities.map((facility: IFacility) => facility._id)
+        facilities: roomData.facilities.map((facility: IFacility) => facility._id),
       })
     })
   }
@@ -77,7 +78,7 @@ export class AddViewEditRoomComponent implements OnInit {
     this.files.splice(this.files.indexOf(event), 1);
   }
 
-  private buildFormData(formGroup: FormGroup, fileFields: { [key: string]: File[] }): FormData {
+  buildFormData(formGroup: FormGroup, fileFields: { [key: string]: File[] }): FormData {
     const formData = new FormData();
     // Iterate over form controls and add values to FormData
     Object.keys(formGroup.controls).forEach((key) => {
@@ -102,7 +103,4 @@ export class AddViewEditRoomComponent implements OnInit {
     });
     return formData;
   }
-
-
-
 }
