@@ -1,66 +1,39 @@
-section {
-  margin-top: 135px;
-  input, select, .custom-select {
-    background-color: #F7F7F7;
-    &::placeholder {
-      text-transform: capitalize;
-    }
-  }
-  mat-error {
-    color: #dc3545;
+input, select {
+  background-color: #F7F7F7;
+  &::placeholder {
     text-transform: capitalize;
-    margin-bottom: 15px !important;
-  }
-  ngx-dropzone {
-    background-color: #F1FFF0;
-    margin-bottom: 150px;
-    border-color: #009247;
-  .choose {
-    color: #009247;
-  }
   }
 }
-.custom-select {
-  position: relative;
-  z-index: 99;
-}
-.select-box {
-  color: #212529;
-  cursor: pointer;
-  i {
-    color: #212529;
-    position: absolute;
-    right: 5px;
-    top: 50%;
-    transform: translateY(-50%);
-    -webkit-transform: translateY(-50%);
-    -moz-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    -o-transform: translateY(-50%);
-  }
-  .selected-item {
-    display: inline-block;
-    background-color: #f0f0f0;
-    margin: 0 5px;
-    padding: 0 10px;
-    border-radius: 5px;
-  }
-}
-.options {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 100%;
-  background-color: white;
-  border: 1px solid #ccc;
-  max-height: 200px;
-  overflow-y: auto;
-  z-index: 10;
-  label {
-    display: block;
-    padding: 8px;
-    cursor: pointer;
+section {
+  height: 70vh;
+  .container {
+    height: 100%;
   }
 }
 
+mat-error {
+  color: #dc3545;
+  text-transform: capitalize;
+  margin-bottom: 15px !important;
+}
+.mat-mdc-select {
+  padding-top: .5rem !important;
+}
+
+ngx-dropzone {
+  background-color: #F1FFF0;
+  border: 1px dashed #009247;
+  ngx-dropzone-label {
+    p span {
+      color: #009247;
+    }
+  }
+}
+
+.room-form {
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 

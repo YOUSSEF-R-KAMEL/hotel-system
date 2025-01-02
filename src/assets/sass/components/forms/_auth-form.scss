@@ -12,7 +12,7 @@
   &-paragraph {
     width: 70%;
     .blue-link {
-      color: mat.get-color-from-palette($Hotel-system-primary, 900);
+      color: mat.get-color-from-palette($Hotel-system-primary, 500);
     }
     .red-link {
       color: mat.get-color-from-palette($Hotel-system-accent);
@@ -28,7 +28,7 @@
       width: 100%;
       text-align: end;
       .link {
-        color: #4D4D4D;
+        color: #4d4d4d;
         font-weight: lighter;
       }
     }

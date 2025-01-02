@@ -1,23 +1,28 @@
 .button {
-  background-color: mat.get-color-from-palette($Hotel-system-primary, A700);
+  background-color: mat.get-color-from-palette($Hotel-system-primary, 500);
   color: #ffffff;
   width: 100%;
   height: 2.5rem;
   padding: 22px 0 !important;
+  &.secondary {
+    background-color: transparent;
+    color: mat.get-color-from-palette($Hotel-system-primary, 900);
+    border: 1px solid mat.get-color-from-palette($Hotel-system-primary, 900);
+  }
 }
 image-container {
   width: 100%;
   height: 100%;
   .mat-raised-button {
     &.primary {
-      background-color: mat.get-color-from-palette($Hotel-system-primary, 900);
+      background-color: mat.get-color-from-palette($Hotel-system-primary, 500);
       color: white;
     }
 
     &.secondary {
       background-color: transparent;
-      color: mat.get-color-from-palette($Hotel-system-primary, 900);
-      border: 1px solid mat.get-color-from-palette($Hotel-system-primary, 900);
+      color: mat.get-color-from-palette($Hotel-system-primary, 500);
+      border: 1px solid mat.get-color-from-palette($Hotel-system-primary, 500);
     }
 
     &.danger {
@@ -26,4 +31,3 @@ image-container {
     }
   }
 }
-
