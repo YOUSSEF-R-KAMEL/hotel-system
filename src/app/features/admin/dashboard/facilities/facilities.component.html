@@ -6,19 +6,12 @@
         <p>You can check all details</p>
       </div>
       <div class="d-flex align-items-center">
-        <button
-          (click)="openFacilityDialog('Add', null)"
-          mat-raised-button
-          color="primary"
-        >
+        <button (click)="openFacilityDialog('Add', null)" mat-raised-button color="primary">
           Add new facility
         </button>
       </div>
     </div>
-      <app-table [columns]="facilitiesColumns" (pageChange)="handlePageChange($event)" [tableInput]="facilitiesData"></app-table>
-    <app-table
-      (pageChange)="handlePageChange($event)"
-      [tableInput]="facilitiesData"
-    ></app-table>
+    <app-table [columns]="facilitiesColumns" (pageChange)="handlePageChange($event)"
+      [tableInput]="facilitiesData"></app-table>
   </div>
 </section>

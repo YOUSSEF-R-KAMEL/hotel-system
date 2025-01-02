@@ -1,100 +1,108 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { RoomsService } from '../../services/rooms.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
+import { IApiResponse } from '../../../../../../shared/interface/api-data-response/api-response.interface';
+import { IFacility } from '../../interfaces/facilities.interface';
+import { RoomsService } from '../../services/rooms.service';
 
 @Component({
   selector: 'app-add-new-room',
   templateUrl: './add-new-room.component.html',
   styleUrl: './add-new-room.component.scss'
 })
-export class AddNewRoomComponent implements OnInit {
-  resMsg:any = ''
+export class AddViewEditRoomComponent implements OnInit {
+  resMsg: any = ''
   files: File[] = [];
-  imgSrc:any;
-  facilitiesArr:string[] = []
+  facilities: IFacility[] = [];
   newRoomForm: FormGroup = new FormGroup({
-    roomNumber: new FormControl(null, [Validators.required, Validators.pattern(/^[0-9]+[-][0-9]+$/)]),
+    roomNumber: new FormControl(null, [Validators.required]),
     price: new FormControl(null, [Validators.required, Validators.pattern(/^[0-9]{0,9}$/)]),
     capacity: new FormControl(null, [Validators.required, Validators.pattern(/^[0-9]{0,9}$/)]),
     discount: new FormControl(null, [Validators.required, Validators.pattern(/^[0-9]{0,9}$/)]),
+    facilities: new FormControl(null, [Validators.required]),
   });
-  selectedAmenities: string[] = [];
   dropdownOpen: boolean = false;
   constructor(
-      private _roomsService: RoomsService,
-      private _ToastrService: ToastrService,
-      private _router:Router,
-  ){
+    private _roomsService: RoomsService,
+    private _ToastrService: ToastrService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
+
+    this.route.data.subscribe((data: any) => {
+      const roomData = data.room.data.room;
+      this.newRoomForm.patchValue({
+        roomNumber: roomData.roomNumber,
+        price: roomData.price,
+        capacity: roomData.capacity,
+        discount: roomData.discount,
+        facilities: roomData.facilities.map((facility: IFacility) => facility._id)
+      })
+    })
   }
+
   ngOnInit(): void {
-      this.getFacilities()
+    this.getFacilities();
   }
+
   addRoom() {
-    if (this.newRoomForm.valid) {
-      const myData = new FormData()
-      Object.keys(this.newRoomForm.controls).forEach((key) => {
-        const value = this.newRoomForm.get(key)?.value
-        if(value){
-          myData.append(key, value)
-        }
-      });
-      myData.append('imgs', this.imgSrc)
-      myData.append('facilities', JSON.stringify(this.selectedAmenities))
-      this._roomsService.addNewRoom(myData).subscribe({
-        next: (res) => {
-          this.resMsg = res
-        },
-        error: (err) => {
-          this._ToastrService.error(err.message, 'Error');
-        },
-        complete: () => {
-          this._ToastrService.success(this.resMsg, 'Success');
-        },
-      });
-    }
+    const formData = this.buildFormData(this.newRoomForm, { images: this.files });
+    this._roomsService.addRoom(formData).subscribe({
+      error: (error) => {
+        this._ToastrService.error('Failed to add room.', 'Error');
+      },
+      complete: () => {
+        this._ToastrService.success('Room added successfully!', 'Success');
+        this.router.navigateByUrl('../')
+      }
+    });
   }
-  getFacilities(){
+
+  getFacilities() {
     this._roomsService.getFacilities().subscribe({
-      next: (res) => {
-        res.data.facilities.forEach(fa =>{
-          this.facilitiesArr.push(fa.name)
-        })
+      next: (res: IApiResponse) => {
+        this.facilities = res.data.facilities as IFacility[];
       },
       error: (err) => {
         this._ToastrService.error(err.message, 'Error');
       },
-      complete: () => {
-        // console.log(this.facilitiesArr)
-      },
     })
   }
-  onSelect(event:any) {
+  onSelect(event: any) {
     this.files.push(...event.addedFiles);
-    this.imgSrc = this.files[0]
-    // console.log(this.imgSrc)
   }
-  onRemove(event:any) {
-    // console.log(event);
+
+  onRemove(event: any) {
     this.files.splice(this.files.indexOf(event), 1);
   }
-  cancelAction(){
-    this._router.navigate(['/admin/dashboard/rooms'])
-  }
-  toggleDropdown() {
-    this.dropdownOpen = !this.dropdownOpen;
-  }
-  onCheckboxChange(event: Event) {
-    const checkbox = event.target as HTMLInputElement;
-    const value = checkbox.value;
-    if (checkbox.checked) {
-      if (!this.selectedAmenities.includes(value)) {
-        this.selectedAmenities.push(value);
+
+  private buildFormData(formGroup: FormGroup, fileFields: { [key: string]: File[] }): FormData {
+    const formData = new FormData();
+    // Iterate over form controls and add values to FormData
+    Object.keys(formGroup.controls).forEach((key) => {
+      const value = formGroup.get(key)?.value;
+      if (key === 'facilities' && Array.isArray(value)) {
+        // Handle facilities as an array
+        value.forEach((facilityId: string) => {
+          formData.append('facilities', facilityId);
+        });
+      } else if (value !== null && value !== undefined) {
+        formData.append(key, value);
       }
-    } else {
-      this.selectedAmenities = this.selectedAmenities.filter(item => item !== value);
-    }
-    console.log(this.selectedAmenities)
+    });
+    // Add files to FormData
+    Object.keys(fileFields).forEach((key) => {
+      const files = fileFields[key];
+      if (files && files.length > 0) {
+        files.forEach((file) => {
+          formData.append('imgs', file);
+        });
+      }
+    });
+    return formData;
   }
+
+
+
 }

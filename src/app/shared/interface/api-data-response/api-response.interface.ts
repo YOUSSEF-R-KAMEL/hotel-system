@@ -15,6 +15,7 @@ export interface IData {
   facilities?: IFacility[];
   booking?: IBooking[];
   rooms?: IRoom[];
+  room?: IRoom
   ads?: Ads[];
   totalCount: number;
 }

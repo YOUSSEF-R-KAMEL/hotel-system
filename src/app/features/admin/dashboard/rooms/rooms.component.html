@@ -5,22 +5,11 @@
         <h3>Booking table details</h3>
         <p>You can check all details</p>
       </div>
-
       <div class="col-md-6 d-flex justify-content-end">
-        <a
-          routerLink="/admin/dashboard/rooms/add-new-room"
-          class="button w-25 px-5"
-          mat-raised-button
-          color="primary"
-          >Add New Room</a
-        >
+        <a [routerLink]="RoomRoutes.ADD_NEW_ROOM" class="button w-25 px-5" mat-raised-button color="primary">Add New Room</a>
       </div>
     </div>
     <app-table [columns]="roomsColumns" (pageChange)="handlePageChange($event)" [tableInput]="roomsData"></app-table>
-    <app-table
-      (pageChange)="handlePageChange($event)"
-      [tableInput]="roomsData"
-    ></app-table>
   </div>
 </section>
 <router-outlet></router-outlet>
