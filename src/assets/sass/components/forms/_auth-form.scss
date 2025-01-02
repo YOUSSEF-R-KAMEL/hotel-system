@@ -1,8 +1,9 @@
 .form__wrapper {
   @include flexCenter;
   height: 80%;
-  width: 60%;
+  width: 64%;
   margin: 0 auto;
+  margin-left: 25%;
   gap: 1rem;
   text-align: start;
   &-header {
@@ -22,12 +23,6 @@
     width: 100%;
     mat-form-field {
       width: 100%;
-      mat-label {
-      }
-      input {
-      }
-      mat-icon {
-      }
     }
     &__links {
       width: 100%;
