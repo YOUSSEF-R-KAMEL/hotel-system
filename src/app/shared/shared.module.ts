@@ -26,9 +26,10 @@ import { RouterModule } from '@angular/router';
 import { DeleteItemComponent } from './components/delete-item/delete-item.component';
 import { TableComponent } from './components/table/table.component';
 import { NgxDropzoneModule } from 'ngx-dropzone';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
-  declarations: [TableComponent, DeleteItemComponent],
+  declarations: [TableComponent, DeleteItemComponent, FooterComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -81,7 +82,8 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
     MatDialogClose,
     MatDialogContent,
     MatDialogTitle,
-    NgxDropzoneModule
+    NgxDropzoneModule,
+    FooterComponent
   ],
 })
 export class SharedModule {}

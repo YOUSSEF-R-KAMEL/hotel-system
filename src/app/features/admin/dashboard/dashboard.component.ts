@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IUserResponse } from '../../../shared/interfaces/IUserResponse';
+import { IUserResponse } from '../../../shared/interface/IUserResponse';
 import { HelperService } from '../../../shared/services/helper/helper.service';
 
 @Component({
@@ -18,7 +18,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     const id = localStorage.getItem('userId');
-    
+
     if (id !== null) {
       this._HelperService.onGetUser(id).subscribe({
         next: (res: IUserResponse) => {

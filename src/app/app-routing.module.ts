@@ -17,21 +17,6 @@ const routes: Routes = [
     loadChildren: () =>
       import('./features/admin/admin.module').then((m) => m.AdminModule),
   },
-  {
-    path: 'anonymous-user',
-    loadChildren: () =>
-      import('./features/anonymous-user/anonymous-user.module').then(
-        (m) => m.AnonymousUserModule
-      ),
-  },
-  {
-    path: 'logged-user',
-    canActivate: [userGuard],
-    loadChildren: () =>
-      import('./features/logged-user/logged-user.module').then(
-        (m) => m.LoggedUserModule
-      ),
-  },
   { path: 'user', loadChildren: () => import('./features/user/user.module').then(m => m.UserModule) },
 ];
 
