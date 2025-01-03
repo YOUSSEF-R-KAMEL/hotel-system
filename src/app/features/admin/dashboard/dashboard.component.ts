@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { IUserResponse } from '../../../shared/interface/user/IUserResponse';
-import { HelperService } from '../../../shared/services/helper/helper.service';
 import { AuthService } from '../../auth/services/auth.service';
 
 @Component({

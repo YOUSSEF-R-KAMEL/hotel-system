@@ -1,7 +1,7 @@
 import { authRoutes } from './../../../features/auth/routes/enum';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../features/auth/services/auth.service';
-import { User } from '../../interfaces/IUserResponse';
+import { User } from '../../interface/IUserResponse';
 
 @Component({
   selector: 'app-user-navbar',

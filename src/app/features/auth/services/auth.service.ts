@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, shareReplay, tap } from 'rxjs';
 import { ILogin, LoginResponse } from '../interfaces/ILogin';
-import { IUserResponse } from '../../../shared/interfaces/IUserResponse';
+import { IUserResponse } from '../../../shared/interface/IUserResponse';
 
 @Injectable({
   providedIn: 'root',
