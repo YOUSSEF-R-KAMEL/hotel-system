@@ -8,12 +8,12 @@
     </div>
     <div mat-dialog-content>
       <mat-form-field class="normal-input w-100">
-        <input matInput placeholder="Name" [(ngModel)]="name" />
-        <mat-error></mat-error>
+        <input [disabled]="data.type === 'View'" required matInput placeholder="Name" [(ngModel)]="name" />
+        <mat-error *ngIf="name === ''">Facility name is required</mat-error>
       </mat-form-field>
     </div>
     <div mat-dialog-actions class="d-flex justify-content-end p-3 pt-0">
-      <button [mat-dialog-close]="name" mat-raised-button color="primary">Save</button>
+      <button [disabled]="name === ''" [mat-dialog-close]="name" mat-raised-button color="primary">Save</button>
     </div>
   </div>
 </section>
