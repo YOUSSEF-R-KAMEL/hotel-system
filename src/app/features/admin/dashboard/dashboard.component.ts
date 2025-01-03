@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { IUserResponse } from '../../../shared/interface/user/IUserResponse';
-import { HelperService } from '../../../shared/services/helper/helper.service';
+import { AuthService } from '../../auth/services/auth.service';
+import { IApiResponse } from '../../../shared/interface/api-data-response/api-response.interface';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,9 +9,9 @@ import { HelperService } from '../../../shared/services/helper/helper.service';
 })
 export class DashboardComponent implements OnInit {
   isExpand: boolean = false;
-  profileImage: string = '';
+  profileImage: string  = '';
   imageUrl: string = 'https://upskilling-egypt.com:3000/';
-  constructor(private _HelperService: HelperService) {}
+  constructor(private authService: AuthService) {}
   toggleSidebar(): void {
     this.isExpand = !this.isExpand;
   }
@@ -20,10 +20,10 @@ export class DashboardComponent implements OnInit {
     const id = localStorage.getItem('userId');
 
     if (id !== null) {
-      this._HelperService.onGetUser(id).subscribe({
-        next: (res: IUserResponse) => {
+      this.authService.getAdmin(id).subscribe({
+        next: (res: IApiResponse) => {
           if (res) {
-            this.profileImage = res.data.user.profileImage;
+            this.profileImage = res.data.user!.profileImage;
           }
         },
         error: (err: any) => {

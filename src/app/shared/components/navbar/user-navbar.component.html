@@ -15,14 +15,17 @@
           }
         </ul>
         @if (!isLoggedIn) {
-        <button mat-raised-button color="primary">Register</button>
-        <button mat-raised-button color="primary">Login now</button>
+        <div class="d-flex gap-3">
+          <button [routerLink]="authRoutes.register" mat-raised-button color="primary">Register</button>
+          <button [routerLink]="authRoutes.login" mat-raised-button color="primary">Login now</button>
+        </div>
         } @else {
         <div class="d-flex align-items-center gap-3">
           <div class="d-flex align-items-center gap-2">
             <img width="40px" height="40px" class="rounded-circle"
-              src="../../../../assets/images/svg/profile-placeholder-image.svg" alt="profile picture">
-            <p>Upskilling</p>
+              [src]="user ? user.profileImage : '../../../../assets/images/svg/profile-placeholder-image.svg'"
+              alt="profile picture">
+            <p>{{user?.userName}}</p>
           </div>
           <button mat-icon-button [matMenuTriggerFor]="menu">
             <mat-icon>keyboard_arrow_down</mat-icon>
@@ -36,7 +39,7 @@
               <mat-icon>lock_open</mat-icon>
               <span>Change password</span>
             </button>
-            <button mat-menu-item>
+            <button mat-menu-item (click)="logout()">
               <mat-icon>logout</mat-icon>
               <span>Logout</span>
             </button>
