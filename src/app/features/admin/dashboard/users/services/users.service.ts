@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IUserResponse } from '../../../../../shared/interfaces/IUserResponse';
+import { IUserResponse } from '../../../../../shared/interface/IUserResponse';
+import { IParams } from '../../../../../shared/interface/params.interface';
 import { IGetUsers } from '../interfaces/get-users-interface';
-import { IParams } from '../interfaces/user-params.interface';
 
 @Injectable({
   providedIn: 'root',

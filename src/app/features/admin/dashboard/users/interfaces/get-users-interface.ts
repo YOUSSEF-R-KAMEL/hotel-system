@@ -1,4 +1,4 @@
-import { IUser } from "./user.interface";
+import { User } from '../../../../../shared/interface/IUserResponse';
 
 export interface IGetUsers {
   success: boolean;
@@ -7,6 +7,6 @@ export interface IGetUsers {
 }
 
 export interface IUserWithCount {
-  users: IUser[];
+  users: User[];
   totalCount: number;
 }
