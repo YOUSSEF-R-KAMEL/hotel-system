@@ -30,6 +30,10 @@ import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [TableComponent, DeleteItemComponent, FooterComponent],
+import { UserNavbarComponent } from './components/navbar/user-navbar.component';
+
+@NgModule({
+  declarations: [TableComponent, DeleteItemComponent, UserNavbarComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -84,6 +88,7 @@ import { FooterComponent } from './components/footer/footer.component';
     MatDialogTitle,
     NgxDropzoneModule,
     FooterComponent
+    UserNavbarComponent
   ],
 })
 export class SharedModule {}

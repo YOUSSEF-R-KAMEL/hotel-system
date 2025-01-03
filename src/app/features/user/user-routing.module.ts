@@ -5,6 +5,8 @@ import { UserComponent } from './user.component';
 const routes: Routes = [
   { path: '', component: UserComponent },
   {path: 'ads-list', loadChildren: () => import('./ads-list/ads-list.module').then(m => m.AdsListModule)}
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'home', component: UserComponent }
 ];
 
 @NgModule({

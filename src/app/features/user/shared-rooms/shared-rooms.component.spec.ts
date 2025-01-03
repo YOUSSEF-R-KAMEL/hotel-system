@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UpdateRoomComponent } from './update-room.component';
+import { SharedRoomsComponent } from './shared-rooms.component';
 
-describe('UpdateRoomComponent', () => {
-  let component: UpdateRoomComponent;
-  let fixture: ComponentFixture<UpdateRoomComponent>;
+describe('SharedRoomsComponent', () => {
+  let component: SharedRoomsComponent;
+  let fixture: ComponentFixture<SharedRoomsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [UpdateRoomComponent]
+      declarations: [SharedRoomsComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(UpdateRoomComponent);
+    fixture = TestBed.createComponent(SharedRoomsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,0 +1,49 @@
+<header>
+  <div class="container h-100">
+    <div class="d-flex justify-content-between align-items-center h-100">
+      <div>
+        <img src="../../../../../../assets/images/svg/logo.svg" alt="logo">
+      </div>
+      <nav class="d-flex gap-5 align-items-center h-100">
+        <ul class="d-flex gap-4 align-items-center m-0">
+          @for(link of navLinks; track link.text) {
+          @if (link.isActive) {
+          <li>
+            <a [routerLink]="link.path" routerLinkActive="active">{{ link.text }}</a>
+          </li>
+          }
+          }
+        </ul>
+        @if (!isLoggedIn) {
+        <button mat-raised-button color="primary">Register</button>
+        <button mat-raised-button color="primary">Login now</button>
+        } @else {
+        <div class="d-flex align-items-center gap-3">
+          <div class="d-flex align-items-center gap-2">
+            <img width="40px" height="40px" class="rounded-circle"
+              src="../../../../assets/images/svg/profile-placeholder-image.svg" alt="profile picture">
+            <p>Upskilling</p>
+          </div>
+          <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>keyboard_arrow_down</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item>
+              <mat-icon>person</mat-icon>
+              <span>Profile</span>
+            </button>
+            <button mat-menu-item>
+              <mat-icon>lock_open</mat-icon>
+              <span>Change password</span>
+            </button>
+            <button mat-menu-item>
+              <mat-icon>logout</mat-icon>
+              <span>Logout</span>
+            </button>
+          </mat-menu>
+        </div>
+        }
+      </nav>
+    </div>
+  </div>
+</header>

@@ -8,6 +8,7 @@ import { RoomsService } from './services/rooms.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteItemComponent } from '../../../../shared/components/delete-item/delete-item.component';
 import { IApiResponse } from '../../../../shared/interface/api-data-response/api-response.interface';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-rooms',
@@ -17,12 +18,11 @@ import { IApiResponse } from '../../../../shared/interface/api-data-response/api
 
 export class RoomsComponent implements OnInit {
   roomsData: ITableInput;
-  apiResponse = '';
   page = 1;
   size = 10;
   roomsColumns: string[] = [];
   actions: ITableAction[] = [];
-  constructor(private dialog: MatDialog,private _roomsService: RoomsService, private router: Router, private route: ActivatedRoute) {
+  constructor(private toast: ToastrService, private dialog: MatDialog, private _roomsService: RoomsService, private router: Router, private route: ActivatedRoute) {
     this.actions = [
       {
         type: 'icon',
@@ -104,17 +104,20 @@ export class RoomsComponent implements OnInit {
   }
   openDeleteDialog(room: IRoom) {
     const dialogRef = this.dialog.open(DeleteItemComponent, {
-      data: {text: 'room'},
+      data: { text: 'room' },
     });
     dialogRef.afterClosed().subscribe({
       next: (result) => {
         if (result) {
           this._roomsService.deleteRoom(room._id).subscribe({
             next: (res: IApiResponse) => {
-              this.apiResponse = res.message;
             },
             error: (err) => {
-              console.log(err);
+              this.toast.error(err.error.message);
+            },
+            complete: () => {
+              this.toast.success('Room deleted successfully!');
+              this.getRooms();
             }
           });
         }
