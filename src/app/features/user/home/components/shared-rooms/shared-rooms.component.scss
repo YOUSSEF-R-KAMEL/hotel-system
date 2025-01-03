@@ -1,4 +1,11 @@
+@import "../../../../../../assets/sass/abstracts/variables";
 .row {
   justify-content: space-evenly;
   margin-bottom: 2rem;
+  h5 {
+    color: $dark-blue2;
+  }
+  .room {
+    width: 23%;
+  }
 }
