@@ -1,4 +1,4 @@
-import { User } from '../../../../../shared/interface/IUserResponse';
+import { User } from '../../../../../shared/interface/user/IUserResponse';
 
 export interface IGetUsers {
   success: boolean;

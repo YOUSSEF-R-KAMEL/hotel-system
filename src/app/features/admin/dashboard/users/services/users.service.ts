@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IUserResponse } from '../../../../../shared/interface/IUserResponse';
-import { IParams } from '../../../../../shared/interface/params.interface';
+import { IParams } from '../../../../../shared/interface/params/params.interface';
+import { IUserResponse } from '../../../../../shared/interface/user/IUserResponse';
 import { IGetUsers } from '../interfaces/get-users-interface';
 
 @Injectable({

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { User } from '../../../../shared/interface/IUserResponse';
 import {
   ITableAction,
   ITableInput,
 } from '../../../../shared/interface/table/table-input.interface';
+import { User } from '../../../../shared/interface/user/IUserResponse';
 import { ViewUserDialogComponent } from './components/view-user-dialog/view-user-dialog.component';
 import { IUserWithCount } from './interfaces/get-users-interface';
 import { UsersService } from './services/users.service';

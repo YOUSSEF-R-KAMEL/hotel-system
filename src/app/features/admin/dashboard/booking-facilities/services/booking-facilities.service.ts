@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IApiResponse } from '../../../../../shared/interface/api-data-response/api-response.interface';
-import { IParams } from '../../../../../shared/interface/params.interface';
+import { IParams } from '../../../../../shared/interface/params/params.interface';
 
 @Injectable({
   providedIn: 'root',

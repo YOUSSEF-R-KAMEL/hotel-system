@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { User } from '../../../../../../shared/interface/IUserResponse';
+import { User } from '../../../../../../shared/interface/user/IUserResponse';
 
 @Component({
   selector: 'app-view-user-dialog',

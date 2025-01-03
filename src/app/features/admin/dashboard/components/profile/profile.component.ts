@@ -1,7 +1,7 @@
 import { AfterViewInit, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { User } from '../../../../../shared/interface/IUserResponse';
+import { User } from '../../../../../shared/interface/user/IUserResponse';
 import { UsersService } from '../../users/services/users.service';
 
 @Component({

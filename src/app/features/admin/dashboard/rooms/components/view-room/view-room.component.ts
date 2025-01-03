@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { IRoom } from '../../../../../../shared/interface/room.interface';
+import { IRoom } from '../../../../../../shared/interface/room /room.interface';
 
 @Component({
   selector: 'app-view-room',

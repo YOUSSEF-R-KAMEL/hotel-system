@@ -2,7 +2,7 @@ import { AfterViewInit, Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { IRoom } from '../../../../../../shared/interface/room.interface';
+import { IRoom } from '../../../../../../shared/interface/room /room.interface';
 import { RoomsService } from '../../services/rooms.service';
 
 @Component({
