@@ -23,7 +23,7 @@ export class RoomsService {
     return this._http.post<IApiResponse>('admin/rooms', room)
   }
   updateRoom(id: string, room: FormData): Observable<IApiResponse> {
-    return this._http.put<IApiResponse>('admin/rooms' + id, room)
+    return this._http.put<IApiResponse>('admin/rooms/' + id, room)
   }
   deleteRoom(id: string): Observable<IApiResponse> {
     return this._http.delete<IApiResponse>('admin/rooms/' + id);
