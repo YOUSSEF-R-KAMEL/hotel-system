@@ -10,8 +10,6 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { SideNavbarComponent } from './components/side-navbar/side-navbar.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
-import { ChangePasswordComponent } from './components/change-password/change-password.component';
-import { ProfileComponent } from './components/profile/profile.component';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -23,4 +21,4 @@ import { ProfileComponent } from './components/profile/profile.component';
   ],
   imports: [CommonModule, DashboardRoutingModule, SharedModule, NgChartsModule],
 })
-export class DashboardModule { }
+export class DashboardModule {}
