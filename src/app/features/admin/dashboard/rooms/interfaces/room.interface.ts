@@ -1,14 +1,22 @@
+interface ICreatedBy {
+  _id: string;
+  userName: string;
+}
+
+interface IFacility {
+  _id: string;
+  name: string;
+}
+
 export interface IRoom {
   _id: string;
-  capacity: string;
+  capacity: number;
   createdAt: string;
-  createdBy: string
-  discount: string;
-  facilities: object[];
+  createdBy: ICreatedBy;
+  discount: number;
+  facilities: IFacility[];
   images: string[];
-  price: string;
+  price: number;
   roomNumber: string;
   updatedAt: string;
 }
-
-
