@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IUserResponse } from '../../../shared/interfaces/IUserResponse';
 import { HelperService } from '../../../shared/services/helper/helper.service';
+import { AuthService } from '../../auth/services/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,16 +12,15 @@ export class DashboardComponent implements OnInit {
   isExpand: boolean = false;
   profileImage: string = '';
   imageUrl: string = 'https://upskilling-egypt.com:3000/';
-  constructor(private _HelperService: HelperService) {}
+  constructor(private authService: AuthService) {}
   toggleSidebar(): void {
     this.isExpand = !this.isExpand;
   }
 
   ngOnInit(): void {
     const id = localStorage.getItem('userId');
-    
     if (id !== null) {
-      this._HelperService.onGetUser(id).subscribe({
+      this.authService.getAdmin(id).subscribe({
         next: (res: IUserResponse) => {
           if (res) {
             this.profileImage = res.data.user.profileImage;
