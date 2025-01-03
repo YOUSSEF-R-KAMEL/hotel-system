@@ -1,11 +1,11 @@
 <section>
   <div class="container">
     <div class="row h-100">
-      <form class="room-form" [formGroup]="newRoomForm" (ngSubmit)="addRoom()">
+      <form class="room-form" [formGroup]="roomForm" (ngSubmit)="saveRoom()">
         <div>
           <mat-form-field class="normal-input w-100">
             <input matInput placeholder="Room number" formControlName="roomNumber" type="text">
-            <mat-error *ngIf="newRoomForm.get('roomNumber')?.errors?.['required']">
+            <mat-error *ngIf="roomForm.get('roomNumber')?.errors?.['required']">
               Room Number is required
             </mat-error>
           </mat-form-field>
@@ -14,10 +14,10 @@
             <div class="col-md-6">
               <mat-form-field class="normal-input w-100">
                 <input matInput placeholder="Price" formControlName="price" type="number">
-                <mat-error *ngIf="newRoomForm.get('price')?.errors?.['required']">
+                <mat-error *ngIf="roomForm.get('price')?.errors?.['required']">
                   Price is required
                 </mat-error>
-                <mat-error *ngIf="newRoomForm.get('price')?.errors?.['pattern']">
+                <mat-error *ngIf="roomForm.get('price')?.errors?.['pattern']">
                   Price must be a number
                 </mat-error>
               </mat-form-field>
@@ -25,10 +25,10 @@
             <div class="col-md-6">
               <mat-form-field class="normal-input w-100">
                 <input matInput placeholder="Capacity" formControlName="capacity" type="number">
-                <mat-error *ngIf="newRoomForm.get('capacity')?.errors?.['required']">
+                <mat-error *ngIf="roomForm.get('capacity')?.errors?.['required']">
                   Capacity is required
                 </mat-error>
-                <mat-error *ngIf="newRoomForm.get('capacity')?.errors?.['pattern']">
+                <mat-error *ngIf="roomForm.get('capacity')?.errors?.['pattern']">
                   Capacity must be a number
                 </mat-error>
               </mat-form-field>
@@ -39,10 +39,10 @@
             <div class="col-md-6">
               <mat-form-field class="normal-input w-100">
                 <input matInput placeholder="Discount" formControlName="discount" type="number">
-                <mat-error *ngIf="newRoomForm.get('discount')?.errors?.['required']">
+                <mat-error *ngIf="roomForm.get('discount')?.errors?.['required']">
                   Discount is required
                 </mat-error>
-                <mat-error *ngIf="newRoomForm.get('discount')?.errors?.['pattern']">
+                <mat-error *ngIf="roomForm.get('discount')?.errors?.['pattern']">
                   Discount must be a number
                 </mat-error>
               </mat-form-field>
@@ -54,7 +54,7 @@
                   <mat-option [value]="facility._id">{{ facility.name }}</mat-option>
                   }
                 </mat-select>
-                <mat-error *ngIf="newRoomForm.get('facilities')?.errors?.['required']">
+                <mat-error *ngIf="roomForm.get('facilities')?.errors?.['required']">
                   Facilities are required
                 </mat-error>
               </mat-form-field>
@@ -62,12 +62,14 @@
           </div>
           <div class="row">
             <div class="col-md-12">
-              <ngx-dropzone (change)="onSelect($event)">
+              <ngx-dropzone (change)="onSelect($event)" [disabled]="isViewMode">
                 <ngx-dropzone-label>
                   <mat-icon>upload</mat-icon>
                   <p>Drag & Drop or <span>Choose a Room Images</span> to Upload</p>
                 </ngx-dropzone-label>
-                <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f" (removed)="onRemove($event)" [removable]="true">
+                <ngx-dropzone-image-preview *ngFor="let preview of imagePreviews" [file]="preview.file"
+                  [removable]="!isViewMode" (removed)="onRemove(preview)">
+                  <img *ngIf="preview.url" [src]="preview.url" alt="Room Image" />
                 </ngx-dropzone-image-preview>
               </ngx-dropzone>
             </div>
@@ -77,13 +79,13 @@
         <div>
           <div class="d-flex justify-content-end gap-3">
             <div>
-              <button routerLink="../" type="button" mat-stroked-button color="primary">
+              <button *ngIf="!isViewMode" routerLink="../../" type="button" mat-stroked-button color="primary">
                 Cancel
               </button>
             </div>
             <div>
-              <button type="submit" mat-raised-button color="primary" [disabled]="newRoomForm.invalid">
-                Save
+              <button type="submit" mat-raised-button color="primary" [disabled]="roomForm.invalid">
+                {{ isViewMode ? 'close' : 'Save' }}
               </button>
             </div>
           </div>

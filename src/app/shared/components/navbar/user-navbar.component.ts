@@ -7,11 +7,11 @@ import { Component } from '@angular/core';
 })
 export class UserNavbarComponent {
   isLoggedIn = true;
-  constructor() {}
+  constructor() { }
   navLinks = [
-    {text: 'Home', path: '', isActive: true, isLink: true},
-    {text: 'Explore', path: 'explore', isActive: true, isLink: true},
-    {text: 'Reviews', path: 'reviews', isActive: true, isLink: true},
-    {text: 'Favorites', path: 'favs', isActive: true, isLink: true},
+    { text: 'Home', path: '', isActive: true },
+    { text: 'Explore', path: 'explore', isActive: true },
+    { text: 'Reviews', path: 'reviews', isActive: true },
+    { text: 'Favorites', path: 'favs', isActive: true },
   ]
 }
