@@ -26,6 +26,10 @@ import { RouterModule } from '@angular/router';
 import { DeleteItemComponent } from './components/delete-item/delete-item.component';
 import { TableComponent } from './components/table/table.component';
 import { NgxDropzoneModule } from 'ngx-dropzone';
+import { FooterComponent } from './components/footer/footer.component';
+
+@NgModule({
+  declarations: [TableComponent, DeleteItemComponent, FooterComponent],
 import { UserNavbarComponent } from './components/navbar/user-navbar.component';
 
 @NgModule({
@@ -83,6 +87,7 @@ import { UserNavbarComponent } from './components/navbar/user-navbar.component';
     MatDialogContent,
     MatDialogTitle,
     NgxDropzoneModule,
+    FooterComponent
     UserNavbarComponent
   ],
 })
