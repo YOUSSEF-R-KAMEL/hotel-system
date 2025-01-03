@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { adminGuard } from './core/guards/admin/admin.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'auth', pathMatch: 'full' },
+  { path: '', redirectTo: 'user', pathMatch: 'full' },
   {
     path: 'auth',
     loadChildren: () =>
@@ -16,6 +16,11 @@ const routes: Routes = [
       import('./features/admin/admin.module').then((m) => m.AdminModule),
   },
   { path: 'user', loadChildren: () => import('./features/user/user.module').then(m => m.UserModule) },
+  {
+    path: 'user',
+    loadChildren: () =>
+      import('./features/user/user.module').then((m) => m.UserModule),
+  },
 ];
 
 @NgModule({

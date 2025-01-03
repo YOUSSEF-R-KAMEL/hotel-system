@@ -35,15 +35,15 @@ export class RegisterComponent {
   constructor(){}
   register(){
     this.isLoading = true
-    const myData = new FormData()
+    const regData = new FormData()
     Object.keys(this.registerForm.controls).forEach((key) => {
       const value = this.registerForm.get(key)?.value
       if(value){
-        myData.append(key, value)
+        regData.append(key, value)
       }
     });
-    myData.append('profileImage', this.imgSrc)
-    this._authService.onRegister(myData).subscribe({
+    regData.append('profileImage', this.imgSrc)
+    this._authService.onRegister(regData).subscribe({
       next: (res:any) => {
         this.isLoading = false
         this.resMsg = res.message
