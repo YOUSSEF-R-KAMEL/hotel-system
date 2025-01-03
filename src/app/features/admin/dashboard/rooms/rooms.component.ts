@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { DeleteItemComponent } from '../../../../shared/components/delete-item/delete-item.component';
 import { IApiResponse } from '../../../../shared/interface/api-data-response/api-response.interface';
 import { IRoom } from '../../../../shared/interface/room /room.interface';
@@ -19,12 +20,12 @@ import { RoomsService } from './services/rooms.service';
 })
 export class RoomsComponent implements OnInit {
   roomsData: ITableInput;
-  apiResponse = '';
   page = 1;
   size = 10;
   roomsColumns: string[] = [];
   actions: ITableAction[] = [];
   constructor(
+    private toast: ToastrService,
     private dialog: MatDialog,
     private _roomsService: RoomsService,
     private router: Router,
@@ -121,11 +122,13 @@ export class RoomsComponent implements OnInit {
       next: (result) => {
         if (result) {
           this._roomsService.deleteRoom(room._id).subscribe({
-            next: (res: IApiResponse) => {
-              this.apiResponse = res.message;
-            },
+            next: (res: IApiResponse) => {},
             error: (err) => {
-              console.log(err);
+              this.toast.error(err.error.message);
+            },
+            complete: () => {
+              this.toast.success('Room deleted successfully!');
+              this.getRooms();
             },
           });
         }
