@@ -1,17 +1,16 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { IRoomParams } from '../interfaces/room-params.interface';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IGetRooms } from '../interfaces/get-rooms-interface';
-import { IRoom } from '../interfaces/room.interface';
 import { IGetFacilities } from '../interfaces/get-facilities-interface';
-import { INewRoom } from '../interfaces/new-room-interface';
+import { IGetRooms } from '../interfaces/get-rooms-interface';
+import { IRoomParams } from '../interfaces/room-params.interface';
+import { IApiResponse } from '../../../../../shared/interface/api-data-response/api-response.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RoomsService {
-  constructor(private _http:HttpClient) {}
+  constructor(private _http: HttpClient) { }
   getRooms(params: IRoomParams): Observable<IGetRooms> {
     return this._http.get<IGetRooms>('admin/rooms', {
       params: {
@@ -20,19 +19,19 @@ export class RoomsService {
       }
     });
   }
-  addNewRoom(data:any){
-    return this._http.post('admin/rooms', data)
+  addRoom(room: FormData): Observable<IApiResponse> {
+    return this._http.post<IApiResponse>('admin/rooms', room)
   }
-  getFacilities(){
-    return this._http.get<IGetFacilities>('admin/room-facilities')
+  updateRoom(id: string, room: FormData): Observable<IApiResponse> {
+    return this._http.put<IApiResponse>('admin/rooms' + id, room)
   }
-  getRoomByID(id:string){
-    return this._http.get('admin/rooms/' + id)
+  deleteRoom(id: string): Observable<IApiResponse> {
+    return this._http.delete<IApiResponse>('admin/rooms' + id);
   }
-  updateByID(id:string, data:any){
-    return this._http.post<IRoom>('admin/rooms/' + id, data)
+  getFacilities(): Observable<IApiResponse> {
+    return this._http.get<IApiResponse>('admin/room-facilities')
   }
-  deleteRoom(id:string){
-    return this._http.delete<IRoom>('admin/rooms/' + id)
+  getRoom(id: string): Observable<IApiResponse> {
+    return this._http.get<IApiResponse>('admin/rooms/' + id)
   }
 }

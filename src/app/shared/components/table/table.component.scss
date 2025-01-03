@@ -1,3 +1,4 @@
+@import '../../../../assets/sass/abstracts/variables';
 .mat-table {
   border-radius: 4px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -11,4 +12,9 @@
 }
 .mat-mdc-row:nth-child(even) {
   background-color: #f5f5f5;
+}
+
+.chip {
+  background-color: $light-blue !important;
+  color: white !important;
 }

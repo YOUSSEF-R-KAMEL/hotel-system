@@ -25,6 +25,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 import { DeleteItemComponent } from './components/delete-item/delete-item.component';
 import { TableComponent } from './components/table/table.component';
+import { NgxDropzoneModule } from 'ngx-dropzone';
 
 @NgModule({
   declarations: [TableComponent, DeleteItemComponent],
@@ -54,6 +55,7 @@ import { TableComponent } from './components/table/table.component';
     MatDialogClose,
     MatDialogContent,
     MatDialogTitle,
+    NgxDropzoneModule
   ],
   exports: [
     RouterModule,
@@ -79,6 +81,7 @@ import { TableComponent } from './components/table/table.component';
     MatDialogClose,
     MatDialogContent,
     MatDialogTitle,
+    NgxDropzoneModule
   ],
 })
 export class SharedModule {}
