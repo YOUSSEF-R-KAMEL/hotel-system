@@ -1,10 +1,10 @@
 .upload {
-  transform: translateX(4%);
-  -webkit-transform: translateX(4%);
-  -moz-transform: translateX(4%);
-  -ms-transform: translateX(4%);
-  -o-transform: translateX(4%);
-  ngx-dropzone {
+  transform: translateX(50%);
+  -webkit-transform: translateX(50%);
+  -moz-transform: translateX(50%);
+  -ms-transform: translateX(50%);
+  -o-transform: translateX(50%);
+  ngx-dropzone{
     width: 180px;
     transform: translateX(50%);
     -webkit-transform: translateX(50%);
@@ -34,6 +34,7 @@ label {
 
 input {
   background-color: #F5F6F8;
+  margin-bottom: 20px;
   height: 45px;
   border-radius: 4px !important;
   -webkit-border-radius: 4px !important;
