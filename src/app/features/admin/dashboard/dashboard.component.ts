@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IUserResponse } from '../../../shared/interfaces/IUserResponse';
+import { IUserResponse } from '../../../shared/interface/user/IUserResponse';
 import { HelperService } from '../../../shared/services/helper/helper.service';
 import { AuthService } from '../../auth/services/auth.service';
 
@@ -19,6 +19,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     const id = localStorage.getItem('userId');
+
     if (id !== null) {
       this.authService.getAdmin(id).subscribe({
         next: (res: IUserResponse) => {

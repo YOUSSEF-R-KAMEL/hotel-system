@@ -1,16 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { ITableAction, ITableInput } from '../../../../shared/interface/table/table-input.interface';
+import { MatDialog } from '@angular/material/dialog';
+import {
+  ITableAction,
+  ITableInput,
+} from '../../../../shared/interface/table/table-input.interface';
+import { User } from '../../../../shared/interface/user/IUserResponse';
+import { ViewUserDialogComponent } from './components/view-user-dialog/view-user-dialog.component';
 import { IUserWithCount } from './interfaces/get-users-interface';
 import { UsersService } from './services/users.service';
-import { IUser } from './interfaces/user.interface';
-import { MatDialog } from '@angular/material/dialog';
-import { ViewUserDialogComponent } from './components/view-user-dialog/view-user-dialog.component';
-import { ITableColumn } from '../../../../shared/interface/table/table-columns.interface';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
-  styleUrl: './users.component.scss'
+  styleUrl: './users.component.scss',
 })
 export class UsersComponent implements OnInit {
   usersData: ITableInput;
@@ -25,16 +27,16 @@ export class UsersComponent implements OnInit {
         color: 'primary',
         label: 'View',
         icon: 'visibility',
-        callback: (row: IUser) => this.openViewDialog(row)
-      }
-    ]
+        callback: (row: User) => this.openViewDialog(row),
+      },
+    ];
     this.usersData = {
       data: {
         users: [],
-        totalCount: 0
+        totalCount: 0,
       },
-      actions: this.actions
-    }
+      actions: this.actions,
+    };
   }
   ngOnInit(): void {
     this.getUsers();
@@ -42,15 +44,15 @@ export class UsersComponent implements OnInit {
   getUsers() {
     let userParams = {
       page: this.page,
-      size: this.size
-    }
+      size: this.size,
+    };
     this.usersService.getUsers(userParams).subscribe({
       next: (res) => {
         this.passDataToTable(res.data);
       },
       error: (err) => {
         console.log(err);
-      }
+      },
     });
   }
 
@@ -58,18 +60,18 @@ export class UsersComponent implements OnInit {
     this.usersData = {
       data: {
         users: data.users,
-        totalCount: data.totalCount
+        totalCount: data.totalCount,
       },
-      actions: this.actions
-    }
+      actions: this.actions,
+    };
     this.userColumns = [
       'Username',
       'Email',
       'Phone number',
       'Country',
       'Role',
-      'Profile image'
-    ]
+      'Profile image',
+    ];
   }
 
   handlePageChange(event: { pageNumber: number; pageSize: number }) {
@@ -78,7 +80,7 @@ export class UsersComponent implements OnInit {
     this.getUsers();
   }
 
-  openViewDialog(row: IUser) {
+  openViewDialog(row: User) {
     this.dialog.open(ViewUserDialogComponent, {
       data: row,
     });

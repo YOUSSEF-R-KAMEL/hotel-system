@@ -1,20 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { IParams } from '../../../../../shared/interface/params/params.interface';
 import { IFacilitiesResponse } from '../interfaces/facitlities.interface';
-import { IParams } from '../../users/interfaces/user-params.interface';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FacilitiesService {
-
-  constructor(private _http: HttpClient) { }
+  constructor(private _http: HttpClient) {}
   getFacilities(params: IParams): Observable<IFacilitiesResponse> {
     return this._http.get<IFacilitiesResponse>('admin/room-facilities', {
       params: {
-        ...params
-      }
+        ...params,
+      },
     });
   }
 
