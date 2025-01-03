@@ -1,4 +1,4 @@
-import { IRoom } from "./room.interface";
+import { IRoom } from '../../../../../shared/interface/room.interface';
 
 export interface IGetRooms {
   success: boolean;

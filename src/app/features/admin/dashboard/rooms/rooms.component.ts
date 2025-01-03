@@ -1,20 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ITableAction, ITableInput } from '../../../../shared/interface/table/table-input.interface';
-import { IRoomWithCount } from './interfaces/get-rooms-interface';
-import { IRoom } from './interfaces/room.interface';
-import { RoomRoutes } from './routes/room-routes';
-import { RoomsService } from './services/rooms.service';
 import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DeleteItemComponent } from '../../../../shared/components/delete-item/delete-item.component';
 import { IApiResponse } from '../../../../shared/interface/api-data-response/api-response.interface';
+import { IRoom } from '../../../../shared/interface/room.interface';
+import {
+  ITableAction,
+  ITableInput,
+} from '../../../../shared/interface/table/table-input.interface';
+import { IRoomWithCount } from './interfaces/get-rooms-interface';
+import { RoomRoutes } from './routes/room-routes';
+import { RoomsService } from './services/rooms.service';
 
 @Component({
   selector: 'app-rooms',
   templateUrl: './rooms.component.html',
-  styleUrl: './rooms.component.scss'
+  styleUrl: './rooms.component.scss',
 })
-
 export class RoomsComponent implements OnInit {
   roomsData: ITableInput;
   apiResponse = '';
@@ -22,7 +24,12 @@ export class RoomsComponent implements OnInit {
   size = 10;
   roomsColumns: string[] = [];
   actions: ITableAction[] = [];
-  constructor(private dialog: MatDialog,private _roomsService: RoomsService, private router: Router, private route: ActivatedRoute) {
+  constructor(
+    private dialog: MatDialog,
+    private _roomsService: RoomsService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
     this.actions = [
       {
         type: 'icon',
@@ -30,8 +37,10 @@ export class RoomsComponent implements OnInit {
         label: 'View',
         icon: 'visibility',
         callback: (row: IRoom) => {
-          this.router.navigate([RoomRoutes.VIEW_ROOM, row._id], { relativeTo: this.route });
-        }
+          this.router.navigate([RoomRoutes.VIEW_ROOM, row._id], {
+            relativeTo: this.route,
+          });
+        },
       },
       {
         type: 'icon',
@@ -39,8 +48,10 @@ export class RoomsComponent implements OnInit {
         label: 'Edit',
         icon: 'edit_square',
         callback: (row) => {
-          this.router.navigate([RoomRoutes.EDIT_ROOM, row._id], { relativeTo: this.route });
-        }
+          this.router.navigate([RoomRoutes.EDIT_ROOM, row._id], {
+            relativeTo: this.route,
+          });
+        },
       },
       {
         type: 'icon',
@@ -48,17 +59,17 @@ export class RoomsComponent implements OnInit {
         label: 'Delete',
         icon: 'delete',
         callback: (room: IRoom) => {
-          this.openDeleteDialog(room)
-        }
+          this.openDeleteDialog(room);
+        },
       },
-    ]
+    ];
     this.roomsData = {
       data: {
         rooms: [],
-        totalCount: 0
+        totalCount: 0,
       },
-      actions: this.actions
-    }
+      actions: this.actions,
+    };
   }
   ngOnInit(): void {
     this.getRooms();
@@ -66,15 +77,15 @@ export class RoomsComponent implements OnInit {
   getRooms() {
     let roomParams = {
       page: this.page,
-      size: this.size
-    }
+      size: this.size,
+    };
     this._roomsService.getRooms(roomParams).subscribe({
       next: (res) => {
         this.passDataToTable(res.data);
       },
       error: (err) => {
         console.log(err);
-      }
+      },
     });
   }
   passDataToTable(data: IRoomWithCount) {
@@ -82,10 +93,10 @@ export class RoomsComponent implements OnInit {
     this.roomsData = {
       data: {
         rooms: data.rooms,
-        totalCount: data.totalCount
+        totalCount: data.totalCount,
       },
-      actions: this.actions
-    }
+      actions: this.actions,
+    };
     this.roomsColumns = [
       'Room',
       'Price',
@@ -93,8 +104,8 @@ export class RoomsComponent implements OnInit {
       'Discount',
       'Facilities',
       'Created by',
-      'Room images'
-    ]
+      'Room images',
+    ];
   }
 
   handlePageChange(event: { pageNumber: number; pageSize: number }) {
@@ -104,7 +115,7 @@ export class RoomsComponent implements OnInit {
   }
   openDeleteDialog(room: IRoom) {
     const dialogRef = this.dialog.open(DeleteItemComponent, {
-      data: {text: 'room'},
+      data: { text: 'room' },
     });
     dialogRef.afterClosed().subscribe({
       next: (result) => {
@@ -115,14 +126,14 @@ export class RoomsComponent implements OnInit {
             },
             error: (err) => {
               console.log(err);
-            }
+            },
           });
         }
-      }
+      },
     });
   }
 
   get RoomRoutes() {
-    return RoomRoutes
+    return RoomRoutes;
   }
 }

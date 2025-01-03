@@ -1,52 +1,51 @@
-import { AfterViewInit, Component, Inject } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { RoomsService } from '../../services/rooms.service';
-import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IRoom } from '../../interfaces/room.interface';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
+import { IRoom } from '../../../../../../shared/interface/room.interface';
+import { RoomsService } from '../../services/rooms.service';
 
 @Component({
   selector: 'app-update-room',
   templateUrl: './update-room.component.html',
-  styleUrl: './update-room.component.scss'
+  styleUrl: './update-room.component.scss',
 })
 export class UpdateRoomComponent implements AfterViewInit {
-  resMsg:any = ''
-  currentRoomId:string = ''
-  currentRoom!:IRoom
+  resMsg: any = '';
+  currentRoomId: string = '';
+  currentRoom!: IRoom;
   files: File[] = [];
-  imgSrc:any;
-  facilitiesArr:string[] = []
+  imgSrc: any;
+  facilitiesArr: string[] = [];
   selectedAmenities: string[] = [];
   dropdownOpen: boolean = false;
   updateRoomForm!: FormGroup;
   constructor(
-      private _roomsService: RoomsService,
-      private _ToastrService: ToastrService,
-      private _router:Router,
-      private _route: ActivatedRoute
-  ){
-    this.getCurrentRoomData()
+    private _roomsService: RoomsService,
+    private _ToastrService: ToastrService,
+    private _router: Router,
+    private _route: ActivatedRoute
+  ) {
+    this.getCurrentRoomData();
   }
   ngAfterViewInit(): void {
-    this.getFacilities()
-    this.getCurrentRoomData()
+    this.getFacilities();
+    this.getCurrentRoomData();
   }
   updateRoom() {
     if (this.updateRoomForm.valid) {
-      const myData = new FormData()
+      const myData = new FormData();
       Object.keys(this.updateRoomForm.controls).forEach((key) => {
-        const value = this.updateRoomForm.get(key)?.value
-        if(value){
-          myData.append(key, value)
+        const value = this.updateRoomForm.get(key)?.value;
+        if (value) {
+          myData.append(key, value);
         }
       });
-      myData.append('imgs', this.imgSrc)
-      myData.append('facilities', JSON.stringify(this.selectedAmenities))
-      this._roomsService.updateByID( this.currentRoomId!, myData).subscribe({
+      myData.append('imgs', this.imgSrc);
+      myData.append('facilities', JSON.stringify(this.selectedAmenities));
+      this._roomsService.updateByID(this.currentRoomId!, myData).subscribe({
         next: (res) => {
-          this.resMsg = res
+          this.resMsg = res;
         },
         error: (err) => {
           this._ToastrService.error(err.message, 'Error');
@@ -57,12 +56,12 @@ export class UpdateRoomComponent implements AfterViewInit {
       });
     }
   }
-  getFacilities(){
+  getFacilities() {
     this._roomsService.getFacilities().subscribe({
       next: (res) => {
-        res.data.facilities.forEach(fa =>{
-          this.facilitiesArr.push(fa.name)
-        })
+        res.data.facilities.forEach((fa) => {
+          this.facilitiesArr.push(fa.name);
+        });
       },
       error: (err) => {
         this._ToastrService.error(err.message, 'Error');
@@ -70,17 +69,17 @@ export class UpdateRoomComponent implements AfterViewInit {
       complete: () => {
         // console.log(this.facilitiesArr)
       },
-    })
+    });
   }
-  onSelect(event:any) {
+  onSelect(event: any) {
     this.files.push(...event.addedFiles);
-    this.imgSrc = this.files[0]
+    this.imgSrc = this.files[0];
   }
-  onRemove(event:any) {
+  onRemove(event: any) {
     this.files.splice(this.files.indexOf(event), 1);
   }
-  cancelAction(){
-    this._router.navigate(['/admin/dashboard/rooms'])
+  cancelAction() {
+    this._router.navigate(['/admin/dashboard/rooms']);
   }
   toggleDropdown() {
     this.dropdownOpen = !this.dropdownOpen;
@@ -93,21 +92,33 @@ export class UpdateRoomComponent implements AfterViewInit {
         this.selectedAmenities.push(value);
       }
     } else {
-      this.selectedAmenities = this.selectedAmenities.filter(item => item !== value);
+      this.selectedAmenities = this.selectedAmenities.filter(
+        (item) => item !== value
+      );
     }
-    console.log(this.selectedAmenities)
+    console.log(this.selectedAmenities);
   }
-  getCurrentRoomData(){
-    this.currentRoomId = this._route.snapshot.paramMap.get('id')!;  // Get route param
-    this._roomsService.getRoomByID(this.currentRoomId).subscribe((res:any) =>{
+  getCurrentRoomData() {
+    this.currentRoomId = this._route.snapshot.paramMap.get('id')!; // Get route param
+    this._roomsService.getRoomByID(this.currentRoomId).subscribe((res: any) => {
       this.updateRoomForm = new FormGroup({
-        roomNumber: new FormControl(res.data.room.roomNumber, [Validators.required, Validators.pattern(/^[0-9]+[-][0-9]+$/)]),
-        price: new FormControl(res.price, [Validators.required, Validators.pattern(/^[0-9]{0,9}$/)]),
-        capacity: new FormControl(res.capacity, [Validators.required, Validators.pattern(/^[0-9]{0,9}$/)]),
-        discount: new FormControl(res.discount, [Validators.required, Validators.pattern(/^[0-9]{0,9}$/)]),
-      })
-    })
+        roomNumber: new FormControl(res.data.room.roomNumber, [
+          Validators.required,
+          Validators.pattern(/^[0-9]+[-][0-9]+$/),
+        ]),
+        price: new FormControl(res.price, [
+          Validators.required,
+          Validators.pattern(/^[0-9]{0,9}$/),
+        ]),
+        capacity: new FormControl(res.capacity, [
+          Validators.required,
+          Validators.pattern(/^[0-9]{0,9}$/),
+        ]),
+        discount: new FormControl(res.discount, [
+          Validators.required,
+          Validators.pattern(/^[0-9]{0,9}$/),
+        ]),
+      });
+    });
   }
-
 }
-
