@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { IData } from '../../../../shared/interface/api-data-response/api-response.interface';
 import {
   ITableAction,
   ITableInput,
 } from '../../../../shared/interface/table/table-input.interface';
-import { User } from '../../../../shared/interface/user/IUserResponse';
+import { IUser } from '../../../../shared/interface/user/IUserResponse';
 import { ViewUserDialogComponent } from './components/view-user-dialog/view-user-dialog.component';
-import { IUserWithCount } from './interfaces/get-users-interface';
 import { UsersService } from './services/users.service';
 
 @Component({
@@ -27,7 +27,7 @@ export class UsersComponent implements OnInit {
         color: 'primary',
         label: 'View',
         icon: 'visibility',
-        callback: (row: User) => this.openViewDialog(row),
+        callback: (row: IUser) => this.openViewDialog(row),
       },
     ];
     this.usersData = {
@@ -56,7 +56,7 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  passDataToTable(data: IUserWithCount) {
+  passDataToTable(data: IData) {
     this.usersData = {
       data: {
         users: data.users,
@@ -80,7 +80,7 @@ export class UsersComponent implements OnInit {
     this.getUsers();
   }
 
-  openViewDialog(row: User) {
+  openViewDialog(row: IUser) {
     this.dialog.open(ViewUserDialogComponent, {
       data: row,
     });

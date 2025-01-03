@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { IUserResponse } from '../../../shared/interface/user/IUserResponse';
 import { AuthService } from '../../auth/services/auth.service';
+import { IApiResponse } from '../../../shared/interface/api-data-response/api-response.interface';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,7 +9,7 @@ import { AuthService } from '../../auth/services/auth.service';
 })
 export class DashboardComponent implements OnInit {
   isExpand: boolean = false;
-  profileImage: string = '';
+  profileImage: string  = '';
   imageUrl: string = 'https://upskilling-egypt.com:3000/';
   constructor(private authService: AuthService) {}
   toggleSidebar(): void {
@@ -21,9 +21,9 @@ export class DashboardComponent implements OnInit {
 
     if (id !== null) {
       this.authService.getAdmin(id).subscribe({
-        next: (res: IUserResponse) => {
+        next: (res: IApiResponse) => {
           if (res) {
-            this.profileImage = res.data.user.profileImage;
+            this.profileImage = res.data.user!.profileImage;
           }
         },
         error: (err: any) => {

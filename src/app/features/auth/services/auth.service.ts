@@ -3,13 +3,14 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, shareReplay, tap } from 'rxjs';
 import { ILogin, LoginResponse } from '../interfaces/ILogin';
-import { IUserResponse } from '../../../shared/interface/IUserResponse';
+import { User } from '../../../shared/interface/user.interface';
+import { IApiResponse } from '../../../shared/interface/api-data-response/api-response.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private userSubject = new BehaviorSubject<IUserResponse | null>(null);
+  private userSubject = new BehaviorSubject<User | undefined | null>(null);
   user$ = this.userSubject.asObservable();
   role: string | null = '';
   constructor(private http: HttpClient, private _Router: Router) {
@@ -45,14 +46,14 @@ export class AuthService {
     this.userSubject.next(null);
   }
 
-  getAdmin(id: string): Observable<IUserResponse> {
-    return this.http.get<IUserResponse>('admin/users/' + id);
+  getAdmin(id: string): Observable<IApiResponse> {
+    return this.http.get<IApiResponse>('admin/users/' + id);
   }
 
-  getUser(id: string): Observable<IUserResponse> {
-    return this.http.get<IUserResponse>('portal/users/' + id).pipe(
+  getUser(id: string): Observable<IApiResponse> {
+    return this.http.get<IApiResponse>('portal/users/' + id).pipe(
       tap((res) => {
-        this.userSubject.next(res);
+        this.userSubject.next(res.data.user);
       }),
       shareReplay(1)
     );}

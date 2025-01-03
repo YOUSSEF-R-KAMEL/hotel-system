@@ -1,7 +1,7 @@
-import { authRoutes } from './../../../features/auth/routes/enum';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../features/auth/services/auth.service';
-import { User } from '../../interface/IUserResponse';
+import { User } from '../../interface/user.interface';
+import { authRoutes } from './../../../features/auth/routes/enum';
 
 @Component({
   selector: 'app-user-navbar',
@@ -11,7 +11,7 @@ import { User } from '../../interface/IUserResponse';
 export class UserNavbarComponent implements OnInit {
   isLoggedIn = false;
   authRoutes = authRoutes;
-  user: User | null = null;
+  user: User | null | undefined = null;
   navLinks = [
     { text: 'Home', path: '', isActive: true },
     { text: 'Explore', path: 'explore', isActive: true },
