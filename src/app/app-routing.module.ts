@@ -6,7 +6,6 @@ const routes: Routes = [
   { path: '', redirectTo: 'user', pathMatch: 'full' },
   {
     path: 'auth',
-    // canActivate: [loggedInAdminGuard],
     loadChildren: () =>
       import('./features/auth/auth.module').then((m) => m.AuthModule),
   },
@@ -16,6 +15,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('./features/admin/admin.module').then((m) => m.AdminModule),
   },
+  { path: 'user', loadChildren: () => import('./features/user/user.module').then(m => m.UserModule) },
   {
     path: 'user',
     loadChildren: () =>
