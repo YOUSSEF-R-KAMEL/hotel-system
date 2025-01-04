@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AdsService } from './services/ads.service';
 import { IAds } from './interfaces/ads.interface';
-import { shareReplay } from 'rxjs';
 
 @Component({
   selector: 'app-ads-list',
