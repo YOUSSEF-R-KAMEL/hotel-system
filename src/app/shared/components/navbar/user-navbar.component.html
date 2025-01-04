@@ -14,7 +14,7 @@
           }
           }
         </ul>
-        @if (!isLoggedIn) {
+        @if (!isLogged()) {
         <div class="d-flex gap-3">
           <button [routerLink]="authRoutes.register" mat-raised-button color="primary">Register</button>
           <button [routerLink]="authRoutes.login" mat-raised-button color="primary">Login now</button>
@@ -50,3 +50,4 @@
     </div>
   </div>
 </header>
+<hr>

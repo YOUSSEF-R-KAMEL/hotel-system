@@ -3,14 +3,14 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { IApiResponse } from '../../../../../../shared/interface/api-data-response/api-response.interface';
+import { IRoom } from '../../../../../../shared/interface/room /room.interface';
 import { IFacility } from '../../interfaces/facilities.interface';
 import { RoomsService } from '../../services/rooms.service';
-import { IRoom } from '../../interfaces/room.interface';
 
 @Component({
   selector: 'app-add-new-room',
   templateUrl: './add-new-room.component.html',
-  styleUrl: './add-new-room.component.scss'
+  styleUrl: './add-new-room.component.scss',
 })
 export class AddViewEditRoomComponent implements OnInit {
   isViewMode = true;
@@ -18,12 +18,21 @@ export class AddViewEditRoomComponent implements OnInit {
   files: File[] = [];
   room: IRoom | null = null;
   facilities: IFacility[] = [];
-  imagePreviews: { url: string, file: File }[] = [];
+  imagePreviews: { url: string; file: File }[] = [];
   roomForm: FormGroup = new FormGroup({
     roomNumber: new FormControl(null, [Validators.required]),
-    price: new FormControl(null, [Validators.required, Validators.pattern(/^[0-9]{0,9}$/)]),
-    capacity: new FormControl(null, [Validators.required, Validators.pattern(/^[0-9]{0,9}$/)]),
-    discount: new FormControl(null, [Validators.required, Validators.pattern(/^[0-9]{0,9}$/)]),
+    price: new FormControl(null, [
+      Validators.required,
+      Validators.pattern(/^[0-9]{0,9}$/),
+    ]),
+    capacity: new FormControl(null, [
+      Validators.required,
+      Validators.pattern(/^[0-9]{0,9}$/),
+    ]),
+    discount: new FormControl(null, [
+      Validators.required,
+      Validators.pattern(/^[0-9]{0,9}$/),
+    ]),
     facilities: new FormControl(null, [Validators.required]),
   });
   dropdownOpen: boolean = false;
@@ -32,7 +41,7 @@ export class AddViewEditRoomComponent implements OnInit {
     private _roomsService: RoomsService,
     private _ToastrService: ToastrService,
     private router: Router,
-    private route: ActivatedRoute,
+    private route: ActivatedRoute
   ) {
     this.route.data.subscribe((data: any) => {
       const roomData = data.room.data.room;
@@ -42,7 +51,9 @@ export class AddViewEditRoomComponent implements OnInit {
         price: roomData.price,
         capacity: roomData.capacity,
         discount: roomData.discount,
-        facilities: roomData.facilities.map((facility: IFacility) => facility._id),
+        facilities: roomData.facilities.map(
+          (facility: IFacility) => facility._id
+        ),
       });
       this.initializeImages(roomData.images);
     });
@@ -62,8 +73,10 @@ export class AddViewEditRoomComponent implements OnInit {
 
   initializeImages(imageUrls: string[]) {
     imageUrls.forEach(async (url) => {
-      const blob = await fetch(url).then(res => res.blob());
-      const file = new File([blob], url.substring(url.lastIndexOf('/') + 1), { type: blob.type });
+      const blob = await fetch(url).then((res) => res.blob());
+      const file = new File([blob], url.substring(url.lastIndexOf('/') + 1), {
+        type: blob.type,
+      });
       this.imagePreviews.push({ url, file });
       this.files.push(file);
     });
@@ -74,12 +87,11 @@ export class AddViewEditRoomComponent implements OnInit {
     if (this.room) {
       if (this.isViewMode) {
         this.router.navigate(['../../'], { relativeTo: this.route });
-        return
+        return;
       } else {
         this.updateRoom(this.room._id, formData);
       }
-    }
-    else {
+    } else {
       this.addRoom(formData);
     }
   }
@@ -91,7 +103,7 @@ export class AddViewEditRoomComponent implements OnInit {
       complete: () => {
         this._ToastrService.success('Room added successfully!', 'Success');
         this.router.navigate(['../'], { relativeTo: this.route });
-      }
+      },
     });
   }
 
@@ -103,7 +115,7 @@ export class AddViewEditRoomComponent implements OnInit {
       complete: () => {
         this._ToastrService.success('Room updated successfully!', 'Success');
         this.router.navigate(['../'], { relativeTo: this.route });
-      }
+      },
     });
   }
 
@@ -135,7 +147,10 @@ export class AddViewEditRoomComponent implements OnInit {
     }
   }
 
-  buildFormData(formGroup: FormGroup, fileFields: { [key: string]: File[] }): FormData {
+  buildFormData(
+    formGroup: FormGroup,
+    fileFields: { [key: string]: File[] }
+  ): FormData {
     const formData = new FormData();
     Object.keys(formGroup.controls).forEach((key) => {
       const value = formGroup.get(key)?.value;
@@ -158,4 +173,3 @@ export class AddViewEditRoomComponent implements OnInit {
     return formData;
   }
 }
-
