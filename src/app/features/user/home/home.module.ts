@@ -9,9 +9,7 @@ import { SharedModule } from '../../../shared/shared.module';
 import { PopularRoomsComponent } from './components/popular-rooms/popular-rooms.component';
 
 @NgModule({
-  declarations: [HomeComponent, SharedRoomsComponent, SingleRoomComponent],
-  imports: [CommonModule, HomeRoutingModule, SharedModule],
   declarations: [HomeComponent, SharedRoomsComponent, SingleRoomComponent, PopularRoomsComponent],
-  imports: [CommonModule, HomeRoutingModule],
+  imports: [CommonModule, HomeRoutingModule, SharedModule],
 })
-export class HomeModule {}
+export class HomeModule { }
