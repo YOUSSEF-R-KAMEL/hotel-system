@@ -1,6 +1,54 @@
-<div class="row booking-section">
-  <div class="col-md-6"></div>
-  <div class="col-md-6"></div>
+<div class="container">
+  <div class="row booking-section">
+    <div class="col-md-6">
+      <div class="booking-container">
+        <div>
+          <h1>Forget Busy Work,
+            Start Next Vacation</h1>
+          <p>We provide what you need to enjoy your holiday with family. Time to make another memorable moments.</p>
+        </div>
+        <div>
+          <h5>Start booking</h5>
+          <form [formGroup]="roomFiltersForm">
+            <mat-form-field class="date-input">
+              <mat-label>Enter a date range</mat-label>
+              <mat-date-range-input [rangePicker]="picker">
+                <input matStartDate formControlName="startDate" placeholder="Start date">
+                <input matEndDate formControlName="endDate" placeholder="End date">
+              </mat-date-range-input>
+              <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+              <mat-datepicker-toggle matIconPrefix [for]="picker"></mat-datepicker-toggle>
+              <mat-date-range-picker #picker></mat-date-range-picker>
+              @if (roomFiltersForm.controls.startDate.hasError('matStartDateInvalid')) {
+              <mat-error>Invalid start date</mat-error>
+              }
+              @if (roomFiltersForm.controls.endDate.hasError('matEndDateInvalid')) {
+              <mat-error>Invalid end date</mat-error>
+              }
+            </mat-form-field>
+            <div class="capacity-input">
+              <button mat-icon-button class="decrement-button icon-button" (click)="decrementCapacity()">
+                <mat-icon>remove</mat-icon>
+              </button>
+              <mat-form-field class="normal-input w-75">
+                <!-- Bind the displayed value dynamically -->
+                <input matInput [value]="getCapacityDisplay()" readonly placeholder="Capacity">
+              </mat-form-field>
+              <button mat-icon-button class="increment-button" (click)="incrementCapacity()">
+                <mat-icon>add</mat-icon>
+              </button>
+            </div>
+            <button (click)="exploreWithFilters()" class="explore-btn" mat-raised-button color="primary">Explore</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+        <div class="img-container">
+          <img src="../../../../assets/images/svg/room-filter-image.svg" alt="Room filter image">
+      </div>
+    </div>
+  </div>
 </div>
 <div class="row popular-ads">
   <div class="col-md-3"></div>

@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AuthService } from '../../../../auth/services/auth.service';
+import { authRoutes } from '../../../../auth/routes/enum';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +13,7 @@ export class HeaderComponent implements OnInit {
   userId: string | null = null;
   @Input() profileImage: string = '';
 
-  constructor(private _AuthService: AuthService) {
+  constructor(private _AuthService: AuthService, private router: Router) {
     if (localStorage.getItem('userName')) {
       this.userName = localStorage.getItem('userName');
     }
@@ -21,5 +23,6 @@ export class HeaderComponent implements OnInit {
   }
   onLogout(): void {
     this._AuthService.onLogout();
+    this.router.navigate([authRoutes.login]);
   }
 }

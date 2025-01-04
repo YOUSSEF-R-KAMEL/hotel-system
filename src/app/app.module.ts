@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule,  provideClientHydration,} from '@angular/platform-browser';
+import { BrowserModule, provideClientHydration, } from '@angular/platform-browser';
 
 import { HttpClientModule, provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -11,6 +11,7 @@ import { globalInterceptor } from './core/interceptors/global/global.interceptor
 import { loadingInterceptor } from './core/interceptors/loading/loading.interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { RouterModule } from '@angular/router';
+import { provideNativeDateAdapter } from '@angular/material/core';
 
 @NgModule({
   declarations: [AppComponent],
@@ -31,7 +32,8 @@ import { RouterModule } from '@angular/router';
       withFetch(),
       withInterceptors([globalInterceptor, loadingInterceptor])
     ),
+    provideNativeDateAdapter()
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

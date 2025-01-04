@@ -28,6 +28,7 @@ import { DeleteItemComponent } from './components/delete-item/delete-item.compon
 import { FooterComponent } from './components/footer/footer.component';
 import { UserNavbarComponent } from './components/navbar/user-navbar.component';
 import { TableComponent } from './components/table/table.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { TableComponent } from './components/table/table.component';
     MatDialogContent,
     MatDialogTitle,
     NgxDropzoneModule,
+    MatDatepickerModule,
   ],
   exports: [
     RouterModule,
@@ -91,6 +93,7 @@ import { TableComponent } from './components/table/table.component';
     NgxDropzoneModule,
     FooterComponent,
     UserNavbarComponent,
+    MatDatepickerModule
   ],
 })
-export class SharedModule {}
+export class SharedModule { }

@@ -5,9 +5,10 @@ import { SingleRoomComponent } from '../components/single-room/single-room.compo
 import { SharedRoomsComponent } from './components/shared-rooms/shared-rooms.component';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
+import { SharedModule } from '../../../shared/shared.module';
 
 @NgModule({
   declarations: [HomeComponent, SharedRoomsComponent, SingleRoomComponent],
-  imports: [CommonModule, HomeRoutingModule],
+  imports: [CommonModule, HomeRoutingModule, SharedModule],
 })
 export class HomeModule {}
