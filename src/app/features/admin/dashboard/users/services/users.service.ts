@@ -1,9 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IUserResponse } from '../../../../../shared/interface/IUserResponse';
-import { IGetUsers } from '../interfaces/get-users-interface';
-import { IParams } from '../interfaces/user-params.interface';
+import { IParams } from '../../../../../shared/interface/params/params.interface';
+import { IApiResponse } from '../../../../../shared/interface/api-data-response/api-response.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -11,15 +10,15 @@ import { IParams } from '../interfaces/user-params.interface';
 export class UsersService {
   constructor(private _http: HttpClient) {}
 
-  getUsers(params: IParams): Observable<IGetUsers> {
-    return this._http.get<IGetUsers>('admin/users', {
+  getUsers(params: IParams): Observable<IApiResponse> {
+    return this._http.get<IApiResponse>('admin/users', {
       params: {
         page: params.page,
         size: params.size,
       },
     });
   }
-  getCurrentUser(id: string): Observable<IUserResponse> {
-    return this._http.get<IUserResponse>(`admin/users/${id}`);
+  getCurrentUser(id: string): Observable<IApiResponse> {
+    return this._http.get<IApiResponse>(`admin/users/${id}`);
   }
 }

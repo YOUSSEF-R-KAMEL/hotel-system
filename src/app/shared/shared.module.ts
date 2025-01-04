@@ -23,14 +23,20 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
-import { DeleteItemComponent } from './components/delete-item/delete-item.component';
-import { TableComponent } from './components/table/table.component';
 import { NgxDropzoneModule } from 'ngx-dropzone';
+import { DeleteItemComponent } from './components/delete-item/delete-item.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { UserNavbarComponent } from './components/navbar/user-navbar.component';
+import { TableComponent } from './components/table/table.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @NgModule({
-  declarations: [TableComponent, DeleteItemComponent, UserNavbarComponent, FooterComponent],
+  declarations: [
+    TableComponent,
+    DeleteItemComponent,
+    UserNavbarComponent,
+    FooterComponent,
+  ],
   imports: [
     CommonModule,
     RouterModule,
@@ -57,7 +63,8 @@ import { UserNavbarComponent } from './components/navbar/user-navbar.component';
     MatDialogClose,
     MatDialogContent,
     MatDialogTitle,
-    NgxDropzoneModule
+    NgxDropzoneModule,
+    MatDatepickerModule,
   ],
   exports: [
     RouterModule,
@@ -85,7 +92,8 @@ import { UserNavbarComponent } from './components/navbar/user-navbar.component';
     MatDialogTitle,
     NgxDropzoneModule,
     FooterComponent,
-    UserNavbarComponent
+    UserNavbarComponent,
+    MatDatepickerModule
   ],
 })
-export class SharedModule {}
+export class SharedModule { }

@@ -1,0 +1,67 @@
+.booking-section {
+  h1 {
+    color: #152C5B;
+  }
+  p {
+    color: #B0B0B0;
+  }
+  div h5 {
+    color: #152C5B;
+  }
+}
+
+.date-input {
+  width: 67%;
+}
+
+.capacity-input {
+  margin-top: 1.5rem;
+  display: flex;
+  width: 70%;
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    height: 40px;
+    color: white;
+    &.increment-button {
+      background-color: #1ABC9C;
+    }
+    &.decrement-button {
+      background-color: #E74C3C;
+    }
+  }
+}
+.explore-btn {
+  width: 40%;
+  margin-top: 1.5rem;
+}
+
+.img-container {
+  position: relative;
+  margin: 0 auto;
+  width: 75%;
+  height: 85%;
+  img {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    border: 2px solid #E5E5E5;
+    width: 90%;
+    height: 100%;
+    border-radius: 15px;
+    z-index: -1;
+  }
+}
+
+.booking-container {
+  margin: 5rem 0;
+}

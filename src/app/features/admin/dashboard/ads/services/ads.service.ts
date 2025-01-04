@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IParams } from '../../users/interfaces/user-params.interface';
+import { IParams } from '../../../../../shared/interface/params/params.interface';
 import { Ads, IAdsResponse } from '../interfaces/IAdsResponse';
 import { IUpdateAd } from '../interfaces/IUpdateAd';
 import { IUpdateResponse } from '../interfaces/IUpdateResponse.ts';
@@ -27,6 +27,6 @@ export class AdsService {
     return this._HttpClient.delete<IUpdateResponse>(`admin/ads/${data._id}`);
   }
   onCreateAds(data: Ads): Observable<Ads> {
-    return this._HttpClient.post<Ads>('admin/ads',data);
+    return this._HttpClient.post<Ads>('admin/ads', data);
   }
 }
