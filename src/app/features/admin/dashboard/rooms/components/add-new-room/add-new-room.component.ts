@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { IApiResponse } from '../../../../../../shared/interface/api-data-response/api-response.interface';
-import { IRoom } from '../../../../../../shared/interface/room /room.interface';
+import { IRoom } from '../../../../../../shared/interface/room/room.interface';
 import { IFacility } from '../../interfaces/facilities.interface';
 import { RoomsService } from '../../services/rooms.service';
 

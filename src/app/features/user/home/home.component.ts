@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { IRoom } from '../../../shared/interface/room/room.interface';
 import { RoomsService } from '../services/rooms.service';
-import { FormGroup, FormControl } from '@angular/forms';
-import { IRoom } from '../../../shared/interface/room /room.interface';
 
 @Component({
   selector: 'app-home',

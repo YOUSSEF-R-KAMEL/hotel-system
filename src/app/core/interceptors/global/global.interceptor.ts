@@ -1,6 +1,5 @@
-import { isPlatformBrowser } from '@angular/common';
 import { HttpInterceptorFn } from '@angular/common/http';
-import { inject, PLATFORM_ID } from '@angular/core';
+import { inject } from '@angular/core';
 import { HelperService } from '../../../shared/services/helpers/helper.service';
 
 export const globalInterceptor: HttpInterceptorFn = (req, next) => {
