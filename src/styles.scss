@@ -80,7 +80,7 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 $hover-color: mat.get-color-from-palette($Hotel-system-primary, 200);
-@import "assets/sass/main.scss";
+@import "./assets/sass/main.scss";
 :root {
   --mat-menu-container-shape: 1rem;
   --mat-menu-item-hover-state-layer-color: #{$hover-color};
