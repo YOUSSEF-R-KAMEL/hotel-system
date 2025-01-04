@@ -10,6 +10,6 @@ import { IParams } from '../../../shared/interface/params/params.interface';
 export class RoomsService {
   constructor(private _HttpClient: HttpClient) {}
   getAllRooms(params: IParams): Observable<IApiResponse> {
-    return this._HttpClient.get<IApiResponse>('portal/rooms/available',);
+    return this._HttpClient.get<IApiResponse>('portal/rooms/available', {params: {...params}});
   }
 }

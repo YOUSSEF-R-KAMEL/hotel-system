@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
@@ -27,10 +26,10 @@ export class LoginComponent {
       this._AuthService.onLogin(this.loginForm.value).subscribe({
         next: (res) => {
           this.resMsg = res.message;
-          localStorage.setItem('token', res.data.token);
-          localStorage.setItem('role', res.data.user.role);
-          localStorage.setItem('userId', res.data.user._id);
-          localStorage.setItem('userName', res.data.user.userName);
+          localStorage.setItem('token', res.data.token as string);
+          localStorage.setItem('role', res.data.user?.role as string);
+          localStorage.setItem('userId', res.data.user?._id as string);
+          localStorage.setItem('userName', res.data.user?.userName as string);
         },
         error: (err) => {
           this._ToastrService.error(err.message, 'Error');

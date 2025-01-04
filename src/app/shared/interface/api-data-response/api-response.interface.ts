@@ -19,4 +19,5 @@ export interface IData {
   room?: IRoom;
   ads?: Ads[];
   totalCount: number;
+  token?: string;
 }

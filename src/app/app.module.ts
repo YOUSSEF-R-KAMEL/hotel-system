@@ -1,18 +1,19 @@
-import { NgModule } from '@angular/core';
+import { importProvidersFrom, NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration, } from '@angular/platform-browser';
-
-import { HttpClientModule, provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
+import { HttpClient, HttpClientModule, provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { ToastrModule } from 'ngx-toastr';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { globalInterceptor } from './core/interceptors/global/global.interceptor';
-import { loadingInterceptor } from './core/interceptors/loading/loading.interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { RouterModule } from '@angular/router';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { provideNativeDateAdapter } from '@angular/material/core';
-
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { globalInterceptor } from './core/interceptors/global/global.interceptor';
+import { loadingInterceptor } from './core/interceptors/loading/loading.interceptor';
+const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (http: HttpClient) => new TranslateHttpLoader(http, '../assets/i18n/', '.json');
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -21,8 +22,8 @@ import { provideNativeDateAdapter } from '@angular/material/core';
     RouterModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    TranslateModule,
     NgxSpinnerModule,
-    ToastrModule.forRoot({ positionClass: 'toast-top-right' }),
     ToastrModule.forRoot(),
   ],
   providers: [
@@ -32,7 +33,16 @@ import { provideNativeDateAdapter } from '@angular/material/core';
       withFetch(),
       withInterceptors([globalInterceptor, loadingInterceptor])
     ),
-    provideNativeDateAdapter()
+    provideNativeDateAdapter(),
+    importProvidersFrom(
+      TranslateModule.forRoot({
+        loader: {
+          provide: TranslateLoader,
+          useFactory: httpLoaderFactory,
+          deps: [HttpClient],
+        },
+      })
+    ),
   ],
   bootstrap: [AppComponent],
 })
