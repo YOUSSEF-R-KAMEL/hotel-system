@@ -57,3 +57,16 @@
     }
   }
 }
+
+.popular-rooms {
+  margin: 2rem 0;
+  .image-container {
+    height: 100%;
+    img {
+      height: 100%;
+    }
+  }
+  .second {
+    row-gap: 1rem;
+  }
+}
