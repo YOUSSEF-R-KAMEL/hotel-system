@@ -10,7 +10,7 @@ import { Subscription, take } from 'rxjs';
   styleUrls: ['./user-navbar.component.scss']
 })
 export class UserNavbarComponent implements OnInit {
-  isLoggedIn = false;
+  role: string | null = null;
   authRoutes = authRoutes;
   user: User | null | undefined = null;
   navLinks = [
@@ -21,22 +21,19 @@ export class UserNavbarComponent implements OnInit {
   ];
 
   constructor(public authService: AuthService) {
-    this.authService.user$.pipe(take(1)).subscribe((user) => {
-      this.user = user;
-      this.isLoggedIn = user !== null;
-    })
+    this.role = this.authService.getRole();
+    if (this.role) {
+      this.authService.user$.pipe(take(1)).subscribe((user) => {
+        this.user = user;
+      })
+    }
   }
 
   ngOnInit(): void {
-    this.authService.user$.subscribe((user) => {
-      this.user = user;
-      this.isLoggedIn = user !== null;
-      this.updateNavLinks();
-    });
   }
 
   isLogged(): boolean {
-    return this.user !== null;
+    return this.role === 'user';
   }
 
   updateNavLinks(): void {
@@ -51,7 +48,6 @@ export class UserNavbarComponent implements OnInit {
   logout(): void {
     this.authService.onLogout();
     this.user = null;
-    this.isLoggedIn = false;
     this.updateNavLinks(); // Reset navLinks on logout
   }
 }

@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { DeleteItemComponent } from '../../../../shared/components/delete-item/delete-item.component';
 import { IApiResponse } from '../../../../shared/interface/api-data-response/api-response.interface';
-import { IRoom } from '../../../../shared/interface/room /room.interface';
+import { IRoom } from '../../../../shared/interface/room/room.interface';
 import {
   ITableAction,
   ITableInput,
