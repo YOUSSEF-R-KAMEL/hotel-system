@@ -1,6 +1,10 @@
 header {
-  height: 8vh;
+  height: 80px;
+}
 
+hr {
+  color: #E5E5E5;
+  margin-bottom: 45px;
 }
 
 ul {
@@ -15,7 +19,7 @@ a {
     color: #3252DF;
     font-weight: 500;
   }
-  &:active {
+  &.active {
     color: #3252DF;
     font-weight: 500;
   }
