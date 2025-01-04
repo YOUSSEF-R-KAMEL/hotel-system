@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../features/auth/services/auth.service';
 import { User } from '../../interface/user.interface';
 import { authRoutes } from './../../../features/auth/routes/enum';
+import { Subscription, take } from 'rxjs';
 
 @Component({
   selector: 'app-user-navbar',
@@ -15,23 +16,23 @@ export class UserNavbarComponent implements OnInit {
   navLinks = [
     { text: 'Home', path: '', isActive: true },
     { text: 'Explore', path: 'explore', isActive: true },
-    { text: 'Reviews', path: 'reviews', isActive: false }, // Default state
-    { text: 'Favorites', path: 'favs', isActive: false },  // Default state
+    { text: 'Reviews', path: 'reviews', isActive: false },
+    { text: 'Favorites', path: 'favs', isActive: false },
   ];
 
-  constructor(private authService: AuthService) {}
+  constructor(public authService: AuthService) {
+    this.authService.user$.pipe(take(1)).subscribe((user) => {
+      this.user = user;
+      this.isLoggedIn = user !== null;
+    })
+  }
 
   ngOnInit(): void {
-    const userId = localStorage.getItem('userId');
-    if (userId) {
-      this.authService.getUser(userId).subscribe({
-        next: (user) => {
-          this.user = user.data.user;
-          this.isLoggedIn = true;
-          this.updateNavLinks(); // Update navLinks based on login status
-        }
-      });
-    }
+    this.authService.user$.subscribe((user) => {
+      this.user = user;
+      this.isLoggedIn = user !== null;
+      this.updateNavLinks();
+    });
   }
 
   isLogged(): boolean {
