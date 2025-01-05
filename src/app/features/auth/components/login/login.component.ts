@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { IUser } from '../../../../shared/interface/user/IUserResponse';
 
 @Component({
   selector: 'app-login',
@@ -30,6 +31,7 @@ export class LoginComponent {
           localStorage.setItem('role', res.data.user?.role as string);
           localStorage.setItem('userId', res.data.user?._id as string);
           localStorage.setItem('userName', res.data.user?.userName as string);
+          this._AuthService.updateUser(res.data.user as IUser);
         },
         error: (err) => {
           this._ToastrService.error(err.message, 'Error');
