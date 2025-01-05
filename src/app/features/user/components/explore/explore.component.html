@@ -1,1 +1,5 @@
-<p>explore works!</p>
+<div class="grid-container">
+  @for(room of rooms;track room._id){
+  <app-single-room [room]="room" />
+  }
+</div>

@@ -2,8 +2,15 @@
   position: relative;
   overflow: hidden;
   border-radius: 1rem;
+  width: 100%;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   img {
     width: 100%;
+    height: 100%;
+    object-fit: cover;
     transition: transform 0.5s ease-in-out;
     box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15);
   }
@@ -23,37 +30,62 @@
     align-items: center;
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
-    .price {
-      color: white;
-      background-color: $pink-color;
-      padding: 2%;
-      margin: 0;
-      position: absolute;
-      top: 0;
-      right: 0;
-      border-radius: 0 0 0 1rem;
-    }
-    i {
-      color: white;
-      font-size: 2rem;
-      margin: 0 0.5rem;
-      cursor: pointer;
-      &:hover {
-        color: $pink-color;
-        opacity: 0.8;
-      }
-    }
     &:hover {
       opacity: 1;
     }
-    .details {
-      position: absolute;
-      bottom: 10%;
-      left: 5%;
-      color: white;
-      p {
-        margin: 0;
-      }
+  }
+  .price,
+  i,
+  .details {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+  }
+  &:hover .price,
+  &:hover i,
+  &:hover .details {
+    opacity: 1;
+  }
+  .price {
+    color: white;
+    background-color: $pink-color;
+    padding: 2%;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transition: opacity 0.5s ease-in-out;
+    border-radius: 0 0 0 1rem;
+  }
+  i {
+    color: white;
+    font-size: 2rem;
+    margin: 0 0.5rem;
+    cursor: pointer;
+    transition: opacity 0.3s ease-in-out;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    transform: translate(-50%, -50%);
+
+    &:hover {
+      color: $pink-color;
+      opacity: 0.8;
+    }
+  }
+  .fa-eye {
+    right: 30%;
+  }
+
+  .details {
+    position: absolute;
+    bottom: 10%;
+    left: 5%;
+    color: white;
+    transition: opacity 0.5s ease-in-out;
+    p {
+      margin: 0;
+      opacity: 1;
     }
   }
 }
@@ -68,5 +100,30 @@
   }
   .second {
     row-gap: 1rem;
+  }
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 20px;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns on medium screens */
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr; /* 1 column on small screens */
+  }
+}
+
+.grid-container {
+  .grid-item {
+    .image-container {
+      .overlay:hover {
+        // opacity: 0;
+      }
+    }
   }
 }
