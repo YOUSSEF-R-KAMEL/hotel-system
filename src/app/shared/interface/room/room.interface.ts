@@ -19,4 +19,5 @@ export interface IRoom {
   price: number;
   roomNumber: string;
   updatedAt: string;
+  isBooked?: boolean;
 }

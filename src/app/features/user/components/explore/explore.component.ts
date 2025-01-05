@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { IRoom } from '../../../../../shared/interface/room/room.interface';
-import { RoomsService } from '../../../services/rooms.service';
+import { IRoom } from '../../../../shared/interface/room/room.interface';
+import { RoomsService } from '../../services/rooms.service';
 
 @Component({
-  selector: 'app-shared-rooms',
-  templateUrl: './shared-rooms.component.html',
-  styleUrl: './shared-rooms.component.scss',
+  selector: 'app-explore',
+  templateUrl: './explore.component.html',
+  styleUrl: './explore.component.scss',
 })
-export class SharedRoomsComponent implements OnInit {
+export class ExploreComponent implements OnInit {
   rooms: IRoom[] = [];
   page: number = 1;
   size: number = 10;

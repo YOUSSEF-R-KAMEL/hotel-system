@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ExploreComponent } from './components/explore/explore.component';
 import { UserComponent } from './user.component';
 
 const routes: Routes = [
@@ -12,6 +13,7 @@ const routes: Routes = [
         loadChildren: () =>
           import('./home/home.module').then((m) => m.HomeModule),
       },
+      { path: 'explore', component: ExploreComponent },
       { path: '', redirectTo: 'home', pathMatch: 'full' },
     ],
   },

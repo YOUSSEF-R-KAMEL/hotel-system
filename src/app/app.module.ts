@@ -1,19 +1,30 @@
+import {
+  HttpClient,
+  HttpClientModule,
+  provideHttpClient,
+  withFetch,
+  withInterceptors,
+} from '@angular/common/http';
 import { importProvidersFrom, NgModule } from '@angular/core';
-import { BrowserModule, provideClientHydration, } from '@angular/platform-browser';
-import { HttpClient, HttpClientModule, provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
+import { provideNativeDateAdapter } from '@angular/material/core';
+import {
+  BrowserModule,
+  provideClientHydration,
+} from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ToastrModule } from 'ngx-toastr';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { NgxSpinnerModule } from 'ngx-spinner';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { RouterModule } from '@angular/router';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { provideNativeDateAdapter } from '@angular/material/core';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { ToastrModule } from 'ngx-toastr';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
 import { globalInterceptor } from './core/interceptors/global/global.interceptor';
 import { loadingInterceptor } from './core/interceptors/loading/loading.interceptor';
-const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (http: HttpClient) => new TranslateHttpLoader(http, '../assets/i18n/', '.json');
+const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (
+  http: HttpClient
+) => new TranslateHttpLoader(http, '../assets/i18n/', '.json');
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -46,4 +57,4 @@ const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (http: Http
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
