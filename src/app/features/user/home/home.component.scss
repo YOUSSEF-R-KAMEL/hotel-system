@@ -1,12 +1,13 @@
 .booking-section {
+  align-items: center;
   h1 {
-    color: #152C5B;
+    color: #152c5b;
   }
   p {
-    color: #B0B0B0;
+    color: #b0b0b0;
   }
   div h5 {
-    color: #152C5B;
+    color: #152c5b;
   }
 }
 
@@ -26,10 +27,10 @@
     height: 40px;
     color: white;
     &.increment-button {
-      background-color: #1ABC9C;
+      background-color: #1abc9c;
     }
     &.decrement-button {
-      background-color: #E74C3C;
+      background-color: #e74c3c;
     }
   }
 }
@@ -37,31 +38,29 @@
   width: 40%;
   margin-top: 1.5rem;
 }
-
 .img-container {
   position: relative;
-  margin: 0 auto;
-  width: 75%;
-  height: 85%;
+  width: 100%;
+  height: 100%;
+  display: flex; /* Ensure content aligns properly */
+  align-items: center;
+  justify-content: center;
   img {
     width: 100%;
     height: 100%;
-    display: block;
   }
-
   &::after {
-    content: '';
     position: absolute;
-    top: 10%;
-    left: 10%;
-    border: 2px solid #E5E5E5;
+    content: "";
+    top: 15%;
+    left: 15%;
     width: 90%;
-    height: 100%;
+    height: 90%;
+    border: 2px solid #e5e5e5;
     border-radius: 15px;
     z-index: -1;
   }
 }
 
-.booking-container {
-  margin: 5rem 0;
+.img-container::after {
 }
