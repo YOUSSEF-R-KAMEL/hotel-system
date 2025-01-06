@@ -8,6 +8,7 @@ import { SharedRoomsComponent } from './components/shared-rooms/shared-rooms.com
 import { TestimonialsComponent } from './components/testimonials/testimonials.component';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
+import { SingleRoomComponent } from '../components/single-room/single-room.component';
 
 @NgModule({
   declarations: [HomeComponent, SharedRoomsComponent, SingleRoomComponent, PopularRoomsComponent, TestimonialsComponent],

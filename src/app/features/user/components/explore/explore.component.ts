@@ -10,6 +10,8 @@ import { IRoom } from '../../../../shared/interface/room/room.interface';
 })
 export class ExploreComponent {
   rooms: IRoom[] = [];
+  page: number = 1;
+  size: number = 10;
   constructor(private route: ActivatedRoute) {
     this.route.data.subscribe((data: any) => {
       const rooms = data.filters.data.rooms;

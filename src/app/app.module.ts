@@ -24,7 +24,7 @@ import { globalInterceptor } from './core/interceptors/global/global.interceptor
 import { loadingInterceptor } from './core/interceptors/loading/loading.interceptor';
 const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (
   http: HttpClient
-) => new TranslateHttpLoader(http, '../assets/i18n/', '.json');
+) => new TranslateHttpLoader(http, './assets/i18n/', '.json');
 @NgModule({
   declarations: [AppComponent],
   imports: [
