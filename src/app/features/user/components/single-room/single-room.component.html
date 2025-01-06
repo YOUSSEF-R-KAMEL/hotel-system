@@ -1,10 +1,14 @@
 <div class="image-container">
-  <img src="assets/images/png/room_01.png" alt="Sample Image" />
-  <div class="overlay">
-    <p class="price"><strong>$200</strong> per night</p>
-    <i class="fas fa-heart"></i> <i class="fas fa-eye"></i>
-    <div class="details">
-      <p>Discount: <strong>10%</strong></p>
-    </div>
+  <img [src]="room.images[0]" [alt]="room.roomNumber" />
+  <div class="overlay"></div>
+
+  <p class="price">
+    <strong>${{ room.price }}</strong> per night
+  </p>
+  <i class="fas fa-heart"></i> <i class="fas fa-eye"></i>
+  <div class="details">
+    <p>
+      Discount: <strong>{{ room.discount }}%</strong>
+    </p>
   </div>
 </div>

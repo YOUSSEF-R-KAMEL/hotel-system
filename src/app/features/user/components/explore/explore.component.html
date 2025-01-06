@@ -1,0 +1,10 @@
+<div class="grid-container">
+  <div
+    *ngFor="
+      let room of rooms | paginate : { itemsPerPage: size, currentPage: page }
+    "
+  >
+    <app-single-room [room]="room"></app-single-room>
+  </div>
+</div>
+<pagination-controls (pageChange)="page = $event"></pagination-controls>

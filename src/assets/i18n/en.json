@@ -14,5 +14,42 @@
     "password": "Password must be at least 6 characters",
     "confirmPassword": "Passwords do not match"
   }
+  "Home": "Home",
+  "Explore": "Explore",
+  "booking": {
+    "heading": "Forget Busy Work, Start Next Vacation",
+    "desc": "We provide what you need to enjoy your holiday with family. Time to make another memorable moments.",
+    "start": "Start booking",
+    "inputLabel": "Enter a date range",
+    "inputPlaceholder": "Start Date - End Date",
+    "person": "Person",
+    "btn": "Explore"
+  },
+  "popular": "Most popular ads",
+  "beautyBackyard": "Houses with beauty backyard",
+  "largeLiving": "Hotels with large living room",
+  "Ads": "Ads",
+  "footer": {
+    "desc": "We kaboom your beauty holiday instantly and memorable.",
+    "col01": {
+      "heading": "For Beginners",
+      "link01": "New Account",
+      "link02": "Start Booking a Room",
+      "link03": "Use Payments"
+    },
+    "col02": {
+      "heading": "Explore Us",
+      "link01": "Our Careers",
+      "link02": "Privacy",
+      "link03": "Terms & Conditions"
+    },
+    "col03": {
+      "heading": "Connect Us",
+      "link01": "support@staycation.id",
+      "link02": "021 - 2208 - 1996",
+      "link03": "Staycation, Kemang, Jakarta"
+    },
+    "copyright": "Copyright 2019 • All rights reserved • Staycation"
+  }
 }
 

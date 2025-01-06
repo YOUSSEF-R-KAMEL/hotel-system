@@ -2,9 +2,17 @@
   padding: 90px 0;
   img {
     margin-right: 65px;
-  }
+    &::after {
+      content: "";
+      border: 2px solid #E5E5E5;
+      border-radius: 16px;
+      position: absolute;
+      left: 35px;
+      top: -35px;
+    }
+    }
   .text {
-    margin-top: 55px;
+    margin-top: 100px;
     h3, p {
       color: #152C5B;
     }
