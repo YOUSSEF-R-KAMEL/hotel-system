@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { IRoom } from '../../../../../shared/interface/room/room.interface';
 
 @Component({
   selector: 'app-popular-rooms',
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrl: './popular-rooms.component.scss'
 })
 export class PopularRoomsComponent {
+  @Input() rooms: IRoom[] = [];
 
 }
