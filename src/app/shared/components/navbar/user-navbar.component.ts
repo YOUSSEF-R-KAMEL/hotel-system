@@ -3,6 +3,7 @@ import { AuthService } from '../../../features/auth/services/auth.service';
 import { authRoutes } from './../../../features/auth/routes/enum';
 import { IApiResponse } from '../../interface/api-data-response/api-response.interface';
 import { IUser } from '../../interface/user/IUserResponse';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-navbar',
@@ -14,17 +15,17 @@ export class UserNavbarComponent implements OnInit {
   role = this.authService.role;
   authRoutes = authRoutes;
   navLinks = computed(() => [
-    { text: 'Home', path: '', isActive: true },
-    { text: 'Explore', path: 'explore', isActive: true },
-    { text: 'Reviews', path: 'reviews', isActive: !!this.user() },
-    { text: 'Favorites', path: 'favs', isActive: !!this.user() },
+    { text: 'Home', path: '', isUser: true },
+    { text: 'Explore', path: 'explore', isUser: true },
+    { text: 'Reviews', path: 'reviews', isUser: !!this.user() },
+    { text: 'Favorites', path: 'favs', isUser: !!this.user() },
   ]);
 
-  constructor(public authService: AuthService) {
+  constructor(public authService: AuthService, private router: Router) {
     this.role = this.authService.role;
     this.user = this.authService.user;
   }
-  
+
   ngOnInit(): void {
     if (this.user()) {
       this.authService.getUser(this.user()!._id).subscribe({

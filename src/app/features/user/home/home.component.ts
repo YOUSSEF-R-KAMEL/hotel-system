@@ -12,7 +12,7 @@ import { IRoomParams } from '../../../shared/interface/params/params.interface';
 })
 export class HomeComponent implements OnInit {
   page: number = 1;
-  size: number = 10;
+  size: number = 20;
   rooms = signal<IRoom[]>([]);
   popularRooms = computed(() => this.rooms().slice(0, 5));
   firstRoomsSection = computed(() => this.rooms().slice(0, 4));
