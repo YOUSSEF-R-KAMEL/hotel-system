@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import {
   MatDialogActions,
   MatDialogClose,
@@ -24,11 +25,11 @@ import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 import { NgxDropzoneModule } from 'ngx-dropzone';
+import { SingleRoomComponent } from '../features/user/components/single-room/single-room.component';
 import { DeleteItemComponent } from './components/delete-item/delete-item.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { UserNavbarComponent } from './components/navbar/user-navbar.component';
 import { TableComponent } from './components/table/table.component';
-import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     DeleteItemComponent,
     UserNavbarComponent,
     FooterComponent,
+    SingleRoomComponent
   ],
   imports: [
     CommonModule,
@@ -93,7 +95,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     NgxDropzoneModule,
     FooterComponent,
     UserNavbarComponent,
-    MatDatepickerModule
+    MatDatepickerModule,
+    SingleRoomComponent
   ],
 })
 export class SharedModule { }

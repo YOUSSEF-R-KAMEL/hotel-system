@@ -7,5 +7,11 @@ import { IRoomParams } from '../../../shared/interface/params/params.interface';
 export const exploreRoomWithFiltersResolver: ResolveFn<IApiResponse> = (route, state) => {
   const filters = route.queryParams as IRoomParams;
   const roomsService = inject(RoomsService);
+  console.log('filters', filters);
+  roomsService.getAllRooms(filters).subscribe({
+    next: (res) => {
+      console.log(res);
+    }
+  })
   return roomsService.getAllRooms(filters);
 };

@@ -1,4 +1,4 @@
-import { Component, effect, Input, OnInit, signal } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { IRoom } from '../../../../shared/interface/room/room.interface';
 
 @Component({
@@ -11,6 +11,5 @@ export class SingleRoomComponent implements OnInit {
   constructor() {
   }
   ngOnInit(): void {
-    console.log('Room:', this.room);
   }
 }

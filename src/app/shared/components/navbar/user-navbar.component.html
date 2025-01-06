@@ -7,9 +7,10 @@
       <nav class="d-flex gap-5 align-items-center h-100">
         <ul class="d-flex gap-4 align-items-center m-0">
           @for(link of navLinks(); track link.text) {
-          @if (link.isActive) {
+          @if (link.isUser) {
           <li>
-            <a [routerLink]="link.path" routerLinkActive="active">{{ link.text }}</a>
+            <a [routerLink]="link.path" [queryParams]="link.text === 'Explore' ? {page: 1, size: 20}: null"
+              routerLinkActive="active">{{ link.text }}</a>
           </li>
           }
           }

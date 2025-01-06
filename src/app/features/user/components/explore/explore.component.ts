@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IApiResponse } from '../../../../shared/interface/api-data-response/api-response.interface';
 import { IRoom } from '../../../../shared/interface/room/room.interface';
+import { RoomsService } from '../../services/rooms.service';
 
 @Component({
   selector: 'app-explore',
@@ -12,10 +12,11 @@ export class ExploreComponent {
   rooms: IRoom[] = [];
   page: number = 1;
   size: number = 10;
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute, private roomsService: RoomsService) {
     this.route.data.subscribe((data: any) => {
       const rooms = data.filters.data.rooms;
       this.rooms = rooms;
     })
   }
+
 }
