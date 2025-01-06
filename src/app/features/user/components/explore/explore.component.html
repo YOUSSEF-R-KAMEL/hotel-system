@@ -1,12 +1,12 @@
-<section>
-  <div class="container">
-    <div class="row">
-
-      @for (room of rooms; track room._id) {
-        <div class="col-md-4">
-          <app-single-room [room]="room"></app-single-room>
-        </div>
-      }
-    </div>
+<h1 class="blue-text text-center fw-bolder">Explore all rooms</h1>
+<p class="ps-5 fs-4 m-0 blue-text">All rooms</p>
+<div class="grid-container">
+  <div
+    *ngFor="
+      let room of rooms | paginate : { itemsPerPage: size, currentPage: page }
+    "
+  >
+    <app-single-room [room]="room"></app-single-room>
   </div>
-</section>
+</div>
+<pagination-controls (pageChange)="page = $event"></pagination-controls>
