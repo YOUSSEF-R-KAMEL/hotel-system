@@ -3,3 +3,28 @@
   justify-content: center;
   margin-top: 16px;
 }
+.breadcrumb {
+  background-color: transparent;
+  margin-bottom: 2rem;
+}
+.breadcrumb-item {
+  font-size: large;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+  content: " / ";
+}
+
+.breadcrumb a {
+  color: #3252df;
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.breadcrumb-item.active {
+  color: #152c5b;
+  font-weight: 500;
+}
