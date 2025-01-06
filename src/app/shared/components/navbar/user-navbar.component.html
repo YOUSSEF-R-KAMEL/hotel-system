@@ -6,7 +6,7 @@
       </div>
       <nav class="d-flex gap-5 align-items-center h-100">
         <ul class="d-flex gap-4 align-items-center m-0">
-          @for(link of navLinks; track link.text) {
+          @for(link of navLinks(); track link.text) {
           @if (link.isActive) {
           <li>
             <a [routerLink]="link.path" routerLinkActive="active">{{ link.text }}</a>
@@ -14,7 +14,7 @@
           }
           }
         </ul>
-        @if (!isLogged()) {
+        @if (!user()) {
         <div class="d-flex gap-3">
           <button [routerLink]="authRoutes.register" mat-raised-button color="primary">Register</button>
           <button [routerLink]="authRoutes.login" mat-raised-button color="primary">Login now</button>
@@ -23,9 +23,9 @@
         <div class="d-flex align-items-center gap-3">
           <div class="d-flex align-items-center gap-2">
             <img width="40px" height="40px" class="rounded-circle"
-              [src]="user ? user.profileImage : '../../../../assets/images/svg/profile-placeholder-image.svg'"
+              [src]="user()?.profileImage ? user()?.profileImage : '../../../../assets/images/svg/profile-placeholder-image.svg'"
               alt="profile picture">
-            <p>{{user?.userName}}</p>
+            <p>{{user()?.userName}}</p>
           </div>
           <button mat-icon-button [matMenuTriggerFor]="menu">
             <mat-icon>keyboard_arrow_down</mat-icon>
@@ -50,4 +50,3 @@
     </div>
   </div>
 </header>
-<hr>
