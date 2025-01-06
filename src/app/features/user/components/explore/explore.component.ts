@@ -1,31 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { IApiResponse } from '../../../../shared/interface/api-data-response/api-response.interface';
 import { IRoom } from '../../../../shared/interface/room/room.interface';
-import { RoomsService } from '../../services/rooms.service';
 
 @Component({
   selector: 'app-explore',
   templateUrl: './explore.component.html',
-  styleUrl: './explore.component.scss',
+  styleUrl: './explore.component.scss'
 })
-export class ExploreComponent implements OnInit {
+export class ExploreComponent {
   rooms: IRoom[] = [];
   page: number = 1;
   size: number = 10;
-  constructor(private _RoomsService: RoomsService) {}
-  ngOnInit(): void {
-    this.getAllRooms();
-  }
-  getAllRooms() {
-    this._RoomsService
-      .getAllRooms({ page: this.page, size: this.size })
-      .subscribe({
-        next: (res) => {
-          this.rooms = res.data.rooms as IRoom[];
-          console.log(this.rooms);
-        },
-        error: (err) => {
-          console.log(err);
-        },
-      });
+  constructor(private route: ActivatedRoute) {
+    this.route.data.subscribe((data: any) => {
+      const rooms = data.filters.data.rooms;
+      this.rooms = rooms;
+    })
   }
 }
