@@ -52,11 +52,11 @@
   </div>
 </div>
 <div class="popular-rooms">
-  <app-popular-rooms />
+  <app-popular-rooms [rooms]="popularRooms()"/>
 </div>
-<div class="shared-rooms"><app-shared-rooms /></div>
-<div class="shared-rooms"><app-shared-rooms /></div>
-<div class="shared-rooms"><app-shared-rooms /></div>
+<div class="shared-rooms"><app-shared-rooms [inputRooms]="firstRoomsSection()"/></div>
+<div class="shared-rooms"><app-shared-rooms [inputRooms]="secondRoomsSection()"/></div>
+<div class="shared-rooms"><app-shared-rooms [inputRooms]="thirdRoomsSection()"/></div>
 <div class="testimonial">
   <app-testimonials></app-testimonials>
 </div>

@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, computed, OnInit, signal } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { IRoom } from '../../../shared/interface/room/room.interface';
 import { RoomsService } from '../services/rooms.service';
+import { Router } from '@angular/router';
+import { IRoomParams } from '../../../shared/interface/params/params.interface';
 
 @Component({
   selector: 'app-home',
@@ -11,23 +13,31 @@ import { RoomsService } from '../services/rooms.service';
 export class HomeComponent implements OnInit {
   page: number = 1;
   size: number = 10;
-  rooms: IRoom[] = [];
+  rooms = signal<IRoom[]>([]);
+  popularRooms = computed(() => this.rooms().slice(0, 5));
+  firstRoomsSection = computed(() => this.rooms().slice(0, 4));
+  secondRoomsSection = computed(() => this.rooms().slice(3, 7));
+  thirdRoomsSection = computed(() => this.rooms().slice(6, 10));
   roomFiltersForm = new FormGroup({
     startDate: new FormControl<Date | null>(null),
     endDate: new FormControl<Date | null>(null),
-    capacity: new FormControl<number>(1), // Default initial value is 1
+    capacity: new FormControl<number>(1),
   });
 
-  constructor(private _RoomService: RoomsService) { }
+  constructor(private _RoomService: RoomsService, private router: Router) {
+  }
 
   ngOnInit(): void {
     this.getAllRooms();
   }
   getAllRooms() {
-    this._RoomService.getAllRooms({ page: this.page, size: this.size }).subscribe({
+    let params: IRoomParams = {
+      page: this.page,
+      size: this.size,
+    }
+    this._RoomService.getAllRooms(params).subscribe({
       next: (res) => {
-        this.rooms = res.data.rooms as IRoom[];
-        console.log(this.rooms);
+        this.rooms.set(res.data.rooms as IRoom[]);
       },
       error: (err) => {
         console.log(err);
@@ -42,14 +52,7 @@ export class HomeComponent implements OnInit {
       endDate: this.roomFiltersForm.get('endDate')?.value,
       capacity: this.roomFiltersForm.get('capacity')?.value
     }
-    this._RoomService.getAllRooms(params).subscribe({
-      next: (res) => {
-        console.log(res);
-      },
-      error: (err) => {
-        console.log(err);
-      }
-    });
+    this.router.navigate(['/explore'], { queryParams: params });
   }
 
   get capacity() {
@@ -57,7 +60,7 @@ export class HomeComponent implements OnInit {
   }
 
   getCapacityDisplay(): string {
-    const value = this.capacity.value || 0; // Fallback to 0 if null
+    const value = this.capacity.value || 0;
     return `${value} person${value > 1 ? 's' : ''}`;
   }
 

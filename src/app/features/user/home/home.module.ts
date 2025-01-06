@@ -12,5 +12,6 @@ import { TestimonialsComponent } from './components/testimonials/testimonials.co
 @NgModule({
   declarations: [HomeComponent, SharedRoomsComponent, SingleRoomComponent, PopularRoomsComponent, TestimonialsComponent],
   imports: [CommonModule, HomeRoutingModule, SharedModule],
+  exports: [SingleRoomComponent]
 })
 export class HomeModule { }
