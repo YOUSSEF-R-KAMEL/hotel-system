@@ -1,4 +1,19 @@
 {
+  "home": "Home",
+  "about": "About",
+  "forms": {
+    "name": "Name",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "submit": "Submit"
+  },
+  "errors": {
+    "required": "This field is required",
+    "email": "Please enter a valid email address",
+    "password": "Password must be at least 6 characters",
+    "confirmPassword": "Passwords do not match"
+  }
   "Home": "Home",
   "Explore": "Explore",
   "booking": {
@@ -36,5 +51,5 @@
     },
     "copyright": "Copyright 2019 • All rights reserved • Staycation"
   }
-
 }
+
