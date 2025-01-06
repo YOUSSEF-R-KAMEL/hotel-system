@@ -14,6 +14,7 @@
                 link.text === 'Explore' ? { page: 1, size: 200 } : null
               "
               routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: true }"
               >{{ link.text }}</a
             >
           </li>
