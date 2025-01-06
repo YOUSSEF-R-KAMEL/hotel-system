@@ -2,31 +2,55 @@
   <div class="container h-100">
     <div class="d-flex justify-content-between align-items-center h-100">
       <div>
-        <img src="../../../../../../assets/images/svg/logo.svg" alt="logo">
+        <img src="../../../../../../assets/images/svg/logo.svg" alt="logo" />
       </div>
       <nav class="d-flex gap-5 align-items-center h-100">
         <ul class="d-flex gap-4 align-items-center m-0">
-          @for(link of navLinks(); track link.text) {
-          @if (link.isUser) {
+          @for(link of navLinks(); track link.text) { @if (link.isUser) {
           <li>
-            <a [routerLink]="link.path" [queryParams]="link.text === 'Explore' ? {page: 1, size: 20}: null"
-              routerLinkActive="active">{{ link.text }}</a>
+            <a
+              [routerLink]="link.path"
+              [queryParams]="
+                link.text === 'Explore' ? { page: 1, size: 200 } : null
+              "
+              routerLinkActive="active"
+              >{{ link.text }}</a
+            >
           </li>
-          }
-          }
+          } }
         </ul>
         @if (!user()) {
         <div class="d-flex gap-3">
-          <button [routerLink]="authRoutes.register" mat-raised-button color="primary">Register</button>
-          <button [routerLink]="authRoutes.login" mat-raised-button color="primary">Login now</button>
+          <button
+            [routerLink]="authRoutes.register"
+            mat-raised-button
+            color="primary"
+          >
+            Register
+          </button>
+          <button
+            [routerLink]="authRoutes.login"
+            mat-raised-button
+            color="primary"
+          >
+            Login now
+          </button>
         </div>
         } @else {
         <div class="d-flex align-items-center gap-3">
           <div class="d-flex align-items-center gap-2">
-            <img width="40px" height="40px" class="rounded-circle"
-              [src]="user()?.profileImage ? user()?.profileImage : '../../../../assets/images/svg/profile-placeholder-image.svg'"
-              alt="profile picture">
-            <p>{{user()?.userName}}</p>
+            <img
+              width="40px"
+              height="40px"
+              class="rounded-circle"
+              [src]="
+                user()?.profileImage
+                  ? user()?.profileImage
+                  : '../../../../assets/images/svg/profile-placeholder-image.svg'
+              "
+              alt="profile picture"
+            />
+            <p>{{ user()?.userName }}</p>
           </div>
           <button mat-icon-button [matMenuTriggerFor]="menu">
             <mat-icon>keyboard_arrow_down</mat-icon>

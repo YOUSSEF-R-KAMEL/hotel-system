@@ -1,20 +1,20 @@
 <div class="container popular-rooms m-0 m-auto">
-  <div class="row justify-content-center">
+  <div class="row justify-content-center row-gap-2">
     <h5 class="blue-text">Houses with beauty backyard</h5>
-    <div class="first col-md-4">
-      <app-single-room [room]="rooms[0]"/>
+    <div class="first col-md-4 p-0">
+      <app-single-room [room]="rooms[0]" />
     </div>
     <div class="second col-md-4 d-flex flex-column">
       <div class="above-img">
-        <app-single-room [room]="rooms[1]"/>
+        <app-single-room [room]="rooms[1]" />
       </div>
       <div class="below-img">
-        <app-single-room [room]="rooms[2]"/>
+        <app-single-room [room]="rooms[2]" />
       </div>
     </div>
-    <div class="second col-md-4 d-flex flex-column">
+    <div class="second p-0 col-md-4 d-flex flex-column">
       <div class="above-img">
-        <app-single-room [room]="rooms[3]"/>
+        <app-single-room [room]="rooms[3]" />
       </div>
       <div class="below-img">
         <app-single-room [room]="rooms[4]" />
@@ -22,3 +22,7 @@
     </div>
   </div>
 </div>
+<!-- @for(room of rooms ;track room._id) {
+  <app-single-room [room]="room"/>
+  
+} -->
