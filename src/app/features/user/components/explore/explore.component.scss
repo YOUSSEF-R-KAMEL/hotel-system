@@ -16,15 +16,16 @@
 }
 
 .breadcrumb a {
-  color: #3252df;
   text-decoration: none;
+  color: #152c5b;
 }
 
 .breadcrumb a:hover {
   text-decoration: underline;
+  color: #3252df;
 }
 
 .breadcrumb-item.active {
-  color: #152c5b;
+  color: #3252df;
   font-weight: 500;
 }
