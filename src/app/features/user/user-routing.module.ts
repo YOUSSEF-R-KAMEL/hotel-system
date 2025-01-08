@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { userGuard } from '../../core/guards/user/user.guard';
 import { ExploreComponent } from './components/explore/explore.component';
 import { FavRoomsComponent } from './components/fav-rooms/fav-rooms.component';
 import { exploreRoomWithFiltersResolver } from './resolvers/explore-room-with-filters.resolver';
@@ -25,6 +26,7 @@ const routes: Routes = [
       {
         path: 'favorites',
         component: FavRoomsComponent,
+        canActivate: [userGuard],
         resolve: { filters: favoriteRoomsResolver },
       },
     ],

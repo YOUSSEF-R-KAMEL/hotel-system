@@ -13,7 +13,8 @@ export class FavRoomsComponent {
   size: number = 10;
   constructor(private route: ActivatedRoute) {
     this.route.data.subscribe((data: any) => {
-      const favRooms = data.filters.data.favoriteRooms;
+      console.log(data);
+      const favRooms = data?.filters?.data?.favoriteRooms;
       this.favRooms = favRooms;
     });
   }

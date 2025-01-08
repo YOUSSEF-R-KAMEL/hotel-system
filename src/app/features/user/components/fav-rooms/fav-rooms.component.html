@@ -8,7 +8,7 @@
     </ol>
   </nav>
   <p class="ps-5 fs-4 fw-bold m-0 blue-text">Your rooms</p>
-  <div class="grid-container">
+  <div class="grid-container" *ngIf="favRooms; else noFavorites">
     <div
       *ngFor="
         let room of favRooms
@@ -32,4 +32,5 @@
     </div>
   </div>
   <pagination-controls (pageChange)="page = $event"></pagination-controls>
+  <ng-template #noFavorites> <p>No favorite rooms found.</p> </ng-template>
 </section>
