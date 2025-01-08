@@ -18,8 +18,8 @@ export class FavoriteRoomsService {
     });
   }
   deleteFavRoom(roomId: string): Observable<IAddFavoriteRoom> {
-    return this._HttpClient.delete<IAddFavoriteRoom>(
-      `portal/favorite-rooms/${roomId}`
-    );
+    return this._HttpClient.delete<IAddFavoriteRoom>('portal/favorite-rooms/'+ roomId, {body: {
+      roomId
+    }});
   }
 }
