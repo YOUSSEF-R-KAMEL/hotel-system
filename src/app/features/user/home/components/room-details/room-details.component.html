@@ -1,1 +1,74 @@
-<p>room-details works!</p>
+
+<div class="container">
+  <nav aria-label="breadcrumb" class="d-flex justify-content-around align-items-center mb-5">
+    <ol class="breadcrumb mb-0">
+      <li class="breadcrumb-item"><a routerLink="/home">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Room Details</li>
+    </ol>
+    <div class="heading text-center">
+      <h2>Room Number: {{currentRoomDetails?.roomNumber}}</h2>
+      @for (fa of currentRoomDetails?.facilities; track $index) {
+        <span>{{fa.name}}
+          @if ($index <( currentRoomDetails?.facilities?.length || 0) - 1) {
+            <span>, </span>
+          }
+        </span>
+      }
+    </div>
+  </nav>
+  <div class="details">
+    <div class="images text-center">
+      @for (img of currentRoomDetails?.images; track $index) {
+        <img [src]="img" alt="">
+      }
+    </div>
+    <div class="start-booking">
+      <h4>Start Booking</h4>
+      <p><span>${{currentRoomDetails?.price}}</span> per night</p>
+      <span class="text-danger">Discount {{currentRoomDetails?.discount}}% Off </span>
+      <form>
+        <label>Pick a Date</label>
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1"><img src="../../../../../../assets/images/svg/calendar.svg" alt=""></span>
+          <input type="text" class="form-control" placeholder="20 Jan - 22 Jan" aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+        <span class="pay">You will pay <span class="num">$480</span> USD per <span class="num">2 Person</span></span>
+        <div class="text-center mt-2">
+          <button class="explore-btn" mat-raised-button color="primary">Continue Book</button>
+        </div>
+      </form>
+    </div>
+    <div class="rate-comment">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="rate">
+            <h3>Rate</h3>
+            <div class="stars">
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+            </div>
+            <h4 class="my-4">Message</h4>
+            <form>
+              <textarea name="" id=""></textarea>
+              <button class="explore-btn" mat-raised-button color="primary">Rate</button>
+            </form>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="comment">
+            <h3>Add Your Comment</h3>
+            <form>
+              <textarea name="" id=""></textarea>
+              <div class="d-flex justify-content-end">
+                <button class="explore-btn" mat-raised-button color="primary">Send</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
