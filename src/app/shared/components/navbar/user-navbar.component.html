@@ -14,7 +14,7 @@
           </li>
           } }
         </ul>
-        @if (!user()) {
+        @if (role === null) {
         <div class="d-flex gap-3">
           <button [routerLink]="authRoutes.register" mat-raised-button color="primary">
             Register
@@ -27,11 +27,11 @@
         <div class="d-flex align-items-center gap-3">
           <div class="d-flex align-items-center gap-2">
             <img width="40px" height="40px" class="rounded-circle" [src]="
-                user()?.profileImage
-                  ? user()?.profileImage
+                user?.profileImage
+                  ? user?.profileImage
                   : '../../../../assets/images/svg/profile-placeholder-image.svg'
               " alt="profile picture" />
-            <p>{{ user()?.userName }}</p>
+            <p>{{ user?.userName }}</p>
           </div>
           <div class="theme-control">
             <mat-slide-toggle checked (click)="toggleTheme()"></mat-slide-toggle>

@@ -25,6 +25,16 @@ export class AuthService {
     return this.roleSignal;
   }
 
+  getRole() {
+    if (this.helperService.isPlatformBrowser()) {
+      const role = localStorage.getItem('role');
+      if (role) {
+        return role;
+      }
+    }
+    return null;
+  }
+  
   updateUser(user: IUser | null): void {
     this.userSignal.set(user);
   }
