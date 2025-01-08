@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IApiResponse } from '../../../shared/interface/api-data-response/api-response.interface';
 import { IRoomParams } from '../../../shared/interface/params/params.interface';
+import { IRoom } from '../../../shared/interface/room/room.interface';
+import { IApiRoomResponse } from '../interfaces/api-response-room.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -20,5 +22,8 @@ export class RoomsService {
       }
     });
     return this._HttpClient.get<IApiResponse>('portal/rooms/available', { params: httpParams });
+  }
+  getRoomDetails(id:string):Observable<IApiRoomResponse>{
+    return this._HttpClient.get<IApiRoomResponse>('portal/rooms/' + id)
   }
 }
