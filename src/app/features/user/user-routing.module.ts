@@ -1,15 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { UserComponent } from './user.component';
 import { ExploreComponent } from './components/explore/explore.component';
+import { FavRoomsComponent } from './components/fav-rooms/fav-rooms.component';
 import { exploreRoomWithFiltersResolver } from './resolvers/explore-room-with-filters.resolver';
+import { favoriteRoomsResolver } from './resolvers/favorite-rooms.resolver';
+import { UserComponent } from './user.component';
 
 const routes: Routes = [
   {
     path: '',
     component: UserComponent,
     children: [
-      {path: '', redirectTo: 'home', pathMatch: 'full'},
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
       {
         path: 'home',
         loadChildren: () =>
@@ -18,7 +20,12 @@ const routes: Routes = [
       {
         path: 'explore',
         component: ExploreComponent,
-        resolve: {filters: exploreRoomWithFiltersResolver}
+        resolve: { filters: exploreRoomWithFiltersResolver },
+      },
+      {
+        path: 'favorites',
+        component: FavRoomsComponent,
+        resolve: { filters: favoriteRoomsResolver },
       },
     ],
   },

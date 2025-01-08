@@ -13,7 +13,7 @@ export const globalInterceptor: HttpInterceptorFn = (req, next) => {
   const newRequest = req.clone({
     url: req.url.includes('assets') ? req.url : baseUrl + req.url,
     setHeaders: {
-      Authorization: token ? token : '',
+      Authorization: token ? `Bearer ${token}` : '',
     },
   });
   return next(newRequest);
