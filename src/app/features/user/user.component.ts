@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ThemeService } from '../../shared/services/theme/theme.service';
 
 @Component({
   selector: 'app-user',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrl: './user.component.scss'
 })
 export class UserComponent {
-
+  constructor(public themeService: ThemeService) {}
 }

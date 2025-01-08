@@ -4,6 +4,7 @@ import { AuthService } from '../../../features/auth/services/auth.service';
 import { IApiResponse } from '../../interface/api-data-response/api-response.interface';
 import { IUser } from '../../interface/user/IUserResponse';
 import { authRoutes } from './../../../features/auth/routes/enum';
+import { ThemeService } from '../../services/theme/theme.service';
 
 @Component({
   selector: 'app-user-navbar',
@@ -21,7 +22,7 @@ export class UserNavbarComponent implements OnInit {
     { text: 'Favorites', path: 'favorites', isUser: !!this.user() },
   ]);
 
-  constructor(public authService: AuthService, private router: Router) {
+  constructor(public themeService: ThemeService,public authService: AuthService, private router: Router) {
     this.role = this.authService.role;
     this.user = this.authService.user;
   }
@@ -36,6 +37,10 @@ export class UserNavbarComponent implements OnInit {
         },
       });
     }
+  }
+
+  toggleTheme () {
+    this.themeService.updateTheme();
   }
 
   logout(): void {
