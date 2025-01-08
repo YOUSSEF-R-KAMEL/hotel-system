@@ -6,6 +6,7 @@ import { FavRoomsComponent } from './components/fav-rooms/fav-rooms.component';
 import { exploreRoomWithFiltersResolver } from './resolvers/explore-room-with-filters.resolver';
 import { favoriteRoomsResolver } from './resolvers/favorite-rooms.resolver';
 import { UserComponent } from './user.component';
+import { RoomDetailsComponent } from './home/components/room-details/room-details.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,10 @@ const routes: Routes = [
         path: 'home',
         loadChildren: () =>
           import('./home/home.module').then((m) => m.HomeModule),
+      },
+      {
+        path: "home/:id",
+        component: RoomDetailsComponent
       },
       {
         path: 'explore',

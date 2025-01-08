@@ -1,0 +1,123 @@
+nav {
+  width: 70%;
+  .heading {
+    h2 {
+      color: #152C5B;
+    }
+    span {
+      color: #B0B0B0;
+    }
+  }
+}
+
+.details {
+  img {
+    width: 500px;
+    border-radius: 16px;
+    -webkit-border-radius: 16px;
+    -moz-border-radius: 16px;
+    -ms-border-radius: 16px;
+    -o-border-radius: 16px;
+  }
+  .start-booking {
+    width: 50%;
+    margin: 10px auto;
+    margin-top: 35px;
+    border: 1px solid #E5E5E5;
+    padding: 35px;
+    border-radius: 16px;
+    -webkit-border-radius: 16px;
+    -moz-border-radius: 16px;
+    -ms-border-radius: 16px;
+    -o-border-radius: 16px;
+    h4 {
+      color: #152C5B;
+    }
+    p {
+      font-size: 36px;
+      color: #B0B0B0;
+      margin-bottom: 0;
+      span {
+        color: #1ABC9C;
+      }
+    }
+    form {
+      width: 60%;
+      margin: 10px auto;
+      margin-top: 80px;
+      label {
+        color: #152C5B;
+      }
+      .input-group {
+        .input-group-text {
+          background-color: #152C5B !important;
+          color: #fff;
+          img {
+            width: 15px;
+          }
+        }
+        input {
+
+        }
+      }
+      .pay {
+        color: #B0B0B0;
+        .num {
+          color: #152C5B;
+        }
+      }
+    }
+  }
+  .rate-comment {
+    margin-top: 50px;
+    border: 1px solid #E5E5E5;
+    padding: 25px 45px;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    -ms-border-radius: 15px;
+    -o-border-radius: 15px;
+    .rate{
+      position: relative;
+      &::after {
+        content: "";
+        position: absolute;
+        right: 48px;
+        bottom: 0;
+        width: 1px;
+        height: 100%;
+        background-color: #203FC7;
+      }
+      .stars i {
+        color: #DFCB1D;
+      }
+    }
+    form {
+      width: 80%;
+      textarea {
+        padding: 10px 15px;
+        resize: none;
+        outline: none;
+        width: 100%;
+        height: 200px;
+        border: 1px solid #203FC7;
+        border-radius: 15px;
+        -webkit-border-radius: 15px;
+        -moz-border-radius: 15px;
+        -ms-border-radius: 15px;
+        -o-border-radius: 15px;
+      }
+      button {
+        width: 210px;
+        height: 50px;
+        display: block;
+        margin: 15px 0;
+        font-size: 18px;
+      }
+    }
+    .comment form {
+      margin-top: 92px;
+    }
+  }
+}
+
