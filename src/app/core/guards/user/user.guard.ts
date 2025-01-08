@@ -5,10 +5,11 @@ import { HelperService } from '../../../shared/services/helpers/helper.service';
 export const userGuard: CanActivateFn = (route, state) => {
   const platform = inject(HelperService);
   let token: string | null = '';
-  const role = localStorage.getItem('role');
+  let role: string | null = '';
   const isBrowser = platform.isPlatformBrowser();
   if (isBrowser) {
     token = localStorage.getItem('token');
+    role = localStorage.getItem('role');
   }
   const _Router = inject(Router);
   if (token !== null && role == 'user') {

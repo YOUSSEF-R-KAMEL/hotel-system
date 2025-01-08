@@ -1,7 +1,7 @@
 <div class="image-container">
   <img [src]="room?.images?.[0]" alt="Sample Image" />
   <div class="overlay">
-    <i class="fas fa-heart" (click)="openDialog()"></i>
+    <i class="fas fa-heart" routerLink="/favorites" (click)="openDialog()"></i>
     <i class="fas fa-eye" (click)="openDialog()"></i>
   </div>
   <p class="price">
