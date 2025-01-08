@@ -18,7 +18,7 @@ export class UserNavbarComponent implements OnInit {
     { text: 'Home', path: 'home', isUser: true },
     { text: 'Explore', path: 'explore', isUser: true },
     { text: 'Reviews', path: 'reviews', isUser: !!this.user() },
-    { text: 'Favorites', path: 'favs', isUser: !!this.user() },
+    { text: 'Favorites', path: 'favorites', isUser: !!this.user() },
   ]);
 
   constructor(public authService: AuthService, private router: Router) {
