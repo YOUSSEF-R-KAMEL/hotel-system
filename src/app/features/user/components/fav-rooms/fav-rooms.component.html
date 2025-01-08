@@ -1,0 +1,35 @@
+<section>
+  <h1 class="blue-text text-center fw-bolder">Your favorites</h1>
+  <!-- Breadcrumbs -->
+  <nav aria-label="breadcrumb" class="ps-5">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a [routerLink]="['/']">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Favorites</li>
+    </ol>
+  </nav>
+  <p class="ps-5 fs-4 fw-bold m-0 blue-text">Your rooms</p>
+  <div class="grid-container">
+    <div
+      *ngFor="
+        let room of favRooms
+          | paginate : { itemsPerPage: size, currentPage: page }
+      "
+    >
+      <div class="image-container">
+        <img [src]="room.rooms[0].images[0]" alt="Sample Image" />
+        <div class="overlay">
+          <i class="fas fa-heart-broken"></i>
+        </div>
+        <p class="price">
+          <strong>${{ room.rooms[0].price }}</strong> per night
+        </p>
+        <div class="details">
+          <p>
+            Discount: <strong>{{ room.rooms[0].discount }}%</strong>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <pagination-controls (pageChange)="page = $event"></pagination-controls>
+</section>

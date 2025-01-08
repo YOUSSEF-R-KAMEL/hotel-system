@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 import { IUser } from '../../../../shared/interface/user/IUserResponse';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +15,12 @@ export class LoginComponent {
   showPassword: boolean = false;
   loginForm: FormGroup = new FormGroup({
     email: new FormControl(null, [Validators.required, Validators.email]),
-    password: new FormControl(null, [Validators.required, Validators.pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,}$/)]),
+    password: new FormControl(null, [
+      Validators.required,
+      Validators.pattern(
+        /^(?=.*\d)(?=.*[a-z])(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,}$/
+      ),
+    ]),
   });
   constructor(
     private _AuthService: AuthService,
@@ -41,7 +46,7 @@ export class LoginComponent {
           if (localStorage.getItem('role') == 'admin') {
             this._Router.navigate(['/admin/dashboard/home']);
           } else if (localStorage.getItem('role') == 'user') {
-            this._Router.navigate(['/user/home']);
+            this._Router.navigate(['/home']);
           }
         },
       });

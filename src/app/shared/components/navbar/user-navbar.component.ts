@@ -1,21 +1,21 @@
 import { Component, computed, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from '../../../features/auth/services/auth.service';
-import { authRoutes } from './../../../features/auth/routes/enum';
 import { IApiResponse } from '../../interface/api-data-response/api-response.interface';
 import { IUser } from '../../interface/user/IUserResponse';
-import { Router } from '@angular/router';
+import { authRoutes } from './../../../features/auth/routes/enum';
 
 @Component({
   selector: 'app-user-navbar',
   templateUrl: './user-navbar.component.html',
-  styleUrls: ['./user-navbar.component.scss']
+  styleUrls: ['./user-navbar.component.scss'],
 })
 export class UserNavbarComponent implements OnInit {
   user = this.authService.user;
   role = this.authService.role;
   authRoutes = authRoutes;
   navLinks = computed(() => [
-    { text: 'Home', path: '', isUser: true },
+    { text: 'Home', path: 'home', isUser: true },
     { text: 'Explore', path: 'explore', isUser: true },
     { text: 'Reviews', path: 'reviews', isUser: !!this.user() },
     { text: 'Favorites', path: 'favs', isUser: !!this.user() },
@@ -33,8 +33,8 @@ export class UserNavbarComponent implements OnInit {
           if (res && res.data && res.data.user) {
             this.authService.updateUser(res.data.user as IUser);
           }
-        }
-      })
+        },
+      });
     }
   }
 
@@ -42,4 +42,3 @@ export class UserNavbarComponent implements OnInit {
     this.authService.onLogout();
   }
 }
-
