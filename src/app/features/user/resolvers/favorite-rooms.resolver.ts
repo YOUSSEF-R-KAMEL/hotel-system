@@ -10,7 +10,6 @@ export const favoriteRoomsResolver: ResolveFn<IApiResponse> = (
   const favoriteRoomsService = inject(FavoriteRoomsService);
   favoriteRoomsService.getAllFavRooms().subscribe({
     next: (res) => {
-      console.log(res);
     },
   });
   return favoriteRoomsService.getAllFavRooms();

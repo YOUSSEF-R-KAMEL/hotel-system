@@ -17,7 +17,9 @@
       <div class="image-container">
         <img [src]="room.images[0]" alt="Sample Image" />
         <div class="overlay">
-          <i class="fas fa-heart-broken"></i>
+          <button (click)="removeFromFav(room._id)">
+            <i class="fas fa-heart-broken"></i>
+          </button>
         </div>
         <p class="price">
           <strong>${{ room.price }}</strong> per night
