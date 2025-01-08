@@ -8,24 +8,23 @@
     </ol>
   </nav>
   <p class="ps-5 fs-4 fw-bold m-0 blue-text">Your rooms</p>
-  <div class="grid-container" *ngIf="favRooms; else noFavorites">
+  <div class="grid-container" *ngIf="rooms; else noFavorites">
     <div
       *ngFor="
-        let room of favRooms
-          | paginate : { itemsPerPage: size, currentPage: page }
+        let room of rooms | paginate : { itemsPerPage: size, currentPage: page }
       "
     >
       <div class="image-container">
-        <img [src]="room.rooms[0].images[0]" alt="Sample Image" />
+        <img [src]="room.images[0]" alt="Sample Image" />
         <div class="overlay">
           <i class="fas fa-heart-broken"></i>
         </div>
         <p class="price">
-          <strong>${{ room.rooms[0].price }}</strong> per night
+          <strong>${{ room.price }}</strong> per night
         </p>
         <div class="details">
           <p>
-            Discount: <strong>{{ room.rooms[0].discount }}%</strong>
+            Discount: <strong>{{ room.discount }}%</strong>
           </p>
         </div>
       </div>
