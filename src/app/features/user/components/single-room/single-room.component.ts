@@ -1,4 +1,4 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { IRoom } from '../../../../shared/interface/room/room.interface';
 import { AuthService } from '../../../auth/services/auth.service';
