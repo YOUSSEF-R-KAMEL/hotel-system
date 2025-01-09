@@ -22,6 +22,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { globalInterceptor } from './core/interceptors/global/global.interceptor';
 import { loadingInterceptor } from './core/interceptors/loading/loading.interceptor';
+import { StarRatingModule } from 'angular-star-rating';
 const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (
   http: HttpClient
 ) => new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -36,6 +37,7 @@ const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (
     TranslateModule,
     NgxSpinnerModule,
     ToastrModule.forRoot(),
+    StarRatingModule.forRoot()
   ],
   providers: [
     provideClientHydration(),
@@ -57,4 +59,4 @@ const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
