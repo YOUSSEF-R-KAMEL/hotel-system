@@ -1,90 +1,3 @@
-// Custom Theming for Angular Material
-// For more information: https://material.angular.io/guide/theming
-@use "@angular/material" as mat;
-// Plus imports for other components in your app.
-
-// Include the common styles for Angular Material. We include this here so that you only
-// have to load a single css file for Angular Material in your app.
-// Be sure that you only ever include this mixin once!
-@include mat.core();
-
-// Define the palettes for your theme using the Material Design palettes available in palette.scss
-// (imported above). For each palette, you can optionally specify a default, lighter, and darker
-// hue. Available color palettes: https://material.io/design/color/
-$custom-primary: (
-  50: #e3f2fd,
-  100: #bbdefb,
-  200: #90caf9,
-  300: #64b5f6,
-  400: #42a5f5,
-  500: #203fc7,
-  600: #1e88e5,
-  700: #1976d2,
-  800: #1565c0,
-  900: #0d47a1,
-  A100: #82b1ff,
-  A200: #448aff,
-  A400: #2979ff,
-  A700: #2962ff,
-  contrast: (
-    50: #000,
-    100: #000,
-    200: #000,
-    300: #fff,
-    400: #fff,
-    500: #fff,
-    600: #fff,
-    700: #fff,
-    800: #fff,
-    900: #fff,
-    A100: #000,
-    A200: #000,
-    A400: #fff,
-    A700: #fff,
-  ),
-);
-
-$Hotel-system-primary: mat.define-palette($custom-primary);
-$Hotel-system-accent: mat.define-palette(mat.$red-palette, A200, A100, A400);
-
-// The warn palette is optional (defaults to red).
-$Hotel-system-warn: mat.define-palette(mat.$red-palette);
-
-// Create the theme object. A theme consists of configurations for individual
-// theming systems such as "color" or "typography".
-$Hotel-system-theme: mat.define-light-theme(
-  (
-    color: (
-      primary: $Hotel-system-primary,
-      accent: $Hotel-system-accent,
-      warn: $Hotel-system-warn,
-    ),
-    typography: mat.define-typography-config(),
-    density: 0,
-  )
-);
-
-// Include theme styles for core and each component used in your app.
-// Alternatively, you can import and @include the theme mixins for each component
-// that you are using.
-@include mat.all-component-themes($Hotel-system-theme);
-
-/* You can add global styles to this file, and also import other style files */
-
-html,
-body {
-  height: 100%;
-}
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-}
-$hover-color: mat.get-color-from-palette($Hotel-system-primary, 200);
-@import "./assets/sass/main.scss";
-:root {
-  --mat-menu-container-shape: 1rem;
-  --mat-menu-item-hover-state-layer-color: #{$hover-color};
-}
 // // Custom Theming for Angular Material
 // // For more information: https://material.angular.io/guide/theming
 // @use "@angular/material" as mat;
@@ -133,8 +46,12 @@ $hover-color: mat.get-color-from-palette($Hotel-system-primary, 200);
 
 // $Hotel-system-primary: mat.define-palette($custom-primary);
 // $Hotel-system-accent: mat.define-palette(mat.$red-palette, A200, A100, A400);
+
+// // The warn palette is optional (defaults to red).
 // $Hotel-system-warn: mat.define-palette(mat.$red-palette);
 
+// // Create the theme object. A theme consists of configurations for individual
+// // theming systems such as "color" or "typography".
 // $Hotel-system-theme: mat.define-light-theme(
 //   (
 //     color: (
@@ -147,46 +64,12 @@ $hover-color: mat.get-color-from-palette($Hotel-system-primary, 200);
 //   )
 // );
 
-// $Hotel-system-dark-primary: mat.define-palette($custom-primary);
-// $Hotel-system-dark-accent: mat.define-palette(
-//   mat.$red-palette,
-//   A200,
-//   A100,
-//   A400
-// );
-// $Hotel-system-dark-warn: mat.define-palette(mat.$red-palette);
+// // Include theme styles for core and each component used in your app.
+// // Alternatively, you can import and @include the theme mixins for each component
+// // that you are using.
+// @include mat.all-component-themes($Hotel-system-theme);
 
-// $Hotel-system-dark-theme: mat.define-dark-theme(
-//   (
-//     color: (
-//       primary: $Hotel-system-dark-primary,
-//       accent: $Hotel-system-dark-accent,
-//       warn: $Hotel-system-dark-warn,
-//     ),
-//     typography: mat.define-typography-config(),
-//     density: 0,
-//   )
-// );
-
-// $dark-bg-color: #222;
-// $semi-dark-bg-color: #333;
-// $light-text-color: #cacaca;
-
-// $light-bg-color: #d2d2d2;
-// $semi-light-bg-color: #c0c0c0;
-// $dark-text-color: #333;
-
-// @include mat.all-component-themes($Hotel-system-primary);
-
-// .dark {
-//   @include mat.all-component-colors($Hotel-system-dark-theme);
-//   background-color: $semi-dark-bg-color;
-//   color: $light-text-color;
-// }
-
-// .light {
-//   @include mat.all-component-themes($Hotel-system-theme);
-// }
+// /* You can add global styles to this file, and also import other style files */
 
 // html,
 // body {
@@ -202,3 +85,116 @@ $hover-color: mat.get-color-from-palette($Hotel-system-primary, 200);
 //   --mat-menu-container-shape: 1rem;
 //   --mat-menu-item-hover-state-layer-color: #{$hover-color};
 // }
+
+@use "@angular/material" as mat;
+
+@include mat.core();
+
+// Define the custom palettes
+$custom-primary: (
+  50: #e3f2fd,
+  100: #bbdefb,
+  200: #90caf9,
+  300: #64b5f6,
+  400: #42a5f5,
+  500: #203fc7,
+  600: #1e88e5,
+  700: #1976d2,
+  800: #1565c0,
+  900: #0d47a1,
+  A100: #82b1ff,
+  A200: #448aff,
+  A400: #2979ff,
+  A700: #2962ff,
+  contrast: (
+    50: #000,
+    100: #000,
+    200: #000,
+    300: #fff,
+    400: #fff,
+    500: #fff,
+    600: #fff,
+    700: #fff,
+    800: #fff,
+    900: #fff,
+    A100: #000,
+    A200: #000,
+    A400: #fff,
+    A700: #fff,
+  ),
+);
+
+$Hotel-system-primary: mat.define-palette($custom-primary);
+$Hotel-system-accent: mat.define-palette(mat.$red-palette, A200, A100, A400);
+$Hotel-system-warn: mat.define-palette(mat.$red-palette);
+
+$Hotel-system-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $Hotel-system-primary,
+      accent: $Hotel-system-accent,
+      warn: $Hotel-system-warn,
+    ),
+    typography: mat.define-typography-config(),
+    density: 0,
+  )
+);
+
+$Hotel-system-dark-theme: mat.define-dark-theme(
+  (
+    color: (
+      primary: $Hotel-system-primary,
+      accent: $Hotel-system-accent,
+      warn: $Hotel-system-warn,
+    ),
+    typography: mat.define-typography-config(),
+    density: 0,
+  )
+);
+
+// Apply Themes
+.light {
+  @include mat.all-component-themes($Hotel-system-theme);
+  background-color: #f7f7f7;
+}
+
+.dark {
+  @include mat.all-component-themes($Hotel-system-dark-theme);
+  background-color: #000000ef;
+  color: #cacaca;
+  & .booking-section h1,
+  & .booking-section h5,
+  h5,
+  h3,
+  p:not(.price) {
+    color: white !important;
+  }
+
+  mat-form-field.normal-input
+    .mdc-text-field--filled:not(.mdc-text-field--disabled)
+    .mdc-text-field__input {
+    --mdc-filled-text-field-input-text-color: #b1adad !important;
+  }
+}
+.light,
+.dark {
+  transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+}
+
+// Global Styles
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+$hover-color: mat.get-color-from-palette($Hotel-system-primary, 200);
+@import "./assets/sass/main.scss";
+:root {
+  --mat-menu-container-shape: 1rem;
+  --mat-menu-item-hover-state-layer-color: #{$hover-color};
+}

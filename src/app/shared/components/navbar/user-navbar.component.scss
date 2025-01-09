@@ -1,5 +1,8 @@
+@import "../../../../assets/sass/abstracts/variables";
 header {
   height: 80px;
+  background-color: #68c4e7;
+  box-shadow: 1px 1px 10px 1px #0000003d;
 }
 
 hr {
@@ -13,7 +16,7 @@ ul {
 
 a {
   text-decoration: none;
-  color: #152c5b;
+  color: #3252df;
   transition: all 0.3 ease;
   &:hover {
     color: #3252df;
@@ -24,13 +27,18 @@ a {
     font-weight: 500;
   }
 }
-
+.btn-navbar {
+  background-color: #3252df !important;
+  border-color: #3252df;
+  color: white !important;
+  box-shadow: 0px 8px 10px 0px #3252df4d;
+}
 p {
   margin: 0;
   color: #1f384c;
 }
 .theme-control {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
