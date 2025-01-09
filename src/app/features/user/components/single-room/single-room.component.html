@@ -5,11 +5,11 @@
     <i class="fas fa-eye" (click)="openDialog(room!)"></i>
   </div>
   <p class="price">
-    <strong>${{ room?.price }}</strong> per night
+    <strong>${{ room?.price }}</strong> {{ 'home-page.popular.per' | translate }}
   </p>
   <div class="details">
     <p>
-      Discount: <strong>{{ room?.discount }}%</strong>
+      {{ 'home-page.popular.discount' | translate }}: <strong>{{ room?.discount }}%</strong>
     </p>
   </div>
 </div>

@@ -1,17 +1,19 @@
 <section class="testi">
-  <div class="container-fluid d-flex justify-content-between">
-    <img src="../../../../assets/images/svg/testimonials.svg" alt="" />
-    <div class="text">
-      <h3>Happy Family</h3>
+  <div class="container d-flex justify-content-between">
+    <img src="../../../../assets/images/svg/testimonials.svg" alt=""
+    [ngClass]="{'ar': currentLang  == 'ar'}">
+    <div class="text me-5">
+      <h3>{{ 'home-page.testimonials.heading' | translate }}</h3>
       <i *ngFor="let star of stars" class="fa-solid fa-star"></i>
       <p>
-        What a great trip with my family and I should try again next time soon
-        ...
+        {{ 'home-page.testimonials.paragraph' | translate }}
       </p>
-      <span>Angga, Product Designer</span>
+      <span>{{ 'home-page.testimonials.persons' | translate }}</span>
       <div class="icons">
-        <img src="../../../../assets/images/svg/left-icon.svg" alt="" />
-        <img src="../../../../assets/images/svg/right-icon.svg" alt="" />
+        <img src="../../../../assets/images/svg/left-icon.svg" alt=""
+        [ngClass]="{'ar': currentLang  == 'ar'}"/>
+        <img src="../../../../assets/images/svg/right-icon.svg" alt=""
+        [ngClass]="{'ar': currentLang  == 'ar'}"/>
       </div>
     </div>
   </div>

@@ -30,6 +30,7 @@ import { DeleteItemComponent } from './components/delete-item/delete-item.compon
 import { FooterComponent } from './components/footer/footer.component';
 import { UserNavbarComponent } from './components/navbar/user-navbar.component';
 import { TableComponent } from './components/table/table.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import { TableComponent } from './components/table/table.component';
     MatDialogTitle,
     NgxDropzoneModule,
     MatDatepickerModule,
+    TranslateModule
   ],
   exports: [
     RouterModule,
@@ -96,7 +98,8 @@ import { TableComponent } from './components/table/table.component';
     FooterComponent,
     UserNavbarComponent,
     MatDatepickerModule,
-    SingleRoomComponent
+    SingleRoomComponent,
+    TranslateModule
   ],
 })
 export class SharedModule { }
