@@ -25,6 +25,16 @@ export class AuthService {
     return this.roleSignal;
   }
 
+  getRole() {
+    if (this.helperService.isPlatformBrowser()) {
+      const role = localStorage.getItem('role');
+      if (role) {
+        return role;
+      }
+    }
+    return null;
+  }
+  
   get currentLang(): string | null {
     if(this._helperService.isPlatformBrowser()){
       return localStorage.getItem('lang');

@@ -30,6 +30,8 @@ import { DeleteItemComponent } from './components/delete-item/delete-item.compon
 import { FooterComponent } from './components/footer/footer.component';
 import { UserNavbarComponent } from './components/navbar/user-navbar.component';
 import { TableComponent } from './components/table/table.component';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { StarRatingModule } from 'angular-star-rating';
 import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
@@ -68,6 +70,8 @@ import { TranslateModule } from '@ngx-translate/core';
     MatDialogTitle,
     NgxDropzoneModule,
     MatDatepickerModule,
+    MatSlideToggleModule,
+    StarRatingModule
     TranslateModule
   ],
   exports: [
@@ -99,7 +103,9 @@ import { TranslateModule } from '@ngx-translate/core';
     UserNavbarComponent,
     MatDatepickerModule,
     SingleRoomComponent,
+    MatSlideToggleModule,
+    StarRatingModule
     TranslateModule
   ],
 })
-export class SharedModule { }
+  export class SharedModule { }
