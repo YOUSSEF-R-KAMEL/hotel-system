@@ -166,6 +166,8 @@ $Hotel-system-dark-theme: mat.define-dark-theme(
   & .booking-section h5,
   h5,
   h3,
+  h1,
+  .breadcrumb-item a,
   p:not(.price) {
     color: white !important;
   }
