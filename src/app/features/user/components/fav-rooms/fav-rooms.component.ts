@@ -1,6 +1,9 @@
+import { IFavoriteRooms } from './../../interfaces/favorite-rooms-interface';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IFavoriteRooms } from '../../interfaces/favorite-rooms-interface';
+import { IRoom } from '../../../../shared/interface/room/room.interface';
+import { FavoriteRoomsService } from '../../services/favorite-rooms.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-fav-rooms',
@@ -8,13 +11,32 @@ import { IFavoriteRooms } from '../../interfaces/favorite-rooms-interface';
   styleUrls: ['./fav-rooms.component.scss'],
 })
 export class FavRoomsComponent {
-  favRooms: IFavoriteRooms[] = [];
+  rooms: IRoom[] = [];
   page: number = 1;
   size: number = 10;
-  constructor(private route: ActivatedRoute) {
+  constructor(
+    private route: ActivatedRoute,
+    private favRoomsService: FavoriteRoomsService,
+    private toast: ToastrService
+  ) {
     this.route.data.subscribe((data: any) => {
-      const favRooms = data.filters.data.favoriteRooms;
-      this.favRooms = favRooms;
+      const favRooms = data?.filters?.data?.favoriteRooms[0];
+      this.rooms = favRooms.rooms
     });
+  }
+  removeFromFav(id: string) {
+    this.favRoomsService.deleteFavRoom(id).subscribe({
+      error: (err) => {
+        this.toast.error('please try again later')
+      },
+      complete: () => {
+        this.toast.success('removed from favourites');
+        this.favRoomsService.getAllFavRooms().subscribe({
+          next: (res) => {
+            this.rooms = (res.data.favoriteRooms![0] as IFavoriteRooms).rooms
+          }
+        });
+      }
+    })
   }
 }

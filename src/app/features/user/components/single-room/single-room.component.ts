@@ -1,10 +1,12 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { IRoom } from '../../../../shared/interface/room/room.interface';
 import { AuthService } from '../../../auth/services/auth.service';
 import { LoginRegisterDialogComponent } from '../../home/components/login-register-dialog/login-register-dialog.component';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { IAddFavoriteRoom } from '../../interfaces/add-to-fav.interface';
+import { FavoriteRoomsService } from '../../services/favorite-rooms.service';
 
 @Component({
   selector: 'app-single-room',
@@ -25,14 +27,27 @@ export class SingleRoomComponent {
     return this._authService.currentLang
   }
   openDialog(room:IRoom): void {
+=======
+  favRoom: IAddFavoriteRoom | null = null;
+  constructor(
+    public dialog: MatDialog,
+    private _AuthService: AuthService,
+    private _FavRoomsService: FavoriteRoomsService
+  ) {}
+  openDialog(): void {
     if (
       this._authService.role() !== 'user' &&
       this._authService.role() !== 'admin'
     ) {
       const dialogRef = this.dialog.open(LoginRegisterDialogComponent);
     } else {
-      console.log(room)
-      this._route.navigate(['home/' + room._id])
+      const roomId = this.room?._id;
+      this._FavRoomsService.addRoomToFavorite(roomId!).subscribe({
+        next: (res: IAddFavoriteRoom) => {
+          console.log(res);
+          console.log(this.favRoom);
+        },
+      });
     }
   }
 }
