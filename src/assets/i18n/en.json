@@ -1,6 +1,4 @@
 {
-  "home": "Home",
-  "about": "About",
   "forms": {
     "name": "Name",
     "email": "Email",
@@ -14,21 +12,55 @@
     "password": "Password must be at least 6 characters",
     "confirmPassword": "Passwords do not match"
   },
-  "Home": "Home",
-  "Explore": "Explore",
-  "booking": {
-    "heading": "Forget Busy Work, Start Next Vacation",
-    "desc": "We provide what you need to enjoy your holiday with family. Time to make another memorable moments.",
-    "start": "Start booking",
-    "inputLabel": "Enter a date range",
-    "inputPlaceholder": "Start Date - End Date",
-    "person": "Person",
-    "btn": "Explore"
+  "nav": {
+    "register": "Register",
+    "login": "Login Now",
+    "home": "Home",
+    "explore": "Explore",
+    "reviews": "Reviews",
+    "favorites": "Favorites",
+    "profile": "Profile",
+    "change-password": "Change password",
+    "logout": "Logout"
   },
-  "popular": "Most popular ads",
-  "beautyBackyard": "Houses with beauty backyard",
-  "largeLiving": "Hotels with large living room",
-  "Ads": "Ads",
+  "home-page": {
+    "booking": {
+      "forget": "Forget Busy Work, Start Next Vacation",
+      "desc": "We provide what you need to enjoy your holiday with family. Time to make another memorable moments.",
+      "start": "Start booking",
+      "inputLabel": "Enter a date range",
+      "inputPlaceholder": "Start Date - End Date",
+      "date-hint": "MM/DD/YYYY",
+      "invalid-start-date": "Invalid start date",
+      "invalid-end-date": "Invalid end date",
+      "invalidStartDate": "Invalid start date",
+      "person": "Person",
+      "btn": "Explore"
+    },
+    "popular": {
+      "most": "Most popular ads",
+      "per": "per night",
+      "discount": "Discount"
+    },
+    "beautyBackyard": {
+      "beauty": "Houses with beauty backyard",
+      "room-number": "Room number",
+      "price": "Price"
+    },
+    "largeLiving": "Hotels with large living room",
+    "Ads": "Ads",
+    "testimonials": {
+      "heading": "Happy Family",
+      "paragraph": "What a great trip with my family and I should try again next time soon ...",
+      "persons": "Angga, Product Designer"
+    }
+  },
+  "explore-page": {
+    "heading": "Explore all rooms",
+    "home": "Home",
+    "explore": "Explore",
+    "all": "All rooms"
+  },
   "footer": {
     "desc": "We kaboom your beauty holiday instantly and memorable.",
     "col01": {

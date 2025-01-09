@@ -33,7 +33,13 @@ const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (
     RouterModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    TranslateModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: httpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
     NgxSpinnerModule,
     ToastrModule.forRoot(),
   ],
