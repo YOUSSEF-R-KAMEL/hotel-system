@@ -7,9 +7,20 @@ import { SharedRoomsComponent } from './components/shared-rooms/shared-rooms.com
 import { TestimonialsComponent } from './components/testimonials/testimonials.component';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
-  declarations: [HomeComponent, SharedRoomsComponent, PopularRoomsComponent, TestimonialsComponent],
-  imports: [CommonModule, HomeRoutingModule, SharedModule],
+  declarations: [
+    HomeComponent,
+    SharedRoomsComponent,
+    PopularRoomsComponent,
+    TestimonialsComponent,
+  ],
+  imports: [
+    CommonModule,
+    HomeRoutingModule,
+    SharedModule,
+    TranslateModule
+  ],
 })
 export class HomeModule {}

@@ -3,8 +3,8 @@ import { computed, Injectable, signal, Signal } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { ILogin } from '../interfaces/ILogin';
 import { IApiResponse } from '../../../shared/interface/api-data-response/api-response.interface';
-import { HelperService } from '../../../shared/services/helpers/helper.service';
 import { IUser } from '../../../shared/interface/user/IUserResponse';
+import { HelperService } from './../../../shared/services/helpers/helper.service';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +13,7 @@ export class AuthService {
   private userSignal = signal<IUser | null>(null);
   private roleSignal = computed(() => this.userSignal()?.role || null);
 
-  constructor(private http: HttpClient, private helperService: HelperService) {
+  constructor(private http: HttpClient, private helperService: HelperService, private _helperService:HelperService) {
     this.loadUserFromLocalStorage();
   }
 
@@ -35,6 +35,13 @@ export class AuthService {
     return null;
   }
   
+  get currentLang(): string | null {
+    if(this._helperService.isPlatformBrowser()){
+      return localStorage.getItem('lang');
+    }
+    return null
+  }
+
   updateUser(user: IUser | null): void {
     this.userSignal.set(user);
   }

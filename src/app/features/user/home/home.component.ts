@@ -4,6 +4,8 @@ import { IRoom } from '../../../shared/interface/room/room.interface';
 import { RoomsService } from '../services/rooms.service';
 import { Router } from '@angular/router';
 import { IRoomParams } from '../../../shared/interface/params/params.interface';
+import { TranslateService } from '@ngx-translate/core';
+import { AuthService } from '../../auth/services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -23,10 +25,20 @@ export class HomeComponent implements OnInit {
     endDate: new FormControl<Date | null>(null),
     capacity: new FormControl<number>(1),
   });
-
-  constructor(private _RoomService: RoomsService, private router: Router) {
+  constructor(private _RoomService: RoomsService,
+              private router: Router,
+              private translate: TranslateService,
+              private _authServices:AuthService ) {
+          this.translate.setDefaultLang(this.currentLang as string);
+          this.translate.use(this.currentLang as string);
+          console.log(this.currentLang)
   }
-
+  switchLanguage(lang: string) {
+    this.translate.use(lang);
+  }
+  get currentLang() : string | null{
+    return this._authServices.currentLang
+  }
   ngOnInit(): void {
     this.getAllRooms();
   }
@@ -54,21 +66,17 @@ export class HomeComponent implements OnInit {
     }
     this.router.navigate(['/explore'], { queryParams: params });
   }
-
   get capacity() {
     return this.roomFiltersForm.get('capacity')!;
   }
-
   getCapacityDisplay(): string {
     const value = this.capacity.value || 0;
     return `${value} person${value > 1 ? 's' : ''}`;
   }
-
   incrementCapacity(): void {
     const currentValue = this.capacity.value || 0;
     this.capacity.setValue(currentValue + 1);
   }
-
   decrementCapacity(): void {
     const currentValue = this.capacity.value || 1;
     if (currentValue > 1) {
