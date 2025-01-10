@@ -6,39 +6,39 @@
       </div>
       <nav class="d-flex gap-5 align-items-center h-100">
         <ul class="d-flex gap-4 align-items-center m-0" [ngStyle]="{'direction': showEnBtn? 'rtl' : 'ltr'}">
-          @for(link of navLinks(); track link.text) {
-            @if (link.isUser) {
-              <li>
-                <a
-                  [routerLink]="link.path"
-                  [queryParams]="
+          @for(link of navLinks; track link.text) {
+          @if (link.isUser) {
+          <li>
+            <a [routerLink]="link.path" [queryParams]="
                     link.text === 'Explore' ? { page: 1, size: 200 } : null
-                  "
-                  routerLinkActive="active"
-                  [routerLinkActiveOptions]="{ exact: true }"
-                  >{{ 'nav.'  + link.text | translate }}</a
-                >
-              </li>
-              }
-            }
-        <button class="btn-trans" *ngIf="showEnBtn" (click)="switchLanguage('en')">EN</button>
-        <button class="btn-trans" *ngIf="!showEnBtn" (click)="switchLanguage('ar')">AR</button>
+                  " routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">{{ 'nav.' + link.text |
+              translate }}</a>
+          </li>
+          }
+          }
+          <button class="btn-trans" *ngIf="showEnBtn" (click)="switchLanguage('en')">EN</button>
+          <button class="btn-trans" *ngIf="!showEnBtn" (click)="switchLanguage('ar')">AR</button>
         </ul>
-        @if (!user()) {
+        @if (role !== 'user') {
         <div class="d-flex gap-3">
           <button
             [routerLink]="authRoutes.register"
             mat-raised-button
-            color="primary"
+            class="btn-navbar"
           >
-          {{ 'nav.register' | translate }}
+            Register
           </button>
           <button
             [routerLink]="authRoutes.login"
             mat-raised-button
-            color="primary"
+            class="btn-navbar"
           >
-          {{ 'nav.login' | translate }}
+            Login now
+          <button [routerLink]="authRoutes.register" mat-raised-button color="primary">
+            {{ 'nav.register' | translate }}
+          </button>
+          <button [routerLink]="authRoutes.login" mat-raised-button color="primary">
+            {{ 'nav.login' | translate }}
           </button>
         </div>
         } @else {
@@ -55,8 +55,31 @@
               "
               alt="profile picture"
             />
-            <p>{{ user()?.userName }}</p>
+            <p class="price">{{ user()?.userName }}</p>
+            <img width="40px" height="40px" class="rounded-circle" [src]="
+                  user?.profileImage
+                    ? user?.profileImage
+                    : '../../../../assets/images/svg/profile-placeholder-image.svg'
+                " alt="profile picture" />
+            <p>{{ user?.userName }}</p>
           </div>
+          <div class="theme-control">
+            <mat-slide-toggle checked (click)="toggleTheme()"></mat-slide-toggle>
+            <button mat-icon-button>
+              @if (themeService.themeSignal() === 'dark'){
+              <mat-icon>bedtime</mat-icon>
+              } @else {
+              <mat-icon>brightness_5</mat-icon>
+              }
+            </button>
+          </div>
+          <button mat-icon-button (click)="toggleTheme()">
+            @if (themeService.themeSignal() === 'dark'){
+            <mat-icon>brightness_5</mat-icon>
+            } @else {
+            <mat-icon>bedtime</mat-icon>
+            }
+          </button>
           <button mat-icon-button [matMenuTriggerFor]="menu">
             <mat-icon>keyboard_arrow_down</mat-icon>
           </button>

@@ -22,6 +22,10 @@ export class SingleRoomComponent {
     private translate: TranslateService,
     private _FavRoomsService: FavoriteRoomsService
   ) {
+  constructor(private favoriteRoomsService: FavoriteRoomsService, 
+              public dialog: MatDialog, 
+              private _authService: AuthService, 
+              private translate: TranslateService) {
     this.translate.setDefaultLang(this.currentLang as string);
     this.translate.use(this.currentLang as string);  // Set default language to English
   }
@@ -31,15 +35,17 @@ export class SingleRoomComponent {
   get currentLang() : string | null{
     return this._authService.currentLang
   }
+
+  favRoom: IAddFavoriteRoom | null = null;
   openDialog(): void {
     if (
-      this._authService.role() !== 'user' &&
-      this._authService.role() !== 'admin'
+      this._authService.getRole() !== 'user' &&
+      this._authService.getRole() !== 'admin'
     ) {
       const dialogRef = this.dialog.open(LoginRegisterDialogComponent);
     } else {
       const roomId = this.room?._id;
-      this._FavRoomsService.addRoomToFavorite(roomId!).subscribe({
+      this.favoriteRoomsService.addRoomToFavorite(roomId!).subscribe({
         next: (res: IAddFavoriteRoom) => {
           console.log(res);
           console.log(this.favRoom);

@@ -1,22 +1,27 @@
-import { Component } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
-import { AuthService } from '../../../../auth/services/auth.service';
+import { Component, Input, OnInit } from '@angular/core';
+import { RoomsService } from '../../../services/rooms.service';
+import { IApiResponse } from '../../../../../shared/interface/api-data-response/api-response.interface';
+import { IRoom } from '../../../../../shared/interface/room/room.interface';
+import { IGetRoomReview } from '../../../interfaces/room-review.interface';
 
 @Component({
   selector: 'app-testimonials',
   templateUrl: './testimonials.component.html',
   styleUrl: './testimonials.component.scss'
 })
-export class TestimonialsComponent {
+export class TestimonialsComponent implements OnInit{
   stars: number[] = Array(5).fill(0);
-  constructor(private translate: TranslateService, private _authService:AuthService) {
-    this.translate.setDefaultLang(this.currentLang as string);
-    this.translate.use(this.currentLang as string);  // Set default language to English
-  }
-  switchLanguage(lang: string) {
-    this.translate.use(lang);  // Change language dynamically
-  }
-  get currentLang() : string | null{
-    return this._authService.currentLang
+  @Input() room: IRoom | null = null;
+  reviews: IGetRoomReview[] = [];
+  constructor(private roomsService: RoomsService) {}
+  ngOnInit(): void {
+    if (this.room) {
+      this.roomsService.getRoomReviews(this.room?._id as string).subscribe({
+        next: (res: IApiResponse) => {
+          this.reviews = res.data.roomReviews as IGetRoomReview[];
+          console.log(this.reviews)
+        }
+      })
+    }
   }
 }

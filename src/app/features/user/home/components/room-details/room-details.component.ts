@@ -5,6 +5,8 @@ import { IRoom } from '../../../../../shared/interface/room/room.interface';
 import { IApiRoomResponse } from '../../../interfaces/api-response-room.interface';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from '../../../../auth/services/auth.service';
+import { IApiResponse } from './../../../../../shared/interface/api-data-response/api-response.interface';
+import { IRouterMatcher } from 'express';
 
 @Component({
   selector: 'app-room-details',
@@ -34,7 +36,7 @@ export class RoomDetailsComponent implements OnInit {
   }
   getRoomDetails(){
     this._roomsService.getRoomDetails(this.id).subscribe({
-      next: (res: IApiRoomResponse) => {
+      next: (res: IApiResponse) => {
         this.currentRoomDetails = res.data.room as IRoom;
       },
       error: (err) => {

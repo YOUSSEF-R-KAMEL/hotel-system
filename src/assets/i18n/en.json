@@ -15,10 +15,10 @@
   "nav": {
     "register": "Register",
     "login": "Login Now",
-    "home": "Home",
-    "explore": "Explore",
-    "reviews": "Reviews",
-    "favorites": "Favorites",
+    "Home": "Home",
+    "Explore": "Explore",
+    "Reviews": "Reviews",
+    "Favorites": "Favorites",
     "profile": "Profile",
     "change-password": "Change password",
     "logout": "Logout"
