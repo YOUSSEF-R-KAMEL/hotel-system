@@ -20,18 +20,19 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+import { StarRatingModule } from 'angular-star-rating';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { SingleRoomComponent } from '../features/user/components/single-room/single-room.component';
 import { DeleteItemComponent } from './components/delete-item/delete-item.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { UserNavbarComponent } from './components/navbar/user-navbar.component';
 import { TableComponent } from './components/table/table.component';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-
 
 @NgModule({
   declarations: [
@@ -39,7 +40,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     DeleteItemComponent,
     UserNavbarComponent,
     FooterComponent,
-    SingleRoomComponent
+    SingleRoomComponent,
   ],
   imports: [
     CommonModule,
@@ -69,7 +70,9 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     MatDialogTitle,
     NgxDropzoneModule,
     MatDatepickerModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    StarRatingModule,
+    TranslateModule,
   ],
   exports: [
     RouterModule,
@@ -100,7 +103,9 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     UserNavbarComponent,
     MatDatepickerModule,
     SingleRoomComponent,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    StarRatingModule,
+    TranslateModule,
   ],
 })
-  export class SharedModule { }
+export class SharedModule {}
