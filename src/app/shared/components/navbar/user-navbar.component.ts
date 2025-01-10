@@ -34,11 +34,14 @@ export class UserNavbarComponent {
       ];
     })
     if (this.role && this.userId) {
+      console.log(this.userId)
+      console.log(this.role)
       this.authService.getUser(this.userId).subscribe({
         next: (res: IApiResponse) => {
           if (res && res.data && res.data.user) {
             this.authService.updateUser(res.data.user as IUser);
             this.user = res.data.user;
+            console.log(this.user)
           }
         },
       });

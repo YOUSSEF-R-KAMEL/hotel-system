@@ -15,10 +15,10 @@
   "nav": {
     "register": "إنشاء حساب",
     "login": "تسجيل الان",
-    "home": "الرئيسية",
-    "explore": "استكشاف",
-    "reviews": "المراجعات",
-    "favorites": "المفضلة",
+    "Home": "الرئيسية",
+    "Explore": "استكشاف",
+    "Reviews": "المراجعات",
+    "Favorites": "المفضلة",
     "profile": "الحساب",
     "change-password": "تغيير كلمة المرور",
     "logout": "تسجيل خروج"
