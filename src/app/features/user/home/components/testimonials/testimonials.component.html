@@ -1,20 +1,7 @@
 <section class="testi">
-  <div class="container d-flex justify-content-between">
-    <img src="../../../../assets/images/svg/testimonials.svg" alt=""
-    [ngClass]="{'ar': currentLang  == 'ar'}">
-    <div class="text me-5">
-      <h3>{{ 'home-page.testimonials.heading' | translate }}</h3>
-      <i *ngFor="let star of stars" class="fa-solid fa-star"></i>
-      <p>
-        {{ 'home-page.testimonials.paragraph' | translate }}
-      </p>
-      <span>{{ 'home-page.testimonials.persons' | translate }}</span>
-      <div class="icons">
-        <img src="../../../../assets/images/svg/left-icon.svg" alt=""
-        [ngClass]="{'ar': currentLang  == 'ar'}"/>
-        <img src="../../../../assets/images/svg/right-icon.svg" alt=""
-        [ngClass]="{'ar': currentLang  == 'ar'}"/>
-      </div>
+  <div class="container">
+    <div class="row p-3">
+      <app-testimonial-carousel [reviews]="reviews"/>
     </div>
   </div>
 </section>

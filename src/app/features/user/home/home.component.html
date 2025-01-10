@@ -5,6 +5,13 @@
         <div>
           <h1>{{ "home-page.booking.forget" | translate }}</h1>
           <p>{{ "home-page.booking.desc" | translate }}</p>
+          <h1>Forget Busy Work, Start Next Vacation</h1>
+          <p>
+            We provide what you need to enjoy your holiday with family. Time to
+            make another memorable moments.
+          </p>
+          <h1>{{ 'home-page.booking.forget' | translate }}</h1>
+          <p>{{ 'home-page.booking.desc' | translate }}</p>
         </div>
         <div>
           <h5>{{ "home-page.booking.start" | translate }}</h5>
@@ -37,6 +44,16 @@
               @if
               (roomFiltersForm.controls.startDate.hasError('matStartDateInvalid'))
               {
+              <mat-error>Invalid start date</mat-error>
+              } @if
+              (roomFiltersForm.controls.endDate.hasError('matEndDateInvalid')) {
+              <mat-error>Invalid end date</mat-error>
+              <mat-hint>{{ 'home-page.booking.date-hint' | translate }} – {{ 'home-page.booking.date-hint' | translate }}</mat-hint>
+              <mat-datepicker-toggle matIconPrefix [for]="picker"></mat-datepicker-toggle>
+              <mat-date-range-picker #picker></mat-date-range-picker>
+              @if
+              (roomFiltersForm.controls.startDate.hasError('matStartDateInvalid'))
+              {
               <mat-error>{{
                 "home-page.booking.invalid-start-date" | translate
               }}</mat-error>
@@ -65,6 +82,12 @@
                   readonly
                   placeholder="Capacity"
                 />
+                  [value]="getCapacityDisplay()"
+                  readonly
+                  placeholder="Capacity"
+                  class="text-center"
+                />
+                <input matInput value="{{ 'home-page.booking.person' | translate }}" readonly placeholder="Capacity">
               </mat-form-field>
               <button
                 mat-icon-button
@@ -82,6 +105,11 @@
             >
               {{ "home-page.booking.btn" | translate }}
             </button>
+            >
+              Explore
+            </button>
+            <button (click)="exploreWithFilters()" class="explore-btn" mat-raised-button
+              color="primary">{{ 'home-page.booking.btn' | translate }}</button>
           </form>
         </div>
       </div>
@@ -95,6 +123,9 @@
             transform: currentLang == 'en' ? 'scaleX(1)' : 'scaleX(-1)'
           }"
         />
+        />
+        <img src="../../../../assets/images/svg/room-filter-image.svg" alt="Room filter image"
+        [ngStyle]="{'transform': currentLang  == 'en'? 'scaleX(1)' : 'scaleX(-1)'}">
       </div>
     </div>
   </div>
@@ -111,6 +142,10 @@
 <div class="shared-rooms">
   <app-shared-rooms [inputRooms]="thirdRoomsSection()" />
 </div>
+</div>
+<div class="shared-rooms"><app-shared-rooms [inputRooms]="firstRoomsSection()" /></div>
+<div class="shared-rooms"><app-shared-rooms [inputRooms]="secondRoomsSection()" /></div>
+<div class="shared-rooms"><app-shared-rooms [inputRooms]="thirdRoomsSection()" /></div>
 <div class="testimonial">
-  <app-testimonials></app-testimonials>
+  <app-testimonials [room]="rooms()[0]"></app-testimonials>
 </div>

@@ -2,11 +2,11 @@
 <div class="container">
   <nav aria-label="breadcrumb" class="d-flex justify-content-around align-items-center mb-5">
     <ol class="breadcrumb mb-0">
-      <li class="breadcrumb-item"><a routerLink="/home">Home</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Room Details</li>
+      <li class="breadcrumb-item"><a routerLink="/home"> {{ 'details-page.home' | translate }} </a></li>
+      <li class="breadcrumb-item active" aria-current="page"> {{ 'details-page.details' | translate }} </li>
     </ol>
     <div class="heading text-center">
-      <h2>Room Number: {{currentRoomDetails?.roomNumber}}</h2>
+      <h2>{{ 'details-page.heading' | translate }}: {{currentRoomDetails?.roomNumber}}</h2>
       @for (fa of currentRoomDetails?.facilities; track $index) {
         <span>{{fa.name}}
           @if ($index <( currentRoomDetails?.facilities?.length || 0) - 1) {
@@ -23,46 +23,46 @@
       }
     </div>
     <div class="start-booking">
-      <h4>Start Booking</h4>
-      <p><span>${{currentRoomDetails?.price}}</span> per night</p>
-      <span class="text-danger">Discount {{currentRoomDetails?.discount}}% Off </span>
+      <h4>{{ 'home-page.booking.start' | translate }}</h4>
+      <p><span>${{currentRoomDetails?.price}}</span> {{ 'home-page.popular.per' | translate }}</p>
+      <span class="text-danger">{{ 'home-page.popular.discount' | translate }}: {{currentRoomDetails?.discount}}% </span>
       <form>
-        <label>Pick a Date</label>
+        <label>{{ 'details-page.pick' | translate }}</label>
         <div class="input-group mb-3">
           <span class="input-group-text" id="basic-addon1"><img src="../../../../../../assets/images/svg/calendar.svg" alt=""></span>
           <input type="text" class="form-control" placeholder="20 Jan - 22 Jan" aria-label="Username" aria-describedby="basic-addon1">
         </div>
-        <span class="pay">You will pay <span class="num">$480</span> USD per <span class="num">2 Person</span></span>
+        <span class="pay">{{ 'details-page.will-pay' | translate }} <span class="num">$480</span> {{ 'details-page.usd' | translate }} <span class="num">{{ 'details-page.person' | translate }}</span></span>
         <div class="text-center mt-2">
-          <button class="explore-btn" mat-raised-button color="primary">Continue Book</button>
+          <button class="explore-btn" mat-raised-button color="primary">{{ 'details-page.continue' | translate }}</button>
         </div>
       </form>
     </div>
     <div class="rate-comment">
       <div class="row">
         <div class="col-md-6">
-          <div class="rate">
-            <h3>Rate</h3>
+          <div class="rate" [ngClass]="{'ar': currentLang == 'ar'}">
+            <h3>{{ 'details-page.rate' | translate }}</h3>
             <div class="stars">
               <i class="fa-solid fa-star"></i>
               <i class="fa-solid fa-star"></i>
               <i class="fa-solid fa-star"></i>
               <i class="fa-solid fa-star"></i>
             </div>
-            <h4 class="my-4">Message</h4>
+            <h4 class="my-4">{{ 'details-page.message' | translate }}</h4>
             <form>
               <textarea name="" id=""></textarea>
-              <button class="explore-btn" mat-raised-button color="primary">Rate</button>
+              <button class="explore-btn" mat-raised-button color="primary">{{ 'details-page.rate' | translate }}</button>
             </form>
           </div>
         </div>
         <div class="col-md-6">
           <div class="comment">
-            <h3>Add Your Comment</h3>
+            <h3>{{ 'details-page.add-comment' | translate }}</h3>
             <form>
               <textarea name="" id=""></textarea>
               <div class="d-flex justify-content-end">
-                <button class="explore-btn" mat-raised-button color="primary">Send</button>
+                <button class="explore-btn" mat-raised-button color="primary">{{ 'details-page.send' | translate }}</button>
               </div>
             </form>
           </div>
