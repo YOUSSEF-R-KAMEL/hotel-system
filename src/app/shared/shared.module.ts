@@ -20,10 +20,13 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+import { StarRatingModule } from 'angular-star-rating';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { SingleRoomComponent } from '../features/user/components/single-room/single-room.component';
 import { DeleteItemComponent } from './components/delete-item/delete-item.component';
@@ -39,7 +42,7 @@ import { TranslateModule } from '@ngx-translate/core';
     DeleteItemComponent,
     UserNavbarComponent,
     FooterComponent,
-    SingleRoomComponent
+    SingleRoomComponent,
   ],
   imports: [
     CommonModule,
@@ -71,6 +74,7 @@ import { TranslateModule } from '@ngx-translate/core';
     MatDatepickerModule,
     MatSlideToggleModule,
     StarRatingModule,
+    TranslateModule,
     TranslateModule
   ],
   exports: [
@@ -102,9 +106,12 @@ import { TranslateModule } from '@ngx-translate/core';
     UserNavbarComponent,
     MatDatepickerModule,
     SingleRoomComponent,
+    MatSlideToggleModule,
+    StarRatingModule,
+    TranslateModule,
     MatSlideToggleModule
     StarRatingModule,
     TranslateModule
   ],
 })
-  export class SharedModule { }
+export class SharedModule {}

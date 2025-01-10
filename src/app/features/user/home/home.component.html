@@ -3,6 +3,8 @@
     <div class="col-md-6">
       <div class="booking-container">
         <div>
+          <h1>{{ "home-page.booking.forget" | translate }}</h1>
+          <p>{{ "home-page.booking.desc" | translate }}</p>
           <h1>Forget Busy Work, Start Next Vacation</h1>
           <p>
             We provide what you need to enjoy your holiday with family. Time to
@@ -12,10 +14,12 @@
           <p>{{ 'home-page.booking.desc' | translate }}</p>
         </div>
         <div>
-          <h5>{{ 'home-page.booking.start' | translate }}</h5>
+          <h5>{{ "home-page.booking.start" | translate }}</h5>
           <form [formGroup]="roomFiltersForm">
             <mat-form-field class="date-input">
-              <mat-label>{{ 'home-page.booking.inputLabel' | translate }}</mat-label>
+              <mat-label>{{
+                "home-page.booking.inputLabel" | translate
+              }}</mat-label>
               <mat-date-range-input [rangePicker]="picker">
                 <input
                   matStartDate
@@ -28,6 +32,10 @@
                   placeholder="End date"
                 />
               </mat-date-range-input>
+              <mat-hint
+                >{{ "home-page.booking.date-hint" | translate }} –
+                {{ "home-page.booking.date-hint" | translate }}</mat-hint
+              >
               <mat-datepicker-toggle
                 matIconPrefix
                 [for]="picker"
@@ -43,11 +51,17 @@
               <mat-hint>{{ 'home-page.booking.date-hint' | translate }} – {{ 'home-page.booking.date-hint' | translate }}</mat-hint>
               <mat-datepicker-toggle matIconPrefix [for]="picker"></mat-datepicker-toggle>
               <mat-date-range-picker #picker></mat-date-range-picker>
-              @if (roomFiltersForm.controls.startDate.hasError('matStartDateInvalid')) {
-              <mat-error>{{ 'home-page.booking.invalid-start-date' | translate }}</mat-error>
-              }
-              @if (roomFiltersForm.controls.endDate.hasError('matEndDateInvalid')) {
-              <mat-error>{{ 'home-page.booking.invalid-end-date' | translate }}</mat-error>
+              @if
+              (roomFiltersForm.controls.startDate.hasError('matStartDateInvalid'))
+              {
+              <mat-error>{{
+                "home-page.booking.invalid-start-date" | translate
+              }}</mat-error>
+              } @if
+              (roomFiltersForm.controls.endDate.hasError('matEndDateInvalid')) {
+              <mat-error>{{
+                "home-page.booking.invalid-end-date" | translate
+              }}</mat-error>
               }
             </mat-form-field>
             <h5>Capicity</h5>
@@ -64,6 +78,10 @@
                 <!-- Bind the displayed value dynamically -->
                 <input
                   matInput
+                  value="{{ 'home-page.booking.person' | translate }}"
+                  readonly
+                  placeholder="Capacity"
+                />
                   [value]="getCapacityDisplay()"
                   readonly
                   placeholder="Capacity"
@@ -83,6 +101,10 @@
               (click)="exploreWithFilters()"
               class="explore-btn"
               mat-raised-button
+              color="primary"
+            >
+              {{ "home-page.booking.btn" | translate }}
+            </button>
             >
               Explore
             </button>
@@ -97,6 +119,10 @@
         <img
           src="../../../../assets/images/svg/room-filter-image.svg"
           alt="Room filter image"
+          [ngStyle]="{
+            transform: currentLang == 'en' ? 'scaleX(1)' : 'scaleX(-1)'
+          }"
+        />
         />
         <img src="../../../../assets/images/svg/room-filter-image.svg" alt="Room filter image"
         [ngStyle]="{'transform': currentLang  == 'en'? 'scaleX(1)' : 'scaleX(-1)'}">
