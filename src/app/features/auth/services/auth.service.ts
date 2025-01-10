@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { computed, Injectable, signal, Signal } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
-import { ILogin } from '../interfaces/ILogin';
+import { ILogin, User } from '../interfaces/ILogin';
 import { IApiResponse } from '../../../shared/interface/api-data-response/api-response.interface';
 import { HelperService } from '../../../shared/services/helpers/helper.service';
 import { IUser } from '../../../shared/interface/user/IUserResponse';
@@ -10,33 +10,28 @@ import { IUser } from '../../../shared/interface/user/IUserResponse';
   providedIn: 'root',
 })
 export class AuthService {
-  private userSignal = signal<IUser | null>(null);
-  private roleSignal = computed(() => this.userSignal()?.role || null);
+  private userSubject = new BehaviorSubject<User | null>(null);
+  private roleSubject = new BehaviorSubject<string | null>(null);
 
   constructor(private http: HttpClient, private helperService: HelperService) {
     this.loadUserFromLocalStorage();
   }
 
-  get user(): Signal<IUser | null> {
-    return this.userSignal.asReadonly();
+  get user$() {
+    return this.userSubject.asObservable();
   }
 
-  get role(): Signal<string | null> {
-    return this.roleSignal;
+  get role() {
+    return this.roleSubject.asObservable();
   }
 
   getRole() {
-    if (this.helperService.isPlatformBrowser()) {
-      const role = localStorage.getItem('role');
-      if (role) {
-        return role;
-      }
-    }
-    return null;
+    return this.roleSubject.getValue();
   }
-  
-  updateUser(user: IUser | null): void {
-    this.userSignal.set(user);
+
+  updateUser(user: User | null): void {
+    this.userSubject.next(user);
+    this.roleSubject.next(user?.role || null);
   }
 
   private loadUserFromLocalStorage(): void {
@@ -45,19 +40,18 @@ export class AuthService {
       const role = localStorage.getItem('role');
       const userName = localStorage.getItem('userName');
       if (token && role && userName) {
-        this.userSignal.set({
+        const user: User = {
           _id: localStorage.getItem('userId') || '',
           userName,
           role,
-        } as IUser);
+        };
+        this.updateUser(user);
       }
     }
   }
+
   onLogin(data: ILogin): Observable<IApiResponse> {
-    return this.http.post<IApiResponse>('admin/users/login', data)
-    // .pipe(tap((res) => {
-    //   this.userSignal.set(res.data.user as IUser);
-    // }));
+    return this.http.post<IApiResponse>('admin/users/login', data);
   }
   onRegister(data: FormData) {
     return this.http.post('portal/users', data);
@@ -71,11 +65,11 @@ export class AuthService {
   }
   onLogout(): void {
     localStorage.clear();
-    this.userSignal.set(null);
+    this.updateUser(null);
   }
 
   isLoggedIn(): boolean {
-    return !!this.userSignal();
+    return !!this.userSubject.getValue();;
   }
   getAdmin(id: string): Observable<IApiResponse> {
     return this.http.get<IApiResponse>('admin/users/' + id);

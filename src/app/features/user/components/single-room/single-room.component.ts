@@ -21,8 +21,8 @@ export class SingleRoomComponent {
   ) {}
   openDialog(): void {
     if (
-      this._AuthService.role() !== 'user' &&
-      this._AuthService.role() !== 'admin'
+      this._AuthService.getRole() !== 'user' &&
+      this._AuthService.getRole() !== 'admin'
     ) {
       const dialogRef = this.dialog.open(LoginRegisterDialogComponent);
     } else {

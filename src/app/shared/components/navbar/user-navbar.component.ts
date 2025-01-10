@@ -17,24 +17,23 @@ export class UserNavbarComponent implements OnInit {
   userId: string | null = null;
   user: IUser | null = null
   authRoutes = authRoutes;
-  navLinks = computed(() => [
-    { text: 'Home', path: 'home', isUser: true },
-    { text: 'Explore', path: 'explore', isUser: true },
-    { text: 'Reviews', path: 'reviews', isUser: this.role === 'user' },
-    { text: 'Favorites', path: 'favorites', isUser: this.role === 'user' },
-  ]);
-
-  constructor(public themeService: ThemeService,public authService: AuthService, private router: Router, private helperService: HelperService) {
-    this.role = authService.getRole();
+  navLinks: { text: string, path: string, isUser: boolean }[] = [];
+  constructor(public themeService: ThemeService, public authService: AuthService, private router: Router, private helperService: HelperService) {
+    this.authService.role.subscribe((role) => {
+      this.role = role;
+      this.navLinks = [
+        { text: 'Home', path: 'home', isUser: true },
+        { text: 'Explore', path: 'explore', isUser: true },
+        { text: 'Reviews', path: 'reviews', isUser: role === 'user' },
+        { text: 'Favorites', path: 'favorites', isUser: role === 'user' },
+      ];
+    })
     if (this.helperService.isPlatformBrowser()) {
       const userId = localStorage.getItem('userId')
       if (userId) {
         this.userId = userId
       }
     }
-  }
-
-  ngOnInit(): void {
     if (this.role && this.userId) {
       this.authService.getUser(this.userId).subscribe({
         next: (res: IApiResponse) => {
@@ -47,7 +46,10 @@ export class UserNavbarComponent implements OnInit {
     }
   }
 
-  toggleTheme () {
+  ngOnInit(): void {
+  }
+
+  toggleTheme() {
     this.themeService.updateTheme();
   }
 
