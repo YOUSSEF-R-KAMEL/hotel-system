@@ -1,6 +1,6 @@
 <header>
   <div class="container h-100">
-    <div class="d-flex justify-content-between align-items-center h-100">
+    <div class="d-flex justify-content-between align-items-center h-100" style="direction: ltr;">
       <div>
         <img src="../../../../../../assets/images/svg/logo.svg" alt="logo" />
       </div>
@@ -13,7 +13,49 @@
               " routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">{{ link.text }}</a>
           </li>
           } }
+        <ul class="d-flex gap-4 align-items-center m-0" [ngStyle]="{'direction': showEnBtn? 'rtl' : 'ltr'}">
+          @for(link of navLinks(); track link.text) {
+            @if (link.isUser) {
+              <li>
+                <a
+                  [routerLink]="link.path"
+                  [queryParams]="
+                    link.text === 'Explore' ? { page: 1, size: 200 } : null
+                  "
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  >{{ 'nav.'  + link.text | translate }}</a
+                >
+              </li>
+              }
+            }
+        <button class="btn-trans" *ngIf="showEnBtn" (click)="switchLanguage('en')">EN</button>
+        <button class="btn-trans" *ngIf="!showEnBtn" (click)="switchLanguage('ar')">AR</button>
         </ul>
+        @if (role === null) {
+        <div class="d-flex gap-3">
+          <button [routerLink]="authRoutes.register" mat-raised-button color="primary">
+            Register
+          </button>
+          <button [routerLink]="authRoutes.login" mat-raised-button color="primary">
+            Login now
+
+          <button
+            [routerLink]="authRoutes.register"
+            mat-raised-button
+            color="primary"
+          >
+          {{ 'nav.register' | translate }}
+          </button>
+          <button
+            [routerLink]="authRoutes.login"
+            mat-raised-button
+            color="primary"
+          >
+          {{ 'nav.login' | translate }}
+          </button>
+        </div>
+        } @else {
         @if(role === 'user') {
         <div class="d-flex align-items-center gap-3">
           <div class="d-flex align-items-center gap-2">
@@ -40,15 +82,15 @@
           <mat-menu #menu="matMenu">
             <button mat-menu-item>
               <mat-icon>person</mat-icon>
-              <span>Profile</span>
+              <span>{{ 'nav.profile' | translate }}</span>
             </button>
             <button mat-menu-item>
               <mat-icon>lock_open</mat-icon>
-              <span>Change password</span>
+              <span>{{ 'nav.change-password' | translate }}</span>
             </button>
             <button mat-menu-item (click)="logout()">
               <mat-icon>logout</mat-icon>
-              <span>Logout</span>
+              <span>{{ 'nav.logout' | translate }}</span>
             </button>
           </mat-menu>
         </div>

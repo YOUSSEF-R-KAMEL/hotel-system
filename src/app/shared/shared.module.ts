@@ -32,7 +32,7 @@ import { UserNavbarComponent } from './components/navbar/user-navbar.component';
 import { TableComponent } from './components/table/table.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { StarRatingModule } from 'angular-star-rating';
-
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -72,6 +72,7 @@ import { StarRatingModule } from 'angular-star-rating';
     MatDatepickerModule,
     MatSlideToggleModule,
     StarRatingModule
+    TranslateModule
   ],
   exports: [
     RouterModule,
@@ -104,6 +105,7 @@ import { StarRatingModule } from 'angular-star-rating';
     SingleRoomComponent,
     MatSlideToggleModule,
     StarRatingModule
+    TranslateModule
   ],
 })
   export class SharedModule { }
