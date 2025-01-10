@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { IRoom } from '../../../../shared/interface/room/room.interface';
 import { AuthService } from '../../../auth/services/auth.service';
@@ -15,8 +15,13 @@ import { FavoriteRoomsService } from '../../services/favorite-rooms.service';
 })
 export class SingleRoomComponent {
   @Input() room: IRoom | null = null;
+  favRoom: IAddFavoriteRoom | null = null;
   _route = inject(Router)
-  constructor(public dialog: MatDialog, private _authService: AuthService, private translate: TranslateService) {
+  constructor(public dialog: MatDialog,
+    private _authService: AuthService,
+    private translate: TranslateService,
+    private _FavRoomsService: FavoriteRoomsService
+  ) {
     this.translate.setDefaultLang(this.currentLang as string);
     this.translate.use(this.currentLang as string);  // Set default language to English
   }
@@ -26,14 +31,6 @@ export class SingleRoomComponent {
   get currentLang() : string | null{
     return this._authService.currentLang
   }
-  openDialog(room:IRoom): void {
-=======
-  favRoom: IAddFavoriteRoom | null = null;
-  constructor(
-    public dialog: MatDialog,
-    private _AuthService: AuthService,
-    private _FavRoomsService: FavoriteRoomsService
-  ) {}
   openDialog(): void {
     if (
       this._authService.role() !== 'user' &&
@@ -49,5 +46,8 @@ export class SingleRoomComponent {
         },
       });
     }
+  }
+  openDetails(room:IRoom){
+    this._route.navigate(['home/' + room._id])
   }
 }
