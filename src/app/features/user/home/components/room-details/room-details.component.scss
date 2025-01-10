@@ -10,6 +10,10 @@ nav {
   }
 }
 
+.breadcrumb-item + .breadcrumb-item::before {
+  float: none;
+}
+
 .details {
   img {
     width: 500px;
@@ -56,9 +60,6 @@ nav {
             width: 15px;
           }
         }
-        input {
-
-        }
       }
       .pay {
         color: #B0B0B0;
@@ -77,7 +78,7 @@ nav {
     -moz-border-radius: 15px;
     -ms-border-radius: 15px;
     -o-border-radius: 15px;
-    .rate{
+    .rate {
       position: relative;
       &::after {
         content: "";
@@ -87,6 +88,9 @@ nav {
         width: 1px;
         height: 100%;
         background-color: #203FC7;
+      }
+      &.ar::after {
+        right: 545px !important;
       }
       .stars i {
         color: #DFCB1D;

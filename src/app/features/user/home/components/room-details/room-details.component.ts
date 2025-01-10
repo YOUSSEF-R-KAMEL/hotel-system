@@ -2,6 +2,9 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RoomsService } from '../../../services/rooms.service';
 import { IRoom } from '../../../../../shared/interface/room/room.interface';
+import { IApiRoomResponse } from '../../../interfaces/api-response-room.interface';
+import { TranslateService } from '@ngx-translate/core';
+import { AuthService } from '../../../../auth/services/auth.service';
 import { IApiResponse } from './../../../../../shared/interface/api-data-response/api-response.interface';
 import { IRouterMatcher } from 'express';
 
@@ -14,12 +17,23 @@ export class RoomDetailsComponent implements OnInit {
   _route = inject(ActivatedRoute)
   _roomsService = inject(RoomsService)
   currentRoomDetails: IRoom | null = null;
+   constructor(private route: ActivatedRoute,
+                private translate: TranslateService,
+                private _authServices:AuthService) {
+      this.translate.setDefaultLang(this.currentLang as string);
+      this.translate.use(this.currentLang as string);
+    }
+  switchLanguage(lang: string) {
+    this.translate.use(lang);
+  }
+  get currentLang() : string | null{
+    return this._authServices.currentLang
+  }
   id:string = ''
   ngOnInit(): void {
     this.id = this._route.snapshot.params['id'];
     this.getRoomDetails()
   }
-
   getRoomDetails(){
     this._roomsService.getRoomDetails(this.id).subscribe({
       next: (res: IApiResponse) => {

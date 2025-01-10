@@ -2,7 +2,7 @@
   <img [src]="room?.images?.[0]" alt="Sample Image" />
   <div class="overlay">
     <i class="fas fa-heart" (click)="openDialog()"></i>
-    <i class="fas fa-eye" (click)="openDialog()"></i>
+    <i class="fas fa-eye" (click)="openDetails(room!)"></i>
   </div>
   <p class="price">
     <strong>${{ room?.price }}</strong> {{ 'home-page.popular.per' | translate }}

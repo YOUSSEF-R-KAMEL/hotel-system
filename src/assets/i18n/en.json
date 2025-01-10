@@ -61,6 +61,20 @@
     "explore": "Explore",
     "all": "All rooms"
   },
+  "details-page": {
+    "heading": "Room Number",
+    "home": "Home",
+    "details": "Room Details",
+    "pick": "Pick a Date",
+    "will-pay": "You will pay",
+    "usd": "USD per",
+    "person": "2 Person",
+    "continue": "Continue Book",
+    "rate": "Rate",
+    "message": "Message",
+    "add-comment": "Add Your Comment",
+    "send": "Send"
+  },
   "footer": {
     "desc": "We kaboom your beauty holiday instantly and memorable.",
     "col01": {

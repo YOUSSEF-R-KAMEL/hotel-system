@@ -20,6 +20,36 @@ export class UserNavbarComponent {
   user: IUser | null = null
   authRoutes = authRoutes;
   navLinks = computed(() => [
+    { text: 'home', path: 'home', isUser: true },
+    { text: 'explore', path: 'explore', isUser: true },
+    { text: 'reviews', path: 'reviews', isUser: !!this.user() },
+    { text: 'favorites', path: 'favs', isUser: !!this.user() },
+  ]);
+  constructor(
+              public authService: AuthService,
+              private translate: TranslateService,
+              @Inject(DOCUMENT) private document: Document,
+  ) {
+    this.translate.setDefaultLang(this.authService.currentLang as string);
+    this.translate.use(this.authService.currentLang as string);
+    this.setHtmlAttributes(this.authService.currentLang as string);
+  }
+  switchLanguage(lang: string) {
+    this.translate.use(lang);
+    this.setHtmlAttributes(lang);
+    this.showEnBtn = !this.showEnBtn
+    if(this.showEnBtn){
+      localStorage.setItem('lang',"ar");
+      console.log(this.authService.currentLang)
+    }else {
+      localStorage.setItem('lang',"en");
+      console.log(this.authService.currentLang)
+    }
+  }
+  setHtmlAttributes(lang: string) {
+    const html = this.document.documentElement;
+    html.lang = lang;
+    html.dir = lang === 'ar' ? 'rtl' : 'ltr';
     { text: 'Home', path: 'home', isUser: true },
     { text: 'Explore', path: 'explore', isUser: true },
     { text: 'Reviews', path: 'reviews', isUser: !!this.user() },
