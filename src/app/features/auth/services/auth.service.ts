@@ -36,8 +36,9 @@ export class AuthService {
     return null
   }
 
-  updateUser(user: IUser | null): void {
-    this.userSignal.set(user);
+  updateUser(user: User | null): void {
+    this.userSubject.next(user);
+    this.roleSubject.next(user?.role || null);
   }
 
   private loadUserFromLocalStorage(): void {

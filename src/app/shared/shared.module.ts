@@ -71,7 +71,7 @@ import { TranslateModule } from '@ngx-translate/core';
     NgxDropzoneModule,
     MatDatepickerModule,
     MatSlideToggleModule,
-    StarRatingModule
+    StarRatingModule,
     TranslateModule
   ],
   exports: [
@@ -104,7 +104,7 @@ import { TranslateModule } from '@ngx-translate/core';
     MatDatepickerModule,
     SingleRoomComponent,
     MatSlideToggleModule,
-    StarRatingModule
+    StarRatingModule,
     TranslateModule
   ],
 })
