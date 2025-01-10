@@ -19,6 +19,21 @@ export class UserNavbarComponent {
   userId: string | null = null;
   user: IUser | null = null
   authRoutes = authRoutes;
+  navLinks = computed(() => [
+    { text: 'Home', path: 'home', isUser: true },
+    { text: 'Explore', path: 'explore', isUser: true },
+    { text: 'Reviews', path: 'reviews', isUser: !!this.user() },
+    { text: 'Favorites', path: 'favorites', isUser: !!this.user() },
+  ]);
+
+  constructor(public themeService: ThemeService,public authService: AuthService, private router: Router) {
+    this.role = this.authService.role;
+    this.user = this.authService.user;
+  }
+
+  ngOnInit(): void {
+    if (this.user()) {
+      this.authService.getUser(this.user()!._id).subscribe({
   showEnBtn = false;
   navLinks: { text: string, path: string, isUser: boolean }[] = [];
   constructor(private translate: TranslateService, public themeService: ThemeService, public authService: AuthService, private router: Router, private helperService: HelperService,
@@ -77,6 +92,10 @@ export class UserNavbarComponent {
       html.dir = lang === 'ar' ? 'rtl' : 'ltr';
     }
   toggleTheme() {
+    this.themeService.updateTheme();
+  }
+
+  toggleTheme () {
     this.themeService.updateTheme();
   }
 

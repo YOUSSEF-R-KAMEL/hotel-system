@@ -33,7 +33,6 @@ import { TableComponent } from './components/table/table.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { StarRatingModule } from 'angular-star-rating';
 import { TranslateModule } from '@ngx-translate/core';
-
 @NgModule({
   declarations: [
     TableComponent,
@@ -103,7 +102,7 @@ import { TranslateModule } from '@ngx-translate/core';
     UserNavbarComponent,
     MatDatepickerModule,
     SingleRoomComponent,
-    MatSlideToggleModule,
+    MatSlideToggleModule
     StarRatingModule,
     TranslateModule
   ],

@@ -21,6 +21,19 @@
         </ul>
         @if (role !== 'user') {
         <div class="d-flex gap-3">
+          <button
+            [routerLink]="authRoutes.register"
+            mat-raised-button
+            class="btn-navbar"
+          >
+            Register
+          </button>
+          <button
+            [routerLink]="authRoutes.login"
+            mat-raised-button
+            class="btn-navbar"
+          >
+            Login now
           <button [routerLink]="authRoutes.register" mat-raised-button color="primary">
             {{ 'nav.register' | translate }}
           </button>
@@ -31,6 +44,18 @@
         } @else {
         <div class="d-flex align-items-center gap-3">
           <div class="d-flex align-items-center gap-2">
+            <img
+              width="40px"
+              height="40px"
+              class="rounded-circle"
+              [src]="
+                user()?.profileImage
+                  ? user()?.profileImage
+                  : '../../../../assets/images/svg/profile-placeholder-image.svg'
+              "
+              alt="profile picture"
+            />
+            <p class="price">{{ user()?.userName }}</p>
             <img width="40px" height="40px" class="rounded-circle" [src]="
                   user?.profileImage
                     ? user?.profileImage
@@ -48,6 +73,13 @@
               }
             </button>
           </div>
+          <button mat-icon-button (click)="toggleTheme()">
+            @if (themeService.themeSignal() === 'dark'){
+            <mat-icon>brightness_5</mat-icon>
+            } @else {
+            <mat-icon>bedtime</mat-icon>
+            }
+          </button>
           <button mat-icon-button [matMenuTriggerFor]="menu">
             <mat-icon>keyboard_arrow_down</mat-icon>
           </button>
