@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { RoomsService } from '../../../services/rooms.service';
 import { IRoom } from '../../../../../shared/interface/room/room.interface';
 import { IApiResponse } from './../../../../../shared/interface/api-data-response/api-response.interface';
-import { IApiRoomResponse } from '../../../interfaces/api-response-room.interface';
 import { IRouterMatcher } from 'express';
 
 @Component({
@@ -23,7 +22,7 @@ export class RoomDetailsComponent implements OnInit {
 
   getRoomDetails(){
     this._roomsService.getRoomDetails(this.id).subscribe({
-      next: (res: IApiRoomResponse) => {
+      next: (res: IApiResponse) => {
         this.currentRoomDetails = res.data.room as IRoom;
       },
       error: (err) => {

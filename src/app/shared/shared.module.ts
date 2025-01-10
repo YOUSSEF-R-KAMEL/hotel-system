@@ -31,8 +31,8 @@ import { FooterComponent } from './components/footer/footer.component';
 import { UserNavbarComponent } from './components/navbar/user-navbar.component';
 import { TableComponent } from './components/table/table.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-
-
+import { StarRatingModule } from 'angular-star-rating';
+import { TranslateModule } from '@ngx-translate/core';
 @NgModule({
   declarations: [
     TableComponent,
@@ -69,7 +69,9 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     MatDialogTitle,
     NgxDropzoneModule,
     MatDatepickerModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    StarRatingModule,
+    TranslateModule
   ],
   exports: [
     RouterModule,
@@ -101,6 +103,8 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     MatDatepickerModule,
     SingleRoomComponent,
     MatSlideToggleModule
+    StarRatingModule,
+    TranslateModule
   ],
 })
   export class SharedModule { }

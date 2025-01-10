@@ -1,26 +1,25 @@
 <header>
   <div class="container h-100">
-    <div class="d-flex justify-content-between align-items-center h-100">
+    <div class="d-flex justify-content-between align-items-center h-100" style="direction: ltr;">
       <div>
         <img src="../../../../../../assets/images/svg/logo.svg" alt="logo" />
       </div>
       <nav class="d-flex gap-5 align-items-center h-100">
-        <ul class="d-flex gap-4 align-items-center m-0">
-          @for(link of navLinks(); track link.text) { @if (link.isUser) {
+        <ul class="d-flex gap-4 align-items-center m-0" [ngStyle]="{'direction': showEnBtn? 'rtl' : 'ltr'}">
+          @for(link of navLinks; track link.text) {
+          @if (link.isUser) {
           <li>
-            <a
-              [routerLink]="link.path"
-              [queryParams]="
-                link.text === 'Explore' ? { page: 1, size: 200 } : null
-              "
-              routerLinkActive="active"
-              [routerLinkActiveOptions]="{ exact: true }"
-              >{{ link.text }}</a
-            >
+            <a [routerLink]="link.path" [queryParams]="
+                    link.text === 'Explore' ? { page: 1, size: 200 } : null
+                  " routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">{{ 'nav.' + link.text |
+              translate }}</a>
           </li>
-          } }
+          }
+          }
+          <button class="btn-trans" *ngIf="showEnBtn" (click)="switchLanguage('en')">EN</button>
+          <button class="btn-trans" *ngIf="!showEnBtn" (click)="switchLanguage('ar')">AR</button>
         </ul>
-        @if (!user()) {
+        @if (role !== 'user') {
         <div class="d-flex gap-3">
           <button
             [routerLink]="authRoutes.register"
@@ -35,6 +34,11 @@
             class="btn-navbar"
           >
             Login now
+          <button [routerLink]="authRoutes.register" mat-raised-button color="primary">
+            {{ 'nav.register' | translate }}
+          </button>
+          <button [routerLink]="authRoutes.login" mat-raised-button color="primary">
+            {{ 'nav.login' | translate }}
           </button>
         </div>
         } @else {
@@ -52,6 +56,22 @@
               alt="profile picture"
             />
             <p class="price">{{ user()?.userName }}</p>
+            <img width="40px" height="40px" class="rounded-circle" [src]="
+                  user?.profileImage
+                    ? user?.profileImage
+                    : '../../../../assets/images/svg/profile-placeholder-image.svg'
+                " alt="profile picture" />
+            <p>{{ user?.userName }}</p>
+          </div>
+          <div class="theme-control">
+            <mat-slide-toggle checked (click)="toggleTheme()"></mat-slide-toggle>
+            <button mat-icon-button>
+              @if (themeService.themeSignal() === 'dark'){
+              <mat-icon>bedtime</mat-icon>
+              } @else {
+              <mat-icon>brightness_5</mat-icon>
+              }
+            </button>
           </div>
           <button mat-icon-button (click)="toggleTheme()">
             @if (themeService.themeSignal() === 'dark'){
@@ -66,15 +86,15 @@
           <mat-menu #menu="matMenu">
             <button mat-menu-item>
               <mat-icon>person</mat-icon>
-              <span>Profile</span>
+              <span>{{ 'nav.profile' | translate }}</span>
             </button>
             <button mat-menu-item>
               <mat-icon>lock_open</mat-icon>
-              <span>Change password</span>
+              <span>{{ 'nav.change-password' | translate }}</span>
             </button>
             <button mat-menu-item (click)="logout()">
               <mat-icon>logout</mat-icon>
-              <span>Logout</span>
+              <span>{{ 'nav.logout' | translate }}</span>
             </button>
           </mat-menu>
         </div>

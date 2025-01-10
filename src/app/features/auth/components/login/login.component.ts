@@ -36,6 +36,7 @@ export class LoginComponent {
           localStorage.setItem('role', res.data.user?.role as string);
           localStorage.setItem('userId', res.data.user?._id as string);
           localStorage.setItem('userName', res.data.user?.userName as string);
+          localStorage.setItem('lang',"en");
           this._AuthService.updateUser(res.data.user as IUser);
         },
         error: (err) => {

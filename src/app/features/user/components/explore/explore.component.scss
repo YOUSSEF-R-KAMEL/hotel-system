@@ -13,6 +13,7 @@
 
 .breadcrumb-item + .breadcrumb-item::before {
   content: " / ";
+  float: none;
 }
 
 .breadcrumb a {
