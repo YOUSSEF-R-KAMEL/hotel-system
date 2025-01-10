@@ -2,6 +2,7 @@ import { Ads } from '../../../features/admin/dashboard/ads/interfaces/IAdsRespon
 import { IBooking } from '../../../features/admin/dashboard/booking-facilities/interfaces/booking-facility.interface';
 import { IFacility } from '../../../features/admin/dashboard/facilities/interfaces/facitlities.interface';
 import { IFavoriteRooms } from '../../../features/user/interfaces/favorite-rooms-interface';
+import { IGetRoomReview } from '../../../features/user/interfaces/room-review.interface';
 import { IRoom } from '../room/room.interface';
 import { IUser } from '../user/IUserResponse';
 
@@ -22,4 +23,5 @@ export interface IData {
   favoriteRooms?: IFavoriteRooms[];
   totalCount: number;
   token?: string;
+  roomReviews?: IGetRoomReview[];
 }
