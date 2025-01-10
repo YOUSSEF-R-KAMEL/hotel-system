@@ -1,8 +1,8 @@
 <div class="container">
-  <div class="row">
-    <h5 class="blue-text">Houses with beauty backyard</h5>
+  <h5 class="blue-text">Houses with beauty backyard</h5>
+  <div class="row gx-3">
     @for (room of rooms(); track room._id) {
-    <div class="room p-0 col-md-3">
+    <div class="room col-lg-3 col-md-4 col-sm-6 col-8">
       <app-single-room [room]="room"></app-single-room>
       <p class="blue-text m-0 mt-2">Room number: {{ room.roomNumber }}</p>
       <p class="grey-text">price: ${{ room.price }}</p>
