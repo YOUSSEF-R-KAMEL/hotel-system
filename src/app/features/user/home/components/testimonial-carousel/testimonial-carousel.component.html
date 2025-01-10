@@ -1,0 +1,26 @@
+<div *ngIf="reviews && reviews.length > 0">
+  <div class="testimonial" [@slide]="animationState">
+    <div class="col-md-6">
+      <div class="user-image-container">
+        <img [src]="currentReview?.user ? currentReview?.user?.profileImage : 'assets/images/svg/testimonials.svg'"
+          alt="" />
+      </div>
+    </div>
+    <div class="text">
+      <h3>{{ currentReview?.user?.userName }}</h3>
+      <star-rating class="m-0" [readOnly]="true" [rating]="currentReview?.rating || 5"></star-rating>
+      <p>
+        Room Number: {{ currentReview?.room?.roomNumber }}
+      </p>
+      <span>Review: {{ currentReview?.review }}</span>
+      <div class="icons">
+        <button (click)="navigate('prev')" [disabled]="currentIndex === 0">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+        <button (click)="navigate('next')" [disabled]="currentIndex >= reviews.length - 1">
+          <mat-icon>arrow_forward</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
