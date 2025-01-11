@@ -23,6 +23,7 @@ import { AppComponent } from './app.component';
 import { globalInterceptor } from './core/interceptors/global/global.interceptor';
 import { loadingInterceptor } from './core/interceptors/loading/loading.interceptor';
 import { StarRatingModule } from 'angular-star-rating';
+import { NgxStripeModule, provideNgxStripe } from 'ngx-stripe';
 const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (
   http: HttpClient
 ) => new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -43,7 +44,7 @@ const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (
     }),
     NgxSpinnerModule,
     ToastrModule.forRoot(),
-    StarRatingModule.forRoot()
+    StarRatingModule.forRoot(),
   ],
   providers: [
     provideClientHydration(),

@@ -8,6 +8,8 @@ import { LoginRegisterDialogComponent } from './home/components/login-register-d
 import { RoomDetailsComponent } from './home/components/room-details/room-details.component';
 import { UserRoutingModule } from './user-routing.module';
 import { UserComponent } from './user.component';
+import { NgxStripeModule } from 'ngx-stripe';
+const publicKey = 'pk_test_51OTjURBQWp069pqTmqhKZHNNd3kMf9TTynJtLJQIJDOSYcGM7xz3DabzCzE7bTxvuYMY0IX96OHBjsysHEKIrwCK006Mu7mKw8';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,6 @@ import { UserComponent } from './user.component';
     LoginRegisterDialogComponent,
     FavRoomsComponent,
   ],
-  imports: [CommonModule, UserRoutingModule, SharedModule, NgxPaginationModule],
+  imports: [CommonModule, UserRoutingModule, SharedModule, NgxPaginationModule, NgxStripeModule.forRoot(publicKey)],
 })
 export class UserModule {}

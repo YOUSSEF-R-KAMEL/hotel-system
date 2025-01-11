@@ -8,6 +8,8 @@ import { HomeComponent } from './home.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { TestimonialCarouselComponent } from './components/testimonial-carousel/testimonial-carousel.component';
 import { SharedModule } from '../../../shared/shared.module';
+import { PaymentComponent } from './components/payment/payment.component';
+import { NgxStripeModule } from 'ngx-stripe';
 
 @NgModule({
   declarations: [
@@ -15,13 +17,15 @@ import { SharedModule } from '../../../shared/shared.module';
     SharedRoomsComponent,
     PopularRoomsComponent,
     TestimonialsComponent,
-    TestimonialCarouselComponent
+    TestimonialCarouselComponent,
+    PaymentComponent
   ],
   imports: [
     CommonModule,
     HomeRoutingModule,
     TranslateModule,
-    SharedModule
+    SharedModule,
+    NgxStripeModule
   ],
 })
 export class HomeModule {}
