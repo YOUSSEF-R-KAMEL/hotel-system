@@ -9,7 +9,6 @@ import { RoomDetailsComponent } from './home/components/room-details/room-detail
 import { UserRoutingModule } from './user-routing.module';
 import { UserComponent } from './user.component';
 import { NgxStripeModule } from 'ngx-stripe';
-const publicKey = 'pk_test_51OTjURBQWp069pqTmqhKZHNNd3kMf9TTynJtLJQIJDOSYcGM7xz3DabzCzE7bTxvuYMY0IX96OHBjsysHEKIrwCK006Mu7mKw8';
 
 @NgModule({
   declarations: [
@@ -19,6 +18,6 @@ const publicKey = 'pk_test_51OTjURBQWp069pqTmqhKZHNNd3kMf9TTynJtLJQIJDOSYcGM7xz3
     LoginRegisterDialogComponent,
     FavRoomsComponent,
   ],
-  imports: [CommonModule, UserRoutingModule, SharedModule, NgxPaginationModule, NgxStripeModule.forRoot(publicKey)],
+  imports: [CommonModule, UserRoutingModule, SharedModule, NgxPaginationModule],
 })
 export class UserModule {}
