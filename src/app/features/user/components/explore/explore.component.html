@@ -1,3 +1,23 @@
+<section class="pt-4">
+  <h1 class="blue-text text-center fw-bolder">Explore all rooms</h1>
+  <!-- Breadcrumbs -->
+  <nav aria-label="breadcrumb" class="ps-5">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a [routerLink]="['/']">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Explore</li>
+    </ol>
+  </nav>
+  <p class="ps-5 fs-4 fw-bold m-0 blue-text mb-4">All rooms</p>
+  <div class="container mb-4">
+    <div class="row g-3">
+  <p class="ps-5 fs-4 fw-bold m-0 blue-text">All rooms</p>
+  <div class="grid-container">
+    <div
+      *ngFor="
+        let room of rooms | paginate : { itemsPerPage: size, currentPage: page }
+      "
+    >
+      <app-single-room [room]="room"></app-single-room>
 <section>
   <div class="container">
     <h1 class="blue-text text-center fw-bolder">{{ 'explore-page.heading' | translate }}</h1>
@@ -11,13 +31,18 @@
     <p class="ps-5 fs-4 fw-bold m-0 blue-text">{{ 'explore-page.all' | translate }}</p>
     <div class="grid-container">
       <div
+        class="col-lg-4 col-md-4 col-sm-6 col-8"
         *ngFor="
-          let room of rooms | paginate : { itemsPerPage: size, currentPage: page }
+          let room of rooms
+            | paginate : { itemsPerPage: size, currentPage: page }
         "
       >
-        <app-single-room [room]="room"></app-single-room>
+        <app-single-room
+          [room]="room"
+          class="col-lg-3 col-md-4 col-sm-6"
+        ></app-single-room>
       </div>
     </div>
-    <pagination-controls (pageChange)="page = $event"></pagination-controls>
   </div>
+  <pagination-controls (pageChange)="page = $event"></pagination-controls>
 </section>

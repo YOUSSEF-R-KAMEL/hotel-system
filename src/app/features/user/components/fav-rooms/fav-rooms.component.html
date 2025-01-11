@@ -1,4 +1,4 @@
-<section>
+<section class="pt-4">
   <h1 class="blue-text text-center fw-bolder">Your favorites</h1>
   <!-- Breadcrumbs -->
   <nav aria-label="breadcrumb" class="ps-5">
@@ -7,27 +7,31 @@
       <li class="breadcrumb-item active" aria-current="page">Favorites</li>
     </ol>
   </nav>
-  <p class="ps-5 fs-4 fw-bold m-0 blue-text">Your rooms</p>
-  <div class="grid-container" *ngIf="rooms; else noFavorites">
-    <div
-      *ngFor="
-        let room of rooms | paginate : { itemsPerPage: size, currentPage: page }
-      "
-    >
-      <div class="image-container">
-        <img [src]="room.images[0]" alt="Sample Image" />
-        <div class="overlay">
-          <button (click)="removeFromFav(room._id)">
-            <i class="fas fa-heart-broken"></i>
-          </button>
-        </div>
-        <p class="price">
-          <strong>${{ room.price }}</strong> per night
-        </p>
-        <div class="details">
-          <p>
-            Discount: <strong>{{ room.discount }}%</strong>
+  <p class="ps-5 fs-4 fw-bold m-0 blue-text mb-4">Your rooms</p>
+  <div class="container" *ngIf="rooms; else noFavorites">
+    <div class="row g-3">
+      <div
+        class="col-lg-4 col-md-4 col-sm-6 col-8"
+        *ngFor="
+          let room of rooms
+            | paginate : { itemsPerPage: size, currentPage: page }
+        "
+      >
+        <div class="image-container">
+          <img [src]="room.images[0]" alt="Sample Image" />
+          <div class="overlay">
+            <button (click)="removeFromFav(room._id)">
+              <i class="fas fa-heart-broken"></i>
+            </button>
+          </div>
+          <p class="price">
+            <strong>${{ room.price }}</strong> per night
           </p>
+          <div class="details">
+            <p>
+              Discount: <strong>{{ room.discount }}%</strong>
+            </p>
+          </div>
         </div>
       </div>
     </div>

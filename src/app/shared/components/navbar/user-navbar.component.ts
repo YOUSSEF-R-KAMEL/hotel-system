@@ -19,6 +19,51 @@ export class UserNavbarComponent {
   userId: string | null = null;
   user: IUser | null = null
   authRoutes = authRoutes;
+  navLinks = computed(() => [
+    { text: 'home', path: 'home', isUser: true },
+    { text: 'explore', path: 'explore', isUser: true },
+    { text: 'reviews', path: 'reviews', isUser: !!this.user() },
+    { text: 'favorites', path: 'favs', isUser: !!this.user() },
+  ]);
+  constructor(
+              public authService: AuthService,
+              private translate: TranslateService,
+              @Inject(DOCUMENT) private document: Document,
+  ) {
+    this.translate.setDefaultLang(this.authService.currentLang as string);
+    this.translate.use(this.authService.currentLang as string);
+    this.setHtmlAttributes(this.authService.currentLang as string);
+  }
+  switchLanguage(lang: string) {
+    this.translate.use(lang);
+    this.setHtmlAttributes(lang);
+    this.showEnBtn = !this.showEnBtn
+    if(this.showEnBtn){
+      localStorage.setItem('lang',"ar");
+      console.log(this.authService.currentLang)
+    }else {
+      localStorage.setItem('lang',"en");
+      console.log(this.authService.currentLang)
+    }
+  }
+  setHtmlAttributes(lang: string) {
+    const html = this.document.documentElement;
+    html.lang = lang;
+    html.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    { text: 'Home', path: 'home', isUser: true },
+    { text: 'Explore', path: 'explore', isUser: true },
+    { text: 'Reviews', path: 'reviews', isUser: !!this.user() },
+    { text: 'Favorites', path: 'favorites', isUser: !!this.user() },
+  ]);
+
+  constructor(public themeService: ThemeService,public authService: AuthService, private router: Router) {
+    this.role = this.authService.role;
+    this.user = this.authService.user;
+  }
+
+  ngOnInit(): void {
+    if (this.user()) {
+      this.authService.getUser(this.user()!._id).subscribe({
   showEnBtn = false;
   navLinks: { text: string, path: string, isUser: boolean }[] = [];
   constructor(private translate: TranslateService, public themeService: ThemeService, public authService: AuthService, private router: Router, private helperService: HelperService,
@@ -77,6 +122,10 @@ export class UserNavbarComponent {
       html.dir = lang === 'ar' ? 'rtl' : 'ltr';
     }
   toggleTheme() {
+    this.themeService.updateTheme();
+  }
+
+  toggleTheme () {
     this.themeService.updateTheme();
   }
 
