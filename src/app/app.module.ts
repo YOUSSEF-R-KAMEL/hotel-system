@@ -26,7 +26,7 @@ import { StarRatingModule } from 'angular-star-rating';
 import { NgxStripeModule, provideNgxStripe } from 'ngx-stripe';
 const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (
   http: HttpClient
-) => new TranslateHttpLoader(http, './assets/i18n/', '.json');
+) => new TranslateHttpLoader(http, '../assets/i18n/', '.json');
 @NgModule({
   declarations: [AppComponent],
   imports: [
