@@ -8,6 +8,7 @@ import { LoginRegisterDialogComponent } from './home/components/login-register-d
 import { RoomDetailsComponent } from './home/components/room-details/room-details.component';
 import { UserRoutingModule } from './user-routing.module';
 import { UserComponent } from './user.component';
+import { NgxStripeModule } from 'ngx-stripe';
 
 @NgModule({
   declarations: [

@@ -2,7 +2,6 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RoomsService } from '../../../services/rooms.service';
 import { IRoom } from '../../../../../shared/interface/room/room.interface';
-import { IApiRoomResponse } from '../../../interfaces/api-response-room.interface';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from '../../../../auth/services/auth.service';
 import { IApiResponse } from './../../../../../shared/interface/api-data-response/api-response.interface';
