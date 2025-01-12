@@ -68,7 +68,7 @@
     "pick": "Pick a Date",
     "will-pay": "You will pay",
     "usd": "USD per",
-    "person": "2 Person",
+    "person": "Person",
     "continue": "Continue Book",
     "rate": "Rate",
     "message": "Message",
@@ -98,4 +98,3 @@
     "copyright": "Copyright 2019 • All rights reserved • Staycation"
   }
 }
-
