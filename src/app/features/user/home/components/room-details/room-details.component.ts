@@ -6,7 +6,9 @@ import { ToastrService } from 'ngx-toastr';
 import { IRoom } from '../../../../../shared/interface/room/room.interface';
 import { AuthService } from '../../../../auth/services/auth.service';
 import { IBookingApiResponse } from '../../../interfaces/api-response-booking.interface';
+import { IReviewRateApiResponse } from '../../../interfaces/review-rate-api-response.interface';
 import { BookingRoomService } from '../../../services/booking-room.service';
+import { RateReviewService } from '../../../services/rate-review.service';
 import { RoomsService } from '../../../services/rooms.service';
 import { IApiResponse } from './../../../../../shared/interface/api-data-response/api-response.interface';
 
@@ -22,6 +24,10 @@ export class RoomDetailsComponent implements OnInit {
   id: string = '';
   resMsg: string = '';
   bookingId = '';
+  rateEditorContent: string = '';
+  commentEditorContent: string = '';
+  reviews: any[] = [];
+  userRating: number = 5;
   facilityIcons: { [key: string]: string } = {
     '4 television': '4 television',
     Bathroom: 'Bathroom',
@@ -45,21 +51,24 @@ export class RoomDetailsComponent implements OnInit {
     private translate: TranslateService,
     private _authServices: AuthService,
     private _BookingRoomService: BookingRoomService,
-    private _ToastrService: ToastrService
-  ) {
-    this.translate.setDefaultLang(this.currentLang as string);
-    this.translate.use(this.currentLang as string);
-  }
-  switchLanguage(lang: string) {
-    this.translate.use(lang);
-  }
-  get currentLang(): string | null {
-    return this._authServices.currentLang;
-  }
+    private _ToastrService: ToastrService,
+    private _RateReviewService: RateReviewService
+  ) {}
   ngOnInit(): void {
     this.id = this._route.snapshot.params['id'];
     this.getRoomDetails();
+    this.onGetAllReviews();
   }
+  editorConfig = {
+    toolbar: [
+      ['bold', 'italic', 'underline'], // Text styling
+      [{ header: [1, 2, 3, 4, 5, 6, false] }], // Headers
+      [{ list: 'ordered' }, { list: 'bullet' }], // Lists
+      [{ align: [] }], // Alignment
+      [{ color: [] }, { background: [] }], // Colors
+      ['clean'], // Clear formatting
+    ],
+  };
   getRoomDetails() {
     this._roomsService.getRoomDetails(this.id).subscribe({
       next: (res: IApiResponse) => {
@@ -76,7 +85,7 @@ export class RoomDetailsComponent implements OnInit {
   sum(price: number, capacity: number): number {
     return price * capacity;
   }
-  onSubmit(form: FormGroup) {
+  onCheckoutRoom(form: FormGroup) {
     if (this.currentRoomDetails) {
       const price = this.currentRoomDetails.price;
       const capacity = this.currentRoomDetails.capacity;
@@ -109,5 +118,15 @@ export class RoomDetailsComponent implements OnInit {
         },
       });
     }
+  }
+
+  onGetAllReviews() {
+    this._RateReviewService
+      .getReviews(this.currentRoomDetails?._id!)
+      .subscribe({
+        next: (res: IReviewRateApiResponse) => {
+          this.reviews = res.data.roomReviews;
+        },
+      });
   }
 }

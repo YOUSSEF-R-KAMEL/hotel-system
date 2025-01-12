@@ -31,15 +31,15 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
 import { SingleRoomComponent } from '../features/user/components/single-room/single-room.component';
 import { DeleteItemComponent } from './components/delete-item/delete-item.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { TableComponent } from './components/table/table.component';
 import { UserNavbarComponent } from './components/navbar/user-navbar.component';
+import { TableComponent } from './components/table/table.component';
 @NgModule({
   declarations: [
     TableComponent,
     DeleteItemComponent,
     FooterComponent,
     SingleRoomComponent,
-    UserNavbarComponent
+    UserNavbarComponent,
   ],
   imports: [
     CommonModule,
@@ -72,7 +72,6 @@ import { UserNavbarComponent } from './components/navbar/user-navbar.component';
     MatSlideToggleModule,
     StarRatingModule,
     TranslateModule,
-    TranslateModule
   ],
   exports: [
     RouterModule,
@@ -108,7 +107,7 @@ import { UserNavbarComponent } from './components/navbar/user-navbar.component';
     MatSlideToggleModule,
     StarRatingModule,
     TranslateModule,
-    UserNavbarComponent
+    UserNavbarComponent,
   ],
 })
-export class SharedModule { }
+export class SharedModule {}

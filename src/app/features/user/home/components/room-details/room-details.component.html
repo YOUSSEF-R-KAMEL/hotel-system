@@ -94,23 +94,10 @@
         </span>
         <form
           [formGroup]="checkoutRoomForm"
-          (ngSubmit)="onSubmit(checkoutRoomForm)"
+          (ngSubmit)="onCheckoutRoom(checkoutRoomForm)"
         >
           <label>{{ "details-page.pick" | translate }}</label>
-          <!-- <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon1"
-              ><img
-                src="../../../../../../assets/images/svg/calendar.svg"
-                alt=""
-            /></span>
-            <input
-              type="text"
-              class="form-control"
-              placeholder="20 Jan - 22 Jan"
-              aria-label="Username"
-              aria-describedby="basic-addon1"
-            />
-          </div> -->
+
           <mat-form-field class="date-input">
             <mat-label>{{
               "home-page.booking.inputLabel" | translate
@@ -127,7 +114,6 @@
                 placeholder="End date"
               />
             </mat-date-range-input>
-            <!-- <mat-hint>{{ 'home-page.booking.date-hint' | translate }} – {{ 'home-page.booking.date-hint' | translate }}</mat-hint> -->
             <mat-datepicker-toggle
               matIconPrefix
               [for]="picker"
@@ -178,17 +164,47 @@
     <div class="rate-comment">
       <div class="row">
         <div class="col-md-6">
-          <div class="rate" [ngClass]="{ ar: currentLang == 'ar' }">
+          <div class="rate">
             <h3>{{ "details-page.rate" | translate }}</h3>
-            <div class="stars">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-            </div>
-            <h4 class="my-4">{{ "details-page.message" | translate }}</h4>
-            <form>
-              <textarea name="" id=""></textarea>
+            @if (reviews && reviews.length > 0) {
+            <ng-container>
+              @for (review of reviews; track review._id) {
+              <div class="review-item">
+                <div class="review-header">
+                  <img
+                    [src]="review.user.profileImage"
+                    alt="user image"
+                    class="user-image"
+                  />
+                  <h5 class="user-name">{{ review.user.userName }}</h5>
+                  <star-rating
+                    [rating]="review.rating"
+                    [showHalfStars]="true"
+                    [readOnly]="true"
+                  ></star-rating>
+                </div>
+                <p class="review-text">{{ review.review }}</p>
+                <p class="review-date">
+                  {{ review.createdAt | date : "short" }}
+                </p>
+              </div>
+              }
+            </ng-container>
+            }
+            <form class="rateForm">
+              <h4>{{ "details-page.message" | translate }}</h4>
+              <star-rating [rating]="5" [showHalfStars]="true"></star-rating>
+
+              <div class="w-100">
+                <quill-editor
+                  class="w-100"
+                  [(ngModel)]="rateEditorContent"
+                  [style]="{ height: '70px' }"
+                  [modules]="editorConfig"
+                  name="editorContent"
+                >
+                </quill-editor>
+              </div>
               <button class="explore-btn" mat-raised-button color="primary">
                 {{ "details-page.rate" | translate }}
               </button>
@@ -199,13 +215,21 @@
           <div class="comment">
             <h3>{{ "details-page.add-comment" | translate }}</h3>
             <form>
-              <textarea name="" id=""></textarea>
+              <div class="w-100">
+                <quill-editor
+                  class="w-100"
+                  [(ngModel)]="commentEditorContent"
+                  [style]="{ height: '70px' }"
+                  [modules]="editorConfig"
+                  name="editorContent"
+                >
+                </quill-editor>
+              </div>
               <div class="d-flex justify-content-end">
                 <button class="explore-btn" mat-raised-button color="primary">
                   {{ "details-page.send" | translate }}
                 </button>
               </div>
-              <star-rating class="m-0" [rating]="5"></star-rating>
             </form>
           </div>
         </div>
