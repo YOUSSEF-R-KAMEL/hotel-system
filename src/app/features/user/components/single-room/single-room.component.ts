@@ -16,7 +16,10 @@ import { FavoriteRoomsService } from '../../services/favorite-rooms.service';
 export class SingleRoomComponent {
   @Input() room: IRoom | null = null;
   _route = inject(Router)
-  constructor(private favoriteRoomsService: FavoriteRoomsService, public dialog: MatDialog, private _authService: AuthService, private translate: TranslateService) {
+  constructor(private favoriteRoomsService: FavoriteRoomsService,
+    public dialog: MatDialog,
+    private _authService: AuthService,
+    private translate: TranslateService) {
     this.translate.setDefaultLang(this.currentLang as string);
     this.translate.use(this.currentLang as string);  // Set default language to English
   }
@@ -43,5 +46,8 @@ export class SingleRoomComponent {
         },
       });
     }
+  }
+  openDetals(room:IRoom){
+    this._route.navigate(['home/'+ room._id])
   }
 }

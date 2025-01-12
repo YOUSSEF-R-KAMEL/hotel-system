@@ -1,12 +1,12 @@
 
 <div class="container">
-  <nav aria-label="breadcrumb" class="d-flex justify-content-around align-items-center mb-5">
+  <nav aria-label="breadcrumb" class="d-flex justify-content-around align-items-center mt-5 mb-5">
     <ol class="breadcrumb mb-0">
       <li class="breadcrumb-item"><a routerLink="/home"> {{ 'details-page.home' | translate }} </a></li>
       <li class="breadcrumb-item active" aria-current="page"> {{ 'details-page.details' | translate }} </li>
     </ol>
     <div class="heading text-center">
-      <h2>{{ 'details-page.heading' | translate }}: {{currentRoomDetails?.roomNumber}}</h2>
+      <h2> {{currentRoomDetails?.roomNumber}}</h2>
       @for (fa of currentRoomDetails?.facilities; track $index) {
         <span>{{fa.name}}
           @if ($index <( currentRoomDetails?.facilities?.length || 0) - 1) {
