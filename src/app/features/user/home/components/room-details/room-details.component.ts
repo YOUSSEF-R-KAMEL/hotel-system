@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RoomsService } from '../../../services/rooms.service';
 import { IRoom } from '../../../../../shared/interface/room/room.interface';
 import { TranslateService } from '@ngx-translate/core';
@@ -13,10 +13,10 @@ import { IRouterMatcher } from 'express';
   styleUrl: './room-details.component.scss'
 })
 export class RoomDetailsComponent implements OnInit {
-  _route = inject(ActivatedRoute)
   _roomsService = inject(RoomsService)
   currentRoomDetails: IRoom | null = null;
-   constructor(private route: ActivatedRoute,
+   constructor(private _activeRoute: ActivatedRoute,
+                private _route: Router,
                 private translate: TranslateService,
                 private _authServices:AuthService) {
       this.translate.setDefaultLang(this.currentLang as string);
@@ -30,7 +30,7 @@ export class RoomDetailsComponent implements OnInit {
   }
   id:string = ''
   ngOnInit(): void {
-    this.id = this._route.snapshot.params['id'];
+    this.id = this._activeRoute.snapshot.params['id'];
     this.getRoomDetails()
   }
   getRoomDetails(){
@@ -45,6 +45,9 @@ export class RoomDetailsComponent implements OnInit {
         console.log(this.currentRoomDetails);
       }
     });
+  }
+  openPayment(){
+    this._route.navigate(['home/payment'])
   }
 
 
