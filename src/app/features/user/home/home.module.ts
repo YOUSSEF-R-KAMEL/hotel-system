@@ -10,6 +10,8 @@ import { TestimonialCarouselComponent } from './components/testimonial-carousel/
 import { SharedModule } from '../../../shared/shared.module';
 import { NgxStripeModule } from 'ngx-stripe';
 import { PaymentComponent } from './components/payment/payment.component';
+import {MatStepperModule} from '@angular/material/stepper';
+
 const publicKey = 'pk_test_51OTjURBQWp069pqTmqhKZHNNd3kMf9TTynJtLJQIJDOSYcGM7xz3DabzCzE7bTxvuYMY0IX96OHBjsysHEKIrwCK006Mu7mKw8';
 @NgModule({
   declarations: [
@@ -25,6 +27,7 @@ const publicKey = 'pk_test_51OTjURBQWp069pqTmqhKZHNNd3kMf9TTynJtLJQIJDOSYcGM7xz3
     HomeRoutingModule,
     TranslateModule,
     SharedModule,
+    MatStepperModule,
     NgxStripeModule.forRoot(publicKey)
   ],
 })

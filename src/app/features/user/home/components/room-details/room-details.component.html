@@ -34,7 +34,7 @@
         </div>
         <span class="pay">{{ 'details-page.will-pay' | translate }} <span class="num">$480</span> {{ 'details-page.usd' | translate }} <span class="num">{{ 'details-page.person' | translate }}</span></span>
         <div class="text-center mt-2">
-          <button class="explore-btn" mat-raised-button color="primary">{{ 'details-page.continue' | translate }}</button>
+          <button class="explore-btn" mat-raised-button color="primary" (click)="openPayment()">{{ 'details-page.continue' | translate }}</button>
         </div>
       </form>
     </div>
