@@ -17,6 +17,7 @@ import { RouterModule } from '@angular/router';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { StarRatingModule } from 'angular-star-rating';
+import { QuillModule } from 'ngx-quill';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastrModule } from 'ngx-toastr';
 import { AppRoutingModule } from './app-routing.module';
@@ -44,6 +45,7 @@ const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (
     NgxSpinnerModule,
     ToastrModule.forRoot(),
     StarRatingModule.forRoot(),
+    QuillModule.forRoot(),
   ],
   providers: [
     provideClientHydration(),
