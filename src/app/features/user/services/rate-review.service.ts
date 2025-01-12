@@ -2,11 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IReviewRateApiResponse } from '../interfaces/review-rate-api-response.interface';
-interface IReview {
-  roomId: string;
-  rating: number;
-  review: string;
-}
+import { IReview } from '../interfaces/review.interface';
+
 @Injectable({
   providedIn: 'root',
 })
