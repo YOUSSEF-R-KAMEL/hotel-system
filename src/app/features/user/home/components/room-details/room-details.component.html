@@ -191,9 +191,13 @@
               }
             </ng-container>
             }
-            <form class="rateForm">
+
+            <form class="rateForm" (ngSubmit)="submitReview()">
               <h4>{{ "details-page.message" | translate }}</h4>
-              <star-rating [rating]="5" [showHalfStars]="true"></star-rating>
+              <star-rating
+                [rating]="userRating"
+                [showHalfStars]="true"
+              ></star-rating>
 
               <div class="w-100">
                 <quill-editor
@@ -205,7 +209,12 @@
                 >
                 </quill-editor>
               </div>
-              <button class="explore-btn" mat-raised-button color="primary">
+              <button
+                type="submit"
+                class="explore-btn"
+                mat-raised-button
+                color="primary"
+              >
                 {{ "details-page.rate" | translate }}
               </button>
             </form>

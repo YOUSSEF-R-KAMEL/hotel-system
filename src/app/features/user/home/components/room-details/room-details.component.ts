@@ -5,8 +5,9 @@ import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { IRoom } from '../../../../../shared/interface/room/room.interface';
 import { AuthService } from '../../../../auth/services/auth.service';
-import { IBookingApiResponse } from '../../../interfaces/api-response-booking.interface';
-import { IReviewRateApiResponse } from '../../../interfaces/review-rate-api-response.interface';
+import { IBookingApiResponse } from '../../../interfaces/api-responses/api-response-booking.interface';
+import { IReviewRateApiResponse } from '../../../interfaces/api-responses/review-rate-api-response.interface';
+import { IReview } from '../../../interfaces/review.interface';
 import { BookingRoomService } from '../../../services/booking-room.service';
 import { RateReviewService } from '../../../services/rate-review.service';
 import { RoomsService } from '../../../services/rooms.service';
@@ -128,5 +129,27 @@ export class RoomDetailsComponent implements OnInit {
           this.reviews = res.data.roomReviews;
         },
       });
+  }
+  submitReview() {
+    const reviewData: IReview = {
+      rating: this.userRating,
+      review: this.rateEditorContent,
+      roomId: this.currentRoomDetails?._id!,
+    };
+
+    this._RateReviewService.createReview(reviewData).subscribe({
+      next: (response) => {
+        this.resMsg = response.message;
+        this._ToastrService.success(this.resMsg);
+      },
+      error: (err) => {
+        console.log(err);
+        this.resMsg = err.error.message;
+        this._ToastrService.error(this.resMsg);
+      },
+      complete: () => {
+        this.onGetAllReviews();
+      },
+    });
   }
 }

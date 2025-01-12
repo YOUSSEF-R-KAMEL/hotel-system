@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IBookingApiResponse } from '../interfaces/api-response-booking.interface';
+import { IBookingApiResponse } from '../interfaces/api-responses/api-response-booking.interface';
 import { ICreateBooking } from '../interfaces/create-booking.interface';
 
 @Injectable({
