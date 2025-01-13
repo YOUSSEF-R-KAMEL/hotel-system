@@ -1,8 +1,8 @@
-import { QuillModule } from 'ngx-quill';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatStepperModule } from '@angular/material/stepper';
 import { TranslateModule } from '@ngx-translate/core';
+import { QuillModule } from 'ngx-quill';
 import { NgxStripeModule } from 'ngx-stripe';
 import { SharedModule } from '../../../shared/shared.module';
 import { PaymentComponent } from './components/payment/payment.component';
@@ -31,8 +31,8 @@ const publicKey =
     HomeRoutingModule,
     TranslateModule,
     SharedModule,
-    MatStepperModule,
     QuillModule.forRoot(),
+    MatStepperModule,
     NgxStripeModule.forRoot(publicKey),
   ],
   exports: [RoomDetailsComponent],
