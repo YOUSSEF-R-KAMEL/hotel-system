@@ -1,5 +1,5 @@
 import { Component, computed, inject, ViewChild } from '@angular/core';
-import { UntypedFormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, UntypedFormBuilder, Validators } from '@angular/forms';
 import { StripeCardElementOptions, StripeElementsOptions } from '@stripe/stripe-js';
 import { StripeCardComponent, injectStripe } from 'ngx-stripe';
 import { ThemeService } from '../../../../../shared/services/theme/theme.service';
@@ -20,11 +20,19 @@ export class PaymentComponent {
 
   stripePublicKey = 'pk_test_51OTjURBQWp069pqTmqhKZHNNd3kMf9TTynJtLJQIJDOSYcGM7xz3DabzCzE7bTxvuYMY0IX96OHBjsysHEKIrwCK006Mu7mKw8';
   @ViewChild(StripeCardComponent) cardElement!: StripeCardComponent;
-  constructor(private roomsService: RoomsService, private route: ActivatedRoute) {
+  constructor(private roomsService: RoomsService, private route: ActivatedRoute, private _formBuilder: FormBuilder) {
     this.bookingId = this.route.snapshot.queryParamMap.get('bookingId') || '';
   }
 
   private readonly fb = inject(UntypedFormBuilder);
+  firstFormGroup = this._formBuilder.group({
+    firstCtrl: ['', Validators.required],
+  });
+  secondFormGroup = this._formBuilder.group({
+    secondCtrl: ['', Validators.required],
+  });
+  isEditable = false;
+
 
   cardOptions: StripeCardElementOptions = {
     style: {

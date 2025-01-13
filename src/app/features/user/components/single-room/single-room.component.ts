@@ -1,11 +1,11 @@
 import { Component, inject, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { IRoom } from '../../../../shared/interface/room/room.interface';
 import { AuthService } from '../../../auth/services/auth.service';
 import { LoginRegisterDialogComponent } from '../../home/components/login-register-dialog/login-register-dialog.component';
-import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
-import { IAddFavoriteRoom } from '../../interfaces/add-to-fav.interface';
+import { IAddFavoriteRoom } from '../../interfaces/api-responses/add-to-fav.interface';
 import { FavoriteRoomsService } from '../../services/favorite-rooms.service';
 
 @Component({
@@ -15,16 +15,21 @@ import { FavoriteRoomsService } from '../../services/favorite-rooms.service';
 })
 export class SingleRoomComponent {
   @Input() room: IRoom | null = null;
-  _route = inject(Router)
-  constructor(private favoriteRoomsService: FavoriteRoomsService, public dialog: MatDialog, private _authService: AuthService, private translate: TranslateService) {
+  _route = inject(Router);
+  constructor(
+    private favoriteRoomsService: FavoriteRoomsService,
+    public dialog: MatDialog,
+    private _authService: AuthService,
+    private translate: TranslateService
+  ) {
     this.translate.setDefaultLang(this.currentLang as string);
-    this.translate.use(this.currentLang as string);  // Set default language to English
+    this.translate.use(this.currentLang as string); // Set default language to English
   }
   switchLanguage(lang: string) {
-    this.translate.use(lang);  // Change language dynamically
+    this.translate.use(lang); // Change language dynamically
   }
-  get currentLang() : string | null{
-    return this._authService.currentLang
+  get currentLang(): string | null {
+    return this._authService.currentLang;
   }
 
   favRoom: IAddFavoriteRoom | null = null;
@@ -43,5 +48,8 @@ export class SingleRoomComponent {
         },
       });
     }
+  }
+  openDetals(room: IRoom) {
+    this._route.navigate(['home/' + room._id]);
   }
 }

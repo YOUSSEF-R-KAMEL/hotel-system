@@ -16,14 +16,13 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { RouterModule } from '@angular/router';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { StarRatingModule } from 'angular-star-rating';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastrModule } from 'ngx-toastr';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { globalInterceptor } from './core/interceptors/global/global.interceptor';
 import { loadingInterceptor } from './core/interceptors/loading/loading.interceptor';
-import { StarRatingModule } from 'angular-star-rating';
-import { NgxStripeModule, provideNgxStripe } from 'ngx-stripe';
 const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (
   http: HttpClient
 ) => new TranslateHttpLoader(http, '../assets/i18n/', '.json');
@@ -39,8 +38,8 @@ const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (
       loader: {
         provide: TranslateLoader,
         useFactory: httpLoaderFactory,
-        deps: [HttpClient]
-      }
+        deps: [HttpClient],
+      },
     }),
     NgxSpinnerModule,
     ToastrModule.forRoot(),
@@ -66,4 +65,4 @@ const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
