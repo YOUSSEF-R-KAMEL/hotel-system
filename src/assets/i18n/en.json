@@ -73,7 +73,11 @@
     "rate": "Rate",
     "message": "Message",
     "add-comment": "Add Your Comment",
-    "send": "Send"
+    "send": "Send",
+    "update": "Update",
+    "delete": "Delete",
+    "no-comments": "No Comments",
+    "cancel": "Cancel"
   },
   "footer": {
     "desc": "We kaboom your beauty holiday instantly and memorable.",

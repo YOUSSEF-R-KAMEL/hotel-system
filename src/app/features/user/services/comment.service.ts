@@ -18,7 +18,7 @@ export class CommentService {
   }
   createCommet(data: IComment): Observable<ICreateCommentApiResponse> {
     return this._HttpClinet.post<ICreateCommentApiResponse>(
-      'portal/room-reviews',
+      'portal/room-comments',
       data
     );
   }
