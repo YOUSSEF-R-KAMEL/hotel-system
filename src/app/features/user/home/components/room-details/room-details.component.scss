@@ -2,10 +2,10 @@ nav {
   width: 70%;
   .heading {
     h2 {
-      color: #152C5B;
+      color: #152c5b;
     }
     span {
-      color: #B0B0B0;
+      color: #b0b0b0;
     }
   }
 }
@@ -13,115 +13,200 @@ nav {
 .breadcrumb-item + .breadcrumb-item::before {
   float: none;
 }
-
+.start-booking {
+  margin: 10px auto;
+  border: 1px solid #e5e5e5;
+  padding: 35px;
+  border-radius: 16px;
+  -webkit-border-radius: 16px;
+  -moz-border-radius: 16px;
+  -ms-border-radius: 16px;
+  -o-border-radius: 16px;
+  h4 {
+    color: #152c5b;
+  }
+  p {
+    font-size: 36px;
+    color: #b0b0b0;
+    margin-bottom: 0;
+    span {
+      color: #1abc9c;
+    }
+  }
+  form {
+    width: 60%;
+    margin: 10px auto;
+    margin-top: 80px;
+    label {
+      color: #152c5b;
+    }
+    .input-group {
+      .input-group-text {
+        background-color: #152c5b !important;
+        color: #fff;
+        img {
+          width: 15px;
+        }
+      }
+    }
+    .pay {
+      color: #b0b0b0;
+      .num {
+        color: #152c5b;
+      }
+    }
+  }
+}
 .details {
   img {
-    width: 500px;
     border-radius: 16px;
-    -webkit-border-radius: 16px;
-    -moz-border-radius: 16px;
-    -ms-border-radius: 16px;
-    -o-border-radius: 16px;
   }
-  .start-booking {
-    width: 50%;
-    margin: 10px auto;
-    margin-top: 35px;
-    border: 1px solid #E5E5E5;
-    padding: 35px;
-    border-radius: 16px;
-    -webkit-border-radius: 16px;
-    -moz-border-radius: 16px;
-    -ms-border-radius: 16px;
-    -o-border-radius: 16px;
-    h4 {
-      color: #152C5B;
-    }
-    p {
-      font-size: 36px;
-      color: #B0B0B0;
-      margin-bottom: 0;
-      span {
-        color: #1ABC9C;
-      }
-    }
-    form {
-      width: 60%;
-      margin: 10px auto;
-      margin-top: 80px;
-      label {
-        color: #152C5B;
-      }
-      .input-group {
-        .input-group-text {
-          background-color: #152C5B !important;
-          color: #fff;
-          img {
-            width: 15px;
-          }
-        }
-      }
-      .pay {
-        color: #B0B0B0;
-        .num {
-          color: #152C5B;
-        }
-      }
-    }
-  }
+
   .rate-comment {
+    padding: 2rem;
     margin-top: 50px;
-    border: 1px solid #E5E5E5;
-    padding: 25px 45px;
+    border: 1px solid #e5e5e5;
     border-radius: 15px;
-    -webkit-border-radius: 15px;
-    -moz-border-radius: 15px;
-    -ms-border-radius: 15px;
-    -o-border-radius: 15px;
-    .rate {
-      position: relative;
-      &::after {
-        content: "";
-        position: absolute;
-        right: 48px;
-        bottom: 0;
-        width: 1px;
-        height: 100%;
-        background-color: #203FC7;
-      }
-      &.ar::after {
-        right: 545px !important;
-      }
-      .stars i {
-        color: #DFCB1D;
-      }
-    }
+
     form {
-      width: 80%;
-      textarea {
-        padding: 10px 15px;
-        resize: none;
-        outline: none;
-        width: 100%;
-        height: 200px;
-        border: 1px solid #203FC7;
-        border-radius: 15px;
-        -webkit-border-radius: 15px;
-        -moz-border-radius: 15px;
-        -ms-border-radius: 15px;
-        -o-border-radius: 15px;
-      }
+      width: 100%;
+      text-align: center;
       button {
-        width: 210px;
+        width: fit-content;
         height: 50px;
         display: block;
         margin: 15px 0;
         font-size: 18px;
       }
     }
-    .comment form {
-      margin-top: 92px;
+  }
+}
+#imageCarousel {
+  width: 90%;
+  margin: 0 auto;
+}
+#imageCarousel img {
+  height: 400px;
+  // object-fit: cover;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+}
+.facilities {
+  .facility-container {
+    width: 25%;
+    height: 5rem;
+    .facility-icon {
+      width: 38px;
+      height: 38px;
+      object-fit: contain;
     }
   }
 }
+.review-item {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+}
 
+.review-header {
+  display: flex;
+  align-items: center;
+}
+
+.user-image {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+.user-name {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.review-text {
+  margin: 6px 0;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.review-date {
+  margin: 0;
+  font-size: 12px;
+  color: #888;
+}
+
+.rateForm {
+  margin-top: 20px;
+  background: #f9f9f9;
+  border-radius: 8px;
+}
+
+.explore-btn {
+  margin-top: 10px;
+}
+.comment-section {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+
+  .comment-header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .comment-body {
+    margin-bottom: 10px;
+    font-size: 14px;
+    line-height: 1.5;
+    word-wrap: break-word;
+  }
+
+  .comment-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+
+    button {
+      font-size: 14px;
+      background-color: #007bff;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: #0056b3;
+      }
+    }
+  }
+
+  .comments-list {
+    margin-top: 15px;
+
+    .comment-item {
+      background-color: #fff;
+      padding: 15px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  .no-comments {
+    text-align: center;
+    color: #777;
+  }
+}
