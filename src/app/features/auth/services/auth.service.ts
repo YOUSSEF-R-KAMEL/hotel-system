@@ -1,9 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { computed, Injectable, signal, Signal } from '@angular/core';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
-import { ILogin, User } from '../interfaces/ILogin';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { IApiResponse } from '../../../shared/interface/api-data-response/api-response.interface';
-import { IUser } from '../../../shared/interface/user/IUserResponse';
+import { ILogin, User } from '../interfaces/ILogin';
 import { HelperService } from './../../../shared/services/helpers/helper.service';
 
 @Injectable({
@@ -13,7 +12,11 @@ export class AuthService {
   private userSubject = new BehaviorSubject<User | null>(null);
   private roleSubject = new BehaviorSubject<string | null>(null);
 
-  constructor(private http: HttpClient, private helperService: HelperService, private _helperService:HelperService) {
+  constructor(
+    private http: HttpClient,
+    private helperService: HelperService,
+    private _helperService: HelperService
+  ) {
     this.loadUserFromLocalStorage();
   }
 
@@ -65,12 +68,15 @@ export class AuthService {
     return this.http.post('portal/users/reset-password', data);
   }
   onLogout(): void {
-    localStorage.clear();
+    localStorage.removeItem('token');
+    localStorage.removeItem('role');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('userName');
     this.updateUser(null);
   }
 
   isLoggedIn(): boolean {
-    return !!this.userSubject.getValue();;
+    return !!this.userSubject.getValue();
   }
   getAdmin(id: string): Observable<IApiResponse> {
     return this.http.get<IApiResponse>('admin/users/' + id);
@@ -78,5 +84,4 @@ export class AuthService {
   getUser(id: string): Observable<IApiResponse> {
     return this.http.get<IApiResponse>('portal/users/' + id);
   }
-
 }
