@@ -1,10 +1,10 @@
-import { IBooking } from './interfaces/booking-facility.interface';
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ITableInput, ITableAction } from '../../../../shared/interface/table/table-input.interface';
-import { BookingFacilitiesService } from './services/booking-facilities.service';
 import { IApiResponse, IData } from '../../../../shared/interface/api-data-response/api-response.interface';
+import { ITableAction, ITableInput } from '../../../../shared/interface/table/table-input.interface';
 import { ViewBookingDialogComponent } from './components/view-booking-dialog/view-booking-dialog.component';
+import { IBooking } from './interfaces/booking-facility.interface';
+import { BookingFacilitiesService } from './services/booking-facilities.service';
 
 @Component({
   selector: 'app-booking-facilities',
@@ -29,7 +29,7 @@ export class BookingFacilitiesComponent {
     ]
     this.bookingFacilitiesData = {
       data: {
-        booking: [],
+        bookings: [],
         totalCount: 0
       },
       actions: this.actions
@@ -58,7 +58,7 @@ export class BookingFacilitiesComponent {
     console.log(data);
     this.bookingFacilitiesData = {
       data: {
-        booking: data.booking,
+        bookings: data.bookings,
         totalCount: data.totalCount
       },
       actions: this.actions
