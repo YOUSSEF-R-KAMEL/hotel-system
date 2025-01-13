@@ -1,5 +1,5 @@
 import { Component, inject, ViewChild } from '@angular/core';
-import { UntypedFormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, UntypedFormBuilder, Validators } from '@angular/forms';
 import { StripeCardElementOptions, StripeElementsOptions } from '@stripe/stripe-js';
 import { StripeCardComponent, injectStripe } from 'ngx-stripe';
 
@@ -13,6 +13,18 @@ export class PaymentComponent {
   @ViewChild(StripeCardComponent) cardElement!: StripeCardComponent;
 
   private readonly fb = inject(UntypedFormBuilder);
+  firstFormGroup = this._formBuilder.group({
+    firstCtrl: ['', Validators.required],
+  });
+  secondFormGroup = this._formBuilder.group({
+    secondCtrl: ['', Validators.required],
+  });
+  isEditable = false;
+
+  constructor(private _formBuilder: FormBuilder
+
+
+  ) {}
 
   cardOptions: StripeCardElementOptions = {
     style: {

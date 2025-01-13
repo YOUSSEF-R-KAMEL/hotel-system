@@ -1,0 +1,22 @@
+mat-stepper{
+  background: none;
+  h2 {
+    color: #152C5B;
+    font-size: 36px;
+  }
+  p, ul li {
+    color: #B0B0B0;
+  }
+  ul img {
+    margin-right: 15px;
+  }
+  ::ng-deep .mat-horizontal-stepper-header-container {
+    width: 30%;
+    margin: 25px auto;
+    .mat-step-icon {
+      width: 45px;
+      height: 45px;
+      transform: translateY(-10px);
+    }
+  }
+}
