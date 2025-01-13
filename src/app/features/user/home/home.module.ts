@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { MatStepperModule } from '@angular/material/stepper';
 import { TranslateModule } from '@ngx-translate/core';
 import { QuillModule } from 'ngx-quill';
 import { NgxStripeModule } from 'ngx-stripe';
@@ -13,9 +12,14 @@ import { TestimonialCarouselComponent } from './components/testimonial-carousel/
 import { TestimonialsComponent } from './components/testimonials/testimonials.component';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { TestimonialCarouselComponent } from './components/testimonial-carousel/testimonial-carousel.component';
+import { SharedModule } from '../../../shared/shared.module';
+import { NgxStripeModule } from 'ngx-stripe';
+import { PaymentComponent } from './components/payment/payment.component';
+import {MatStepperModule} from '@angular/material/stepper';
 
-const publicKey =
-  'pk_test_51OTjURBQWp069pqTmqhKZHNNd3kMf9TTynJtLJQIJDOSYcGM7xz3DabzCzE7bTxvuYMY0IX96OHBjsysHEKIrwCK006Mu7mKw8';
+const publicKey = 'pk_test_51OTjURBQWp069pqTmqhKZHNNd3kMf9TTynJtLJQIJDOSYcGM7xz3DabzCzE7bTxvuYMY0IX96OHBjsysHEKIrwCK006Mu7mKw8';
 @NgModule({
   declarations: [
     HomeComponent,
@@ -33,7 +37,7 @@ const publicKey =
     SharedModule,
     QuillModule.forRoot(),
     MatStepperModule,
-    NgxStripeModule.forRoot(publicKey),
+    NgxStripeModule.forRoot(publicKey)
   ],
   exports: [RoomDetailsComponent],
 })
