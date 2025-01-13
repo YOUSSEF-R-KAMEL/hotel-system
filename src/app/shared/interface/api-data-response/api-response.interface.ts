@@ -15,7 +15,8 @@ export interface IApiResponse {
 export interface IData {
   users?: IUser[];
   facilities?: IFacility[];
-  booking?: IBooking[];
+  bookings?: IBooking[];
+  booking?: IBooking;
   rooms?: IRoom[];
   user?: IUser;
   room?: IRoom;
