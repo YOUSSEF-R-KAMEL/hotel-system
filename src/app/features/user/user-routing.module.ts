@@ -7,6 +7,7 @@ import { exploreRoomWithFiltersResolver } from './resolvers/explore-room-with-fi
 import { favoriteRoomsResolver } from './resolvers/favorite-rooms.resolver';
 import { UserComponent } from './user.component';
 import { RoomDetailsComponent } from './home/components/room-details/room-details.component';
+import { NotFoundComponent } from '../../shared/components/not-found/not-found.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,7 @@ const routes: Routes = [
       },
     ],
   },
+  {path: "**", component: NotFoundComponent}
 ];
 
 @NgModule({

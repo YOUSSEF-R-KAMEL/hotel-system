@@ -32,6 +32,7 @@ import { SingleRoomComponent } from '../features/user/components/single-room/sin
 import { DeleteItemComponent } from './components/delete-item/delete-item.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { UserNavbarComponent } from './components/navbar/user-navbar.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 import { TableComponent } from './components/table/table.component';
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { TableComponent } from './components/table/table.component';
     FooterComponent,
     SingleRoomComponent,
     UserNavbarComponent,
+    NotFoundComponent
   ],
   imports: [
     CommonModule,
