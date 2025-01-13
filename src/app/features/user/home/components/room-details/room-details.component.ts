@@ -1,5 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { IRoom } from '../../../../../shared/interface/room/room.interface';
@@ -17,6 +18,7 @@ import { BookingRoomService } from '../../../services/booking-room.service';
 import { CommentService } from '../../../services/comment.service';
 import { RateReviewService } from '../../../services/rate-review.service';
 import { RoomsService } from '../../../services/rooms.service';
+import { LoginRegisterDialogComponent } from '../login-register-dialog/login-register-dialog.component';
 import { IApiResponse } from './../../../../../shared/interface/api-data-response/api-response.interface';
 
 @Component({
@@ -65,7 +67,8 @@ export class RoomDetailsComponent implements OnInit {
     private _BookingRoomService: BookingRoomService,
     private _ToastrService: ToastrService,
     private _RateReviewService: RateReviewService,
-    private _CommentService: CommentService
+    private _CommentService: CommentService,
+    public dialog: MatDialog
   ) {}
   ngOnInit(): void {
     this.id = this._route.snapshot.params['id'];
@@ -133,6 +136,8 @@ export class RoomDetailsComponent implements OnInit {
           },
         });
       }
+    } else {
+      const dialogRef = this.dialog.open(LoginRegisterDialogComponent);
     }
   }
 
@@ -168,6 +173,8 @@ export class RoomDetailsComponent implements OnInit {
           this.onGetAllReviews();
         },
       });
+    } else {
+      const dialogRef = this.dialog.open(LoginRegisterDialogComponent);
     }
   }
   getComments() {
@@ -208,6 +215,8 @@ export class RoomDetailsComponent implements OnInit {
           this.getComments();
         },
       });
+    } else {
+      const dialogRef = this.dialog.open(LoginRegisterDialogComponent);
     }
   }
   editComment(commentId: string, commentText: string) {
@@ -216,6 +225,8 @@ export class RoomDetailsComponent implements OnInit {
       this.selectedCommentText = commentText;
       this.commentEditorContent = commentText;
       this.isEditing = true;
+    } else {
+      const dialogRef = this.dialog.open(LoginRegisterDialogComponent);
     }
   }
   updateComment() {
@@ -240,6 +251,8 @@ export class RoomDetailsComponent implements OnInit {
             },
           });
       }
+    } else {
+      const dialogRef = this.dialog.open(LoginRegisterDialogComponent);
     }
   }
   deleteComment(commentId: string) {
