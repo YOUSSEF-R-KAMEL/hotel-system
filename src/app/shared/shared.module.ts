@@ -33,13 +33,15 @@ import { DeleteItemComponent } from './components/delete-item/delete-item.compon
 import { FooterComponent } from './components/footer/footer.component';
 import { TableComponent } from './components/table/table.component';
 import { UserNavbarComponent } from './components/navbar/user-navbar.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 @NgModule({
   declarations: [
     TableComponent,
     DeleteItemComponent,
     FooterComponent,
     SingleRoomComponent,
-    UserNavbarComponent
+    UserNavbarComponent,
+    NotFoundComponent
   ],
   imports: [
     CommonModule,
