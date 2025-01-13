@@ -1,18 +1,18 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import {
-    Component,
-    EventEmitter,
-    Input,
-    Output,
-    TemplateRef,
-    ViewChild,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  TemplateRef,
+  ViewChild,
 } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Ads } from '../../../features/admin/dashboard/ads/interfaces/IAdsResponse';
 import { TableTypeEnum } from '../../enums/table-type-enum';
 import { ITableColumn } from '../../interface/table/table-columns.interface';
+import { Ads } from '../../../features/admin/dashboard/ads/interfaces/IAdsResponse';
 import { ITableInput } from '../../interface/table/table-input.interface';
 
 @Component({
@@ -67,7 +67,7 @@ export class TableComponent {
     if (!tableData || tableData.data.totalCount === 0) {
       return;
     }
-    let tableDataArray = tableData.data.bookings ?? tableData.data.users ?? tableData.data.facilities ?? tableData.data.rooms ?? tableData.data.ads ?? [];
+    let tableDataArray = tableData.data.booking ?? tableData.data.users ?? tableData.data.facilities ?? tableData.data.rooms ?? tableData.data.ads ?? [];
     if (this.type === TableTypeEnum.Ads) {
       tableDataArray = (tableDataArray as Ads[]).map((ad: Ads) => {
         return {
