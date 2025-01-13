@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IApiResponse } from '../../../shared/interface/api-data-response/api-response.interface';
-import { IAddFavoriteRoom } from '../interfaces/add-to-fav.interface';
+import { IAddFavoriteRoom } from '../interfaces/api-responses/add-to-fav.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -18,8 +18,13 @@ export class FavoriteRoomsService {
     });
   }
   deleteFavRoom(roomId: string): Observable<IAddFavoriteRoom> {
-    return this._HttpClient.delete<IAddFavoriteRoom>('portal/favorite-rooms/'+ roomId, {body: {
-      roomId
-    }});
+    return this._HttpClient.delete<IAddFavoriteRoom>(
+      'portal/favorite-rooms/' + roomId,
+      {
+        body: {
+          roomId,
+        },
+      }
+    );
   }
 }

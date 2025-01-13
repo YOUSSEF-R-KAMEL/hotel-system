@@ -68,12 +68,16 @@
     "pick": "Pick a Date",
     "will-pay": "You will pay",
     "usd": "USD per",
-    "person": "2 Person",
+    "person": "Person",
     "continue": "Continue Book",
     "rate": "Rate",
     "message": "Message",
     "add-comment": "Add Your Comment",
-    "send": "Send"
+    "send": "Send",
+    "update": "Update",
+    "delete": "Delete",
+    "no-comments": "No Comments",
+    "cancel": "Cancel"
   },
   "footer": {
     "desc": "We kaboom your beauty holiday instantly and memorable.",
@@ -98,4 +102,3 @@
     "copyright": "Copyright 2019 • All rights reserved • Staycation"
   }
 }
-
