@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IApiResponse } from '../../../shared/interface/api-data-response/api-response.interface';
-import { IAddFavoriteRoom } from '../interfaces/api-responses/add-to-fav.interface';
+import { IApiResponse } from '../../../../shared/interface/api-data-response/api-response.interface';
+import { IAddFavoriteRoom } from '../../interfaces/api-responses/add-to-fav.interface';
 
 @Injectable({
   providedIn: 'root',

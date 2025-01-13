@@ -1,11 +1,12 @@
 import { Component, computed, OnInit, signal } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { IRoom } from '../../../shared/interface/room/room.interface';
-import { RoomsService } from '../services/rooms.service';
 import { Router } from '@angular/router';
-import { IRoomParams } from '../../../shared/interface/params/params.interface';
 import { TranslateService } from '@ngx-translate/core';
+import { IRoomParams } from '../../../shared/interface/params/params.interface';
+import { IRoom } from '../../../shared/interface/room/room.interface';
 import { AuthService } from '../../auth/services/auth.service';
+import { RoomsService } from '../services/rooms/rooms.service';
+import { TranslationService } from '../services/translation/translation.service';
 
 @Component({
   selector: 'app-home',
@@ -26,18 +27,18 @@ export class HomeComponent implements OnInit {
     capacity: new FormControl<number>(1),
   });
   constructor(private _RoomService: RoomsService,
-              private router: Router,
-              private translate: TranslateService,
-              private _authServices:AuthService ) {
-          this.translate.setDefaultLang(this.currentLang as string);
-          this.translate.use(this.currentLang as string);
-          console.log(this.currentLang)
+    private router: Router,
+    private translate: TranslateService,
+    private translationService: TranslationService) {
+    this.translate.setDefaultLang(this.currentLang as string);
+    this.translate.use(this.currentLang as string);
+    console.log(this.currentLang)
   }
   switchLanguage(lang: string) {
     this.translate.use(lang);
   }
-  get currentLang() : string | null{
-    return this._authServices.currentLang
+  get currentLang(): string | null {
+    return this.translationService.currentLang
   }
   ngOnInit(): void {
     this.getAllRooms();
@@ -71,7 +72,8 @@ export class HomeComponent implements OnInit {
   }
   getCapacityDisplay(): string {
     const value = this.capacity.value || 0;
-    return `${value} person${value > 1 ? 's' : ''}`;
+    const currentLang = this.translationService.currentLang;
+    return currentLang === 'en' ?`${value} person${value > 1 ? 's' : ''}` : `${value} ${value > 1 ? 'أشخاص' : 'شخص'}`;
   }
   incrementCapacity(): void {
     const currentValue = this.capacity.value || 0;

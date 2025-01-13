@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { IRoom } from '../../../../../shared/interface/room/room.interface';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from '../../../../auth/services/auth.service';
+import { TranslationService } from '../../../services/translation/translation.service';
 
 @Component({
   selector: 'app-popular-rooms',
@@ -10,12 +11,12 @@ import { AuthService } from '../../../../auth/services/auth.service';
 })
 export class PopularRoomsComponent {
   @Input() rooms: IRoom[] = [];
-  constructor(private translate: TranslateService, private _authService:AuthService) {
+  constructor(private translate: TranslateService, private translationService: TranslationService) {
     this.translate.setDefaultLang(this.currentLang as string);
     this.translate.use(this.currentLang as string);  // Set default language to English
   }
-  get currentLang() : string | null{
-    return this._authService.currentLang
+  get currentLang(): string | null {
+    return this.translationService.currentLang
   }
   switchLanguage(lang: string) {
     this.translate.use(lang);  // Change language dynamically

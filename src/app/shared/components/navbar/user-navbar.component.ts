@@ -34,49 +34,48 @@ export class UserNavbarComponent {
         { text: 'Favorites', path: 'favorites', isUser: role === 'user' },
       ];
     })
-    if (this.role && this.userId) {
-      console.log(this.userId)
-      console.log(this.role)
-      this.authService.getUser(this.userId).subscribe({
-        next: (res: IApiResponse) => {
-          if (res && res.data && res.data.user) {
-            this.authService.updateUser(res.data.user as IUser);
-            this.user = res.data.user;
-            console.log(this.user)
-          }
-        },
-      });
-    }
-    this.translate.setDefaultLang(this.authService.currentLang as string);
-    this.translate.use(this.authService.currentLang as string);
-    this.setHtmlAttributes(this.authService.currentLang as string);
-    this.role = authService.getRole();
     if (this.helperService.isPlatformBrowser()) {
       const userId = localStorage.getItem('userId')
       if (userId) {
         this.userId = userId
       }
     }
+    this.getUser();
+    this.translate.setDefaultLang(this.authService.currentLang as string);
+    this.translate.use(this.authService.currentLang as string);
+    this.setHtmlAttributes(this.authService.currentLang as string);
+    this.role = authService.getRole();
+  }
+  getUser() {
+    if (this.userId) {
+      this.authService.getUser(this.userId).subscribe({
+        next: (res: IApiResponse) => {
+          if (res && res.data && res.data.user) {
+            this.user = res.data.user;
+          }
+        },
+      });
+    }
   }
 
-    switchLanguage(lang: string) {
-      this.translate.use(lang);
-      this.setHtmlAttributes(lang);
-      this.showEnBtn = !this.showEnBtn
-      if (this.showEnBtn) {
-        localStorage.setItem('lang', "ar");
-        console.log(this.authService.currentLang)
-      } else {
-        localStorage.setItem('lang', "en");
-        console.log(this.authService.currentLang)
+  switchLanguage(lang: string) {
+    this.translate.use(lang);
+    this.setHtmlAttributes(lang);
+    this.showEnBtn = !this.showEnBtn
+    if (this.showEnBtn) {
+      localStorage.setItem('lang', "ar");
+      console.log(this.authService.currentLang)
+    } else {
+      localStorage.setItem('lang', "en");
+      console.log(this.authService.currentLang)
 
-      }
     }
-    setHtmlAttributes(lang: string) {
-      const html = this.document.documentElement;
-      html.lang = lang;
-      html.dir = lang === 'ar' ? 'rtl' : 'ltr';
-    }
+  }
+  setHtmlAttributes(lang: string) {
+    const html = this.document.documentElement;
+    html.lang = lang;
+    html.dir = lang === 'ar' ? 'rtl' : 'ltr';
+  }
   toggleTheme() {
     this.themeService.updateTheme();
   }

@@ -1,9 +1,9 @@
-import { IFavoriteRooms } from './../../interfaces/favorite-rooms-interface';
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IRoom } from '../../../../shared/interface/room/room.interface';
-import { FavoriteRoomsService } from '../../services/favorite-rooms.service';
 import { ToastrService } from 'ngx-toastr';
+import { IRoom } from '../../../../shared/interface/room/room.interface';
+import { FavoriteRoomsService } from '../../services/favRooms/favorite-rooms.service';
+import { IFavoriteRooms } from './../../interfaces/favorite-rooms-interface';
 
 @Component({
   selector: 'app-fav-rooms',

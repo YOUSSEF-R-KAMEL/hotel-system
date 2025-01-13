@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IReviewRateApiResponse } from '../interfaces/api-responses/review-rate-api-response.interface';
-import { IReview } from '../interfaces/review.interface';
+import { IReviewRateApiResponse } from '../../interfaces/api-responses/review-rate-api-response.interface';
+import { IReview } from '../../interfaces/review.interface';
 
 @Injectable({
   providedIn: 'root',

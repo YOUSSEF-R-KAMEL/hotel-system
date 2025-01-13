@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { IRoom } from '../../../../shared/interface/room/room.interface';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from '../../../auth/services/auth.service';
+import { TranslationService } from '../../services/translation/translation.service';
 
 @Component({
   selector: 'app-explore',
@@ -14,8 +15,8 @@ export class ExploreComponent {
   page: number = 1;
   size: number = 10;
   constructor(private route: ActivatedRoute,
-              private translate: TranslateService,
-              private _authServices:AuthService) {
+    private translate: TranslateService,
+    private translationService: TranslationService) {
     this.translate.setDefaultLang(this.currentLang as string);
     this.translate.use(this.currentLang as string);
     this.route.data.subscribe((data: any) => {
@@ -23,10 +24,10 @@ export class ExploreComponent {
       this.rooms = rooms;
     })
   }
-    switchLanguage(lang: string) {
-      this.translate.use(lang);
-    }
-    get currentLang() : string | null{
-      return this._authServices.currentLang
-    }
+  switchLanguage(lang: string) {
+    this.translate.use(lang);
+  }
+  get currentLang(): string | null {
+    return this.translationService.currentLang
+  }
 }

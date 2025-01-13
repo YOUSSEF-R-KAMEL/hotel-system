@@ -2,6 +2,7 @@ import { Component, Input, effect, Signal, computed, signal } from '@angular/cor
 import { IRoom } from '../../../../../shared/interface/room/room.interface';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from '../../../../auth/services/auth.service';
+import { TranslationService } from '../../../services/translation/translation.service';
 
 @Component({
   selector: 'app-shared-rooms',
@@ -15,7 +16,7 @@ export class SharedRoomsComponent {
   set inputRooms(value: IRoom[]) {
     this._rooms.set(value || []);
   }
-  constructor(private translate: TranslateService, private _authService:AuthService) {
+  constructor(private translate: TranslateService, private translationService:TranslationService) {
     this.translate.setDefaultLang(this.currentLang as string);
     this.translate.use(this.currentLang as string);  // Set default language to English
   }
@@ -23,7 +24,7 @@ export class SharedRoomsComponent {
     this.translate.use(lang);  // Change language dynamically
   }
   get currentLang() : string | null{
-    return this._authService.currentLang
+    return this.translationService.currentLang
   }
 
 }
