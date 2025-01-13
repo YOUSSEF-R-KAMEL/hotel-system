@@ -29,12 +29,6 @@ export class AuthService {
     return this.roleSubject.getValue();
   }
 
-  get currentLang(): string | null {
-    if(this._helperService.isPlatformBrowser()){
-      return localStorage.getItem('lang');
-    }
-    return null
-  }
 
   updateUser(user: User | null): void {
     this.userSubject.next(user);
