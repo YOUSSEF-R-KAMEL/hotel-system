@@ -1,11 +1,7 @@
-import { Component, computed, inject, ViewChild } from '@angular/core';
+import { Component, inject, ViewChild } from '@angular/core';
 import { FormBuilder, UntypedFormBuilder, Validators } from '@angular/forms';
 import { StripeCardElementOptions, StripeElementsOptions } from '@stripe/stripe-js';
 import { StripeCardComponent, injectStripe } from 'ngx-stripe';
-import { ThemeService } from '../../../../../shared/services/theme/theme.service';
-import { HelperService } from '../../../../../shared/services/helpers/helper.service';
-import { RoomsService } from '../../../services/rooms.service';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-payment',
@@ -13,16 +9,8 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './payment.component.scss'
 })
 export class PaymentComponent {
-  // theme = 'light';
-  // backgroundColor = computed(() => this.theme === 'light' ? '#fff' : '#000');
-  bookingId = '';
-
-
   stripePublicKey = 'pk_test_51OTjURBQWp069pqTmqhKZHNNd3kMf9TTynJtLJQIJDOSYcGM7xz3DabzCzE7bTxvuYMY0IX96OHBjsysHEKIrwCK006Mu7mKw8';
   @ViewChild(StripeCardComponent) cardElement!: StripeCardComponent;
-  constructor(private roomsService: RoomsService, private route: ActivatedRoute, private _formBuilder: FormBuilder) {
-    this.bookingId = this.route.snapshot.queryParamMap.get('bookingId') || '';
-  }
 
   private readonly fb = inject(UntypedFormBuilder);
   firstFormGroup = this._formBuilder.group({
@@ -33,13 +21,16 @@ export class PaymentComponent {
   });
   isEditable = false;
 
+  constructor(private _formBuilder: FormBuilder
+
+
+  ) {}
 
   cardOptions: StripeCardElementOptions = {
     style: {
       base: {
         iconColor: '#666EE8',
-        backgroundColor:  'transparent',
-        color: '#6668CEFF',
+        color: '#31325F',
         fontWeight: '300',
         fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
         fontSize: '18px',
@@ -60,6 +51,7 @@ export class PaymentComponent {
     cardNumber: ['', [Validators.required]],
   });
 
+  // Replace with your own public key
   stripe = injectStripe(this.stripePublicKey);
 
   createToken() {
@@ -68,8 +60,10 @@ export class PaymentComponent {
       .createToken(this.cardElement.element, { name })
       .subscribe((result) => {
         if (result.token) {
+          // Use the token
           console.log(result.token.id);
         } else if (result.error) {
+          // Error creating the token
           console.log(result.error.message);
         }
       });
