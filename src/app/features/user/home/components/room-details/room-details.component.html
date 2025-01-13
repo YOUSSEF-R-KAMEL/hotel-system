@@ -221,9 +221,46 @@
           </div>
         </div>
         <div class="col-md-6">
+          <ng-container *ngIf="comments.length > 0">
+            <div class="comments-list mt-4">
+              @for (comment of comments; track comment._id) {
+              <div class="comment-item">
+                <div class="comment-header">
+                  <span class="user-name">{{ comment.user.userName }}</span>
+                  <span class="comment-date">{{
+                    comment.createdAt | date
+                  }}</span>
+                </div>
+                <div class="comment-body">
+                  <p>{{ comment.comment }}</p>
+                </div>
+                <div class="comment-actions">
+                  <button
+                    class="btn btn-primary me-3"
+                    *ngIf="!isEditing"
+                    (click)="editComment(comment._id, comment.comment)"
+                  >
+                    {{ "details-page.update" | translate }}
+                  </button>
+                  <button
+                    class="btn btn-danger"
+                    *ngIf="!isEditing"
+                    (click)="deleteComment(comment._id)"
+                  >
+                    {{ "details-page.delete" | translate }}
+                  </button>
+                </div>
+              </div>
+              }
+            </div>
+          </ng-container>
+
           <div class="comment">
-            <h3>{{ "details-page.add-comment" | translate }}</h3>
-            <form>
+            <h3 class="my-3">{{ "details-page.add-comment" | translate }}</h3>
+            <ng-container *ngIf="comments.length === 0">
+              <p>{{ "details-page.no-comments" | translate }}</p>
+            </ng-container>
+            <form (ngSubmit)="isEditing ? updateComment() : createComment()">
               <div class="w-100">
                 <quill-editor
                   class="w-100"
@@ -236,7 +273,19 @@
               </div>
               <div class="d-flex justify-content-end">
                 <button class="explore-btn" mat-raised-button color="primary">
-                  {{ "details-page.send" | translate }}
+                  {{
+                    isEditing
+                      ? ("details-page.update" | translate)
+                      : ("details-page.send" | translate)
+                  }}
+                </button>
+                <button
+                  *ngIf="isEditing"
+                  mat-raise-button
+                  class="btn btn-outline-secondary ms-3"
+                  (click)="cancelEdit()"
+                >
+                  {{ "details-page.cancel" | translate }}
                 </button>
               </div>
             </form>
