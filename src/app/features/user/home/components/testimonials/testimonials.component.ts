@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { RoomsService } from '../../../services/rooms.service';
 import { IApiResponse } from '../../../../../shared/interface/api-data-response/api-response.interface';
 import { IRoom } from '../../../../../shared/interface/room/room.interface';
 import { IGetRoomReview } from '../../../interfaces/room-review.interface';
+import { RoomsService } from '../../../services/rooms/rooms.service';
 
 @Component({
   selector: 'app-testimonials',

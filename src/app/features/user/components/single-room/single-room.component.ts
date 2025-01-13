@@ -6,7 +6,8 @@ import { IRoom } from '../../../../shared/interface/room/room.interface';
 import { AuthService } from '../../../auth/services/auth.service';
 import { LoginRegisterDialogComponent } from '../../home/components/login-register-dialog/login-register-dialog.component';
 import { IAddFavoriteRoom } from '../../interfaces/api-responses/add-to-fav.interface';
-import { FavoriteRoomsService } from '../../services/favorite-rooms.service';
+import { FavoriteRoomsService } from '../../services/favRooms/favorite-rooms.service';
+import { TranslationService } from '../../services/translation/translation.service';
 
 @Component({
   selector: 'app-single-room',
@@ -19,8 +20,9 @@ export class SingleRoomComponent {
   constructor(
     private favoriteRoomsService: FavoriteRoomsService,
     public dialog: MatDialog,
-    private _authService: AuthService,
-    private translate: TranslateService
+    private translationService: TranslationService,
+    private translate: TranslateService,
+    private _authService: AuthService
   ) {
     this.translate.setDefaultLang(this.currentLang as string);
     this.translate.use(this.currentLang as string); // Set default language to English
@@ -29,7 +31,7 @@ export class SingleRoomComponent {
     this.translate.use(lang); // Change language dynamically
   }
   get currentLang(): string | null {
-    return this._authService.currentLang;
+    return this.translationService.currentLang;
   }
 
   favRoom: IAddFavoriteRoom | null = null;

@@ -9,6 +9,7 @@ import { HelperService } from '../../services/helpers/helper.service';
 import { TranslateService } from '@ngx-translate/core';
 import { DOCUMENT } from '@angular/common';
 import { Router } from '@angular/router';
+import { TranslationService } from '../../../features/user/services/translation/translation.service';
 
 @Component({
   selector: 'app-user-navbar',
@@ -22,7 +23,7 @@ export class UserNavbarComponent {
   authRoutes = authRoutes;
   showEnBtn = false;
   navLinks: { text: string, path: string, isUser: boolean }[] = [];
-  constructor(private translate: TranslateService, public themeService: ThemeService, public authService: AuthService, private router: Router, private helperService: HelperService,
+  constructor(private translationService: TranslationService, private translate: TranslateService, public themeService: ThemeService, public authService: AuthService, private router: Router, private helperService: HelperService,
     @Inject(DOCUMENT) private document: Document
   ) {
     this.authService.role.subscribe((role) => {
@@ -47,9 +48,9 @@ export class UserNavbarComponent {
         },
       });
     }
-    this.translate.setDefaultLang(this.authService.currentLang as string);
-    this.translate.use(this.authService.currentLang as string);
-    this.setHtmlAttributes(this.authService.currentLang as string);
+    this.translate.setDefaultLang(this.translationService.currentLang as string);
+    this.translate.use(this.translationService.currentLang as string);
+    this.setHtmlAttributes(this.translationService.currentLang as string);
     this.role = authService.getRole();
     if (this.helperService.isPlatformBrowser()) {
       const userId = localStorage.getItem('userId')
@@ -65,11 +66,10 @@ export class UserNavbarComponent {
       this.showEnBtn = !this.showEnBtn
       if (this.showEnBtn) {
         localStorage.setItem('lang', "ar");
-        console.log(this.authService.currentLang)
+        console.log(this.translationService.currentLang)
       } else {
         localStorage.setItem('lang', "en");
-        console.log(this.authService.currentLang)
-
+        console.log(this.translationService.currentLang)
       }
     }
     setHtmlAttributes(lang: string) {

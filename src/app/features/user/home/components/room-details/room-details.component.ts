@@ -13,10 +13,10 @@ import { IReviewRateApiResponse } from '../../../interfaces/api-responses/review
 import { IUpdateCommentApiResponse } from '../../../interfaces/api-responses/update-comment-api-response.interface';
 import { IComment } from '../../../interfaces/comment-interface';
 import { IReview } from '../../../interfaces/review.interface';
-import { BookingRoomService } from '../../../services/booking-room.service';
-import { CommentService } from '../../../services/comment.service';
-import { RateReviewService } from '../../../services/rate-review.service';
-import { RoomsService } from '../../../services/rooms.service';
+import { BookingRoomService } from '../../../services/booking/booking-room.service';
+import { CommentService } from '../../../services/comments/comment.service';
+import { RateReviewService } from '../../../services/rating/rate-review.service';
+import { RoomsService } from '../../../services/rooms/rooms.service';
 import { IApiResponse } from './../../../../../shared/interface/api-data-response/api-response.interface';
 
 @Component({
