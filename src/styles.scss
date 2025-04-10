@@ -124,7 +124,7 @@ $hover-color: mat.get-color-from-palette($Hotel-system-primary, 200);
 }
 @import "css-star-rating/scss/star-rating";
 // Import additional styles
-@import "./assets/sass/main.scss";
+@import "./assets/sass/main.scss";  
 ::ng-deep .mat-datepicker-content.ng-trigger.ng-trigger-transformPanel {
   background-color: #f7f7f7 !important;
 }

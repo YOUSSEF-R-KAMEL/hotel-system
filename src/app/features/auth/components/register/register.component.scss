@@ -1,25 +1,12 @@
 .upload {
-  transform: translateX(50%);
-  -webkit-transform: translateX(50%);
-  -moz-transform: translateX(50%);
-  -ms-transform: translateX(50%);
-  -o-transform: translateX(50%);
+  width: 100%;
   ngx-dropzone{
     width: 180px;
-    transform: translateX(50%);
-    -webkit-transform: translateX(50%);
-    -moz-transform: translateX(50%);
-    -ms-transform: translateX(50%);
-    -o-transform: translateX(50%);
     ::ng-deep ngx-dropzone-image-preview img {
       min-width: 160px !important;
       min-height: 160px !important;
       object-fit: cover;
       border-radius: 50%;
-      -webkit-border-radius: 50%;
-      -moz-border-radius: 50%;
-      -ms-border-radius: 50%;
-      -o-border-radius: 50%;
     }
     ::ng-deep ngx-dropzone-image-preview ngx-dropzone-remove-badge {
       top: -2px !important;
@@ -32,26 +19,28 @@ label {
   color: #152C5B;
 }
 
-input {
-  background-color: #F5F6F8;
-  margin-bottom: 20px;
-  height: 45px;
-  border-radius: 4px !important;
-  -webkit-border-radius: 4px !important;
-  -moz-border-radius: 4px !important;
-  -ms-border-radius: 4px !important;
-  -o-border-radius: 4px !important;
-  &::placeholder {
-    color: #D3D6DC;
+.input-group {
+  margin-bottom: 15px;
+  input {
+    background-color: #F5F6F8;
+    height: 45px;
+    border-radius: 4px !important;
+    &::placeholder {
+      color: #D3D6DC;
+    }
   }
-}
-.eye-pass {
-  z-index: 99;
-  cursor: pointer;
-  position: absolute;
-  top: 56%;
-  right: 15px;
-  color: #ABABAB;
+  .eye-pass {
+    z-index: 99;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    color: #ABABAB;
+    transform: translateY(-50%);
+    i {
+      font-size: 18px;
+    }
+  }
 }
 
 mat-error {
@@ -67,3 +56,4 @@ mat-error {
     margin-top: 1rem;
   }
 }
+

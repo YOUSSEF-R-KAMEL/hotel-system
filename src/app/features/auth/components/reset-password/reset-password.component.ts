@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-reset-password',
@@ -21,7 +22,8 @@ export class ResetPasswordComponent {
 
   constructor(
     private _AuthService: AuthService,
-    private _ToastrService: ToastrService
+    private _ToastrService: ToastrService,
+    private _router:Router
   ) {}
   reqRes() {
     if (this.resPasswordForm.valid) {
@@ -38,6 +40,7 @@ export class ResetPasswordComponent {
         },
         complete: () => {
           this._ToastrService.success(this.resMsg, 'Success');
+          this._router.navigateByUrl('/auth/login')
         },
       });
     }
