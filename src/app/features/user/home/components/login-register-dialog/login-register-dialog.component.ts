@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 
@@ -8,10 +8,8 @@ import { Router } from '@angular/router';
   styleUrl: './login-register-dialog.component.scss',
 })
 export class LoginRegisterDialogComponent {
-  constructor(
-    public dialogRef: MatDialogRef<LoginRegisterDialogComponent>,
-    private _Router: Router
-  ) {}
+  public dialogRef = inject(MatDialogRef<LoginRegisterDialogComponent>);
+  private _Router = inject(Router);
   onLogin(): void {
     this._Router.navigate(['/auth/login']);
   }

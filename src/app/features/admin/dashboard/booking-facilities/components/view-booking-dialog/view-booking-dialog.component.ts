@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, inject, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { IBooking } from '../../interfaces/booking-facility.interface';
 
@@ -8,9 +8,5 @@ import { IBooking } from '../../interfaces/booking-facility.interface';
   styleUrl: './view-booking-dialog.component.scss'
 })
 export class ViewBookingDialogComponent {
-  constructor(
-    @Inject(MAT_DIALOG_DATA) public data: IBooking,
-  ) {
-
-  }
+  public data = inject(MAT_DIALOG_DATA);
 }

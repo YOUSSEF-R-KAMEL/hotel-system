@@ -1,4 +1,4 @@
-import { Component, computed, OnInit, signal } from '@angular/core';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -26,10 +26,11 @@ export class HomeComponent implements OnInit {
     endDate: new FormControl<Date | null>(null),
     capacity: new FormControl<number>(1),
   });
-  constructor(private _RoomService: RoomsService,
-    private router: Router,
-    private translate: TranslateService,
-    private translationService: TranslationService) {
+  private _RoomService = inject(RoomsService);
+  private router = inject(Router);
+  private translate = inject(TranslateService);
+  private translationService = inject(TranslationService);
+  constructor() {
     this.translate.setDefaultLang(this.currentLang as string);
     this.translate.use(this.currentLang as string);
     console.log(this.currentLang)

@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IApiResponse } from '../../../../shared/interface/api-data-response/api-response.interface';
 import { IAddFavoriteRoom } from '../../interfaces/api-responses/add-to-fav.interface';
@@ -8,7 +8,7 @@ import { IAddFavoriteRoom } from '../../interfaces/api-responses/add-to-fav.inte
   providedIn: 'root',
 })
 export class FavoriteRoomsService {
-  constructor(private _HttpClient: HttpClient) {}
+  private _HttpClient = inject(HttpClient);
   getAllFavRooms(): Observable<IApiResponse> {
     return this._HttpClient.get<IApiResponse>('portal/favorite-rooms');
   }

@@ -44,6 +44,12 @@ export class RoomDetailsComponent implements OnInit {
 
   currentCommentId: string | null = null;
   editedComment: string = '';
+  private _Router = inject(Router);
+  private _BookingRoomService = inject(BookingRoomService);
+  private _ToastrService = inject(ToastrService);
+  private _RateReviewService = inject(RateReviewService);
+  private _CommentService = inject(CommentService);
+  public dialog = inject(MatDialog);
 
   facilityIcons: { [key: string]: string } = {
     '4 television': '4 television',
@@ -62,14 +68,6 @@ export class RoomDetailsComponent implements OnInit {
     room: new FormControl<string>(''),
     totalPrice: new FormControl<number>(0),
   });
-  constructor(
-    private _Router: Router,
-    private _BookingRoomService: BookingRoomService,
-    private _ToastrService: ToastrService,
-    private _RateReviewService: RateReviewService,
-    private _CommentService: CommentService,
-    public dialog: MatDialog
-  ) {}
   ngOnInit(): void {
     this.id = this._route.snapshot.params['id'];
     this.getRoomDetails();

@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, inject, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Ads } from '../../interfaces/IAdsResponse';
 
@@ -8,8 +8,6 @@ import { Ads } from '../../interfaces/IAdsResponse';
   styleUrl: './view-ad.component.scss',
 })
 export class ViewAdComponent {
-  constructor(
-    public dialogRef: MatDialogRef<ViewAdComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Ads
-  ) {}
+  public dialogRef = inject(MatDialogRef);
+  public data = inject(MAT_DIALOG_DATA);
 }

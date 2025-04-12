@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -22,11 +22,9 @@ export class LoginComponent {
       ),
     ]),
   });
-  constructor(
-    private _AuthService: AuthService,
-    private _ToastrService: ToastrService,
-    private _Router: Router
-  ) {}
+  private _AuthService = inject(AuthService);
+  private _ToastrService = inject(ToastrService);
+  private _Router = inject(Router);
   login() {
     if (this.loginForm.valid) {
       this._AuthService.onLogin(this.loginForm.value).subscribe({

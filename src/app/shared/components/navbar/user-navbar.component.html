@@ -1,71 +1,172 @@
 <header>
   <div class="container h-100">
-    <div class="d-flex justify-content-between align-items-center h-100" style="direction: ltr;">
-      <div>
+    <div class="nav-container d-flex justify-content-between align-items-center h-100">
+      <div class="image-box">
         <img src="../../../../../../assets/images/svg/logo.svg" alt="logo" />
       </div>
       <nav class="d-flex gap-5 align-items-center h-100">
-        <ul class="d-flex gap-4 align-items-center m-0" [ngStyle]="{'direction': showEnBtn? 'rtl' : 'ltr'}">
-          @for(link of navLinks; track link.text) {
-          @if (link.isUser) {
-          <li>
-            <a [routerLink]="link.path" [queryParams]="link.text === 'Explore' ? { page: 1, size: 200 } : null
-                  " routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">{{ 'nav.' + link.text |
-              translate }}</a>
-          </li>
-          }
-          }
-          <button class="btn-trans" *ngIf="showEnBtn" (click)="switchLanguage('en')">EN</button>
-          <button class="btn-trans" *ngIf="!showEnBtn" (click)="switchLanguage('ar')">AR</button>
-        </ul>
         @if (role !== 'user') {
-        <div class="d-flex gap-3">
-          <button [routerLink]="authRoutes.register" mat-raised-button color="primary">
-            {{ 'nav.register' | translate }}
-          </button>
-          <button [routerLink]="authRoutes.login" mat-raised-button color="primary">
-            {{ 'nav.login' | translate }}
-          </button>
-        </div>
-        } @else {
-        <div class="d-flex align-items-center gap-3">
-          <div class="d-flex align-items-center gap-2">
-            <img width="40px" height="40px" class="rounded-circle" [src]="
-                  user?.profileImage
-                    ? user?.profileImage
-                    : '../../../../assets/images/svg/profile-placeholder-image.svg'
-                " alt="profile picture" />
-            <p>{{ user?.userName }}</p>
-          </div>
-          <div class="theme-control">
-            <button mat-icon-button (click)="toggleTheme()">
-              @if (themeService.themeSignal() === 'dark'){
-                <mat-icon>brightness_5</mat-icon>
-              } @else {
-                <mat-icon>bedtime</mat-icon>
+          @if (!isSmallScreen) {
+            <ul class="d-flex gap-4 align-items-center m-0" >
+              @for(link of navLinks; track link.text) {
+                @if (link.isUser) {
+                  <li>
+                    <a [routerLink]="link.path" [queryParams]="link.text === 'Explore' ? { page: 1, size: 200 } : null
+                          " routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">{{ 'nav.' + link.text |
+                      translate }}</a>
+                  </li>
+                }
               }
+              <button class="btn-trans" *ngIf="showEnBtn" (click)="switchLanguage('en')">EN</button>
+              <button class="btn-trans" *ngIf="!showEnBtn" (click)="switchLanguage('ar')">AR</button>
+            </ul>
+            <div class="auth-btns d-flex gap-3">
+              <button [routerLink]="authRoutes.register" mat-raised-button color="primary">
+                {{ 'nav.register' | translate }}
+              </button>
+              <button [routerLink]="authRoutes.login" mat-raised-button color="primary">
+                {{ 'nav.login' | translate }}
+              </button>
+            </div>
+          }
+          @if (isSmallScreen) {
+            <button class="d-flex" mat-icon-button [matMenuTriggerFor]="menu">
+              <mat-icon>menu</mat-icon>
             </button>
+            <mat-menu #menu="matMenu" >
+              @for(link of navLinks; track link.text) {
+                @if (link.isUser) {
+                  <button mat-menu-item [routerLink]="link.path" [queryParams]="link.text === 'Explore' ? { page: 1, size: 200 } : null"
+                  routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                    <mat-icon>{{link.icon}}</mat-icon>
+                    <span>
+                        {{ 'nav.' + link.text | translate }}
+                      </span>
+                  </button>
+                }
+              }
+              <button mat-menu-item  [routerLink]="authRoutes.login">
+                <mat-icon>login</mat-icon>
+                {{ 'nav.login' | translate }}
+              </button>
+              <button mat-menu-item  [routerLink]="authRoutes.register">
+                <mat-icon>app_registration</mat-icon>
+                {{ 'nav.register' | translate }}
+              </button>
+              <button mat-menu-item class="btn-trans" *ngIf="showEnBtn" (click)="switchLanguage('en')">
+                <mat-icon>language</mat-icon>
+                EN
+              </button>
+              <button mat-menu-item class="btn-trans" *ngIf="!showEnBtn" (click)="switchLanguage('ar')">
+                <mat-icon>language</mat-icon>
+                AR
+              </button>
+              <ng-container>
+                <button mat-menu-item (click)="toggleTheme()">
+                  <mat-icon>
+                    @if (themeService.themeSignal() === 'dark') {
+                      brightness_5
+                    } @else {
+                      bedtime
+                    }
+                  </mat-icon>
+                  <span>{{ 'nav.mode' | translate }}</span>
+                </button>
+              </ng-container>
+
+            </mat-menu>
+          }
+        } @else {
+          <div class="d-flex align-items-center gap-3" >
+            @if (!isSmallScreen) {
+              <ul class="d-flex gap-4 align-items-center m-0" >
+                @for(link of navLinks; track link.text) {
+                  @if (link.isUser) {
+                    <li>
+                      <a [routerLink]="link.path" [queryParams]="link.text === 'Explore' ? { page: 1, size: 200 } : null
+                            " routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">{{ 'nav.' + link.text |
+                        translate }}</a>
+                    </li>
+                  }
+                }
+              </ul>
+              <div class="theme-control">
+              <button mat-icon-button (click)="toggleTheme()">
+                @if (themeService.themeSignal() === 'dark') {
+                  <mat-icon>brightness_5</mat-icon>
+                } @else {
+                  <mat-icon>bedtime</mat-icon>
+                }
+              </button>
+              </div>
+              <div class="d-flex align-items-center gap-2" >
+                <img width="40px" height="40px" class="rounded-circle"
+                  [src]="user?.profileImage ? user?.profileImage : '../../../../assets/images/svg/profile-placeholder-image.svg'"
+                  alt="profile picture" />
+                <p>{{ user?.userName }}</p>
+              </div>
+              <button class="d-flex" mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon>keyboard_arrow_down</mat-icon>
+              </button>
+            }
+            @if (isSmallScreen) {
+              <button class="d-flex" mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon>menu</mat-icon>
+              </button>
+            }
+            <mat-menu #menu="matMenu" >
+              @if (isSmallScreen) {
+                @for(link of navLinks; track link.text) {
+                  @if (link.isUser) {
+                    <button mat-menu-item [routerLink]="link.path" [queryParams]="link.text === 'Explore' ? { page: 1, size: 200 } : null"
+                    routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                      <mat-icon>{{link.icon}}</mat-icon>
+                      <span>
+                          {{ 'nav.' + link.text | translate }}
+                        </span>
+                    </button>
+                  }
+                }
+              }
+              <ng-container>
+                <button mat-menu-item>
+                  <mat-icon>person</mat-icon>
+                  <span>{{ 'nav.profile' | translate }}</span>
+                </button>
+              </ng-container>
+              <button mat-menu-item>
+                <mat-icon>lock_open</mat-icon>
+                <span>{{ 'nav.change-password' | translate }}</span>
+              </button>
+              <ng-container *ngIf="isSmallScreen">
+                <button mat-menu-item (click)="toggleTheme()">
+                  <mat-icon>
+                    @if (themeService.themeSignal() === 'dark') {
+                      brightness_5
+                    } @else {
+                      bedtime
+                    }
+                  </mat-icon>
+                  <span>{{ 'nav.mode' | translate }}</span>
+                </button>
+              </ng-container>
+              <button mat-menu-item class="btn-trans" *ngIf="showEnBtn" (click)="switchLanguage('en')">
+                <mat-icon>language</mat-icon>
+                EN
+              </button>
+              <button mat-menu-item class="btn-trans" *ngIf="!showEnBtn" (click)="switchLanguage('ar')">
+                <mat-icon>language</mat-icon>
+                AR
+              </button>
+              <button mat-menu-item (click)="logout()">
+                <mat-icon>logout</mat-icon>
+                <span>{{ 'nav.logout' | translate }}</span>
+              </button>
+            </mat-menu>
           </div>
-          <button mat-icon-button [matMenuTriggerFor]="menu">
-            <mat-icon>keyboard_arrow_down</mat-icon>
-          </button>
-          <mat-menu #menu="matMenu">
-            <button mat-menu-item>
-              <mat-icon>person</mat-icon>
-              <span>{{ 'nav.profile' | translate }}</span>
-            </button>
-            <button mat-menu-item>
-              <mat-icon>lock_open</mat-icon>
-              <span>{{ 'nav.change-password' | translate }}</span>
-            </button>
-            <button mat-menu-item (click)="logout()">
-              <mat-icon>logout</mat-icon>
-              <span>{{ 'nav.logout' | translate }}</span>
-            </button>
-          </mat-menu>
-        </div>
         }
       </nav>
     </div>
   </div>
 </header>
+<hr>

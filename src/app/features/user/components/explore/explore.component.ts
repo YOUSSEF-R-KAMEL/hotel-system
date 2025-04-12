@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IRoom } from '../../../../shared/interface/room/room.interface';
 import { TranslateService } from '@ngx-translate/core';
@@ -14,9 +14,10 @@ export class ExploreComponent {
   rooms: IRoom[] = [];
   page: number = 1;
   size: number = 10;
-  constructor(private route: ActivatedRoute,
-    private translate: TranslateService,
-    private translationService: TranslationService) {
+  private route = inject(ActivatedRoute);
+  private translate = inject(TranslateService);
+  private translationService = inject(TranslationService);
+  constructor() {
     this.translate.setDefaultLang(this.currentLang as string);
     this.translate.use(this.currentLang as string);
     this.route.data.subscribe((data: any) => {

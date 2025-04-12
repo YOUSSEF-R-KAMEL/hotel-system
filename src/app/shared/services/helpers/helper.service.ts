@@ -1,12 +1,11 @@
 import { isPlatformBrowser } from '@angular/common';
-import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { inject, Inject, Injectable, PLATFORM_ID } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HelperService {
-  constructor(@Inject(PLATFORM_ID) private platformId: any) {}
-
+  private platformId = inject(PLATFORM_ID);
   isPlatformBrowser(): boolean {
     return isPlatformBrowser(this.platformId);
   }

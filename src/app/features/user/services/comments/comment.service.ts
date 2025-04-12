@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ICommentApiResponse } from '../../interfaces/api-responses/comment-api-response.interface';
 import { ICreateCommentApiResponse } from '../../interfaces/api-responses/create-comment-api-response.interface';
@@ -10,14 +10,14 @@ import { IComment } from '../../interfaces/comment-interface';
   providedIn: 'root',
 })
 export class CommentService {
-  constructor(private _HttpClinet: HttpClient) {}
+  private _HttpClient = inject(HttpClient);
   getComments(roomId: string): Observable<ICommentApiResponse> {
-    return this._HttpClinet.get<ICommentApiResponse>(
+    return this._HttpClient.get<ICommentApiResponse>(
       `portal/room-comments/${roomId}`
     );
   }
   createCommet(data: IComment): Observable<ICreateCommentApiResponse> {
-    return this._HttpClinet.post<ICreateCommentApiResponse>(
+    return this._HttpClient.post<ICreateCommentApiResponse>(
       'portal/room-comments',
       data
     );
@@ -25,7 +25,7 @@ export class CommentService {
   deleteComment(
     commentId: string
   ): Observable<{ success: string; message: string }> {
-    return this._HttpClinet.delete<{ success: string; message: string }>(
+    return this._HttpClient.delete<{ success: string; message: string }>(
       'portal/room-comments/' + commentId
     );
   }
@@ -33,7 +33,7 @@ export class CommentService {
     commentId: string,
     comment: string
   ): Observable<IUpdateCommentApiResponse> {
-    return this._HttpClinet.put<IUpdateCommentApiResponse>(
+    return this._HttpClient.put<IUpdateCommentApiResponse>(
       'portal/room-comments/' + commentId,
       comment
     );

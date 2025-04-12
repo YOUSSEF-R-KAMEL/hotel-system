@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -24,13 +24,12 @@ export class RoomsComponent implements OnInit {
   size = 10;
   roomsColumns: string[] = [];
   actions: ITableAction[] = [];
-  constructor(
-    private toast: ToastrService,
-    private dialog: MatDialog,
-    private _roomsService: RoomsService,
-    private router: Router,
-    private route: ActivatedRoute
-  ) {
+  private toast = inject(ToastrService);
+  private dialog = inject(MatDialog);
+  private _roomsService = inject(RoomsService);
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
+  constructor() {
     this.actions = [
       {
         type: 'icon',

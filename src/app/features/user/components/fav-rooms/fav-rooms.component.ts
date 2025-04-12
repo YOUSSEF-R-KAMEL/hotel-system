@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { IRoom } from '../../../../shared/interface/room/room.interface';
@@ -14,11 +14,10 @@ export class FavRoomsComponent {
   rooms: IRoom[] = [];
   page: number = 1;
   size: number = 10;
-  constructor(
-    private route: ActivatedRoute,
-    private favRoomsService: FavoriteRoomsService,
-    private toast: ToastrService
-  ) {
+  private route = inject(ActivatedRoute);
+  private favRoomsService = inject(FavoriteRoomsService);
+  private toast = inject(ToastrService);
+  constructor() {
     this.route.data.subscribe((data: any) => {
       const favRooms = data?.filters?.data?.favoriteRooms[0];
       this.rooms = favRooms.rooms

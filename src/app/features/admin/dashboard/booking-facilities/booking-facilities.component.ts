@@ -1,5 +1,5 @@
 import { IBooking } from './interfaces/booking-facility.interface';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ITableInput, ITableAction } from '../../../../shared/interface/table/table-input.interface';
 import { BookingFacilitiesService } from './services/booking-facilities.service';
@@ -17,7 +17,9 @@ export class BookingFacilitiesComponent {
   size = 10;
   bookingsColumns: string[] = [];
   actions: ITableAction[] = [];
-  constructor(private dialog: MatDialog, private bookingService: BookingFacilitiesService) {
+  private dialog = inject(MatDialog);
+  private bookingService = inject(BookingFacilitiesService);
+  constructor() {
     this.actions = [
       {
         type: 'icon',

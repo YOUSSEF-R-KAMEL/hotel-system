@@ -1,4 +1,4 @@
-import { Injectable, signal } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { HelperService } from '../helpers/helper.service';
 
 @Injectable({
@@ -6,8 +6,9 @@ import { HelperService } from '../helpers/helper.service';
 })
 export class ThemeService {
   themeSignal = signal<string>('light')
-  constructor(private helperService: HelperService) {
-    if (helperService.isPlatformBrowser()) {
+  private helperService = inject(HelperService);
+  constructor() {
+    if (this.helperService.isPlatformBrowser()) {
       const theme = localStorage.getItem('theme');
       if (theme) {
         this.setTheme(theme);

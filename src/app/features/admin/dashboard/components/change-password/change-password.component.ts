@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { DashboardService } from '../../services/dashboard.service';
@@ -17,11 +17,8 @@ export class ChangePasswordComponent {
     newPassword: new FormControl(null, [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,}$/)]),
     confirmPassword: new FormControl(null, Validators.required)
   }, { validators: this.checkPasswords })
-
-  constructor(
-    private _dashboardService: DashboardService,
-    private _ToastrService: ToastrService
-  ) {}
+  private _dashboardService = inject(DashboardService);
+  private _ToastrService = inject(ToastrService);
   changePass() {
     if (this.changePasswordForm.valid) {
       this._dashboardService.changePassword(this.changePasswordForm.value).subscribe({

@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IBookingApiResponse } from '../../interfaces/api-responses/api-response-booking.interface';
 import { ICreateBooking } from '../../interfaces/create-booking.interface';
@@ -8,8 +8,8 @@ import { ICreateBooking } from '../../interfaces/create-booking.interface';
   providedIn: 'root',
 })
 export class BookingRoomService {
-  constructor(private _HttpClinet: HttpClient) {}
+  private _HttpClient = inject(HttpClient);
   createBooking(data: ICreateBooking): Observable<IBookingApiResponse> {
-    return this._HttpClinet.post<IBookingApiResponse>('portal/booking', data);
+    return this._HttpClient.post<IBookingApiResponse>('portal/booking', data);
   }
 }

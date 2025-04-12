@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, inject, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Room } from '../../interfaces/IAdsResponse';
@@ -23,11 +23,9 @@ export class AddAdComponent implements OnInit {
     page: 1,
     size: 1000,
   };
-  constructor(
-    public dialogRef: MatDialogRef<AddAdComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { text: string },
-    private roomsService: RoomsService
-  ) {}
+  public dialogRef = inject(MatDialogRef);
+  public data = inject(MAT_DIALOG_DATA);
+  private roomsService = inject(RoomsService);
   ngOnInit(): void {
     this.getRooms();
   }

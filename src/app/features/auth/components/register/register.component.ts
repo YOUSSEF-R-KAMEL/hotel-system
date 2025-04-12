@@ -32,7 +32,6 @@ export class RegisterComponent {
     password: new FormControl(null, [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,}$/)]),
     confirmPassword : new FormControl(null, [Validators.required])
   }, { validators: this.checkPasswords })
-  constructor(){}
   register(){
     this.isLoading = true
     const regData = new FormData()

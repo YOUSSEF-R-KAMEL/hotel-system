@@ -16,14 +16,13 @@ import { TranslationService } from '../../services/translation/translation.servi
 })
 export class SingleRoomComponent {
   @Input() room: IRoom | null = null;
-  _route = inject(Router);
-  constructor(
-    private favoriteRoomsService: FavoriteRoomsService,
-    public dialog: MatDialog,
-    private translationService: TranslationService,
-    private translate: TranslateService,
-    private _authService: AuthService
-  ) {
+  private _route = inject(Router);
+  private favoriteRoomsService = inject(FavoriteRoomsService);
+  public dialog = inject(MatDialog);
+  private translationService = inject(TranslationService);
+  private translate = inject(TranslateService);
+  private _authService = inject(AuthService);
+  constructor() {
     this.translate.setDefaultLang(this.currentLang as string);
     this.translate.use(this.currentLang as string); // Set default language to English
   }

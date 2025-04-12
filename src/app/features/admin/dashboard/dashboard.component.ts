@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { AuthService } from '../../auth/services/auth.service';
 import { IApiResponse } from '../../../shared/interface/api-data-response/api-response.interface';
 
@@ -11,7 +11,8 @@ export class DashboardComponent implements OnInit {
   isExpand: boolean = false;
   profileImage: string  = '';
   imageUrl: string = 'https://upskilling-egypt.com:3000/';
-  constructor(private authService: AuthService) {}
+  private authService = inject(AuthService);
+  constructor() {}
   toggleSidebar(): void {
     this.isExpand = !this.isExpand;
   }

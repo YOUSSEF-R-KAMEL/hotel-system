@@ -38,14 +38,13 @@
                 <mat-icon>remove</mat-icon>
               </button>
               <mat-form-field class="normal-input w-75">
-                <!-- Bind the displayed value dynamically -->
                 <input matInput [value]="getCapacityDisplay()" readonly placeholder="Capacity" />
               </mat-form-field>
               <button mat-icon-button class="increment-button" (click)="incrementCapacity()">
                 <mat-icon>add</mat-icon>
               </button>
             </div>
-            <button (click)="exploreWithFilters()" class="explore-btn" mat-raised-button color="primary">
+            <button (click)="exploreWithFilters()" class="explore-btn mb-5" mat-raised-button color="primary">
               {{ "home-page.booking.btn" | translate }}
             </button>
           </form>

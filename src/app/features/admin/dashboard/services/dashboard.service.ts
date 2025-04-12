@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { IChangePassword } from '../Interfaces/ichange-password';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DashboardService {
-  constructor(private _http: HttpClient) {}
+  private _http = inject(HttpClient);
+
   changePassword(data: IChangePassword) {
     return this._http.post('admin/users/change-password', data);
   }

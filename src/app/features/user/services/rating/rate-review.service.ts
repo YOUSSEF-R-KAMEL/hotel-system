@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IReviewRateApiResponse } from '../../interfaces/api-responses/review-rate-api-response.interface';
 import { IReview } from '../../interfaces/review.interface';
@@ -8,14 +8,14 @@ import { IReview } from '../../interfaces/review.interface';
   providedIn: 'root',
 })
 export class RateReviewService {
-  constructor(private _HttpClinet: HttpClient) {}
+  private _HttpClient = inject(HttpClient);
   getReviews(roomId: string): Observable<IReviewRateApiResponse> {
-    return this._HttpClinet.get<IReviewRateApiResponse>(
+    return this._HttpClient.get<IReviewRateApiResponse>(
       `portal/room-reviews/${roomId}`
     );
   }
   createReview(data: IReview): Observable<IReviewRateApiResponse> {
-    return this._HttpClinet.post<IReviewRateApiResponse>(
+    return this._HttpClient.post<IReviewRateApiResponse>(
       'portal/room-reviews',
       data
     );

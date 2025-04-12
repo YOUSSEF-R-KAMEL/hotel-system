@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -9,7 +9,8 @@ import { TranslateService } from '@ngx-translate/core';
 
 export class AppComponent {
   title = 'Hotel-system';
-  constructor(private translateService: TranslateService) {
+  private translateService = inject(TranslateService);
+  constructor() {
     this.initializeTranslation();
   }
   private initializeTranslation() {

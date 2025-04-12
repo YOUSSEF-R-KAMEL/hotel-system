@@ -2,6 +2,7 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
 import {
   Component,
   EventEmitter,
+  inject,
   Input,
   Output,
   TemplateRef,
@@ -53,8 +54,9 @@ export class TableComponent {
   @ViewChild('discountTemplate', { static: true }) discountTemplate!: TemplateRef<any>;
   @ViewChild('imagesArrayTemplate', { static: true }) imagesArrayTemplate!: TemplateRef<any>;
   @ViewChild('defaultTemplate', { static: true }) defaultTemplate!: TemplateRef<any>;
+  private _liveAnnouncer = inject(LiveAnnouncer);
 
-  constructor(private _liveAnnouncer: LiveAnnouncer) {
+  constructor() {
     this.data = {
       data: {
         totalCount: 0,

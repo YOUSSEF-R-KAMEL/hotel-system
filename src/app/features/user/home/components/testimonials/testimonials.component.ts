@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { IApiResponse } from '../../../../../shared/interface/api-data-response/api-response.interface';
 import { IRoom } from '../../../../../shared/interface/room/room.interface';
 import { IGetRoomReview } from '../../../interfaces/room-review.interface';
@@ -13,7 +13,7 @@ export class TestimonialsComponent implements OnInit{
   stars: number[] = Array(5).fill(0);
   @Input() room: IRoom | null = null;
   reviews: IGetRoomReview[] = [];
-  constructor(private roomsService: RoomsService) {}
+  private roomsService = inject(RoomsService);
   ngOnInit(): void {
     if (this.room) {
       this.roomsService.getRoomReviews(this.room?._id as string).subscribe({

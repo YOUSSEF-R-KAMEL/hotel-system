@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -36,13 +36,12 @@ export class AddViewEditRoomComponent implements OnInit {
     facilities: new FormControl(null, [Validators.required]),
   });
   dropdownOpen: boolean = false;
+  private _roomsService = inject(RoomsService);
+  private _ToastrService = inject(ToastrService);
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
 
-  constructor(
-    private _roomsService: RoomsService,
-    private _ToastrService: ToastrService,
-    private router: Router,
-    private route: ActivatedRoute
-  ) {
+  constructor() {
     this.route.data.subscribe((data: any) => {
       const roomData = data.room.data.room;
       this.room = roomData;

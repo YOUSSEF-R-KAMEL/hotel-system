@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { ToastrService } from 'ngx-toastr';
@@ -19,12 +19,9 @@ export class ResetPasswordComponent {
     password: new FormControl(null, [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,}$/)]),
     confirmPassword: new FormControl(null, Validators.required)
   }, { validators: this.checkPasswords })
-
-  constructor(
-    private _AuthService: AuthService,
-    private _ToastrService: ToastrService,
-    private _router:Router
-  ) {}
+  private _AuthService = inject(AuthService);
+  private _ToastrService = inject(ToastrService);
+  private _router = inject(Router);
   reqRes() {
     if (this.resPasswordForm.valid) {
       this._AuthService.onResPassword(this.resPasswordForm.value).subscribe({

@@ -13,6 +13,7 @@ export class PaymentComponent {
   @ViewChild(StripeCardComponent) cardElement!: StripeCardComponent;
 
   private readonly fb = inject(UntypedFormBuilder);
+  private _formBuilder = inject(FormBuilder);
   firstFormGroup = this._formBuilder.group({
     firstCtrl: ['', Validators.required],
   });
@@ -20,12 +21,6 @@ export class PaymentComponent {
     secondCtrl: ['', Validators.required],
   });
   isEditable = false;
-
-  constructor(private _formBuilder: FormBuilder
-
-
-  ) {}
-
   cardOptions: StripeCardElementOptions = {
     style: {
       base: {

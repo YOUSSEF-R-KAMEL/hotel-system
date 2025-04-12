@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { AuthService } from '../../../../auth/services/auth.service';
 import { authRoutes } from '../../../../auth/routes/enum';
 import { Router } from '@angular/router';
@@ -12,8 +12,10 @@ export class HeaderComponent implements OnInit {
   userName: string | null = null;
   userId: string | null = null;
   @Input() profileImage: string = '';
+  private _AuthService = inject(AuthService);
+  private router = inject(Router);
 
-  constructor(private _AuthService: AuthService, private router: Router) {
+  constructor() {
     if (localStorage.getItem('userName')) {
       this.userName = localStorage.getItem('userName');
     }

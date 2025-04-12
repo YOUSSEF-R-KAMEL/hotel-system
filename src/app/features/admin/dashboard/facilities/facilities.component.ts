@@ -1,5 +1,5 @@
 import { ToastrService } from 'ngx-toastr';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ITableAction, ITableInput } from '../../../../shared/interface/table/table-input.interface';
 import { AddEditViewDialogComponent } from './components/add-edit-view-dialog/add-edit-view-dialog.component';
@@ -19,7 +19,10 @@ export class FacilitiesComponent {
   size = 10;
   facilitiesColumns: string[] = [];
   actions: ITableAction[] = [];
-  constructor(private toast: ToastrService, private dialog: MatDialog, private facilitiesService: FacilitiesService) {
+  private toast = inject(ToastrService);
+  private dialog = inject(MatDialog);
+  private facilitiesService = inject(FacilitiesService);
+  constructor() {
     this.actions = [
       {
         type: 'icon',

@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { IApiResponse } from '../../../shared/interface/api-data-response/api-response.interface';
 import { ILogin, User } from '../interfaces/ILogin';
@@ -11,12 +11,9 @@ import { HelperService } from './../../../shared/services/helpers/helper.service
 export class AuthService {
   private userSubject = new BehaviorSubject<User | null>(null);
   private roleSubject = new BehaviorSubject<string | null>(null);
-
-  constructor(
-    private http: HttpClient,
-    private helperService: HelperService,
-    private _helperService: HelperService
-  ) {
+  private http = inject(HttpClient);
+  private helperService = inject(HelperService);
+  constructor() {
     this.loadUserFromLocalStorage();
   }
 

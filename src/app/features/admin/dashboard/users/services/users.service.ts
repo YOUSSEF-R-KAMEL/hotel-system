@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IParams } from '../../../../../shared/interface/params/params.interface';
 import { IApiResponse } from '../../../../../shared/interface/api-data-response/api-response.interface';
@@ -8,7 +8,7 @@ import { IApiResponse } from '../../../../../shared/interface/api-data-response/
   providedIn: 'root',
 })
 export class UsersService {
-  constructor(private _http: HttpClient) {}
+  private _http = inject(HttpClient);
 
   getUsers(params: IParams): Observable<IApiResponse> {
     return this._http.get<IApiResponse>('admin/users', {

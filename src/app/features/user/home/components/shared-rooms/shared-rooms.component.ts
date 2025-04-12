@@ -1,4 +1,4 @@
-import { Component, Input, effect, Signal, computed, signal } from '@angular/core';
+import { Component, Input, effect, Signal, computed, signal, inject } from '@angular/core';
 import { IRoom } from '../../../../../shared/interface/room/room.interface';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from '../../../../auth/services/auth.service';
@@ -16,7 +16,9 @@ export class SharedRoomsComponent {
   set inputRooms(value: IRoom[]) {
     this._rooms.set(value || []);
   }
-  constructor(private translate: TranslateService, private translationService:TranslationService) {
+  private translate = inject(TranslateService);
+  private translationService = inject(TranslationService);
+  constructor() {
     this.translate.setDefaultLang(this.currentLang as string);
     this.translate.use(this.currentLang as string);  // Set default language to English
   }
