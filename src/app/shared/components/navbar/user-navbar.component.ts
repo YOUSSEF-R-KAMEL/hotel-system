@@ -43,7 +43,7 @@ export class UserNavbarComponent {
       this.navLinks = [
         { text: 'Home', path: 'home', icon: "home", isUser: true },
         { text: 'Explore', path: 'explore', icon: "explore", isUser: true },
-        { text: 'Reviews', path: 'reviews', icon: "rate_review", isUser: role === 'user' },
+        // { text: 'Reviews', path: 'reviews', icon: "rate_review", isUser: role === 'user' },
         { text: 'Favorites', path: 'favorites', icon: "favorite", isUser: role === 'user' },
       ];
     })

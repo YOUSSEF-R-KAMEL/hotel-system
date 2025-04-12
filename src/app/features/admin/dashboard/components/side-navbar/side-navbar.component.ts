@@ -12,6 +12,8 @@ interface IMenu {
 })
 export class SideNavbarComponent {
   isExpanded: boolean = false;
+  isSidebarActive = false;
+
   @Output() toggle: EventEmitter<boolean> = new EventEmitter<boolean>();
   navItems: IMenu[] = [
     {
@@ -45,8 +47,15 @@ export class SideNavbarComponent {
       icon: 'book_online',
     },
   ];
-  toggleSidebar(): void {
-    this.isExpanded = !this.isExpanded;
-    this.toggle.emit();
+  // toggleSidebar(): void {
+  //   this.isExpanded = !this.isExpanded;
+  //   this.toggle.emit();
+  // }
+
+  showSideBar() {
+    this.isSidebarActive = true;
+  }
+  hideSideBar(){
+    this.isSidebarActive = false;
   }
 }

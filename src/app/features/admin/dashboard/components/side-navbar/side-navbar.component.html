@@ -1,8 +1,10 @@
+
+<i class="fa-solid fa-bars" (click)="showSideBar()"></i>
 <aside
   class="sidebar h-100"
-  (mouseleave)="isExpanded = false"
-  (mouseenter)="isExpanded = true"
+  [class.active]="isSidebarActive"
 >
+<i class="fa-solid fa-xmark" (click)="hideSideBar()"></i>
   <ul>
     <ng-container *ngFor="let item of navItems">
       <li class="py-3">
@@ -11,14 +13,27 @@
           [routerLink]="item.route"
           routerLinkActive="active"
           #rla="routerLinkActive"
+          (click)="hideSideBar()"
         >
           <i class="material-icons">{{ item.icon }}</i>
-          @if (isExpanded ) {
           <span class="nav-text">{{ item.name }}</span>
-
-          }
         </a>
       </li>
     </ng-container>
   </ul>
 </aside>
+
+<!-- <i class="fa-solid fa-bars" (click)="showSideBar()"></i>
+<section class="sidebar pt-5">
+  <i class="fa-solid fa-xmark" (click)="hideSideBar()"></i>
+  <ul class="links list-unstyled mt-3">
+    <ng-container *ngFor="let item of navItems">
+      <li *ngIf="item">
+        <a [routerLink]="'/' + item.route" routerLinkActive="active">
+          <i class="material-icons">{{ item.icon }}</i>
+          <span>{{item.name}}</span>
+        </a>
+      </li>
+    </ng-container>
+  </ul>
+</section> -->
