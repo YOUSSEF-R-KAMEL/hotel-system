@@ -1,27 +1,77 @@
-# HotelSystem
+## 🏨 Hotel System
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.11.
+### 🚀 Overview
+Hotel System is a modern, responsive web application built with Angular to manage hotel operations. It allows users to explore rooms, make reservations, manage profiles, and enjoy a personalized experience with multi-language support and dark mode!
 
-## Development server
+---
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+### 🎯 Features
+✅ **User Authentication** – Register, log in, and manage profiles securely.  
+✅ **Room Management** – Browse and explore hotel rooms with details.  
+✅ **Booking System** – Book rooms easily and manage your bookings.  
+✅ **Responsive Design** – Fully responsive and mobile-friendly design.  
+✅ **Profile Management** – Update profile information and manage preferences.  
+✅ **Dark / Light Theme** – Toggle between light and dark themes.  
+✅ **Multi-language Support** – Switch easily between English and Arabic.  
 
-## Code scaffolding
+---
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### 🛠️ Tech Stack
+- **Frontend:** Angular, TypeScript, SCSS  
+- **UI Framework:** Angular Material  
+- **State Management:** Signals & Services  
+- **Icons:** Material Icons  
+- **Internationalization:** ngx-translate  
+- **Authentication:** JWT (assumed)  
+- **Version Control:** Git + GitHub  
 
-## Build
+---
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### 📂 Project Structure
+```
+hotel-system/
+│── src/
+│   ├── app/
+│   │   ├── core/            # Core modules & services
+│   │   ├── features/        # Feature modules (auth, booking, profile)
+│   │   ├── shared/          # Shared components & utilities
+│   │   ├── environments/    # Environment configurations
+│── angular.json             # Angular project configuration
+│── package.json             # Dependencies & scripts
+│── README.md                # Project documentation like this
+```
 
-## Running unit tests
+---
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### 📌 Installation & Setup
+#### 1️⃣ Clone the Repository
+```bash
+git clone https://github.com/YOUSSEF-R-KAMEL/hotel-system.git
+cd hotel-system
+```
 
-## Running end-to-end tests
+#### 2️⃣ Install Dependencies
+```bash
+npm install
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+#### 3️⃣ Run the Development Server
+```bash
+ng serve
+```
+Then open `http://localhost:4200/` in your browser.
 
-## Further help
+#### 4️⃣ Build for Production
+```bash
+ng build --configuration production
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+---
+
+
+### 📱 Contact
+For any inquiries, reach out:  
+- **portfolio:** https://youssef-raafat-angular-portfolio.vercel.app/home
+- **Email:** se.youssefrafat@gmail.com
+- **phone:** +20 01278004938
+- **linkedin:** https://www.linkedin.com/in/youssef-raafat-695591203
