@@ -11,7 +11,7 @@ interface IMenu {
   styleUrl: './side-navbar.component.scss',
 })
 export class SideNavbarComponent {
-  isExpanded: boolean = false;
+  // isExpanded: boolean = false;
   isSidebarActive = false;
 
   @Output() toggle: EventEmitter<boolean> = new EventEmitter<boolean>();

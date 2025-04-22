@@ -1,4 +1,10 @@
 @import '../../../../assets/sass/abstracts/variables';
+
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
 .mat-table {
   border-radius: 4px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
