@@ -68,7 +68,10 @@ ng build --configuration production
 
 ---
 
-### 📞 Contact
-For any inquiries, reach out:
-- **GitHub:** https://github.com/YOUSSEF-R-KAMEL?tab=repositories
+
+### 📱 Contact
+For any inquiries, reach out:  
+- **portfolio:** https://youssef-raafat-angular-portfolio.vercel.app/home
 - **Email:** se.youssefrafat@gmail.com
+- **phone:** +20 01278004938
+- **linkedin:** https://www.linkedin.com/in/youssef-raafat-695591203
