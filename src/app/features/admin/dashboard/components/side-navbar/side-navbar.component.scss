@@ -4,7 +4,7 @@
   display: none;
   cursor: pointer;
   position: absolute;
-  top: 1.5rem;
+  top: 1.3rem;
   left: 2rem;
   font-size: 2rem;
   color: #777;
@@ -12,7 +12,7 @@
 
 .sidebar {
   transition: 0.7s;
-  width: 90%;
+  width: 100%;
   transition: 0.5s ease;
   background-color: $dark-blue;
   z-index: 9999;
@@ -57,7 +57,7 @@
         align-items: center;
         justify-content: flex-start;
         width: 100%;
-        padding-left: 2.5rem;
+        padding-left: 1.5rem;
         column-gap: 0.5rem;
       }
     }
@@ -89,12 +89,9 @@
 }
 
 @media (max-width: 992px) {
-  .sidebar {
-    width: 70%;
-    .links li a span {
-      display: none;
-      color: #fff;
-    }
+  .links li a span {
+    display: none;
+    color: #fff;
   }
 }
 

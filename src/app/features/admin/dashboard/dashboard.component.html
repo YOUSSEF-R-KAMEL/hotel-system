@@ -1,10 +1,7 @@
 <div class="d-flex min-vh-100">
   <div
-    class="sidebar col-transition p-0"
-    [ngClass]="{
-      'w-25': isExpand,
-      'w-10': !isExpand
-    }"
+    class="sidebar col-md-2 col-xl-1 p-0"
+
     (mouseenter)="isExpand = true"
     (mouseleave)="isExpand = false"
     style="transition: all 0.3s ease;"
