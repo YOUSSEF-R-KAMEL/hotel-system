@@ -2,6 +2,7 @@ import { Component, inject, Input, OnInit } from '@angular/core';
 import { AuthService } from '../../../../auth/services/auth.service';
 import { authRoutes } from '../../../../auth/routes/enum';
 import { Router } from '@angular/router';
+import { HelperService } from '../../../../../shared/services/helpers/helper.service';
 
 @Component({
   selector: 'app-header',
@@ -14,15 +15,20 @@ export class HeaderComponent implements OnInit {
   @Input() profileImage: string = '';
   private _AuthService = inject(AuthService);
   private router = inject(Router);
+  private helperService = inject(HelperService);
 
   constructor() {
-    if (localStorage.getItem('userName')) {
+    if (this.helperService.isPlatformBrowser()) {
       this.userName = localStorage.getItem('userName');
     }
   }
+
   ngOnInit(): void {
-    this.userId = localStorage.getItem('userId');
+    if (this.helperService.isPlatformBrowser()) {
+      this.userId = localStorage.getItem('userId');
+    }
   }
+
   onLogout(): void {
     this._AuthService.onLogout();
     this.router.navigate([authRoutes.login]);

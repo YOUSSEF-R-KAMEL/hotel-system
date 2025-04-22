@@ -12,7 +12,8 @@ export class AuthService {
   private userSubject = new BehaviorSubject<User | null>(null);
   private roleSubject = new BehaviorSubject<string | null>(null);
   private http = inject(HttpClient);
-  private helperService = inject(HelperService);
+  private helperService = inject(HelperService);  // Inject HelperService
+
   constructor() {
     this.loadUserFromLocalStorage();
   }
@@ -29,14 +30,13 @@ export class AuthService {
     return this.roleSubject.getValue();
   }
 
-
   updateUser(user: User | null): void {
     this.userSubject.next(user);
     this.roleSubject.next(user?.role || null);
   }
 
   private loadUserFromLocalStorage(): void {
-    if (this.helperService.isPlatformBrowser()) {
+    if (this.helperService.isPlatformBrowser()) { 
       const token = localStorage.getItem('token');
       const role = localStorage.getItem('role');
       const userName = localStorage.getItem('userName');
@@ -54,9 +54,11 @@ export class AuthService {
   onLogin(data: ILogin): Observable<IApiResponse> {
     return this.http.post<IApiResponse>('admin/users/login', data);
   }
+
   onRegister(data: FormData) {
     return this.http.post('portal/users', data);
   }
+
   onReqResPassword(data: FormData) {
     return this.http.post('portal/users/forgot-password', data);
   }
@@ -64,20 +66,25 @@ export class AuthService {
   onResPassword(data: FormData) {
     return this.http.post('portal/users/reset-password', data);
   }
+
   onLogout(): void {
-    localStorage.removeItem('token');
-    localStorage.removeItem('role');
-    localStorage.removeItem('userId');
-    localStorage.removeItem('userName');
+    if (this.helperService.isPlatformBrowser()) {  // Check if the platform is a browser before accessing localStorage
+      localStorage.removeItem('token');
+      localStorage.removeItem('role');
+      localStorage.removeItem('userId');
+      localStorage.removeItem('userName');
+    }
     this.updateUser(null);
   }
 
   isLoggedIn(): boolean {
     return !!this.userSubject.getValue();
   }
+
   getAdmin(id: string): Observable<IApiResponse> {
     return this.http.get<IApiResponse>('admin/users/' + id);
   }
+
   getUser(id: string): Observable<IApiResponse> {
     return this.http.get<IApiResponse>('portal/users/' + id);
   }

@@ -20,6 +20,7 @@ import { RoomsService } from '../../../services/rooms/rooms.service';
 import { BookingRoomService } from '../../../services/booking/booking-room.service';
 import { RateReviewService } from '../../../services/rating/rate-review.service';
 import { CommentService } from '../../../services/comments/comment.service';
+import { HelperService } from '../../../../../shared/services/helpers/helper.service';
 
 @Component({
   selector: 'app-room-details',
@@ -50,6 +51,7 @@ export class RoomDetailsComponent implements OnInit {
   private _RateReviewService = inject(RateReviewService);
   private _CommentService = inject(CommentService);
   public dialog = inject(MatDialog);
+  public helperService = inject(HelperService);
 
   facilityIcons: { [key: string]: string } = {
     '4 television': '4 television',
@@ -274,6 +276,10 @@ export class RoomDetailsComponent implements OnInit {
     this.editedComment = '';
   }
   getToken(): string | null {
-    return localStorage.getItem('token');
+    if (this.helperService.isPlatformBrowser()) {
+      return localStorage.getItem('token');
+    }
+    return null;
   }
+
 }

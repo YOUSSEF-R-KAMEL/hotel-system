@@ -1,14 +1,18 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
+import { HelperService } from '../../../shared/services/helpers/helper.service';
 
 export const loggedInAdminGuard: CanActivateFn = (route, state) => {
-  const token = localStorage.getItem('token');
-  // const role = localStorage.getItem('role');
   const _Router = inject(Router);
-  if (!token) {
-    return true;
-  } else {
+  const helperService = inject(HelperService);
+  let token: string | null = null;
+  if (helperService.isPlatformBrowser()) {
+    token = localStorage.getItem('token');
+  }
+  if (token) {
     _Router.navigate(['/admin/dashboard']);
     return false;
+  } else {
+    return true;
   }
 };
