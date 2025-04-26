@@ -16,31 +16,36 @@ export class HomeComponent implements OnInit {
   page: number = 1;
   size: number = 20;
   rooms = signal<IRoom[]>([]);
+  capacitySignal = signal<number>(1);
   popularRooms = computed(() => this.rooms().slice(0, 5));
   firstRoomsSection = computed(() => this.rooms().slice(0, 4));
   secondRoomsSection = computed(() => this.rooms().slice(3, 7));
   thirdRoomsSection = computed(() => this.rooms().slice(6, 10));
+  currentLangSignal = signal<string>(this._authServices.currentLang ?? 'en');
   roomFiltersForm = new FormGroup({
     startDate: new FormControl<Date | null>(null),
     endDate: new FormControl<Date | null>(null),
     capacity: new FormControl<number>(1),
   });
   constructor(private _RoomService: RoomsService,
-              private router: Router,
-              private translate: TranslateService,
-              private _authServices:AuthService ) {
-          this.translate.setDefaultLang(this.currentLang as string);
-          this.translate.use(this.currentLang as string);
-          console.log(this.currentLang)
+    private router: Router,
+    private translate: TranslateService,
+    private _authServices: AuthService) {
+    this.translate.setDefaultLang(this.currentLangSignal() as string);
+    this.translate.use(this.currentLangSignal() as string);
   }
   switchLanguage(lang: string) {
     this.translate.use(lang);
   }
-  get currentLang() : string | null{
-    return this._authServices.currentLang
-  }
+
   ngOnInit(): void {
     this.getAllRooms();
+    this.capacity.valueChanges?.subscribe(value => {
+      this.capacitySignal.set(value ?? 1);
+    });
+    this.translate.onLangChange.subscribe((event) => {
+      this.currentLangSignal.set(event.lang);
+    });
   }
   getAllRooms() {
     let params: IRoomParams = {
@@ -69,10 +74,14 @@ export class HomeComponent implements OnInit {
   get capacity() {
     return this.roomFiltersForm.get('capacity')!;
   }
-  getCapacityDisplay(): string {
-    const value = this.capacity.value || 0;
-    return `${value} person${value > 1 ? 's' : ''}`;
-  }
+  capacityDisplay = computed(() => {
+    const value = this.capacitySignal();
+    this.currentLangSignal();
+    const translationKey = value > 1 ? 'home-page.booking.capacity.people' : 'home-page.booking.capacity.person';
+    return this.translate.stream(translationKey, { value });
+
+  });
+
   incrementCapacity(): void {
     const currentValue = this.capacity.value || 0;
     this.capacity.setValue(currentValue + 1);

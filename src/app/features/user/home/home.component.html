@@ -46,8 +46,7 @@
             </mat-form-field>
             <div class="capacity-input">
               <button
-                mat-icon-button
-                class="decrement-button icon-button"
+                class="decrement-button icon-button border-0"
                 (click)="decrementCapacity()"
               >
                 <mat-icon>remove</mat-icon>
@@ -56,14 +55,13 @@
                 <!-- Bind the displayed value dynamically -->
                 <input
                   matInput
-                  value="{{ 'home-page.booking.person' | translate }}"
+                  [value]="capacityDisplay() | async"
                   readonly
                   placeholder="Capacity"
                 />
               </mat-form-field>
               <button
-                mat-icon-button
-                class="increment-button"
+                class="increment-button border-0"
                 (click)="incrementCapacity()"
               >
                 <mat-icon>add</mat-icon>
@@ -87,7 +85,7 @@
           src="../../../../assets/images/svg/room-filter-image.svg"
           alt="Room filter image"
           [ngStyle]="{
-            transform: currentLang == 'en' ? 'scaleX(1)' : 'scaleX(-1)'
+            transform: currentLangSignal() == 'en' ? 'scaleX(1)' : 'scaleX(-1)'
           }"
         />
       </div>
