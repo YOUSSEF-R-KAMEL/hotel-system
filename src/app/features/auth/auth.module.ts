@@ -19,6 +19,6 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
     ImageCropperComponent,
     SharedModule,
     NgxDropzoneModule
-    ],
+  ],
 })
 export class AuthModule { }

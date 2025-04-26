@@ -12,36 +12,25 @@
             <mat-form-field class="date-input">
               <mat-label>{{
                 "home-page.booking.inputLabel" | translate
-              }}</mat-label>
+                }}</mat-label>
               <mat-date-range-input [rangePicker]="picker">
-                <input
-                  matStartDate
-                  formControlName="startDate"
-                  placeholder="Start date"
-                />
-                <input
-                  matEndDate
-                  formControlName="endDate"
-                  placeholder="End date"
-                />
+                <input matStartDate formControlName="startDate" placeholder="Start date" />
+                <input matEndDate formControlName="endDate" placeholder="End date" />
               </mat-date-range-input>
               <!-- <mat-hint>{{ 'home-page.booking.date-hint' | translate }} – {{ 'home-page.booking.date-hint' | translate }}</mat-hint> -->
-              <mat-datepicker-toggle
-                matIconPrefix
-                [for]="picker"
-              ></mat-datepicker-toggle>
+              <mat-datepicker-toggle matIconPrefix [for]="picker"></mat-datepicker-toggle>
               <mat-date-range-picker #picker></mat-date-range-picker>
               @if
               (roomFiltersForm.controls.startDate.hasError('matStartDateInvalid'))
               {
               <mat-error>{{
                 "home-page.booking.invalid-start-date" | translate
-              }}</mat-error>
+                }}</mat-error>
               } @if
               (roomFiltersForm.controls.endDate.hasError('matEndDateInvalid')) {
               <mat-error>{{
                 "home-page.booking.invalid-end-date" | translate
-              }}</mat-error>
+                }}</mat-error>
               }
             </mat-form-field>
             <div class="capacity-input">
@@ -67,12 +56,7 @@
                 <mat-icon>add</mat-icon>
               </button>
             </div>
-            <button
-              (click)="exploreWithFilters()"
-              class="explore-btn"
-              mat-raised-button
-              color="primary"
-            >
+            <button (click)="exploreWithFilters()" class="explore-btn mb-5" mat-raised-button color="primary">
               {{ "home-page.booking.btn" | translate }}
             </button>
           </form>

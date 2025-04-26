@@ -1,4 +1,3 @@
-@import "../../../../../../assets/sass/abstracts/variables";
 header {
   .row {
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
@@ -12,8 +11,8 @@ header {
   }
 }
 
-// .mat-mdc-menu-item:hover,
-// .mat-mdc-menu-item:hover .mat-icon-no-color,
-// .mat-mdc-menu-item:hover .mat-mdc-menu-submenu-icon {
-//   color: white;
-// }
+@media (max-width: 768px) {
+  img {
+    margin-left: 45px;
+  }
+}

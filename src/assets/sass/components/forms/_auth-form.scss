@@ -1,3 +1,5 @@
+@import '../../abstracts/variables';
+
 .form__wrapper {
   @include flexCenter;
   height: 80%;
@@ -10,13 +12,16 @@
     width: 100%;
   }
   &-paragraph {
-    width: 70%;
+    width: 100%;
     .blue-link {
       color: mat.get-color-from-palette($Hotel-system-primary, 500);
     }
     .red-link {
       color: mat.get-color-from-palette($Hotel-system-accent);
     }
+  }
+  .form__wrapper-paragraph {
+    width: 100%;
   }
   .auth-form {
     @include flexCenter;
@@ -34,8 +39,14 @@
     }
     &__actions {
       width: 100%;
-      margin-top: 3rem;
+      margin-top: 1rem;
     }
+  }
+}
+@media (max-width: 768px) {
+  .form__wrapper {
+    width: 100%;
+    margin: 0;
   }
 }
 .image__container {
@@ -47,6 +58,8 @@
   flex-direction: column;
   color: white;
   padding: 0 0 4rem 4rem;
+  position: relative;
+  overflow: hidden;
   &.login {
     @include login-image;
   }
@@ -56,8 +69,33 @@
   &.reset {
     @include reset-image;
   }
-  &.-header {
+  &::after {
+    content:  "";
+    background-color: $primary-color;
+    opacity: .3;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
   }
-  &.-paragraph {
+  * {
+    position: relative;
+    z-index: 999;
+  }
+  .image__container-header {
+    font-size: 35px;
+  }
+  .image__container-paragraph {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .image__container {
+    justify-content: center;
+    padding: 4rem 2rem;
+    align-items: center;
+    text-align: center;
   }
 }

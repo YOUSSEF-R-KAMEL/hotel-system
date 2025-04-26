@@ -2,6 +2,8 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
-//   h1, h2, h3 {
-//     font-family: 'Montserrat', sans-serif;
-//   }
+.mat-body, .mat-body-2, .mat-typography .mat-body, .mat-typography .mat-body-2, .mat-typography,
+.mat-body h5, .mat-body-2 h5, .mat-typography .mat-body h5, .mat-typography .mat-body-2 h5, .mat-typography h5 {
+  font-size: inherit;
+  font-weight: 500;
+}

@@ -14,14 +14,15 @@
   },
   "nav": {
     "register": "Register",
-    "login": "Login Now",
+    "login": "Login",
     "Home": "Home",
     "Explore": "Explore",
     "Reviews": "Reviews",
     "Favorites": "Favorites",
     "profile": "Profile",
     "change-password": "Change password",
-    "logout": "Logout"
+    "logout": "Logout",
+    "mode": "Dark mode"
   },
   "home-page": {
     "booking": {

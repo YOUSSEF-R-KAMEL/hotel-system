@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IParams } from '../../../../../shared/interface/params/params.interface';
 import { Ads, IAdsResponse } from '../interfaces/IAdsResponse';
@@ -10,7 +10,7 @@ import { IUpdateResponse } from '../interfaces/IUpdateResponse.ts';
   providedIn: 'root',
 })
 export class AdsService {
-  constructor(private _HttpClient: HttpClient) {}
+  private _HttpClient = inject(HttpClient);
   onGetAllAds(params: IParams): Observable<IAdsResponse> {
     return this._HttpClient.get<IAdsResponse>('admin/ads', {
       params: { ...params },

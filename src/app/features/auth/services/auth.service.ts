@@ -1,9 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { computed, Injectable, signal, Signal } from '@angular/core';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
-import { ILogin, User } from '../interfaces/ILogin';
+import { inject, Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { IApiResponse } from '../../../shared/interface/api-data-response/api-response.interface';
-import { IUser } from '../../../shared/interface/user/IUserResponse';
+import { ILogin, User } from '../interfaces/ILogin';
 import { HelperService } from './../../../shared/services/helpers/helper.service';
 
 @Injectable({
@@ -12,8 +11,10 @@ import { HelperService } from './../../../shared/services/helpers/helper.service
 export class AuthService {
   private userSubject = new BehaviorSubject<User | null>(null);
   private roleSubject = new BehaviorSubject<string | null>(null);
+  private http = inject(HttpClient);
+  private helperService = inject(HelperService);  // Inject HelperService
 
-  constructor(private http: HttpClient, private helperService: HelperService, private _helperService:HelperService) {
+  constructor() {
     this.loadUserFromLocalStorage();
   }
 
@@ -29,20 +30,13 @@ export class AuthService {
     return this.roleSubject.getValue();
   }
 
-  get currentLang(): string | null {
-    if(this._helperService.isPlatformBrowser()){
-      return localStorage.getItem('lang');
-    }
-    return null
-  }
-
   updateUser(user: User | null): void {
     this.userSubject.next(user);
     this.roleSubject.next(user?.role || null);
   }
 
   private loadUserFromLocalStorage(): void {
-    if (this.helperService.isPlatformBrowser()) {
+    if (this.helperService.isPlatformBrowser()) { 
       const token = localStorage.getItem('token');
       const role = localStorage.getItem('role');
       const userName = localStorage.getItem('userName');
@@ -60,9 +54,11 @@ export class AuthService {
   onLogin(data: ILogin): Observable<IApiResponse> {
     return this.http.post<IApiResponse>('admin/users/login', data);
   }
+
   onRegister(data: FormData) {
     return this.http.post('portal/users', data);
   }
+
   onReqResPassword(data: FormData) {
     return this.http.post('portal/users/forgot-password', data);
   }
@@ -70,19 +66,26 @@ export class AuthService {
   onResPassword(data: FormData) {
     return this.http.post('portal/users/reset-password', data);
   }
+
   onLogout(): void {
-    localStorage.clear();
+    if (this.helperService.isPlatformBrowser()) {  // Check if the platform is a browser before accessing localStorage
+      localStorage.removeItem('token');
+      localStorage.removeItem('role');
+      localStorage.removeItem('userId');
+      localStorage.removeItem('userName');
+    }
     this.updateUser(null);
   }
 
   isLoggedIn(): boolean {
-    return !!this.userSubject.getValue();;
+    return !!this.userSubject.getValue();
   }
+
   getAdmin(id: string): Observable<IApiResponse> {
     return this.http.get<IApiResponse>('admin/users/' + id);
   }
+
   getUser(id: string): Observable<IApiResponse> {
     return this.http.get<IApiResponse>('portal/users/' + id);
   }
-
 }

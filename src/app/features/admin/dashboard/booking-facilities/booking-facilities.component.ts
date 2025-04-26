@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { IApiResponse, IData } from '../../../../shared/interface/api-data-response/api-response.interface';
-import { ITableAction, ITableInput } from '../../../../shared/interface/table/table-input.interface';
-import { ViewBookingDialogComponent } from './components/view-booking-dialog/view-booking-dialog.component';
 import { IBooking } from './interfaces/booking-facility.interface';
+import { Component, inject } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ITableInput, ITableAction } from '../../../../shared/interface/table/table-input.interface';
 import { BookingFacilitiesService } from './services/booking-facilities.service';
+import { IApiResponse, IData } from '../../../../shared/interface/api-data-response/api-response.interface';
+import { ViewBookingDialogComponent } from './components/view-booking-dialog/view-booking-dialog.component';
 
 @Component({
   selector: 'app-booking-facilities',
@@ -17,7 +17,9 @@ export class BookingFacilitiesComponent {
   size = 10;
   bookingsColumns: string[] = [];
   actions: ITableAction[] = [];
-  constructor(private dialog: MatDialog, private bookingService: BookingFacilitiesService) {
+  private dialog = inject(MatDialog);
+  private bookingService = inject(BookingFacilitiesService);
+  constructor() {
     this.actions = [
       {
         type: 'icon',
@@ -29,7 +31,7 @@ export class BookingFacilitiesComponent {
     ]
     this.bookingFacilitiesData = {
       data: {
-        bookings: [],
+        booking: [],
         totalCount: 0
       },
       actions: this.actions
@@ -58,7 +60,7 @@ export class BookingFacilitiesComponent {
     console.log(data);
     this.bookingFacilitiesData = {
       data: {
-        bookings: data.bookings,
+        booking: data.booking,
         totalCount: data.totalCount
       },
       actions: this.actions

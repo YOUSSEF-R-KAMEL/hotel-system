@@ -2,7 +2,7 @@
   <div class="row mt-5 justify-content-around">
     <div
       *ngFor="let card of cards()"
-      class="col-md-3 radius-16 card-container d-flex justify-content-around align-items-center"
+      class="col-8 col-md-3 mb-3 radius-16 card-container d-flex justify-content-around align-items-center"
     >
       <div [routerLink]="'/admin/dashboard/' + card.name.toLowerCase()">
         <p class="numbers-wrapper">{{ card.number }}</p>

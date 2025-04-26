@@ -1,7 +1,7 @@
 <section class="">
   <div class="containter">
-    <div class="row w-100">
-      <div class="col-md-6 ">
+    <div class="row w-100 m-0 p-0">
+      <div class="col-12 col-md-6 ">
         <div class="logo__container">
           <img src="../../../../../assets/images/svg/logo.svg" alt="logo" />
         </div>
@@ -35,37 +35,35 @@
               <mat-error  *ngIf="registerForm.get('userName')?.errors?.['required']">The User Name is required</mat-error>
               <mat-error  *ngIf="registerForm.get('userName')?.errors?.['pattern']">The User Name must contain characters and end with numbers without spaces.</mat-error>
             </ng-container>
-            <div class="row">
-              <div class="col-md-6">
+            <div class="row w-100 g-0">
+              <div class="col-md-6 pe-md-2"> <!-- 'pe-md-2' adds padding-right (spacing between columns) -->
                 <!-- phoneNumber -->
-                <div class="input-group ">
+                <div class="input-group">
                   <label for="phoneNumber" class="w-100 mb-2">Phone Number</label>
                   <input type="text"
                         id="phoneNumber"
                         class="form-control"
                         placeholder="Please type here ..."
                         formControlName="phoneNumber"
-                        aria-label="phoneNumber"
-                  >
+                        aria-label="phoneNumber">
                 </div>
                 <ng-container *ngIf="registerForm.get('phoneNumber')?.dirty || registerForm.get('phoneNumber')?.touched">
-                  <mat-error  *ngIf="registerForm.get('phoneNumber')?.errors?.['required']">Phone Number is required</mat-error>
+                  <mat-error *ngIf="registerForm.get('phoneNumber')?.errors?.['required']">Phone Number is required</mat-error>
                 </ng-container>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-6 ps-md-2">
                 <!-- country -->
-                <div class="input-group ">
+                <div class="input-group">
                   <label for="country" class="w-100 mb-2">Country</label>
                   <input type="text"
                         id="country"
                         class="form-control"
                         placeholder="Please type here ..."
                         formControlName="country"
-                        aria-label="country"
-                  >
+                        aria-label="country">
                 </div>
                 <ng-container *ngIf="registerForm.get('country')?.dirty || registerForm.get('country')?.touched">
-                  <mat-error  *ngIf="registerForm.get('country')?.errors?.['required']">country is required</mat-error>
+                  <mat-error *ngIf="registerForm.get('country')?.errors?.['required']">Country is required</mat-error>
                 </ng-container>
               </div>
             </div>
@@ -87,8 +85,8 @@
               </mat-error>
             </ng-container>
             <!-- password -->
+            <label for="password" class="password-label w-100 mb-2">Password</label>
             <div class="input-group  position-relative">
-              <label for="password" class="password-label w-100 mb-2">Password</label>
               <input [type]="showPassword? 'text' : 'password'"
                     id="password"
                     class="form-control"
@@ -110,8 +108,8 @@
                 </mat-error>
               </ng-container>
             <!-- confirmPassword -->
+            <label for="confirmPassword" class="w-100 mb-2">Confirm Password</label>
             <div class="input-group  position-relative">
-              <label for="confirmPassword" class="w-100 mb-2">Confirm Password</label>
               <input [type]="showConfirmPassword? 'text' : 'password'"
                     id="confirmPassword"
                     class="form-control"
@@ -137,7 +135,7 @@
           </form>
         </div>
       </div>
-      <div class="col-md-6 py-3 d-flex">
+      <div class="col-12 col-md-6 py-3 d-flex">
         <div class="image__container register">
           <h1 class="image__container-header">Sign in to Roamhome</h1>
           <p class="image__container-paragraph">Homes as unique as you.</p>

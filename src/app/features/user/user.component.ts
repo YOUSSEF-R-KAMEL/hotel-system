@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ThemeService } from '../../shared/services/theme/theme.service';
 import { TranslateService } from '@ngx-translate/core';
 @Component({
@@ -7,5 +7,5 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrl: './user.component.scss'
 })
 export class UserComponent {
-  constructor(public themeService: ThemeService) {}
+  public themeService = inject(ThemeService);
 }

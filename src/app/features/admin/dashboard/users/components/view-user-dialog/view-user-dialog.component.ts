@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, inject, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { IUser } from '../../../../../../shared/interface/user/IUserResponse';
 
@@ -8,5 +8,5 @@ import { IUser } from '../../../../../../shared/interface/user/IUserResponse';
   styleUrls: ['./view-user-dialog.component.scss'],
 })
 export class ViewUserDialogComponent {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: IUser) {}
+  public data = inject(MAT_DIALOG_DATA);
 }

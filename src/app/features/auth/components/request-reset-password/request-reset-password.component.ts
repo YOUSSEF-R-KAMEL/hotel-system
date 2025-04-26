@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { ToastrService } from 'ngx-toastr';
@@ -14,11 +14,10 @@ export class RequestResetPasswordComponent {
   reqResForm: FormGroup = new FormGroup({
       email: new FormControl(null, [Validators.required, Validators.email]),
     });
-  constructor(
-    private _AuthService: AuthService,
-    private _ToastrService: ToastrService,
-    private _router: Router,
-  ) {}
+
+  private _AuthService = inject(AuthService);
+  private _ToastrService = inject(ToastrService);
+  private _router = inject(Router);
   reqRes() {
     if (this.reqResForm.valid) {
       this._AuthService.onReqResPassword(this.reqResForm.value).subscribe({

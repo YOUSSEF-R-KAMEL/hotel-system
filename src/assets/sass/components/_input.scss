@@ -25,7 +25,7 @@ mat-form-field {
     &.mat-mdc-form-field-infix {
     }
     &.mdc-text-field--filled:not(.mdc-text-field--disabled) {
-      --mdc-filled-text-field-container-color: #F5F6F8 !important ;
+      --mdc-filled-text-field-container-color: #f7f7f7 !important ;
     }
     .mdc-text-field__input {
       padding: 0.5rem 0;
@@ -51,8 +51,7 @@ mat-form-field {
       --mdc-filled-text-field-label-text-color: $primary-color !important;
     }
     .mdc-text-field--filled:not(.mdc-text-field--disabled)
-    .mdc-text-field__input {
-        --mdc-filled-text-field-container-color: #F5F6F8 !important ;
+      .mdc-text-field__input {
       --mdc-filled-text-field-input-text-color: black !important;
       &::placeholder {
         color: #8391a1 !important;

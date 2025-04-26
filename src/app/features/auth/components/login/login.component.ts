@@ -1,14 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { IUser } from '../../../../shared/interface/user/IUserResponse';
 import { AuthService } from '../../services/auth.service';
+import { HelperService } from '../../../../shared/services/helpers/helper.service'; // Import HelperService
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss',
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
   resMsg: string = '';
@@ -22,21 +23,23 @@ export class LoginComponent {
       ),
     ]),
   });
-  constructor(
-    private _AuthService: AuthService,
-    private _ToastrService: ToastrService,
-    private _Router: Router
-  ) {}
+  private _AuthService = inject(AuthService);
+  private _ToastrService = inject(ToastrService);
+  private _Router = inject(Router);
+  private _HelperService = inject(HelperService);
+
   login() {
     if (this.loginForm.valid) {
       this._AuthService.onLogin(this.loginForm.value).subscribe({
         next: (res) => {
           this.resMsg = res.message;
-          localStorage.setItem('token', res.data.token as string);
-          localStorage.setItem('role', res.data.user?.role as string);
-          localStorage.setItem('userId', res.data.user?._id as string);
-          localStorage.setItem('userName', res.data.user?.userName as string);
-          localStorage.setItem('lang',"en");
+          if (this._HelperService.isPlatformBrowser()) {
+            localStorage.setItem('token', res.data.token as string);
+            localStorage.setItem('role', res.data.user?.role as string);
+            localStorage.setItem('userId', res.data.user?._id as string);
+            localStorage.setItem('userName', res.data.user?.userName as string);
+            localStorage.setItem('lang', 'en');
+          }
           this._AuthService.updateUser(res.data.user as IUser);
         },
         error: (err) => {
@@ -44,15 +47,17 @@ export class LoginComponent {
         },
         complete: () => {
           this._ToastrService.success(this.resMsg, 'Success');
-          if (localStorage.getItem('role') == 'admin') {
+          const role = localStorage.getItem('role');
+          if (role === 'admin') {
             this._Router.navigate(['/admin/dashboard/home']);
-          } else if (localStorage.getItem('role') == 'user') {
+          } else if (role === 'user') {
             this._Router.navigate(['/home']);
           }
         },
       });
     }
   }
+
   toggleShowPass(): void {
     this.showPassword = !this.showPassword;
   }

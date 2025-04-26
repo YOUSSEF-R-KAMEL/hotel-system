@@ -1,7 +1,7 @@
 mat-stepper{
   background: none;
   h2 {
-    // color: #152C5B;
+    color: #152C5B;
     font-size: 36px;
   }
   p, ul li {
@@ -19,25 +19,4 @@ mat-stepper{
       transform: translateY(-10px);
     }
   }
-}
-
-// h2 {
-//   color: #152C5B;
-// }
-// p {
-//   color: #B0B0B0;
-// }
-
-button {
-  &.cancel {
-    background-color: #F5F6F8;
-    color: #B3B3B3;
-  }
-}
-
-.form-actions {
-  display: flex;
-  flex-direction: column;
-  width: 40%;
-  gap: 1rem;
 }

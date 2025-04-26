@@ -16,7 +16,7 @@ export const routes: Routes = [
     loadChildren: () =>
       import('./features/admin/admin.module').then((m) => m.AdminModule),
   },
-  {path: '**', component: NotFoundComponent}
+  {path: "**", component: NotFoundComponent}
 ];
 
 @NgModule({

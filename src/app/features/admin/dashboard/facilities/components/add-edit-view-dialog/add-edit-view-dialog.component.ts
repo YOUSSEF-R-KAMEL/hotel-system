@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, inject, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
@@ -8,11 +8,11 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class AddEditViewDialogComponent {
   name = '';
-  constructor(
-    @Inject(MAT_DIALOG_DATA) public data: { type: string, data: any },
-  ) {
-    if (data.data) {
-      this.name = data.data.name;
+  public data = inject(MAT_DIALOG_DATA);
+
+  constructor() {
+    if (this.data.data) {
+      this.name = this.data.data.name;
     }
   }
 }

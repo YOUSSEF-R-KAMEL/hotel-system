@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Charts } from '../interfaces/charts';
 
@@ -7,8 +7,7 @@ import { Charts } from '../interfaces/charts';
   providedIn: 'root',
 })
 export class HomeService {
-  constructor(private _HttpClient: HttpClient) {}
-
+  private _HttpClient = inject(HttpClient);
   getChartData(): Observable<Charts> {
     return this._HttpClient.get<Charts>('admin/dashboard');
   }

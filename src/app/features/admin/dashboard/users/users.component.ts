@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { IData } from '../../../../shared/interface/api-data-response/api-response.interface';
 import {
@@ -20,7 +20,9 @@ export class UsersComponent implements OnInit {
   page = 1;
   size = 10;
   actions: ITableAction[] = [];
-  constructor(private dialog: MatDialog, private usersService: UsersService) {
+  private dialog = inject(MatDialog);
+  private usersService = inject(UsersService);
+  constructor() {
     this.actions = [
       {
         type: 'icon',

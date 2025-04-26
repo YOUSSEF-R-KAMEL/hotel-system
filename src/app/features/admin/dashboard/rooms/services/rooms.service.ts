@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IApiResponse } from '../../../../../shared/interface/api-data-response/api-response.interface';
 import { IParams } from '../../../../../shared/interface/params/params.interface';
@@ -9,7 +9,7 @@ import { IGetRooms } from '../interfaces/get-rooms-interface';
   providedIn: 'root',
 })
 export class RoomsService {
-  constructor(private _http: HttpClient) {}
+  private _http = inject(HttpClient);
   getRooms(params: IParams): Observable<IGetRooms> {
     return this._http.get<IGetRooms>('admin/rooms', {
       params: {

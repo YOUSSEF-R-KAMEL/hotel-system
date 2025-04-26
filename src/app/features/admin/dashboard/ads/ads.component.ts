@@ -1,5 +1,5 @@
 import { ToastrService } from 'ngx-toastr';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteItemComponent } from '../../../../shared/components/delete-item/delete-item.component';
 import { TableTypeEnum } from '../../../../shared/enums/table-type-enum';
@@ -17,7 +17,7 @@ import { AdsService } from './services/ads.service';
 @Component({
   selector: 'app-ads',
   templateUrl: './ads.component.html',
-  styleUrl: './ads.component.scss', 
+  styleUrl: './ads.component.scss',
 })
 export class AdsComponent implements OnInit {
   type = TableTypeEnum.Ads;
@@ -27,7 +27,10 @@ export class AdsComponent implements OnInit {
   size = 10;
   adsColumns: string[] = [];
   actions: ITableAction[] = [];
-  constructor(private toast: ToastrService, private _AdsService: AdsService, private dialog: MatDialog) {
+  private toast = inject(ToastrService);
+  private _AdsService = inject(AdsService);
+  private dialog = inject(MatDialog);
+  constructor() {
     this.actions = [
       {
         type: 'icon',

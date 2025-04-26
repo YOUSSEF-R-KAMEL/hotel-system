@@ -7,7 +7,6 @@ import { exploreRoomWithFiltersResolver } from './resolvers/explore-room-with-fi
 import { favoriteRoomsResolver } from './resolvers/favorite-rooms.resolver';
 import { UserComponent } from './user.component';
 import { RoomDetailsComponent } from './home/components/room-details/room-details.component';
-import { NotFoundComponent } from '../../shared/components/not-found/not-found.component';
 
 const routes: Routes = [
   {
@@ -26,12 +25,14 @@ const routes: Routes = [
       },
       {
         path: 'explore',
-        component: ExploreComponent,
+        loadChildren: () =>
+          import('./components/explore/explore.component').then((m) => m.ExploreComponent),
         resolve: { filters: exploreRoomWithFiltersResolver },
       },
       {
         path: 'favorites',
-        component: FavRoomsComponent,
+        loadChildren: () =>
+          import('./components/fav-rooms/fav-rooms.component').then((m) => m.FavRoomsComponent),
         canActivate: [userGuard],
         resolve: { filters: favoriteRoomsResolver },
       },

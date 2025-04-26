@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
+import { HelperService } from '../../../../shared/services/helpers/helper.service';
 
 @Component({
   selector: 'app-reset-password',
@@ -9,24 +11,30 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './reset-password.component.scss'
 })
 export class ResetPasswordComponent {
+  private _AuthService = inject(AuthService);
+  private _ToastrService = inject(ToastrService);
+  private _router = inject(Router);
+  private helperService = inject(HelperService);
   resMsg: string = '';
-  showPassword:boolean = false
-  showConfirmPassword:boolean = false
+  showPassword: boolean = false;
+  showConfirmPassword: boolean = false;
   resPasswordForm: FormGroup = new FormGroup({
-    email: new FormControl(localStorage.getItem('email'), [Validators.email, Validators.required]),
+    email: new FormControl(
+      this.helperService.isPlatformBrowser() ? localStorage.getItem('email') || null : null,
+      [Validators.email, Validators.required]
+    ),
     seed: new FormControl(null, [Validators.required]),
-    password: new FormControl(null, [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,}$/)]),
+    password: new FormControl(null, [
+      Validators.required,
+      Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,}$/)
+    ]),
     confirmPassword: new FormControl(null, Validators.required)
-  }, { validators: this.checkPasswords })
+  }, { validators: this.checkPasswords });
 
-  constructor(
-    private _AuthService: AuthService,
-    private _ToastrService: ToastrService
-  ) {}
   reqRes() {
     if (this.resPasswordForm.valid) {
       this._AuthService.onResPassword(this.resPasswordForm.value).subscribe({
-        next: (res:any) => {
+        next: (res: any) => {
           console.log(res);
           this.resMsg = res.message;
           localStorage.setItem('token', res.data.token);
@@ -38,23 +46,34 @@ export class ResetPasswordComponent {
         },
         complete: () => {
           this._ToastrService.success(this.resMsg, 'Success');
+          this._router.navigateByUrl('/auth/login');
         },
       });
     }
   }
 
-  toggleShowPass(): void{
-    this.showPassword = !this.showPassword
+  toggleShowPass(): void {
+    this.showPassword = !this.showPassword;
   }
 
-  toggleShowConfirmPass(): void{
-    this.showConfirmPassword = !this.showConfirmPassword
+  toggleShowConfirmPass(): void {
+    this.showConfirmPassword = !this.showConfirmPassword;
   }
 
-  checkPasswords(g:AbstractControl) {
+  checkPasswords(g: AbstractControl) {
     const password = g.get('password')?.value;
     const confirmPassword = g.get('confirmPassword')?.value;
-    return password === confirmPassword ? null : { mismatch: true }
+    return password === confirmPassword ? null : { mismatch: true };
+  }
+
+  getPasswordErrorMessage(): string {
+    const control = this.resPasswordForm.get('confirmPassword');
+    if (control?.hasError('required')) {
+      return 'Confirm password is required';
+    }
+    if (control?.hasError('mismatch')) {
+      return 'Passwords do not match';
+    }
+    return '';
   }
 }
-

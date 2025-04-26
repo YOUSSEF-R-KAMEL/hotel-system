@@ -1,11 +1,12 @@
-import { Component, computed, OnInit, signal } from '@angular/core';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { IRoom } from '../../../shared/interface/room/room.interface';
-import { RoomsService } from '../services/rooms.service';
 import { Router } from '@angular/router';
-import { IRoomParams } from '../../../shared/interface/params/params.interface';
 import { TranslateService } from '@ngx-translate/core';
+import { IRoomParams } from '../../../shared/interface/params/params.interface';
+import { IRoom } from '../../../shared/interface/room/room.interface';
 import { AuthService } from '../../auth/services/auth.service';
+import { RoomsService } from '../services/rooms/rooms.service';
+import { TranslationService } from '../services/translation/translation.service';
 
 @Component({
   selector: 'app-home',

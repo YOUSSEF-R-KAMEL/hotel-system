@@ -14,14 +14,15 @@
   },
   "nav": {
     "register": "إنشاء حساب",
-    "login": "تسجيل الان",
+    "login": "تسجيل",
     "Home": "الرئيسية",
     "Explore": "استكشاف",
     "Reviews": "المراجعات",
     "Favorites": "المفضلة",
     "profile": "الحساب",
     "change-password": "تغيير كلمة المرور",
-    "logout": "تسجيل خروج"
+    "logout": "تسجيل خروج",
+    "mode": "الوضع المظلم"
   },
   "home-page": {
     "booking": {

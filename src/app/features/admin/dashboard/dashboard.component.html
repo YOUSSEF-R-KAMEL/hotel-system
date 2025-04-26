@@ -1,26 +1,16 @@
-<div class="container-fluid h-100">
-  <div class="row h-100">
-    <div
-      [ngClass]="{
-        'col-md-1': !isExpand,
-        'col-md-2': isExpand,
-        'col-transition': true
-      }"
-      (mouseenter)="isExpand = true"
-      (mouseleave)="isExpand = false"
-      class="sidebar p-0 h-100 position-fixed"
-    >
-      <app-side-navbar></app-side-navbar>
-    </div>
-    <div
-      class="ms-auto"
-      [ngClass]="{
-        'col-md-10 ': isExpand,
-        'col-md-11 ': !isExpand,
-        'col-transition': true
-      }"
-    >
-      <app-header [profileImage]="profileImage"></app-header>
+<div class="d-flex min-vh-100">
+  <div
+    class="sidebar col-md-2 col-xl-1 p-0"
+
+    (mouseenter)="isExpand = true"
+    (mouseleave)="isExpand = false"
+    style="transition: all 0.3s ease;"
+  >
+    <app-side-navbar></app-side-navbar>
+  </div>
+  <div class="flex-grow-1 d-flex flex-column w-100">
+    <app-header [profileImage]="profileImage"></app-header>
+    <div class="flex-grow-1 overflow-auto p-3">
       <router-outlet></router-outlet>
     </div>
   </div>

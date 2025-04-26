@@ -1,15 +1,14 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IApiResponse } from '../../../shared/interface/api-data-response/api-response.interface';
-import { IRoomParams } from '../../../shared/interface/params/params.interface';
-import { IRoom } from '../../../shared/interface/room/room.interface';
+import { IApiResponse } from '../../../../shared/interface/api-data-response/api-response.interface';
+import { IRoomParams } from '../../../../shared/interface/params/params.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RoomsService {
-  constructor(private _HttpClient: HttpClient) { }
+  private _HttpClient = inject(HttpClient);
   getAllRooms(params: IRoomParams): Observable<IApiResponse> {
     let httpParams = new HttpParams();
     Object.entries(params).forEach(([key, value]) => {
