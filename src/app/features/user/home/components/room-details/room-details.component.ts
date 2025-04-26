@@ -138,7 +138,7 @@ export class RoomDetailsComponent implements OnInit {
 
   onGetAllReviews() {
     this._RateReviewService
-      .getReviews(this.currentRoomDetails?._id!)
+      .getReviews(this.id)
       .subscribe({
         next: (res: IReviewRateApiResponse) => {
           this.reviews = res.data.roomReviews;
@@ -171,8 +171,7 @@ export class RoomDetailsComponent implements OnInit {
     }
   }
   getComments() {
-    const roomId = this.currentRoomDetails?._id!;
-    this._CommentService.getComments(roomId).subscribe({
+    this._CommentService.getComments(this.id).subscribe({
       next: (response: ICommentApiResponse) => {
         this.comments = response.data.roomComments;
         this.resMsg = response.message;
@@ -188,9 +187,8 @@ export class RoomDetailsComponent implements OnInit {
   }
   createComment() {
     if (this.getToken() !== null) {
-      const roomId = this.currentRoomDetails?._id!;
       const commentData: IComment = {
-        roomId: roomId,
+        roomId: this.id,
         comment: this.commentEditorContent,
       };
       this._CommentService.createCommet(commentData).subscribe({
