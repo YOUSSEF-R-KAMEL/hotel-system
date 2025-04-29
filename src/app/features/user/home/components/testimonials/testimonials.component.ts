@@ -19,7 +19,6 @@ export class TestimonialsComponent implements OnInit{
       this.roomsService.getRoomReviews(this.room?._id as string).subscribe({
         next: (res: IApiResponse) => {
           this.reviews = res.data.roomReviews as IGetRoomReview[];
-          console.log(this.reviews)
         }
       })
     }
