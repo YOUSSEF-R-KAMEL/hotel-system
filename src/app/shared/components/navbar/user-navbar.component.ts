@@ -16,20 +16,20 @@ import { TranslationService } from '../../../features/user/services/translation/
   templateUrl: './user-navbar.component.html',
   styleUrls: ['./user-navbar.component.scss'],
 })
-export class UserNavbarComponent {
+export class UserNavbarComponent implements OnInit {
   role: string | null = null;
   userId: string | null = null;
-  user: IUser | null = null
+  user: IUser | null = null;
   authRoutes = authRoutes;
   showEnBtn = false;
-  navLinks: { text: string, path: string, icon:string, isUser: boolean }[] = [];
-  private translationService = inject(TranslationService);
+  navLinks: { text: string, path: string, icon: string, isUser: boolean }[] = [];
   private translate = inject(TranslateService);
   public themeService = inject(ThemeService);
   public authService = inject(AuthService);
   private helperService = inject(HelperService);
   private document = inject(DOCUMENT);
   isSmallScreen = false;
+
   @HostListener('window:resize', [])
   onResize() {
     if (this.helperService.isPlatformBrowser()) {
@@ -38,35 +38,51 @@ export class UserNavbarComponent {
   }
 
   constructor() {
+    this.initializeNavigation();
+    this.initializeLanguage();
+    this.initializeUser();
+  }
+
+  ngOnInit() {
+    this.onResize();
+  }
+
+  private initializeNavigation() {
     this.authService.role.subscribe((role) => {
       this.role = role;
       this.navLinks = [
         { text: 'Home', path: 'home', icon: "home", isUser: true },
         { text: 'Explore', path: 'explore', icon: "explore", isUser: true },
-        // { text: 'Reviews', path: 'reviews', icon: "rate_review", isUser: role === 'user' },
         { text: 'Favorites', path: 'favorites', icon: "favorite", isUser: role === 'user' },
       ];
-    })
-    if (this.helperService.isPlatformBrowser()) {
-      const userId = localStorage.getItem('userId')
-      if (userId) {
-        this.userId = userId
-      }
-    }
-    this.getUser();
-    this.translate.setDefaultLang(this.translationService.currentLang as string);
-    this.translate.use(this.translationService.currentLang as string);
-    this.setHtmlAttributes(this.translationService.currentLang as string);
+    });
     this.role = this.authService.getRole();
   }
-  ngOnInit() {
-    this.onResize();
+
+  private initializeLanguage() {
+    if (this.helperService.isPlatformBrowser()) {
+      const currentLang = localStorage.getItem('lang') || 'en';
+      this.showEnBtn = currentLang === 'ar';
+      this.translate.setDefaultLang(currentLang);
+      this.translate.use(currentLang);
+      this.setHtmlAttributes(currentLang);
+    }
   }
+
+  private initializeUser() {
+    if (this.helperService.isPlatformBrowser()) {
+      this.userId = localStorage.getItem('userId') || null;
+      if (this.userId) {
+        this.getUser();
+      }
+    }
+  }
+
   getUser() {
     if (this.userId) {
       this.authService.getUser(this.userId).subscribe({
         next: (res: IApiResponse) => {
-          if (res && res.data && res.data.user) {
+          if (res?.data?.user) {
             this.user = res.data.user;
           }
         },
@@ -77,21 +93,16 @@ export class UserNavbarComponent {
   switchLanguage(lang: string) {
     this.translate.use(lang);
     this.setHtmlAttributes(lang);
-    this.showEnBtn = !this.showEnBtn
-    if (this.showEnBtn) {
-      localStorage.setItem('lang', "ar");
-      console.log(this.translationService.currentLang)
-    } else {
-      localStorage.setItem('lang', "en");
-      console.log(this.translationService.currentLang)
-
-    }
+    localStorage.setItem('lang', lang);
+    this.showEnBtn = lang === 'ar';
   }
+
   setHtmlAttributes(lang: string) {
     const html = this.document.documentElement;
     html.lang = lang;
     html.dir = lang === 'ar' ? 'rtl' : 'ltr';
   }
+
   toggleTheme() {
     this.themeService.updateTheme();
   }
@@ -100,4 +111,3 @@ export class UserNavbarComponent {
     this.authService.onLogout();
   }
 }
-
