@@ -1,125 +1,92 @@
-<div class="container">
-<!-- <button mat-raised-button (click)="isEditable = !isEditable">
-  {{!isEditable ? 'Enable edit mode' : 'Disable edit mode'}}
-</button>
-<mat-stepper linear #stepper>
-  <mat-step [stepControl]="firstFormGroup" [editable]="isEditable">
-    <form [formGroup]="firstFormGroup">
-      <mat-form-field>
-        <h2>Card Example</h2>
-        <div [formGroup]="checkoutForm">
-          <mat-form-field class="example-full-width" appearance="fill">
-            <input matInput placeholder="name" formControlName="name" />
-          </mat-form-field>
-          <mat-form-field class="example-full-width" appearance="fill">
-            <input matInput placeholder="Email" type="email" formControlName="email" />
-          </mat-form-field>
-          <ngx-stripe-elements [stripe]="stripe" [elementsOptions]="elementsOptions">
-            <ngx-stripe-card [options]="cardOptions" />
-          </ngx-stripe-elements>
-        </div>
-        <button type="submit" (click)="createToken()">
-          CREATE TOKEN
-        </button>
-      </mat-form-field>
-      <div>
-        <button mat-button matStepperNext>Next</button>
+<div class="container py-5">
+  <mat-stepper labelPosition="bottom" #stepper class="payment-stepper" [linear]="true">
+    <mat-step [stepControl]="firstFormGroup" [editable]="false">
+      <div class="text-center mb-4">
+        <h2 class="fw-bold blue-text">Secure Payment</h2>
+        <p class="text-muted">Please complete your payment details below</p>
       </div>
-    </form>
-  </mat-step>
-  <mat-step [stepControl]="secondFormGroup" [editable]="isEditable">
-    <form [formGroup]="secondFormGroup">
-      <mat-form-field>
-        <mat-label>Address</mat-label>
-        <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
-              required>
-      </mat-form-field>
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
-      </div>
-    </form>
-  </mat-step>
-  <mat-step>
-    <p>You are now done.</p>
-    <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
-    </div>
-  </mat-step>
-</mat-stepper> -->
 
-<mat-stepper labelPosition="bottom" #stepper>
-  <mat-step [stepControl]="firstFormGroup">
-    <h2 class="text-center">Payment</h2>
-    <p class="text-center">Kindly follow the instructions below</p>
-    <div class="layout-stepper d-flex justify-content-around mt-5">
-      <div class="text">
-        <p>Transfer Pembayaran:</p>
-        <p>Tax: 10%</p>
-        <p>Sub total: $480 USD</p>
-        <p>Total: $580 USD</p>
-        <ul class="list-unstyled d-flex align-items-start">
-          <img src="../../../../../../assets/images/svg/bca.svg" alt="">
-          <ul class="list-unstyled">
-            <li>Bank Central Asia</li>
-            <li>2208 1996</li>
-            <li>BuildWith Angga</li>
-          </ul>
-        </ul>
-        <ul class="list-unstyled d-flex align-items-start">
-          <img src="../../../../../../assets/images/svg/logo_bank.svg" alt="">
-          <ul class="list-unstyled">
-            <li>Bank Central Asia</li>
-            <li>2208 1996</li>
-            <li>BuildWith Angga</li>
-          </ul>
-        </ul>
-        <p></p>
-      </div>
-      <form [formGroup]="firstFormGroup">
-        <mat-form-field>
-          <div [formGroup]="checkoutForm">
-            <mat-form-field class="example-full-width" appearance="fill">
-              <input matInput placeholder="name" formControlName="name" />
-            </mat-form-field>
-            <mat-form-field class="example-full-width" appearance="fill">
-              <input matInput placeholder="Email" type="email" formControlName="email" />
-            </mat-form-field>
-            <ngx-stripe-elements [stripe]="stripe" [elementsOptions]="elementsOptions">
-              <ngx-stripe-card [options]="cardOptions" />
-            </ngx-stripe-elements>
+      <div class="row justify-content-center">
+        <div class="col-md-6 pe-md-4 mb-4 mb-md-0">
+          <div class="payment-summary p-4 rounded-3 bg-light">
+            <h4 class="blue-text mb-4">Payment Summary</h4>
+            <div class="d-flex justify-content-between mb-2">
+              <span>Subtotal</span>
+              <span class="fw-bold">${{bookingDetails?.totalPrice}}</span>
+            </div>
+            <div class="d-flex justify-content-between mb-2">
+              <span>Tax (10%)</span>
+              <span class="fw-bold">${{(bookingDetails?.totalPrice || 0) * 0.1}}</span>
+            </div>
+            <hr>
+            <div class="d-flex justify-content-between mb-4">
+              <span class="fw-bold">Total</span>
+              <span class="fw-bold blue-text">${{(bookingDetails?.totalPrice || 0) * 1.1}}</span>
+            </div>
+
+            <div class="payment-methods">
+              <h5 class="mb-3">Alternative Payment Methods</h5>
+              <div class="bank-info p-3 mb-3 rounded bg-white">
+                <div class="d-flex align-items-center">
+                  <img src="../../../../../../assets/images/svg/bca.svg" alt="BCA" class="me-3" style="width: 60px">
+                  <div>
+                    <p class="mb-1 fw-bold">Bank Central Asia</p>
+                    <p class="mb-1">2208 1996</p>
+                    <p class="mb-0 text-muted">BuildWith Angga</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <button type="submit" (click)="createToken()">
-            CREATE TOKEN
-          </button>
-        </mat-form-field>
-        <div>
-          <button mat-button matStepperNext>Next</button>
         </div>
-      </form>
-    </div>
-  </mat-step>
-  <!-- <mat-step [stepControl]="secondFormGroup">
-    <form [formGroup]="secondFormGroup">
-      <mat-form-field>
-        <mat-label>Address</mat-label>
-        <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
-               required>
-      </mat-form-field>
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
-      </div>
-    </form>
-  </mat-step> -->
-  <mat-step>
-    <p>You are now done.</p>
-    <div>
-      <!-- <button mat-button matStepperPrevious>Back</button> -->
-      <button mat-button (click)="stepper.reset()">Reset</button>
-    </div>
-  </mat-step>
-</mat-stepper>
 
+        <div class="col-md-6 ps-md-4">
+          <div class="card-payment p-4 rounded-3 border">
+            <h4 class="blue-text mb-4">Card Details</h4>
+            <form [formGroup]="checkoutForm" class="payment-form">
+              <mat-form-field appearance="outline" class="w-100 mb-3">
+                <mat-label>Full Name</mat-label>
+                <input matInput placeholder="Enter your name" formControlName="name">
+                <mat-error *ngIf="checkoutForm.get('name')?.hasError('required')">Name is required</mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="w-100 mb-3">
+                <mat-label>Email Address</mat-label>
+                <input matInput type="email" placeholder="Enter your email" formControlName="email">
+                <mat-error *ngIf="checkoutForm.get('email')?.hasError('required')">Email is required</mat-error>
+                <mat-error *ngIf="checkoutForm.get('email')?.hasError('email')">Please enter a valid email</mat-error>
+              </mat-form-field>
+
+              <div class="stripe-card-container mb-4">
+                <ngx-stripe-elements [stripe]="stripe" [elementsOptions]="elementsOptions">
+                  <ngx-stripe-card [options]="cardOptions" />
+                </ngx-stripe-elements>
+              </div>
+
+              <div class="d-grid gap-2">
+                <button mat-flat-button color="primary" class="py-2" 
+                        (click)="createToken()" 
+                        [disabled]="!checkoutForm.valid || isPaymentProcessing">
+                  {{ isPaymentProcessing ? 'Processing...' : 'Pay Now' }}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </mat-step>
+
+    <mat-step [editable]="false">
+      <div class="text-center py-5">
+        <div class="mb-4">
+          <mat-icon class="text-success" style="font-size: 48px; height: 48px; width: 48px">check_circle</mat-icon>
+        </div>
+        <h3 class="blue-text">Payment Successful!</h3>
+        <p class="text-muted">Thank you for your payment</p>
+        <button mat-flat-button color="primary" (click)="resetPayment()">
+          Make Another Payment
+        </button>
+      </div>
+    </mat-step>
+  </mat-stepper>
 </div>
