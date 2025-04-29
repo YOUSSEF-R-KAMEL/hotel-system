@@ -8,11 +8,10 @@
         <li class="breadcrumb-item active" aria-current="page">Favorites</li>
       </ol>
     </nav>
-    <p class="ps-5 fs-4 fw-bold m-0 blue-text mb-5 mt-3">Your rooms</p>
     <div class="container mb-3" *ngIf="rooms; else noFavorites">
-      <div class="row g-3">
+      <div class="row g-4">
         <div
-          class="col-lg-4 col-md-4 col-sm-6 col-8"
+          class="col-lg-3 col-md-4 col-sm-6"
           *ngFor="
             let room of rooms
               | paginate : { itemsPerPage: size, currentPage: page }
