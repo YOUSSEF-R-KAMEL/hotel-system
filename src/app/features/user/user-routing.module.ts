@@ -25,14 +25,12 @@ const routes: Routes = [
       },
       {
         path: 'explore',
-        loadChildren: () =>
-          import('./components/explore/explore.component').then((m) => m.ExploreComponent),
+        component: ExploreComponent,
         resolve: { filters: exploreRoomWithFiltersResolver },
       },
       {
         path: 'favorites',
-        loadChildren: () =>
-          import('./components/fav-rooms/fav-rooms.component').then((m) => m.FavRoomsComponent),
+        component: FavRoomsComponent,
         canActivate: [userGuard],
         resolve: { filters: favoriteRoomsResolver },
       },
