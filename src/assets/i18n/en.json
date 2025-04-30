@@ -36,7 +36,11 @@
       "invalid-end-date": "Invalid end date",
       "invalidStartDate": "Invalid start date",
       "person": "Person",
-      "btn": "Explore"
+      "btn": "Explore",
+      "capacity": {
+        "person": "{{value}} person",
+        "people": "{{value}} people"
+      }
     },
     "popular": {
       "most": "Most popular ads",

@@ -35,7 +35,11 @@
       "invalid-start-date": "تاريخ البدء غير صالح",
       "invalid-end-date": "تاريخ انتهاء غير صالح",
       "person": "شخص",
-      "btn": "استكشاف"
+      "btn": "استكشاف",
+      "capacity": {
+        "person": "{{value}} شخص",
+        "people": "{{value}} أشخاص"
+      }
     },
     "popular": {
       "most": "الإعلانات الأكثر شعبية",

@@ -34,13 +34,25 @@
               }
             </mat-form-field>
             <div class="capacity-input">
-              <button mat-icon-button class="decrement-button icon-button" (click)="decrementCapacity()">
+              <button
+                class="decrement-button icon-button border-0"
+                (click)="decrementCapacity()"
+              >
                 <mat-icon>remove</mat-icon>
               </button>
               <mat-form-field class="normal-input w-75">
-                <input matInput [value]="getCapacityDisplay()" readonly placeholder="Capacity" />
+                <!-- Bind the displayed value dynamically -->
+                <input
+                  matInput
+                  [value]="capacityDisplay() | async"
+                  readonly
+                  placeholder="Capacity"
+                />
               </mat-form-field>
-              <button mat-icon-button class="increment-button" (click)="incrementCapacity()">
+              <button
+                class="increment-button border-0"
+                (click)="incrementCapacity()"
+              >
                 <mat-icon>add</mat-icon>
               </button>
             </div>
@@ -53,9 +65,13 @@
     </div>
     <div class="col-md-6 mx-auto">
       <div class="img-container">
-        <img src="../../../../assets/images/svg/room-filter-image.svg" alt="Room filter image" [ngStyle]="{
-            transform: currentLang == 'en' ? 'scaleX(1)' : 'scaleX(-1)'
-          }" />
+        <img
+          src="../../../../assets/images/svg/room-filter-image.svg"
+          alt="Room filter image"
+          [ngStyle]="{
+            transform: currentLangSignal() == 'en' ? 'scaleX(1)' : 'scaleX(-1)'
+          }"
+        />
       </div>
     </div>
   </div>
