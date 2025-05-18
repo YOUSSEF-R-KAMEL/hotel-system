@@ -67,7 +67,6 @@ export class FacilitiesComponent {
         this.passDataToTable(res.data);
       },
       error: (err) => {
-        console.log(err);
       }
     });
   }

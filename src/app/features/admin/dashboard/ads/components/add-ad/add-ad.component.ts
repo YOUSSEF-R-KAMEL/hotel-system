@@ -35,7 +35,6 @@ export class AddAdComponent implements OnInit {
         this.rooms = res.data.rooms;
       },
       error: (err) => {
-        console.log(err.error.message)
       },
     });
   }

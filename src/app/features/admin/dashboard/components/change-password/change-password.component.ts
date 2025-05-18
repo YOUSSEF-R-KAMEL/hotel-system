@@ -23,7 +23,6 @@ export class ChangePasswordComponent {
     if (this.changePasswordForm.valid) {
       this._dashboardService.changePassword(this.changePasswordForm.value).subscribe({
         next: (res:any) => {
-          console.log(res);
           this.resMsg = res.message;
         },
         error: (err) => {

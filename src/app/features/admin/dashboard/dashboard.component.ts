@@ -33,11 +33,9 @@ export class DashboardComponent implements OnInit {
             }
           },
           error: (err: any) => {
-            console.log(err);
           },
         });
       } else {
-        console.log('User ID not found in local storage');
       }
     }
   }

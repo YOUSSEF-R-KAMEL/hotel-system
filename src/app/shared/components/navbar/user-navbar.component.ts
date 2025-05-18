@@ -1,15 +1,14 @@
-import { Component, computed, HostListener, inject, Inject, OnInit } from '@angular/core';
+import { Component, HostListener, inject, OnInit } from '@angular/core';
 
+import { DOCUMENT } from '@angular/common';
+import { TranslateService } from '@ngx-translate/core';
+import { TranslationService } from '../../../core/services/translation/translation.service';
 import { AuthService } from '../../../features/auth/services/auth.service';
 import { IApiResponse } from '../../interface/api-data-response/api-response.interface';
 import { IUser } from '../../interface/user/IUserResponse';
-import { authRoutes } from './../../../features/auth/routes/enum';
-import { ThemeService } from '../../services/theme/theme.service';
 import { HelperService } from '../../services/helpers/helper.service';
-import { TranslateService } from '@ngx-translate/core';
-import { DOCUMENT, isPlatformBrowser } from '@angular/common';
-import { Router } from '@angular/router';
-import { TranslationService } from '../../../features/user/services/translation/translation.service';
+import { ThemeService } from '../../services/theme/theme.service';
+import { authRoutes } from './../../../features/auth/routes/enum';
 
 @Component({
   selector: 'app-user-navbar',
@@ -24,10 +23,11 @@ export class UserNavbarComponent implements OnInit {
   showEnBtn = false;
   navLinks: { text: string, path: string, icon: string, isUser: boolean }[] = [];
   private translate = inject(TranslateService);
-  public themeService = inject(ThemeService);
-  public authService = inject(AuthService);
+  themeService = inject(ThemeService);
+  private authService = inject(AuthService);
   private helperService = inject(HelperService);
   private document = inject(DOCUMENT);
+  private translationService = inject(TranslationService);
   isSmallScreen = false;
 
   @HostListener('window:resize', [])
@@ -60,13 +60,9 @@ export class UserNavbarComponent implements OnInit {
   }
 
   private initializeLanguage() {
-    if (this.helperService.isPlatformBrowser()) {
-      const currentLang = localStorage.getItem('lang') || 'en';
-      this.showEnBtn = currentLang === 'ar';
-      this.translate.setDefaultLang(currentLang);
-      this.translate.use(currentLang);
-      this.setHtmlAttributes(currentLang);
-    }
+    const currentLang = this.translationService.getCurrentLang();
+    this.showEnBtn = currentLang === 'ar';
+    this.setHtmlAttributes(currentLang);
   }
 
   private initializeUser() {
@@ -91,7 +87,7 @@ export class UserNavbarComponent implements OnInit {
   }
 
   switchLanguage(lang: string) {
-    this.translate.use(lang);
+    this.translationService.setLanguage(lang);
     this.setHtmlAttributes(lang);
     localStorage.setItem('lang', lang);
     this.showEnBtn = lang === 'ar';

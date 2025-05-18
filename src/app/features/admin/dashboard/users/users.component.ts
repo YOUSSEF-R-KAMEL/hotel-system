@@ -53,7 +53,6 @@ export class UsersComponent implements OnInit {
         this.passDataToTable(res.data);
       },
       error: (err) => {
-        console.log(err);
       },
     });
   }

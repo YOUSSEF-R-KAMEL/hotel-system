@@ -1,43 +1,49 @@
-import {
-  HttpClient,
-  HttpClientModule,
-  provideHttpClient,
-  withFetch,
-  withInterceptors,
-} from '@angular/common/http';
-import { importProvidersFrom, NgModule } from '@angular/core';
-import { provideNativeDateAdapter } from '@angular/material/core';
-import {
-  BrowserModule,
-  provideClientHydration,
-} from '@angular/platform-browser';
+import { HttpClient, provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MomentDateAdapter } from '@angular/material-moment-adapter';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { RouterModule } from '@angular/router';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { StarRatingModule } from 'angular-star-rating';
+import 'moment/locale/ar';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastrModule } from 'ngx-toastr';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { globalInterceptor } from './core/interceptors/global/global.interceptor';
-import { loadingInterceptor } from './core/interceptors/loading/loading.interceptor';
-const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (
-  http: HttpClient
-) => new TranslateHttpLoader(http, '../assets/i18n/', '.json');
+
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, '/assets/i18n/', '.json');
+}
+
+// Custom date formats
+export const MY_FORMATS = {
+  parse: {
+    dateInput: 'LL',
+  },
+  display: {
+    dateInput: 'YYYY-MM-DD',
+    monthYearLabel: 'MMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     RouterModule,
-    HttpClientModule,
     BrowserAnimationsModule,
     TranslateModule.forRoot({
+      defaultLanguage: 'en',
       loader: {
         provide: TranslateLoader,
-        useFactory: httpLoaderFactory,
+        useFactory: createTranslateLoader,
         deps: [HttpClient],
       },
     }),
@@ -46,23 +52,16 @@ const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (
     StarRatingModule.forRoot(),
   ],
   providers: [
-    provideClientHydration(),
-    provideAnimationsAsync(),
-    provideHttpClient(
-      withFetch(),
-      withInterceptors([globalInterceptor, loadingInterceptor])
-    ),
-    provideNativeDateAdapter(),
-    importProvidersFrom(
-      TranslateModule.forRoot({
-        loader: {
-          provide: TranslateLoader,
-          useFactory: httpLoaderFactory,
-          deps: [HttpClient],
-        },
-      })
-    ),
+    provideHttpClient(withFetch(),withInterceptors([globalInterceptor])),
+    {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
+    },
+    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
+    { provide: MAT_DATE_LOCALE, useValue: 'en' },
+    { provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { useUtc: true, strict: false } }
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}

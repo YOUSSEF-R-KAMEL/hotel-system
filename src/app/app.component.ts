@@ -1,19 +1,27 @@
+import { ViewportScroller } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { Router } from '@angular/router';
+import { TranslationService } from './core/services/translation/translation.service';
+import { ScrollToTopService } from './core/services/scroll/scroll-to-top.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-
 export class AppComponent {
-  title = 'Hotel-system';
-  private translateService = inject(TranslateService);
+  private translationService = inject(TranslationService);
+  private router = inject(Router);
+  private viewportScroller = inject(ViewportScroller);
+  private scrollToTopService = inject(ScrollToTopService);
+
   constructor() {
-    this.initializeTranslation();
-  }
-  private initializeTranslation() {
-    this.translateService.use('en');
+    // Translation service will handle initialization automatically
+
+    // Configure the ViewportScroller
+    this.viewportScroller.setOffset([0, 0]);
+
+    // Set scroll position restoration to 'enabled'
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 }

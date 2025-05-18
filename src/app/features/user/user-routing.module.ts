@@ -20,7 +20,7 @@ const routes: Routes = [
           import('./home/home.module').then((m) => m.HomeModule),
       },
       {
-        path: "home/:id",
+        path: "room/:id",
         component: RoomDetailsComponent
       },
       {

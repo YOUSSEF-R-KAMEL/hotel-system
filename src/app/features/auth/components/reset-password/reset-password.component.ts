@@ -35,13 +35,11 @@ export class ResetPasswordComponent {
     if (this.resPasswordForm.valid) {
       this._AuthService.onResPassword(this.resPasswordForm.value).subscribe({
         next: (res: any) => {
-          console.log(res);
           this.resMsg = res.message;
           localStorage.setItem('token', res.data.token);
           localStorage.setItem('role', res.data.user.role);
         },
         error: (err) => {
-          console.log(err);
           this._ToastrService.error(err.message, 'Error');
         },
         complete: () => {

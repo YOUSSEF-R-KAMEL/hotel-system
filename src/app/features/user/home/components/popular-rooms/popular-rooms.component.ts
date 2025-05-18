@@ -1,8 +1,6 @@
 import { Component, inject, Input } from '@angular/core';
+import { TranslationService } from '../../../../../core/services/translation/translation.service';
 import { IRoom } from '../../../../../shared/interface/room/room.interface';
-import { TranslateService } from '@ngx-translate/core';
-import { AuthService } from '../../../../auth/services/auth.service';
-import { TranslationService } from '../../../services/translation/translation.service';
 
 @Component({
   selector: 'app-popular-rooms',
@@ -11,16 +9,13 @@ import { TranslationService } from '../../../services/translation/translation.se
 })
 export class PopularRoomsComponent {
   @Input() rooms: IRoom[] = [];
-  private translate = inject(TranslateService);
   private translationService = inject(TranslationService);
-  constructor() {
-    this.translate.setDefaultLang(this.currentLang as string);
-    this.translate.use(this.currentLang as string);
-  }
-  get currentLang(): string | null {
-    return this.translationService.currentLang
-  }
+
   switchLanguage(lang: string) {
-    this.translate.use(lang);
+    this.translationService.setLanguage(lang);
+  }
+
+  get currentLang(): string {
+    return this.translationService.getCurrentLang();
   }
 }

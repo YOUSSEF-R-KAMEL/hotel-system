@@ -69,10 +69,8 @@ export class RegisterComponent {
   onSelect(event:any) {
     this.files.push(...event.addedFiles);
     this.imgSrc = this.files[0]
-    console.log(this.imgSrc)
   }
   onRemove(event:any) {
-    console.log(event);
     this.files.splice(this.files.indexOf(event), 1);
   }
   toggleShowPass(): void{

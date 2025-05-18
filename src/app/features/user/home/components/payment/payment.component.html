@@ -1,6 +1,6 @@
 <div class="container py-5">
   <mat-stepper labelPosition="bottom" #stepper class="payment-stepper" [linear]="true">
-    <mat-step [stepControl]="firstFormGroup" [editable]="false">
+    <mat-step [stepControl]="firstFormGroup" [completed]="firstFormGroup.valid">
       <div class="text-center mb-4">
         <h2 class="fw-bold blue-text">Secure Payment</h2>
         <p class="text-muted">Please complete your payment details below</p>
@@ -59,14 +59,14 @@
 
               <div class="stripe-card-container mb-4">
                 <ngx-stripe-elements [stripe]="stripe" [elementsOptions]="elementsOptions">
-                  <ngx-stripe-card [options]="cardOptions" />
+                  <ngx-stripe-card [options]="cardOptions" (change)="onCardChange($event)" />
                 </ngx-stripe-elements>
               </div>
 
               <div class="d-grid gap-2">
-                <button mat-flat-button color="primary" class="py-2" 
-                        (click)="createToken()" 
-                        [disabled]="!checkoutForm.valid || isPaymentProcessing">
+                <button mat-flat-button color="primary" class="py-2"
+                        (click)="createToken()"
+                        [disabled]="!checkoutForm.valid || isPaymentProcessing || !isCardComplete">
                   {{ isPaymentProcessing ? 'Processing...' : 'Pay Now' }}
                 </button>
               </div>
@@ -83,7 +83,7 @@
         </div>
         <h3 class="blue-text">Payment Successful!</h3>
         <p class="text-muted">Thank you for your payment</p>
-        <button mat-flat-button color="primary" (click)="resetPayment()">
+        <button mat-flat-button color="primary" (click)="returnHome()">
           Make Another Payment
         </button>
       </div>

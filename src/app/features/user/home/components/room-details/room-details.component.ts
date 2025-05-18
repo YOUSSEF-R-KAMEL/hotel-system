@@ -1,33 +1,36 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { ViewportScroller } from '@angular/common';
+import { AfterViewInit, Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { IRoom } from '../../../../../shared/interface/room/room.interface';
+import { HelperService } from '../../../../../shared/services/helpers/helper.service';
+import { AuthService } from '../../../../auth/services/auth.service';
 import { IBookingApiResponse } from '../../../interfaces/api-responses/api-response-booking.interface';
 import {
   ICommentApiResponse,
   RoomComment,
 } from '../../../interfaces/api-responses/comment-api-response.interface';
 import { ICreateCommentApiResponse } from '../../../interfaces/api-responses/create-comment-api-response.interface';
-import { IReviewRateApiResponse } from '../../../interfaces/api-responses/review-rate-api-response.interface';
+import { IReviewRateApiResponse, RoomReview } from '../../../interfaces/api-responses/review-rate-api-response.interface';
 import { IUpdateCommentApiResponse } from '../../../interfaces/api-responses/update-comment-api-response.interface';
 import { IComment } from '../../../interfaces/comment-interface';
 import { IReview } from '../../../interfaces/review.interface';
+import { BookingRoomService } from '../../../services/booking/booking-room.service';
+import { CommentService } from '../../../services/comments/comment.service';
+import { RateReviewService } from '../../../services/rating/rate-review.service';
+import { RoomsService } from '../../../services/rooms/rooms.service';
 import { LoginRegisterDialogComponent } from '../login-register-dialog/login-register-dialog.component';
 import { IApiResponse } from './../../../../../shared/interface/api-data-response/api-response.interface';
-import { RoomsService } from '../../../services/rooms/rooms.service';
-import { BookingRoomService } from '../../../services/booking/booking-room.service';
-import { RateReviewService } from '../../../services/rating/rate-review.service';
-import { CommentService } from '../../../services/comments/comment.service';
-import { HelperService } from '../../../../../shared/services/helpers/helper.service';
 
 @Component({
   selector: 'app-room-details',
   templateUrl: './room-details.component.html',
   styleUrl: './room-details.component.scss',
 })
-export class RoomDetailsComponent implements OnInit {
+export class RoomDetailsComponent implements OnInit, AfterViewInit {
+  private viewportScroller = inject(ViewportScroller);
   _route = inject(ActivatedRoute);
   _roomsService = inject(RoomsService);
   currentRoomDetails: IRoom | null = null;
@@ -35,7 +38,7 @@ export class RoomDetailsComponent implements OnInit {
   resMsg: string = '';
   bookingId = '';
   rateEditorContent: string = '';
-  reviews: any[] = [];
+  reviews: RoomReview[] = [];
   userRating: number = 5;
   comments: RoomComment[] = [];
   commentEditorContent: string = '';
@@ -52,6 +55,7 @@ export class RoomDetailsComponent implements OnInit {
   private _CommentService = inject(CommentService);
   public dialog = inject(MatDialog);
   public helperService = inject(HelperService);
+  private _authService = inject(AuthService);
 
   facilityIcons: { [key: string]: string } = {
     '4 television': '4 television',
@@ -72,9 +76,21 @@ export class RoomDetailsComponent implements OnInit {
   });
   ngOnInit(): void {
     this.id = this._route.snapshot.params['id'];
+    if (!this.id) {
+      this._ToastrService.error('Room ID is required');
+      return;
+    }
+
+    if (this.helperService.isPlatformBrowser()) {
+      this.viewportScroller.scrollToPosition([0, 0]);
+    }
+
     this.getRoomDetails();
     this.onGetAllReviews();
     this.getComments();
+  }
+  ngAfterViewInit(): void {
+    // No need for AfterViewInit scroll handling when using ViewportScroller
   }
   editorConfig = {
     toolbar: [
@@ -92,23 +108,24 @@ export class RoomDetailsComponent implements OnInit {
         this.currentRoomDetails = res.data.room as IRoom;
       },
       error: (err) => {
-        console.error('Error fetching room details', err);
-      },
-      complete: () => {
-        console.log(this.currentRoomDetails);
-      },
+        this._ToastrService.error(err.error?.message || 'Error fetching room details');
+      }
     });
   }
   sum(price: number, capacity: number): number {
     return price * capacity;
   }
   onCheckoutRoom(form: FormGroup) {
-    if (this.getToken() !== null) {
-      if (this.currentRoomDetails) {
-        const price = this.currentRoomDetails.price;
-        const capacity = this.currentRoomDetails.capacity;
-        const discount = this.currentRoomDetails.discount || 0;
-        const totalPrice = price * capacity - discount;
+    if (!this._authService.checkAuthenticationStatus()) {
+      this.dialog.open(LoginRegisterDialogComponent);
+      return;
+    }
+
+    if (this.currentRoomDetails) {
+      const price = this.currentRoomDetails.price;
+      const capacity = this.currentRoomDetails.capacity;
+      const discount = this.currentRoomDetails.discount || 0;
+      const totalPrice = price * capacity - discount;
 
         const bookingData = {
           startDate: form.value.startDate,
@@ -136,86 +153,106 @@ export class RoomDetailsComponent implements OnInit {
           },
         });
       }
-    } else {
+    else {
       const dialogRef = this.dialog.open(LoginRegisterDialogComponent);
     }
   }
 
   onGetAllReviews() {
-    this._RateReviewService
-      .getReviews(this.id)
-      .subscribe({
-        next: (res: IReviewRateApiResponse) => {
+    this._RateReviewService.getReviews(this.id).subscribe({
+      next: (res: IReviewRateApiResponse) => {
+        if (res?.data?.roomReviews) {
           this.reviews = res.data.roomReviews;
-        },
-      });
+        } else {
+          this.reviews = [];
+        }
+      },
+      error: (err) => {
+        console.error('Error fetching reviews:', err);
+        this._ToastrService.error(err.error?.message || 'Error fetching reviews');
+        this.reviews = [];
+      }
+    });
   }
   submitReview() {
-    if (this.getToken() !== null) {
-      const reviewData: IReview = {
-        rating: this.userRating,
-        review: this.rateEditorContent,
-        roomId: this.currentRoomDetails?._id!,
-      };
-
-      this._RateReviewService.createReview(reviewData).subscribe({
-        next: (response) => {
-          this.resMsg = response.message;
-          this._ToastrService.success(this.resMsg);
-        },
-        error: (err) => {
-          console.log(err);
-          this.resMsg = err.error.message;
-          this._ToastrService.error(this.resMsg);
-        },
-        complete: () => {
-          this.rateEditorContent = '';
-          this.onGetAllReviews();
-        },
-      });
-    } else {
-      const dialogRef = this.dialog.open(LoginRegisterDialogComponent);
+    if (!this.getToken()) {
+      this.dialog.open(LoginRegisterDialogComponent);
+      return;
     }
+
+    if (!this.rateEditorContent?.trim()) {
+      this._ToastrService.error('Please enter a review');
+      return;
+    }
+
+    if (!this.currentRoomDetails?._id) {
+      this._ToastrService.error('Room data not available');
+      return;
+    }
+
+    const reviewData: IReview = {
+      rating: this.userRating,
+      review: this.rateEditorContent.trim(),
+      roomId: this.currentRoomDetails._id,
+    };
+
+    this._RateReviewService.createReview(reviewData).subscribe({
+      next: (response) => {
+        this.resMsg = response.message;
+        this._ToastrService.success(this.resMsg);
+        this.rateEditorContent = '';
+        this.onGetAllReviews();
+      },
+      error: (err) => {
+        this.resMsg = err.error?.message || 'Error submitting review';
+        this._ToastrService.error(this.resMsg);
+      }
+    });
   }
   getComments() {
     this._CommentService.getComments(this.id).subscribe({
       next: (response: ICommentApiResponse) => {
-        this.comments = response.data.roomComments;
-        this.resMsg = response.message;
+        if (response?.data?.roomComments) {
+          this.comments = response.data.roomComments;
+        } else {
+          this.comments = [];
+        }
       },
       error: (err) => {
-        this.resMsg = err.error.message;
+        this.resMsg = err.error?.message || 'Error fetching comments';
         this._ToastrService.error(this.resMsg);
-      },
-      complete: () => {
-        this._ToastrService.success(this.resMsg);
-      },
+        this.comments = [];
+      }
     });
   }
   createComment() {
-    if (this.getToken() !== null) {
-      const commentData: IComment = {
-        roomId: this.id,
-        comment: this.commentEditorContent,
-      };
-      this._CommentService.createCommet(commentData).subscribe({
-        next: (response: ICreateCommentApiResponse) => {
-          console.log(response);
-          this.resMsg = response.message;
-        },
-        error: (err) => {
-          this.resMsg = err.error.message;
-          this._ToastrService.error(this.resMsg);
-        },
-        complete: () => {
-          this.commentEditorContent = '';
-          this._ToastrService.success(this.resMsg);
-          this.getComments();
-        },
-      });
-    } else {
-      const dialogRef = this.dialog.open(LoginRegisterDialogComponent);
+    if (!this.getToken()) {
+      this.dialog.open(LoginRegisterDialogComponent);
+      return;
     }
+
+    if (!this.commentEditorContent?.trim()) {
+      this._ToastrService.error('Please enter a comment');
+      return;
+    }
+
+    const commentData: IComment = {
+      roomId: this.id,
+      comment: this.commentEditorContent.trim(),
+    };
+
+    this._CommentService.createCommet(commentData).subscribe({
+      next: (response: ICreateCommentApiResponse) => {
+        this.resMsg = response.message;
+        this._ToastrService.success(this.resMsg);
+        this.commentEditorContent = '';
+        this.getComments();
+      },
+      error: (err) => {
+        this.resMsg = err.error?.message || 'Error submitting comment';
+        this._ToastrService.error(this.resMsg);
+      }
+    });
   }
   editComment(commentId: string, commentText: string) {
     if (this.getToken() !== null) {
@@ -228,44 +265,47 @@ export class RoomDetailsComponent implements OnInit {
     }
   }
   updateComment() {
-    if (this.getToken() !== null) {
-      if (this.selectedCommentId && this.commentEditorContent) {
-        this._CommentService
-          .updateComment(this.selectedCommentId, this.commentEditorContent)
-          .subscribe({
-            next: (response: IUpdateCommentApiResponse) => {
-              this.isEditing = false;
-              this.selectedCommentId = null;
-              this.commentEditorContent = '';
-              this.resMsg = response.message;
-            },
-            error: (err) => {
-              this.resMsg = err.error.message;
-              this._ToastrService.error(this.resMsg);
-            },
-            complete: () => {
-              this._ToastrService.success(this.resMsg);
-              this.getComments();
-            },
-          });
-      }
-    } else {
-      const dialogRef = this.dialog.open(LoginRegisterDialogComponent);
+    if (!this.getToken()) {
+      this.dialog.open(LoginRegisterDialogComponent);
+      return;
     }
+
+    if (!this.selectedCommentId || !this.commentEditorContent?.trim()) {
+      this._ToastrService.error('Comment data is invalid');
+      return;
+    }
+
+    this._CommentService.updateComment(this.selectedCommentId, this.commentEditorContent.trim()).subscribe({
+      next: (response: IUpdateCommentApiResponse) => {
+        this.resMsg = response.message;
+        this._ToastrService.success(this.resMsg);
+        this.isEditing = false;
+        this.selectedCommentId = null;
+        this.commentEditorContent = '';
+        this.getComments();
+      },
+      error: (err) => {
+        this.resMsg = err.error?.message || 'Error updating comment';
+        this._ToastrService.error(this.resMsg);
+      }
+    });
   }
   deleteComment(commentId: string) {
+    if (!commentId) {
+      this._ToastrService.error('Comment ID is required');
+      return;
+    }
+
     this._CommentService.deleteComment(commentId).subscribe({
       next: (res) => {
         this.resMsg = res.message;
-      },
-      error: (err) => {
-        this.resMsg = err.error.message;
-        this._ToastrService.error(this.resMsg);
-      },
-      complete: () => {
         this._ToastrService.success(this.resMsg);
         this.getComments();
       },
+      error: (err) => {
+        this.resMsg = err.error?.message || 'Error deleting comment';
+        this._ToastrService.error(this.resMsg);
+      }
     });
   }
   cancelEdit() {

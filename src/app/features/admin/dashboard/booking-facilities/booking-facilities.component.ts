@@ -47,17 +47,14 @@ export class BookingFacilitiesComponent {
     }
     this.bookingService.getBookingFacilities(bookingParams).subscribe({
       next: (res: IApiResponse) => {
-        console.log(res);
         this.passDataToTable(res.data);
       },
       error: (err) => {
-        console.log(err);
       }
     });
   }
 
   passDataToTable(data: IData) {
-    console.log(data);
     this.bookingFacilitiesData = {
       data: {
         booking: data.booking,

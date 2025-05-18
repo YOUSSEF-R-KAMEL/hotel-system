@@ -20,7 +20,6 @@ export class ProfileComponent implements AfterViewInit {
     if (userId) {
       this._UsersService.getCurrentUser(userId).subscribe({
         next: (res) => {
-          console.log(res);
           this.user = res.data.user;
         },
         error: (err) => {

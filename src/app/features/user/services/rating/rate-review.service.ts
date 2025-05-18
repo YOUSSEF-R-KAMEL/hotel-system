@@ -10,6 +10,9 @@ import { IReview } from '../../interfaces/review.interface';
 export class RateReviewService {
   private _HttpClient = inject(HttpClient);
   getReviews(roomId: string): Observable<IReviewRateApiResponse> {
+    if (!roomId) {
+      throw new Error('Room ID is required to fetch reviews');
+    }
     return this._HttpClient.get<IReviewRateApiResponse>(
       `portal/room-reviews/${roomId}`
     );

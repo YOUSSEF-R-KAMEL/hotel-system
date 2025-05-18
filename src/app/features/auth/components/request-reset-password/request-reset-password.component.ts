@@ -22,13 +22,11 @@ export class RequestResetPasswordComponent {
     if (this.reqResForm.valid) {
       this._AuthService.onReqResPassword(this.reqResForm.value).subscribe({
         next: (res:any) => {
-          console.log(res);
           this.resMsg = res.message;
           localStorage.setItem('token', res.data.token);
           localStorage.setItem('role', res.data.user.role);
         },
         error: (err) => {
-          console.log(err);
           this._ToastrService.error(err.message, 'Error');
         },
         complete: () => {

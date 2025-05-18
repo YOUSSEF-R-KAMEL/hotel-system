@@ -84,12 +84,10 @@ export class RoomsComponent implements OnInit {
         this.passDataToTable(res.data);
       },
       error: (err) => {
-        console.log(err);
       },
     });
   }
   passDataToTable(data: IRoomWithCount) {
-    console.log(data);
     this.roomsData = {
       data: {
         rooms: data.rooms,

@@ -7,11 +7,9 @@ import { IRoomParams } from '../../../shared/interface/params/params.interface';
 import { IRoom } from '../../../shared/interface/room/room.interface';
 import { AuthService } from '../../auth/services/auth.service';
 import { RoomsService } from '../services/rooms/rooms.service';
-import { HelperService } from '../../../shared/services/helpers/helper.service';
+import { TranslationService } from '../../../core/services/translation/translation.service';
 
-interface IExploreParams {
-  page: number;
-  size: number;
+interface IExploreParams extends IRoomParams {
   startDate: Date | null;
   endDate: Date | null;
   capacity: number;
@@ -24,21 +22,21 @@ interface IExploreParams {
 })
 export class HomeComponent implements OnInit, OnDestroy {
   private readonly destroy$ = new Subject<void>();
-  
+
   // Services
   private readonly roomsService = inject(RoomsService);
   private readonly router = inject(Router);
   private readonly translate = inject(TranslateService);
-  private readonly authService = inject(AuthService);
-  private readonly helperService = inject(HelperService);
+  private readonly translationService = inject(TranslationService);
+
   // Pagination
   private readonly page = 1;
-  private readonly size = 20;
+  private readonly size = 10;
 
   // Signals
   readonly rooms = signal<IRoom[]>([]);
   readonly capacitySignal = signal<number>(1);
-  readonly currentLangSignal = signal<string>(this.helperService.isPlatformBrowser() ? localStorage.getItem('lang') ?? 'en' : 'en');
+  readonly currentLangSignal = signal<string>(this.translationService.getCurrentLang());
 
   // Computed values
   readonly popularRooms = computed(() => this.rooms().slice(0, 5));
@@ -57,11 +55,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     endDate: new FormControl<Date | null>(null),
     capacity: new FormControl<number>(1),
   });
-
-  constructor() {
-    this.translate.setDefaultLang(this.currentLangSignal());
-    this.translate.use(this.currentLangSignal());
-  }
 
   ngOnInit(): void {
     this.initializeSubscriptions();
@@ -101,7 +94,6 @@ export class HomeComponent implements OnInit, OnDestroy {
         },
         error: (error) => {
           console.error('Error fetching rooms:', error);
-          // TODO: Add proper error handling (e.g., show error message to user)
         }
       });
   }
@@ -116,10 +108,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     };
 
     this.router.navigate(['/explore'], { queryParams: params });
-  }
-
-  switchLanguage(lang: string): void {
-    this.translate.use(lang);
   }
 
   get capacity(): FormControl<number> {

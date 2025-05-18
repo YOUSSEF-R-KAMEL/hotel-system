@@ -52,7 +52,6 @@ export class HomeComponent implements OnInit {
         this.updateDataInCharts(res.data);
       },
       error: (err) => {
-        // console.log(err);
         this.toast.error(err.error.message);
       },
     });

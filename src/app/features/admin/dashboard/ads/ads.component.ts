@@ -79,11 +79,9 @@ export class AdsComponent implements OnInit {
     };
     this._AdsService.onGetAllAds(adsParams).subscribe({
       next: (res) => {
-        console.log(res);
         this.passDataToTable(res.data);
       },
       error: (err) => {
-        console.log(err);
       },
     });
   }
@@ -157,7 +155,6 @@ export class AdsComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((result: IUpdateAd) => {
       if (result) {
-        console.log(result);
         this._AdsService.onUpdateAds(data._id, result).subscribe({
           next: (res) => {
             this.apiResponse = res.message;

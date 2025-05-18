@@ -1,9 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IRoom } from '../../../../shared/interface/room/room.interface';
 import { TranslateService } from '@ngx-translate/core';
-import { AuthService } from '../../../auth/services/auth.service';
-import { TranslationService } from '../../services/translation/translation.service';
+import { IRoom } from '../../../../shared/interface/room/room.interface';
+import { TranslationService } from '../../../../core/services/translation/translation.service';
 
 @Component({
   selector: 'app-explore',
@@ -17,18 +16,19 @@ export class ExploreComponent {
   private route = inject(ActivatedRoute);
   private translate = inject(TranslateService);
   private translationService = inject(TranslationService);
+
   constructor() {
-    this.translate.setDefaultLang(this.currentLang as string);
-    this.translate.use(this.currentLang as string);
     this.route.data.subscribe((data: any) => {
       const rooms = data.filters.data.rooms;
       this.rooms = rooms;
     })
   }
+
   switchLanguage(lang: string) {
-    this.translate.use(lang);
+    this.translationService.setLanguage(lang);
   }
-  get currentLang(): string | null {
-    return this.translationService.currentLang
+
+  get currentLang(): string {
+    return this.translationService.getCurrentLang();
   }
 }

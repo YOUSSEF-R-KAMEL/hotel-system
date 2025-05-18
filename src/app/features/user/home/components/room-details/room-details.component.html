@@ -1,8 +1,5 @@
 <div class="container">
-  <nav
-    aria-label="breadcrumb"
-    class="d-flex justify-content-around align-items-center mt-5 mb-5"
-  >
+  <nav aria-label="breadcrumb" class="d-flex justify-content-around align-items-center mt-5 mb-5">
     <ol class="breadcrumb mb-0">
       <li class="breadcrumb-item">
         <a routerLink="/home"> {{ "details-page.home" | translate }} </a>
@@ -11,35 +8,21 @@
         {{ "details-page.details" | translate }}
       </li>
     </ol>
-    <h1 class="text-center blue-text fw-bolder">
-      Room number {{ currentRoomDetails?.roomNumber }}
+    <h1 class="text-center blue-text fw-bolder m-0">
+      {{ currentRoomDetails?.roomNumber }}
     </h1>
   </nav>
   <div id="imageCarousel" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
-      <div
-        class="carousel-item"
-        *ngFor="let img of currentRoomDetails?.images; let i = index"
-        [class.active]="i === 0"
-      >
+      <div class="carousel-item" *ngFor="let img of currentRoomDetails?.images; let i = index" [class.active]="i === 0">
         <img [src]="img" class="d-block w-100" alt="Room Image" />
       </div>
     </div>
-    <button
-      class="carousel-control-prev"
-      type="button"
-      data-bs-target="#imageCarousel"
-      data-bs-slide="prev"
-    >
+    <button class="carousel-control-prev" type="button" data-bs-target="#imageCarousel" data-bs-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Previous</span>
     </button>
-    <button
-      class="carousel-control-next"
-      type="button"
-      data-bs-target="#imageCarousel"
-      data-bs-slide="next"
-    >
+    <button class="carousel-control-next" type="button" data-bs-target="#imageCarousel" data-bs-slide="next">
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Next</span>
     </button>
@@ -63,18 +46,12 @@
       <div class="facilities d-flex flex-wrap row-gap-3">
         @for (fa of currentRoomDetails?.facilities; track fa._id) {
 
-        <div
-          class="facility-container d-flex flex-column justify-content-around"
-        >
-          <img
-            [src]="
+        <div class="facility-container d-flex flex-column justify-content-around">
+          <img [src]="
               'assets/images/svg/facility-icons/' +
               (facilityIcons[fa.name] || 'Dining room') +
               '.svg'
-            "
-            alt="{{ fa.name }}"
-            class="facility-icon me-2"
-          />
+            " alt="{{ fa.name }}" class="facility-icon me-2" />
           <span>{{ fa.name }} </span>
         </div>
         }
@@ -87,72 +64,49 @@
           <span>${{ currentRoomDetails?.price }}</span>
           {{ "home-page.popular.per" | translate }}
         </p>
-        <span class="text-danger"
-          >{{ "home-page.popular.discount" | translate }}: ${{
-            currentRoomDetails?.discount
+        <span class="text-danger">{{ "home-page.popular.discount" | translate }}: ${{
+          currentRoomDetails?.discount
           }}
         </span>
-        <form
-          [formGroup]="checkoutRoomForm"
-          (ngSubmit)="onCheckoutRoom(checkoutRoomForm)"
-        >
+        <form [formGroup]="checkoutRoomForm" (ngSubmit)="onCheckoutRoom(checkoutRoomForm)">
           <label>{{ "details-page.pick" | translate }}</label>
 
           <mat-form-field class="date-input">
             <mat-label>{{
               "home-page.booking.inputLabel" | translate
-            }}</mat-label>
+              }}</mat-label>
             <mat-date-range-input [rangePicker]="picker">
-              <input
-                matStartDate
-                formControlName="startDate"
-                placeholder="Start date"
-              />
-              <input
-                matEndDate
-                formControlName="endDate"
-                placeholder="End date"
-              />
+              <input matStartDate formControlName="startDate" placeholder="Start date" />
+              <input matEndDate formControlName="endDate" placeholder="End date" />
             </mat-date-range-input>
-            <mat-datepicker-toggle
-              matIconPrefix
-              [for]="picker"
-            ></mat-datepicker-toggle>
+            <mat-datepicker-toggle matIconPrefix [for]="picker"></mat-datepicker-toggle>
             <mat-date-range-picker #picker></mat-date-range-picker>
             @if
             (checkoutRoomForm.controls.startDate.hasError('matStartDateInvalid'))
             {
             <mat-error>{{
               "home-page.booking.invalid-start-date" | translate
-            }}</mat-error>
+              }}</mat-error>
             } @if
             (checkoutRoomForm.controls.endDate.hasError('matEndDateInvalid')) {
             <mat-error>{{
               "home-page.booking.invalid-end-date" | translate
-            }}</mat-error>
+              }}</mat-error>
             }
           </mat-form-field>
 
-          <span class="pay"
-            >{{ "details-page.will-pay" | translate }}
+          <span class="pay">{{ "details-page.will-pay" | translate }}
             <span class="num">{{
               sum(currentRoomDetails?.price!, currentRoomDetails?.capacity!)
-                | number : "1.0-0"
-            }}</span>
+              | number : "1.0-0"
+              }}</span>
             {{ "details-page.usd" | translate }}
             <span class="num">
               {{ currentRoomDetails?.capacity }}
-              {{ "details-page.person" | translate }}</span
-            ></span
-          >
+              {{ "details-page.person" | translate }}</span></span>
           <div class="text-center mt-2">
-            <button
-              type="submit"
-              [disabled]="checkoutRoomForm.invalid"
-              class="explore-btn"
-              mat-raised-button
-              color="primary"
-            >
+            <button type="submit" [disabled]="checkoutRoomForm.invalid" class="explore-btn" mat-raised-button
+              color="primary">
               {{ "details-page.continue" | translate }}
             </button>
           </div>
@@ -171,17 +125,9 @@
               @for (review of reviews; track review._id) {
               <div class="review-item">
                 <div class="review-header">
-                  <img
-                    [src]="review.user.profileImage"
-                    alt="user image"
-                    class="user-image"
-                  />
+                  <img [src]="review.user.profileImage" alt="user image" class="user-image" />
                   <h5 class="user-name">{{ review.user.userName }}</h5>
-                  <star-rating
-                    [rating]="review.rating"
-                    [showHalfStars]="true"
-                    [readOnly]="true"
-                  ></star-rating>
+                  <star-rating [rating]="review.rating" [showHalfStars]="true" [readOnly]="true"></star-rating>
                 </div>
                 <p class="review-text">{{ review.review }}</p>
                 <p class="review-date">
@@ -194,27 +140,14 @@
 
             <form class="rateForm" (ngSubmit)="submitReview()">
               <h4>{{ "details-page.message" | translate }}</h4>
-              <star-rating
-                [rating]="userRating"
-                [showHalfStars]="true"
-              ></star-rating>
+              <star-rating [rating]="userRating" [showHalfStars]="true"></star-rating>
 
               <div class="w-100">
-                <quill-editor
-                  class="w-100"
-                  [(ngModel)]="rateEditorContent"
-                  [style]="{ height: '70px' }"
-                  [modules]="editorConfig"
-                  name="editorContent"
-                >
+                <quill-editor class="w-100" [(ngModel)]="rateEditorContent" [style]="{ height: '70px' }"
+                  [modules]="editorConfig" name="editorContent">
                 </quill-editor>
               </div>
-              <button
-                type="submit"
-                class="explore-btn"
-                mat-raised-button
-                color="primary"
-              >
+              <button type="submit" class="explore-btn" mat-raised-button color="primary">
                 {{ "details-page.rate" | translate }}
               </button>
             </form>
@@ -229,24 +162,17 @@
                   <span class="user-name">{{ comment.user.userName }}</span>
                   <span class="comment-date">{{
                     comment.createdAt | date
-                  }}</span>
+                    }}</span>
                 </div>
                 <div class="comment-body">
                   <p>{{ comment.comment }}</p>
                 </div>
                 <div class="comment-actions">
-                  <button
-                    class="btn btn-primary me-3"
-                    *ngIf="!isEditing"
-                    (click)="editComment(comment._id, comment.comment)"
-                  >
+                  <button class="btn btn-primary me-3" *ngIf="!isEditing"
+                    (click)="editComment(comment._id, comment.comment)">
                     {{ "details-page.update" | translate }}
                   </button>
-                  <button
-                    class="btn btn-danger"
-                    *ngIf="!isEditing"
-                    (click)="deleteComment(comment._id)"
-                  >
+                  <button class="btn btn-danger" *ngIf="!isEditing" (click)="deleteComment(comment._id)">
                     {{ "details-page.delete" | translate }}
                   </button>
                 </div>
@@ -262,29 +188,20 @@
             </ng-container>
             <form (ngSubmit)="isEditing ? updateComment() : createComment()">
               <div class="w-100">
-                <quill-editor
-                  class="w-100"
-                  [(ngModel)]="commentEditorContent"
-                  [style]="{ height: '70px' }"
-                  [modules]="editorConfig"
-                  name="editorContent"
-                >
+                <quill-editor class="w-100" [(ngModel)]="commentEditorContent" [style]="{ height: '70px' }"
+                  [modules]="editorConfig" name="editorContent">
                 </quill-editor>
               </div>
               <div class="d-flex justify-content-end">
                 <button class="explore-btn" mat-raised-button color="primary">
                   {{
-                    isEditing
-                      ? ("details-page.update" | translate)
-                      : ("details-page.send" | translate)
+                  isEditing
+                  ? ("details-page.update" | translate)
+                  : ("details-page.send" | translate)
                   }}
                 </button>
-                <button
-                  *ngIf="isEditing"
-                  mat-raise-button
-                  class="btn btn-outline-secondary ms-3"
-                  (click)="cancelEdit()"
-                >
+                <button *ngIf="isEditing" mat-raise-button class="btn btn-outline-secondary ms-3"
+                  (click)="cancelEdit()">
                   {{ "details-page.cancel" | translate }}
                 </button>
               </div>

@@ -1,6 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
-import { TranslationService } from '../../../features/user/services/translation/translation.service';
+import { TranslationService } from '../../../core/services/translation/translation.service';
 
 @Component({
   selector: 'app-footer',
@@ -8,16 +7,13 @@ import { TranslationService } from '../../../features/user/services/translation/
   styleUrl: './footer.component.scss'
 })
 export class FooterComponent {
-  private translate = inject(TranslateService);
   private translationService = inject(TranslationService);
-  constructor() {
-    this.translate.setDefaultLang(this.currentLang as string);
-    this.translate.use(this.currentLang as string);
-  }
+
   switchLanguage(lang: string) {
-    this.translate.use(lang);
+    this.translationService.setLanguage(lang);
   }
-  get currentLang() : string | null{
-    return this.translationService.currentLang
+
+  get currentLang(): string {
+    return this.translationService.getCurrentLang();
   }
 }
